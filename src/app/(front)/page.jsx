@@ -2,7 +2,7 @@ import BannerSectionCard from "@/components/Front/BannerSectionCard";
 // import Carousel from "@/components/Front/Carousel";
 import FeaturSection from "@/components/Front/FeaturSection";
 import PartnerSection from "@/components/Front/PartnerSection";
-import SearchBar from "@/components/Front/searchBar";
+import SearchBar from "@/components/Front/SearchBar";
 import Link from "next/link";
 
 export default function Home() {

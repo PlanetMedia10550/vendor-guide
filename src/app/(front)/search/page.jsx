@@ -1,6 +1,6 @@
 import TopBannerSearch from "@/components/Front/TopBannerSearch";
 import VendorCard from "@/components/Front/VendorCard";
-import Companyinfo from "@/components/Front/companyinfo";
+import Companyinfo from "@/components/Front/Companyinfo";
 import TopBarImage from "public/images&icons/search_result/Asset2.jpg";
 const Search = () => {
   return (
