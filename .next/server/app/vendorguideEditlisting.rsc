@@ -1,8 +1,8 @@
-1:HL["/_next/static/css/65f36faafbaac24e.css","style",{"crossOrigin":""}]
-0:["ch9L-8nrijCRfLbD72OiA",[[["",{"children":["(front)",{"children":["vendorguideEditlisting",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/65f36faafbaac24e.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
-4:I{"id":1443,"chunks":["272:static/chunks/webpack-00f01eb83cb55235.js","971:static/chunks/fd9d1056-c2e12ab5417b3d70.js","864:static/chunks/864-8e0637fa0b497626.js"],"name":"","async":false}
-5:I{"id":1654,"chunks":["676:static/chunks/870fdd6f-88f0a2e687431146.js","724:static/chunks/724-d6f128cfb260766d.js","964:static/chunks/964-f16a538242359c35.js","35:static/chunks/35-dbb804f67de9f03e.js","489:static/chunks/app/template-54661671e1b6f2b7.js"],"name":"","async":false}
-6:I{"id":8639,"chunks":["272:static/chunks/webpack-00f01eb83cb55235.js","971:static/chunks/fd9d1056-c2e12ab5417b3d70.js","864:static/chunks/864-8e0637fa0b497626.js"],"name":"","async":false}
+1:HL["/_next/static/css/cb9bac98823f33d2.css","style",{"crossOrigin":""}]
+0:["fIVsT9d6-obsEQN3VG53o",[[["",{"children":["(front)",{"children":["vendorguideEditlisting",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/cb9bac98823f33d2.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+4:I{"id":1443,"chunks":["272:static/chunks/webpack-1b3f05cc7cc4428b.js","971:static/chunks/fd9d1056-c2e12ab5417b3d70.js","864:static/chunks/864-8e0637fa0b497626.js"],"name":"","async":false}
+5:I{"id":1654,"chunks":["676:static/chunks/870fdd6f-88f0a2e687431146.js","724:static/chunks/724-d6f128cfb260766d.js","964:static/chunks/964-f16a538242359c35.js","35:static/chunks/35-dbb804f67de9f03e.js","489:static/chunks/app/template-07762a0c56a918b6.js"],"name":"","async":false}
+6:I{"id":8639,"chunks":["272:static/chunks/webpack-1b3f05cc7cc4428b.js","971:static/chunks/fd9d1056-c2e12ab5417b3d70.js","864:static/chunks/864-8e0637fa0b497626.js"],"name":"","async":false}
 8:I{"id":6964,"chunks":["724:static/chunks/724-d6f128cfb260766d.js","964:static/chunks/964-f16a538242359c35.js","187:static/chunks/app/(front)/vendorguideEditlisting/page-ff3454c87a86c789.js"],"name":"Image","async":false}
 9:I{"id":4724,"chunks":["724:static/chunks/724-d6f128cfb260766d.js","964:static/chunks/964-f16a538242359c35.js","187:static/chunks/app/(front)/vendorguideEditlisting/page-ff3454c87a86c789.js"],"name":"","async":false}
 a:I{"id":4904,"chunks":["724:static/chunks/724-d6f128cfb260766d.js","964:static/chunks/964-f16a538242359c35.js","187:static/chunks/app/(front)/vendorguideEditlisting/page-ff3454c87a86c789.js"],"name":"","async":false}

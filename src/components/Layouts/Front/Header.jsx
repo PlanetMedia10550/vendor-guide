@@ -120,11 +120,11 @@ const Header = () => {
                     Contact
                   </Link>
                 </li>
-                <li>
+                <li >
                   <div className="head_dropdown inline-block relative pb-2">
                     <button
                       type="button"
-                      className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle pl-3"
+                      className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle dark:border-zinc-600  pl-3 "
                       id="page-header-user-dropdown"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
@@ -139,20 +139,20 @@ const Header = () => {
                       />
                     </button>
                     <ul className="head_dropdown-menu absolute hidden text-gray-700 pt-1 w-[8rem] z-50 bg-white mt-2 shadow-solid-primary ">
-                      <li className="py-1">
+                      <li className="py-1 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50" >
                         <Link
-                          className="px-3 text-sm font-bold hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50"
+                          className="px-3 text-sm font-bold block "
                           href=""
                         >
                           <i className="mdi mdi-lock text-16 align-middle mr-1"></i>
                           Blog
                         </Link>
                       </li>
-                      <li>
+                      <li className="hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
                         <div className="head_pulbication_dropdown inline-block relative pb-2 pr-8">
                           <button
                             type="button"
-                            className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-100 pl-3"
+                            className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle  dark:border-zinc-600  pl-3"
                             id="page-header-user-dropdown"
                             data-bs-toggle="dropdown"
                             aria-haspopup="true"
