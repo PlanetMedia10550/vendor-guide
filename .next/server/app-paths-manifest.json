@@ -1,26 +1,6 @@
 {
-  "/_not-found": "app/_not-found.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/(front)/page": "app/(front)/page.js",
-  "/(front)/advertise/page": "app/(front)/advertise/page.js",
   "/(front)/allPages/page": "app/(front)/allPages/page.js",
-  "/(front)/company/page": "app/(front)/company/page.js",
-  "/(front)/resources/page": "app/(front)/resources/page.js",
-  "/(front)/search/page": "app/(front)/search/page.js",
-  "/(front)/signup/page": "app/(front)/signup/page.js",
-  "/(front)/vendorguideEditlisting/page": "app/(front)/vendorguideEditlisting/page.js",
-  "/(front)/newregional/(individual)/individualnewregionalmanagerDashboard/page": "app/(front)/newregional/(individual)/individualnewregionalmanagerDashboard/page.js",
-  "/(front)/newregional/(individual)/individualnewregionalmanagerEmployee/page": "app/(front)/newregional/(individual)/individualnewregionalmanagerEmployee/page.js",
-  "/(front)/newregional/(individual)/individualnewregionalmanagerProperty/page": "app/(front)/newregional/(individual)/individualnewregionalmanagerProperty/page.js",
-  "/(front)/newregional/(managmentCompanyDashboard)/managementCompanyDashboardThree/page": "app/(front)/newregional/(managmentCompanyDashboard)/managementCompanyDashboardThree/page.js",
-  "/(front)/newregional/(managmentCompanyDashboard)/managementCompanyDashboardTwo/page": "app/(front)/newregional/(managmentCompanyDashboard)/managementCompanyDashboardTwo/page.js",
-  "/(front)/newregional/(managmentCompanyDashboard)/managementCompanyDashboard/page": "app/(front)/newregional/(managmentCompanyDashboard)/managementCompanyDashboard/page.js",
-  "/(front)/newregional/(propertyManager)/propertyManagerDashboardProperty/page": "app/(front)/newregional/(propertyManager)/propertyManagerDashboardProperty/page.js",
-  "/(front)/newregional/(propertyManager)/propertyManagerDashboard/page": "app/(front)/newregional/(propertyManager)/propertyManagerDashboard/page.js",
-  "/(front)/newregional/(propertyStaff)/propertyStaffDashboard/page": "app/(front)/newregional/(propertyStaff)/propertyStaffDashboard/page.js",
-  "/(front)/newregional/(propertyStaff)/propertyStaffEmployees/page": "app/(front)/newregional/(propertyStaff)/propertyStaffEmployees/page.js",
-  "/(front)/newregional/(propertyStaff)/propertyStaffProperties/page": "app/(front)/newregional/(propertyStaff)/propertyStaffProperties/page.js",
-  "/(front)/newregional/(quotePopup)/quotePopupRegionalManagerDashboard/page": "app/(front)/newregional/(quotePopup)/quotePopupRegionalManagerDashboard/page.js",
-  "/(front)/newregional/(quotePopup)/quotePopupRegionalManagerEmployees/page": "app/(front)/newregional/(quotePopup)/quotePopupRegionalManagerEmployees/page.js",
-  "/(front)/newregional/(quotePopup)/quotePopupRegionalManagerProperties/page": "app/(front)/newregional/(quotePopup)/quotePopupRegionalManagerProperties/page.js"
+  "/(front)/resources/page": "app/(front)/resources/page.js"
 }
