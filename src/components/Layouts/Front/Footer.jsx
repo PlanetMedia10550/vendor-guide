@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="flex items-center gap-4 md:gap-7 justify-between md:flex-row md:mb-0 mb-4">
             <div className="flex flex-col gap-2">
               <Link
-                href="#"
+                href=""
                 className="flex items-center md:ps-8 sm:ps-7"
               >
                 <Image

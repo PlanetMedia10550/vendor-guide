@@ -1,6 +1,4 @@
-
-import DashBoardTable from "@/components/Front/NewRegionalmanagerDashboard/DashBoardTable";
-import DashBoardTableBtn from "@/components/Front/NewRegionalmanagerDashboard/DashBoardTableBtn";
+import DashBoardTablePdata from "@/components/Front/NewRegionalmanagerDashboard/DashBoardTablePdata";
 import TableCheckbox from "@/components/Front/Company/TableCheckbox"
 import Pagination from "@/components/Common/Pagination"
    
@@ -136,17 +134,7 @@ const NewRegionalmanagerProperty =  () => {
 
     return (
         <>
-          
-          <section className="pt-14"> 
-          <div className="px-10"> 
-          <DashBoardTable data={bidRequests} />
-          <div className="flex gap-7 justify-end">
-          <DashBoardTableBtn name="View/Edit"/> 
-          <DashBoardTableBtn name="Add"/> 
-          </div> 
-          </div>  
-          <Pagination/>        
-          </section>
+            <DashBoardTablePdata />
         </>
     )
 }

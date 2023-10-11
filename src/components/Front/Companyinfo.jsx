@@ -4,13 +4,13 @@ const Companyinfo = () => {
   return (
     <>
       <section className="search-section bg-[#f7f9f8]">
-        <div class=" isolate px-6   lg:px-8">
-          <div class="mx-auto max-w-2xl py-5 lg:py-12 md:pt-10  lg:pt-8">
-            <div class="text-center">
-              <h1 class="xl:text-5xl  lg:text-4xl text-3xl font-bold tracking-tight text-[#221F20] md:text-4xl">
+        <div className=" isolate px-6   lg:px-8">
+          <div className="mx-auto max-w-2xl py-5 lg:py-12 md:pt-10  lg:pt-8">
+            <div className="text-center">
+              <h1 className="xl:text-5xl  lg:text-4xl text-3xl font-bold tracking-tight text-[#221F20] md:text-4xl">
                 Search Results
               </h1>
-              <p class="lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
+              <p className="lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
                 Twin Cities Plumbers
               </p>
             </div>
@@ -25,7 +25,7 @@ const Companyinfo = () => {
               <form className="lg:flex gap-8 text-sm lg:pr-[0.1rem] xl:pr-[1.1rem] pr-4">
                 <div className="grid grid-cols-12  items-center  lg:mb-0 mb-4">
                   <label
-                    for="horizontal-firstname-input"
+                    htmlFor="horizontal-firstname-input"
                     className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20]"
                   >
                     Company Name
@@ -41,7 +41,7 @@ const Companyinfo = () => {
                 </div>
                 <div className="grid grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-4">
                   <label
-                    for="horizontal-email-input"
+                    htmlFor="horizontal-email-input"
                     className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20] "
                   >
                     Category
@@ -57,7 +57,7 @@ const Companyinfo = () => {
                 </div>
                 <div className="grid grid-cols-12  items-center lg:pl-0 lg:mb-0 mb-4">
                   <label
-                    for="horizontalzip-input"
+                    htmlFor="horizontalzip-input"
                     className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20]"
                   >
                     Zip Code

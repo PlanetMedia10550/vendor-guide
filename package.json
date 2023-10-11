@@ -16,6 +16,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@material-tailwind/react": "^2.1.2",
     "@mui/material": "^5.14.8",
     "@nextui-org/react": "^2.1.12",
     "autoprefixer": "10.4.15",
@@ -40,6 +41,8 @@
     "sharp": "^0.32.6",
     "simplebar-react": "^3.2.4",
     "tailwindcss": "3.3.3",
+    "tw-elements": "^1.0.0",
+    "typescript": "^5.2.2",
     "yup": "^1.2.0"
   }
 }

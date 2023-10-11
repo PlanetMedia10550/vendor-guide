@@ -33,7 +33,7 @@ const FeaturSection = (props) => {
               height="100"
             />
             <Image
-              src="images&icons/Asset1.png"
+              src="/images&icons/Asset1.png"
               alt="Product screenshot"
               className="absolute_class max-w-none absolute lg:block hidden  xl:right-[27.5rem] md:right-[22.5rem] xl:top-32 md:top-20  xl:w-[12rem] md:w-[10rem] sm:w-[9rem]"
               width="80"
@@ -70,7 +70,7 @@ const FeaturSection = (props) => {
               height="100"
             />
             <Image
-              src="images&icons/Asset2.png"
+              src="/images&icons/Asset2.png"
               alt="Product screenshot"
               className="absolute xl:left-[21rem] md:top-24 md:left-72 lg:block hidden xl:w-[12rem] md:w-[10rem] sm:w-[9rem]"
               width="100"

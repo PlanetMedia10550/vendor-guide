@@ -9,9 +9,9 @@ const CommanTable = (props) => {
                             <thead className="text-xs text-[#171717] font-myriad  pb-3">
                                 <tr>
                                     {
-                                        collums.map((row) => {
+                                        collums.map((row,i) => {
                                             return (
-                                                <th  key="key-1" scope="col" className="px-1 py-1 pb-4 font-extrabold">{row}</th>
+                                                <th  key={i} scope="col" className="px-1 py-1 pb-4 font-extrabold">{row}</th>
                                             )
                                         })
                                     }
@@ -19,12 +19,12 @@ const CommanTable = (props) => {
                             </thead>
                             <tbody className="text-xs font-semibold">
                                 {
-                                    rows.map((row) => {
+                                    rows.map((row,i) => {
                                         return (
-                                                <tr key="key-2" className="bg-white   hover:bg-gray-50/50   whitespace-nowrap">
+                                                <tr key={i} className="bg-white   hover:bg-gray-50/50   whitespace-nowrap">
                                                     {
-                                                        row.map((r1) => {
-                                                            return (<td key="key-3" className="px-1 py-1">{r1}</td>)
+                                                        row.map((r1,i) => {
+                                                            return (<td key={i} className="px-1 py-1">{r1}</td>)
                                                         })
                                                     }
                                                 </tr>

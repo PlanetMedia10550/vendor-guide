@@ -71,7 +71,7 @@ const SignUpForm = (props) => {
                     value=""
                   />
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="absolute top-2 left-0 text-black pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold  text-[0.55rem]  md:text-[0.77rem]"
                   >
                     Full Name
@@ -86,7 +86,7 @@ const SignUpForm = (props) => {
                     placeholder=""
                   />
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="absolute top-2 left-0 text-black pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold text-[0.55rem] md:text-[0.77rem]"
                   >
                     Company Name
@@ -101,7 +101,7 @@ const SignUpForm = (props) => {
                     placeholder=""
                   />
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="absolute top-2.5 left-0 text-black pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold  text-[0.55rem] md:text-[0.77rem]"
                   >
                     Company Website
@@ -118,7 +118,7 @@ const SignUpForm = (props) => {
                     placeholder=""
                   />
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="absolute top-2.5 left-0 text-black pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold  text-[0.55rem] md:text-[0.77rem]"
                   >
                     Phone
@@ -133,7 +133,7 @@ const SignUpForm = (props) => {
                     placeholder=""
                   />
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="absolute top-2.5 left-0 text-black pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold text-[0.55rem] md:text-[0.77rem]"
                   >
                     Email
@@ -149,18 +149,18 @@ const SignUpForm = (props) => {
                     placeholder=""
                   ></textarea>
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="absolute top-2.5 left-0 text-black pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold text-[0.55rem] md:text-[0.77rem]"
                   >
                     Note
                   </label>
                 </div>
               </div>
-              <div class="block text-center">
+              <div className="block text-center">
                 <buttom
                   type="submit"
                   name="save"
-                  class="px-10 lg:px-6 md:px-5 py-2 text-center flex-none rounded-md bg-[#B13634] lg:text-[1.3rem] md:text-lg text-sm tracking-wide font-normal font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
+                  className="px-10 lg:px-6 md:px-5 py-2 text-center flex-none rounded-md bg-[#B13634] lg:text-[1.3rem] md:text-lg text-sm tracking-wide font-normal font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
                 >
                   {props.btnTitle}
                 </buttom>

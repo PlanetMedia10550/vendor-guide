@@ -14,7 +14,7 @@ const TopBanner = (props) => {
                 <h1 className="lg:text-5xl text-3xl font-bold tracking-tight text-gray-50 md:text-4xl">
                   {props.heading}
                 </h1>
-                <p class="lg:mt-5 mt-3 lg:text-xl text-sm leading-5 text-gray-50">
+                <p className="lg:mt-5 mt-3 lg:text-xl text-sm leading-5 text-gray-50">
                   {props.title}
                 </p>
               </div>

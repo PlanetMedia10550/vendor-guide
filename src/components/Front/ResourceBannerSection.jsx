@@ -59,7 +59,7 @@ const ResourceBannerSection = (props) => {
                       </div>
                       <div className="text-center block">
                         <Link
-                          href="javascript:void();"
+                          href=""
                           className="my-4 xl:my-9 mx-5 xl:mx-8  block px-0  py-1 lg:py-2 text-center rounded-full  bg-[#221F20] xl:text-xl text:lg tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#221F20] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
                         >
                           Twin Cities

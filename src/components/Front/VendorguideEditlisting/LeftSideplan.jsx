@@ -124,14 +124,14 @@ const LeftSideplan = (props) =>{
                     <div className="lg:ps-32 flex gap-x-3 items-center my-6 mb-4">
                     <Radio name="default-radio-1" id="default-radio-1"/>
                       <label
-                        for="default-radio-1"
+                        htmlFor="default-radio-1"
                         className=" font-semibold text-[#221F20] md:text-xl text-sm "
                       >Credit or debit card</label>
                     </div>
                     <div className="lg:ps-32 flex gap-x-3 items-center mb-5">
                     <Radio name="default-radio-1" id="default-radio-1"/>
                       <label
-                        for="default-radio-1"
+                        htmlFor="default-radio-1"
                         className="flex items-center font-semibold text-[#221F20] md:text-xl text-sm "
                       >
                          <Image   width="100"  height="100"
@@ -150,7 +150,7 @@ const LeftSideplan = (props) =>{
                         <div className="mb-4 relative float-label-input mt-0">
                          
                              <Input name= "cardno" id="cardno" placeholder="" value=""/>
-                             <Lable lable= "Credit Card Number" for="cardno" />
+                             <Lable lable= "Credit Card Number" htmlFor="cardno" />
                          
                         </div>
                         <div className="">
@@ -158,17 +158,17 @@ const LeftSideplan = (props) =>{
                             <div className="col-span-1 lg:col-span-1 mb-4 relative float-label-input mt-0">
                               
                                 <Input name= "carddate" id="carddate" placeholder="" value=""/>
-                                <Lable lable= "Exp. Date" for="name" />
+                                <Lable lable= "Exp. Date" htmlFor="name" />
                             </div>
                             <div className="col-span-1 lg:col-span-1 mb-4 relative float-label-input mt-0">
                              
                                 <Input name= "cardyear" id="cardyear" placeholder="" value=""/>
-                                <Lable lable= "Year" for="name" />
+                                <Lable lable= "Year" htmlFor="name" />
                             </div>
                             <div className="col-span-1 lg:col-span-1 mb-4 relative float-label-input mt-0">
                             
                                  <Input name= "secretcode" id="secretcode" placeholder="" value=""/>
-                                 <Lable lable= "CVV" for="name" />
+                                 <Lable lable= "CVV" htmlFor="name" />
                             </div>
                           </div>
                         </div>

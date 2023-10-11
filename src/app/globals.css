@@ -1,9 +1,10 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
 
+/* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap'); */
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -20,6 +21,12 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
 /* custom css */
@@ -42,7 +49,7 @@ footer {
 .divider {
   filter: blur(1px);
 }
-input {
+input{
   color: var(--black);
 }
 .nav-modal {
@@ -54,67 +61,38 @@ input {
   border: 1px solid var(--comp-primary);
 }
 
-/* .float-label-input {
-  margin: 32px 0;
-} */
+.float-label-input {
+    margin: 32px 0;     
+ }
 
-.float-label-input:focus-within label {
-  transform: translateY(-1.5rem) scale(0.9);
-  background-color: white;
+ .float-label-input:focus-within label, .float-label-input input:not(:placeholder-shown) + label {
+    transform: translateY(-1.5rem) scale(0.9);
+    background-color: white;
 }
 
-.float-label-input-2:focus-within label {
-  transform: translateY(-1.5rem) scale(0);
-}
-
-.para {
-  @apply text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800;
+.para{
+  @apply   text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800
 }
 
 /* SANSKRITI */
 
 .head_dropdown:hover .head_dropdown-menu {
-  display: block;
-}
-
-.head_pulbication_dropdown:hover .head_pulbication_dropdown-menu {
-  display: block;
+display: block;
 }
 
 .shadow-solid-primary {
-  box-shadow: 5px 5px 12px black;
+box-shadow: 5px 5px 12px black
 }
 
 .shadow-resources-primary {
-  box-shadow: 0px 1px 12px #575757;
+box-shadow: 0px 1px 12px #575757;
 }
 input[type="range"] {
-  accent-color: #151515;
+accent-color: #151515;
 }
-@media (max-width: 575px) {
+@media (max-width:575px){
   .float-label-input {
-    margin: 0px 0;
-  }
+    margin: 0px 0;     
+ }
 }
 
-@media (max-width: 992px) {
-  div#mobile-menu-2 {
-    position: fixed;
-    top: 0;
-    z-index: 99;
-    background-color: #fff;
-    left: 0;
-    width: 313px;
-    height: 100%;
-    box-shadow: 0 0 11px #b1363475;
-  }
-
-  li#Vendor_Guide_Logo2 {
-    display: block;
-  }
-}
-
-@media (max-width: 992px) {
-  div#mobile-menu-2 {
-  }
-}

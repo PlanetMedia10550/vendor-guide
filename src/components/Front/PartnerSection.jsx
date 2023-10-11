@@ -15,7 +15,7 @@ const PartnerSection = (props) => {
               </p>
               <div className="pt-7 md:pt-9 gap-x-4 text-center block">
                 <Link
-                  href="#"
+                  href=""
                   className="inline-block text-center flex-none rounded-md bg-[#B13634] px-8 sm:px-11 py-2 lg:py-3 text-base sm:text-lg lg:text-xl tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B13634]"
                 >
                   {props.btnTitle}

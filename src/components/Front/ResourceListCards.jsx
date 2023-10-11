@@ -6,20 +6,19 @@ import Link from "next/link";
 const ResourceListCards = (props) => {
   const [items, setItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
-  // const [itemsPerPage, setItemsPerPage] = useState(10);
-  const itemsPerPage = 10;
-  useEffect(() => {
-    const getProducts = async () => {
-      const res = await fetch(
-        `https://dummyjson.com/products?skip=0&limit=${itemsPerPage}`
-      );
-      const data = await res.json();
-      const totalCount = data.total;
-      setPageCount(Math.ceil(totalCount / itemsPerPage));
-      setItems(data.products);
-    };
-    getProducts();
-  }, [items]);
+  var itemsPerPage = 10;
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     const res = await fetch(
+  //       `https://dummyjson.com/products?skip=0&limit=${itemsPerPage}`
+  //     );
+  //     const data = await res.json();
+  //     const totalCount = data.total;
+  //     setPageCount(Math.ceil(totalCount / itemsPerPage));
+  //     setItems(data.products);
+  //   };
+  //   getProducts();
+  // }, []);
 
   const fetchProducts = async (currentPage) => {
     const res = await fetch(
@@ -42,10 +41,10 @@ const ResourceListCards = (props) => {
     <>
       <div className="z-50">
         <div className="mx-auto max-w-2xl px-10 pb-6 sm:px-6 lg:py-24 lg:max-w-7xl lg:px-8">
-          <div class="text-center py-10 sm:py-0">
+          <div className="text-center py-10 sm:py-0">
             <Link
-              href="javascript:void();"
-              class="inline-block px-10 sm:px-20 lg:px-40 2xl:px-56 py-2 lg:py-2 2xl:py-3 text-center rounded-full  bg-[#B13634] 2xl:text-3xl lg:text-2xl text:xl tracking-wide font-semibold font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B13634]"
+              href=""
+              className="inline-block px-10 sm:px-20 lg:px-40 2xl:px-56 py-2 lg:py-2 2xl:py-3 text-center rounded-full  bg-[#B13634] 2xl:text-3xl lg:text-2xl text:xl tracking-wide font-semibold font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B13634]"
             >
               {props.title}
             </Link>

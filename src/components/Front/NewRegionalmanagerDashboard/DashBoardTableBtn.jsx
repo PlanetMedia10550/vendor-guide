@@ -1,6 +1,6 @@
 import SaveEditButton from "@/components/Front/SaveEditButton";
 import TableCheckbox from "@/components/Front/Company/TableCheckbox"
-import DashBoardTableulli from "@/components/Front/NewRegionalmanagerDashboard/DashBoardTableulli"
+// import DashBoardTableulli from "@/components/Front/NewRegionalmanagerDashboard/DashBoardTableulli"
 import Link  from "next/link"
 
 const DashBoardTableBtn = (props) =>{

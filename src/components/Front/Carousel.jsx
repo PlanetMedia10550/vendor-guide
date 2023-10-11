@@ -8,7 +8,7 @@ const Carousel = (props) => {
             <div className="overflow-hidden relative xl:h-[70vh]  lg:h-[70vh] md:h-[54vh] h-[40vh]">
                 {props.images && props.images.map((src, i) => {
                     return (
-                        <div key="key-1" className="duration-700 ease-in-out xl:h-[70vh] lg:h-[70vh] md:h-[54vh] h-[40vh] bg-blend-darken" data-carousel-item >
+                        <div key= {i} className="duration-700 ease-in-out xl:h-[70vh] lg:h-[70vh] md:h-[54vh] h-[40vh] bg-blend-darken" data-carousel-item >
                             <Image src={src} className="h-[54vh] lg:h-[70vh] w-auto object-cover block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt={src} width="100"  height="100"/>
                         </div>
                     );

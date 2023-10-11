@@ -54,8 +54,7 @@ const Advertise = () => {
       </section>
       <section
         id="advertise_section"
-        style={{
-          backgroundImage: `url(images&icons/advertise/pattern.png)`,
+        style={{backgroundImage:`url(images&icons/advertise/pattern.png)`,
         }}
         className="bg-bottom-left
         bg-no-repeat bg-contain"

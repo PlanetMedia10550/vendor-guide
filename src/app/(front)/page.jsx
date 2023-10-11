@@ -1,8 +1,8 @@
 import BannerSectionCard from "@/components/Front/BannerSectionCard";
-// import Carousel from "@/components/Front/Carousel";
+import Carousel from "@/components/Front/Carousel";
 import FeaturSection from "@/components/Front/FeaturSection";
 import PartnerSection from "@/components/Front/PartnerSection";
-import SearchBar from "@/components/Front/SearchBar";
+import SearchBar from "@/components/Front/searchBar";
 import Link from "next/link";
 
 export default function Home() {
@@ -35,7 +35,7 @@ export default function Home() {
           <div className="grid grid-cols-5 items-center justify-center gap-5 md:gap-5 sm:mt-4 md:mt-0">
             {BCardimages.map((src, i) => {
               return (
-                <BannerSectionCard key={i} imgsrc={src} imgalt={src} />
+                <BannerSectionCard key="key-1" imgsrc={src} imgalt={src} />
               );
             })}
           </div>

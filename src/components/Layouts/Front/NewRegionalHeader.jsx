@@ -19,13 +19,13 @@ const Header = () => {
           <div className="container mx-auto">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
               <Link
-                href="javascript:void();"
+                href=""
                 className="flex items-center md:ps-4"
               >
                 <Image
                   width="100"
                   height="100"
-                  src=" ../../images&icons/SVG/logo_white.svg"
+                  src=" /../../images&icons/SVG/logo_white.svg"
                   className="mr-3 h-3 sm:h-6 w-full"
                   alt=""
                 />
@@ -45,7 +45,7 @@ const Header = () => {
                       width="100"
                       height="100"
                       className="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2"
-                      src=" ../../images&icons/profile.png"
+                      src="/../../images&icons/profile.png"
                       alt="Header Avatar"
                     />
                     <div>
@@ -70,7 +70,7 @@ const Header = () => {
                       <div className="dropdown-item ">
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
-                          href="javascript:void();"
+                          href=""
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
@@ -82,7 +82,7 @@ const Header = () => {
                       <div className="dropdown-item ">
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
-                          href="javascript:void();"
+                          href=""
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
@@ -95,7 +95,7 @@ const Header = () => {
                       <div className="dropdown-item ">
                         <Link
                           className="p-3 hover:bg-gray-50/50 block"
-                          href="javascript:void();"
+                          href=""
                         >
                           <i
                             className="fa fa-sign-out text-16 align-middle mr-1"
@@ -130,9 +130,9 @@ const Header = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
                 <svg
@@ -142,9 +142,9 @@ const Header = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </button>
@@ -152,15 +152,15 @@ const Header = () => {
                 className="hidden justify-between items-center gap-x-20 w-full md:flex md:w-auto"
                 id="mobile-menu-2"
               >
-                <div class="">
-                  <h6 class="hidden lg:block mb-1 lg:text-xl  md:text-lg font-semibold text-[#171717]">
+                <div className="">
+                  <h6 className="hidden lg:block mb-1 lg:text-xl  md:text-lg font-semibold text-[#171717]">
                     Welcome to Your Vendor Management Dashboard!
                   </h6>
                 </div>
                 <ul className="flex flex-col gap-x-5 mt-4 font-semibold md:flex-row  md:mt-0 text-base text-[#221F20]">
                   <li>
                     <Link
-                      href="javascript:void();"
+                      href=""
                       className="lg:active text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3  lg:px-3  border-b-[3px]  focus:border-red-700 hover:border-b-[3px] border-transparent active:border-b-[3px] lg:active:border-red-700"
                     >
                       Dashboard
@@ -168,7 +168,7 @@ const Header = () => {
                   </li>
                   <li>
                     <Link
-                      href="javascript:void();"
+                      href=""
                       className="text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3 lg:px-2  border-b-[3px] border-transparent focus:border-red-700 hover:border-b-[3px] hover:border-red-700 active:border-b-[3px] active:border-red-700"
                     >
                       Properties
@@ -176,7 +176,7 @@ const Header = () => {
                   </li>
                   <li>
                     <Link
-                      href="javascript:void();"
+                      href=""
                       className="text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3 lg:px-2  border-b-[3px] border-transparent focus:border-red-700 hover:border-b-[3px] hover:border-red-700 active:border-b-[3px] active:border-red-700"
                     >
                       Employees
@@ -196,11 +196,11 @@ const Header = () => {
                     <input
                       type="text"
                       id="table-search-users"
-                      class="block p-[0.27rem] pl-10 text-sm text-[#171717] border border-[#003041] rounded-xl lg:w-56 bg-white focus:ring-0 "
+                      className="block p-[0.27rem] pl-10 text-sm text-[#171717] border border-[#003041] rounded-xl lg:w-56 bg-white focus:ring-0 "
                     />
                     <label
                       htmlFor="name"
-                      class="absolute top-2 left-16 text-[#003041] pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold  text-sm lato"
+                      className="absolute top-2 left-16 text-[#003041] pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-bold  text-sm lato"
                     >
                       Search
                     </label>

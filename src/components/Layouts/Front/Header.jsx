@@ -76,7 +76,7 @@ const Header = () => {
               id="mobile-menu-2"
             >
               <ul className="flex flex-col mt-4 font-semibold lg:flex-row lg:space-x-8 lg:mt-0 text-base text-[#221F20]">
-                <li className="hidden" id="Vendor_Guide_Logo2">
+                <li className="hidden " id="Vendor_Guide_Logo2">
                   <Link
                     href="/"
                     className="flex items-center px-4 pb-4 lg:ps-4"
@@ -120,11 +120,11 @@ const Header = () => {
                     Contact
                   </Link>
                 </li>
-                <li >
+                <li>
                   <div className="head_dropdown inline-block relative pb-2">
                     <button
                       type="button"
-                      className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle dark:border-zinc-600  pl-3 "
+                      className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle pl-3"
                       id="page-header-user-dropdown"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
@@ -139,20 +139,20 @@ const Header = () => {
                       />
                     </button>
                     <ul className="head_dropdown-menu absolute hidden text-gray-700 pt-1 w-[8rem] z-50 bg-white mt-2 shadow-solid-primary ">
-                      <li className="py-1 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50" >
+                      <li className="py-1">
                         <Link
-                          className="px-3 text-sm font-bold block "
+                          className="px-3 text-sm font-bold hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50"
                           href=""
                         >
                           <i className="mdi mdi-lock text-16 align-middle mr-1"></i>
                           Blog
                         </Link>
                       </li>
-                      <li className="hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
+                      <li>
                         <div className="head_pulbication_dropdown inline-block relative pb-2 pr-8">
                           <button
                             type="button"
-                            className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle  dark:border-zinc-600  pl-3"
+                            className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-100 pl-3"
                             id="page-header-user-dropdown"
                             data-bs-toggle="dropdown"
                             aria-haspopup="true"
