@@ -1,0 +1,129 @@
+"use client";
+import Link from "next/link";
+import { getResponse } from "@/app/lib/load-api";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { LoadingScreen } from "./LoadingScreen";
+import Companyinfo from "./Companyinfo";
+
+const VendorCard = (props) => {
+  const [vendorData, setVendorData] = useState([]);
+  const [isLoading, setIsLoding] = useState(true);
+  const [totalPage, setTotalPage] = useState(0);
+  const searchParams = useSearchParams()
+  const search = searchParams.get('key_word')?searchParams.get('key_word'):""
+  
+
+  useEffect(() => {
+    const params = new URLSearchParams()
+    const bannerResponse = async () => {
+      params.set('limit',5)
+      params.set('offset',0)
+      if(search) {params.set('key_word',search) }else{ params.delete('key_word') }
+      var urlString = params.toString();
+      const vendorResult = await getResponse('vendor?' + urlString)
+      setVendorData(vendorResult.data)
+      setIsLoding(false)
+      // console.log(totalPage)
+    }
+
+    bannerResponse();
+  }, [search])
+
+
+  
+  return (
+    <>
+      <Companyinfo searchWord={search} setIsLoding={setIsLoding} setVendorData={setVendorData} />
+      
+      <section className="contact_search bg-[#f7f9f8]">
+        <div className="py-20 pt-8 px-10 md:px-10">
+          <div className="grid grid-cols-12 md:gap-12">
+            <div className="col-span-12  md:col-span-12 lg:col-span-12  order-2 sm:order-1">
+            {(isLoading) ? <LoadingScreen /> : (
+            (vendorData == "") ? <DataNotFound /> : (
+            <div className="grid_system grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  xl:grid-cols-5 2xl:grid-cols-5 gap-6  xl:gap-8 items-center" >
+              {vendorData && vendorData.map((row, index) => {
+                return (
+                  
+                    <div className="h-full" key={index}>
+                      <div className="card mb-0 bg-white px-3 shadow h-full relative">
+                        <div className="card-body">
+                          <div className="text-center xl:px-2 3xl:min-h-[36vh] 2xl:min-h-[42vh] lg:min-h-[55vh] md:min-h-[56vh] min-h-[55vh]">
+                            <div className="w-36  pt-2 mx-auto text-center">
+                              <Image
+                                width="100"
+                                height="100"
+                                className="w-full"
+                                src={row.image_url}
+                                alt="Sunset in the mountains"
+                              />
+                            </div>
+                            <h5 className="text-16 text-gray-700 mb-1">
+                              <Link href="#" className="text-[#B13634] font-bold">
+                                {row.name}
+                              </Link>
+                            </h5>
+                            <p className="text-black font-bold  mb-2 pt-5">{row.mobile}</p>
+                            <p className="text-gray-400 font-normal text-sm">
+                              {row.short_description}
+                            </p>
+                          </div>
+                          <div
+                            className="py-10 px-3 absolute bottom-0 left-0 right-0"
+                            role="group"
+                          >
+                            <div className="flex items-center justify-center xl:gap-x-4 gap-x-6  md:text-center">
+                              <div>
+                                <Link
+                                  href=""
+                                  className="rounded-[0.7rem] md:inline-block px-3.5 py-1 xl:text-[0.55rem] text-sm border-solid border-[1px] border-black font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >
+                                  Learn More
+                                </Link>
+                              </div>
+                              <div className="lg:mt-0  mt-0">
+                                <Link
+                                  href=""
+                                  className="rounded-[0.7rem] md:inline-block px-3.5 py-1 xl:text-[0.55rem] text-sm border-solid border-[1px] border-black font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >
+                                  Request Quote
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                );
+              })}
+              </div>)
+              ) }
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default VendorCard;
+
+export const DataNotFound = () => {
+  return (
+    <>
+      <div className="h-full">
+        <div className="w-100  pt-2 mx-auto text-center text-sm text-[#221F20]">
+          <h1 className="text-lg font-medium">Sorry, we could not find any vendors that matched your criteria.</h1>
+          <p className="text-base ">Try a different search
+            {/* or view all our vendors */}
+          </p>
+        </div>
+      </div>
+    </>
+  );
+};
