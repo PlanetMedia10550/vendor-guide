@@ -1,5 +1,4 @@
 "use client";
-import DashBoardTableData from "@/components/Front/NewRegionalmanagerDashboard/DashBoardTableData";
 import Graph from "@/components/Front/NewRegionalmanagerDashboard/Graph";
 import Sideli from "@/components/Common/Sideli";
 import DashBoardTable from "@/components/Front/DashboardNewLookEmployee/DashBoardTable";
