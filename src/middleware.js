@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 export function middleware(request) {
     const cookie = request.cookies.get('token')?.value;
     const moduleType = request.cookies.get('is_module_type')?.value;
+    
     if(cookie && moduleType!='vendor' && request.nextUrl.pathname.startsWith('/vendor/dashboard')){
         return NextResponse.redirect(new URL('/', request.url))
     }else if(cookie && moduleType!='manager' && request.nextUrl.pathname.startsWith('/manager/dashboard')){
@@ -20,6 +21,7 @@ export function middleware(request) {
         return NextResponse.redirect(new URL(`/company/dashboard`, request.url))
     }
 
+    // console.log(cookie);
     if(!cookie && (request.nextUrl.pathname.startsWith(`/vendor/dashboard`) || request.nextUrl.pathname.startsWith(`/manager/dashboard`) || request.nextUrl.pathname.startsWith(`/company/dashboard`))){
         return NextResponse.redirect(new URL(`/`, request.url))
     }

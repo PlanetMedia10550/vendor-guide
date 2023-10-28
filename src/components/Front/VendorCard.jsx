@@ -6,19 +6,32 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { LoadingScreen } from "./LoadingScreen";
 import Companyinfo from "./Companyinfo";
+import Modal from "@/components/Modal";
+import { useAuth } from "@/context/UserContext";
+import PropartyForm from "@/components/PropartyForm";
+import vendorDefult from "@/../../public/images&icons/vendor-default.jpg"
 
 const VendorCard = (props) => {
+  const {user,renderFieldError,isLoding}  = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [vendorData, setVendorData] = useState([]);
   const [isLoading, setIsLoding] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
   const searchParams = useSearchParams()
   const search = searchParams.get('key_word')?searchParams.get('key_word'):""
   
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const params = new URLSearchParams()
     const bannerResponse = async () => {
-      params.set('limit',5)
+      params.set('limit',20)
       params.set('offset',0)
       if(search) {params.set('key_word',search) }else{ params.delete('key_word') }
       var urlString = params.toString();
@@ -56,8 +69,8 @@ const VendorCard = (props) => {
                                 width="100"
                                 height="100"
                                 className="w-full"
-                                src={row.image_url}
-                                alt="Sunset in the mountains"
+                                src={row.image_url ? row.image_url : vendorDefult.src}
+                                alt={row.name}
                               />
                             </div>
                             <h5 className="text-16 text-gray-700 mb-1">
@@ -87,6 +100,7 @@ const VendorCard = (props) => {
                                 <Link
                                   href=""
                                   className="rounded-[0.7rem] md:inline-block px-3.5 py-1 xl:text-[0.55rem] text-sm border-solid border-[1px] border-black font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                  onClick={openModal}
                                 >
                                   Request Quote
                                 </Link>
@@ -107,6 +121,20 @@ const VendorCard = (props) => {
           </div>
         </div>
       </section>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <h1 className="text-3xl font-medium" >Request a Quote !</h1>
+        {user!=null ? (
+          <PropartyForm user={user}  />
+        ) : (
+          <>
+            <p className="text-xl mt-2">Kindly login or register to request a quote</p>
+            <div className="flex justify-center gap-x-2 mt-10">
+              <Link className="text-white bg-[#B13634] block   hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-normal rounded-lg text-xs sm:text-base lg:text-[1.100rem] px-2 sm:px-4 lg:px-4 py-2 lg:py-2 md:mr-2 focus:outline-none" href="/manager/login" >Login</Link>
+              <Link className="text-white bg-[#B13634] block   hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-normal rounded-lg text-xs sm:text-base lg:text-[1.100rem] px-2 sm:px-4 lg:px-4 py-2 lg:py-2 md:mr-2 focus:outline-none" href='/manager/register' >Register</Link>
+            </div>
+          </>
+        )}
+      </Modal>
     </>
   );
 };

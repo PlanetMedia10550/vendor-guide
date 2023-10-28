@@ -15,20 +15,32 @@ export function UserProvider({ children }) {
   const [isLoding, setIsLoding] = useState(false);
   // const [formErrors, setFormErrors] = useState(false);
   const token = getCookie('token');
+  const is_module_type = getCookie('is_module_type');
   const { errors,setErrors, renderFieldError, navigate } = useForm();
   useEffect(() => {
     const loadUserFromCookies = async () => {
       // const token = Cookies.get('token');
       setIsLoding(true);
       if (token) {
-        console.log("Got a token in the cookies, let's see if it is valid");
+        // console.log("Got a token in the cookies, let's see if it is valid");
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Set the Authorization header for Axios
         try {
           const response = await axios.post(`${process.env.BASE_API_URL}user-info`); // Assuming you want to make a GET request for user info
-          // console.log(response.data)
+          // const result = await response.json();
+          // console.log(result)
           setUser(response.data); // Assuming the user data is in the response
           setIsLogin(true);
+          setCookie('token', token,{maxAge: 3600 });
+          setCookie('is_module_type', is_module_type,{maxAge: 3600 });
         } catch (error) {
+          // console.log(error.response.status)
+          if(error?.response?.status==401){
+            if(hasCookie('token')){
+              deleteCookie('token');
+              deleteCookie('is_module_type');
+              router.push(`/`);
+            }
+          }
           console.error('Error loading user info', error);
           setUser(null); // Handle errors by setting user to null or implement error handling as needed.
         }
@@ -47,18 +59,20 @@ export function UserProvider({ children }) {
       setIsLoding(true);
       await axios.post(`${process.env.BASE_API_URL}${requestUrl}/login`, data).then(response => {
         // console.log(response.data.data);
+        setIsLoding(false);
         if(response.data.success==true) {
           var token_new = response.data.data.token;
           if (token_new) {
                   setUser(response.data.data); 
-                  setCookie('token', token_new);
-                  setCookie('is_module_type', requestUrl);
+                  setCookie('token', token_new,{maxAge: 3600 });
+                  setCookie('is_module_type', requestUrl,{maxAge: 3600 });
                   // console.log(user.data.name);
                   router.push(`/${requestUrl}/dashboard`);
-                  setIsLoding(false);
+                  
               }
           }
       }).catch(error => {
+        setIsLoding(false);
           // console.log(error.response);
           if(error?.response?.data?.data.errors) {
               if (error.response.data.data.errors) {
@@ -66,7 +80,7 @@ export function UserProvider({ children }) {
                   
               }
           }
-          setIsLoding(false);
+          
       });
   };
   
@@ -75,11 +89,13 @@ export function UserProvider({ children }) {
       setIsLoding(true);
       await axios.post(`${process.env.BASE_API_URL}${requestUrl}/register`, data).then(response => {
         // console.log(response.data.data);
+        setIsLoding(false);
         if(response.data.success==true) {
             router.push(`/${requestUrl}/login`);
-            setIsLoding(false);
+            
         }
       }).catch(error => {
+        setIsLoding(false);
           // console.log(error.response);
           if(error?.response?.data?.data) {
               if (error.response.data.data) {
@@ -87,7 +103,7 @@ export function UserProvider({ children }) {
                   
               }
           }
-          setIsLoding(false);
+          
       });
   };
 
@@ -96,6 +112,7 @@ export function UserProvider({ children }) {
     if(hasCookie('token')){
       deleteCookie('token')
       deleteCookie('is_maneger')
+      deleteCookie('is_module_type')
       setUser(null); 
       setIsLogin(false);
       router.push(`/`);

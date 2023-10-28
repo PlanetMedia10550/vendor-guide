@@ -25,6 +25,8 @@
     "cookies-next": "^4.0.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "flowbite": "^2.0.0",
+    "flowbite-react": "^0.6.4",
     "formik": "^2.4.4",
     "framer-motion": "^10.16.4",
     "metismenujs": "^1.4.0",
