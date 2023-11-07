@@ -31,6 +31,7 @@ const VendorCard = (props) => {
   const itemsToDisplay = vendorData.slice(startIndex, endIndex);
   
   const openModal = (id) => {
+    // e.preventDefault();
     setIsModalOpen(true);
     setVendorId(id);
     // console.log(id)
@@ -122,7 +123,7 @@ const VendorCard = (props) => {
                                 <Link
                                   href=""
                                   className="rounded-[0.7rem] md:inline-block px-3.5 py-1 xl:text-[0.55rem] text-sm border-solid border-[1px] border-black font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                  onClick={openModal}
+                                  onClick={(e)=>{e.preventDefault(); openModal(row.id)}}
                                 >
                                   Request Quote
                                 </Link>
@@ -138,11 +139,13 @@ const VendorCard = (props) => {
               </div>)
               ) }
 
+              { nPages!=0 && 
               <Pagination
                   nPages={nPages}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
               />
+              }
 
 
             </div>

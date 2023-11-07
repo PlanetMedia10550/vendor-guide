@@ -50,7 +50,7 @@ import { usePathname,useRouter } from "next/navigation";
 
             <div className="lg:ml-8 flex items-center lg:order-2">
               <Link
-                href="#"
+                href="/search"
                 className="text-white bg-[#B13634]
               hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-normal rounded-lg text-xs sm:text-base lg:text-[1.100rem] px-3 sm:px-4 lg:px-5 py-2 lg:py-2.5 md:mr-2 focus:outline-none"
               >

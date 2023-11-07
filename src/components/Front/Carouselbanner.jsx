@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Carouselbanner = (props) => {
   return (
-    <Carousel autoPlay showIndicators={true} showThumbs={false} >
+    <Carousel  showIndicators={true} showThumbs={false} >
       <div>
         <Image
           src="/images&icons/banner1.jpg"

@@ -93,7 +93,7 @@ const BidFavoriteButton = ({bid}) => {
       }
     }
 
-    return isFavorite==1 ? <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleRemoveFavorite} severity="info" rounded> {isLoading ? <Loading /> : "Remove To favorite"}  </Button> :<Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleFavorite} severity="info" rounded> {isLoading ? <Loading /> : "Add To favorite"}  </Button>;
+    return isFavorite==1 ? <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleRemoveFavorite} severity="info" rounded> {isLoading ? <Loading /> : "Remove from favorite"}  </Button> :<Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleFavorite} severity="info" rounded> {isLoading ? <Loading /> : "Add To favorite"}  </Button>;
 }
 
 export default BidFavoriteButton;

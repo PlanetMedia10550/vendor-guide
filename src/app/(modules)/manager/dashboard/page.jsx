@@ -2,12 +2,14 @@ import Graph from "@/components/Front/NewRegionalmanagerDashboard/Graph";
 import Sideli from "@/components/Common/Sideli";
 import TabComponent from "@/components/Front/TabComponent";
 
-const Dashboard = () => {
+const Dashboard =  () => {
+  
   return (
     <>
       <section className="top_grid">
         <div className="px-20">
           <div className="grid grid-cols-3 sm:gap-16 ">
+          
             <Sideli />
             <Graph />
           </div>
@@ -21,5 +23,6 @@ const Dashboard = () => {
     </>
   );
 };
+
 
 export default Dashboard;

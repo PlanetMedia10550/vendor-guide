@@ -125,9 +125,9 @@ li.thumb {
   width: 147px !important;
   height: 80px !important;
 }
-ul.control-dots {
+/* ul.control-dots {
   display: none !important;
-}
+} */
 
 .carousel .control-arrow:before, .carousel.carousel-slider .control-arrow:before {
   border: none !important;

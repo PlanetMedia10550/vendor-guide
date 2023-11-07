@@ -3,10 +3,24 @@ import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Modal from "@/components/Modal";
+import { useAuth } from "@/context/UserContext";
+import EditForm from "../EditForm";
 
 const Page = ({ params }) => {
+  const {user,renderFieldError,isLoding}  = useAuth();
   const id = params.id;
   const [propertie, setPropertie] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (e) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   
   useEffect(() => {
     const getPropertie = async () => {
@@ -65,6 +79,7 @@ const Page = ({ params }) => {
                   {/* <SaveEditButton name="Add/Edit" /> */}
                   <Link
                   href="#"
+                  onClick={openModal}
                   className="rounded-[0.7rem]  px-7 py-1 text-sm border-solid  border border-gray-500 font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >Edit</Link>
                 </div>
@@ -88,6 +103,9 @@ const Page = ({ params }) => {
           </div>
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <EditForm user={user} onClose={closeModal} id={id} />
+      </Modal>
     </section>
   );
 };
