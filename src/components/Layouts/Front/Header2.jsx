@@ -7,15 +7,25 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useAuth } from '@/context/UserContext';
+import { usePathname } from "next/navigation";
+import whiteLogo from "@/../../public/images&icons/SVG/logo_white.svg"
 
 const Header = () => {
+    const router = usePathname();
+    // var newArray = router.split('/');
+    // var tab = newArray.filter((word) => word.length > 0);
+    // console.log(router)
     const {user,isLoding,logout}  = useAuth();
     const [showMenu, setShowMenu] = useState(true);
+    const [tabList, setTabList] = useState([{'label':'Dashboard','url':'/manager/dashboard'},{'label':'Properties','url':'/manager/properties'}]);
+    const [activeTab, setActiveTab] = useState(router);
     const toggleMenu = (event) => {
         setShowMenu((current) => !current);
-        // event.target.parentNode.nextElementSibling.classList.toggle("hidden");
     };
-    // console.log(user.data.name)
+    const handleTabActive = (event) => {
+      setActiveTab((current) => !current);
+    };
+    // console.log(user.data)
   return (
     <>
       <header>
@@ -23,15 +33,15 @@ const Header = () => {
           <div className="container mx-auto">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
               <Link
-                href=""
+                href="/"
                 className="flex items-center md:ps-4"
               >
                 <Image
                   width="100"
                   height="100"
-                  src=" /../../images&icons/SVG/logo_white.svg"
+                  src={whiteLogo.src}
                   className="mr-3 h-3 sm:h-6 w-full"
-                  alt=""
+                  alt="Vendor Guide"
                 />
               </Link>
               {/* <!-- profile part --> */}
@@ -65,7 +75,7 @@ const Header = () => {
                     </div>
                   </button>
                   <div
-                    className={`dropdown-menu absolute top-0 left-8 z-40 w-40 list-none rounded bg-white shadow ${showMenu? 'hidden': ""}`}
+                    className={`dropdown-menu absolute top-[3.2rem] left-0 z-40 w-40 list-none rounded bg-white shadow ${showMenu? 'hidden': ""}`}
                     id="profile/log"
                     data-popper-placement=""
                   >
@@ -161,34 +171,21 @@ const Header = () => {
               >
                 <div className="">
                   <h6 className="hidden lg:block mb-1 lg:text-xl  md:text-lg font-semibold text-[#171717]">
-                    Welcome to Your Vendor Management Dashboard!
+                    Welcome to Your Dashboard!
                   </h6>
                 </div>
                 <ul className="flex flex-col gap-x-5 mt-4 font-semibold md:flex-row  md:mt-0 text-base text-[#221F20]">
-                  <li>
-                    <Link
-                      href=""
-                      className="lg:active text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3  lg:px-3  border-b-[3px]  focus:border-red-700 hover:border-b-[3px] border-transparent active:border-b-[3px] lg:active:border-red-700"
-                    >
-                      Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href=""
-                      className="text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3 lg:px-2  border-b-[3px] border-transparent focus:border-red-700 hover:border-b-[3px] hover:border-red-700 active:border-b-[3px] active:border-red-700"
-                    >
-                      Properties
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href=""
-                      className="text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3 lg:px-2  border-b-[3px] border-transparent focus:border-red-700 hover:border-b-[3px] hover:border-red-700 active:border-b-[3px] active:border-red-700"
-                    >
-                      Employees
-                    </Link>
-                  </li>
+                  {tabList && tabList.map((row,i) => (
+                    <li key={`tab-${i}`}>
+                      <Link
+                        href={row.url}
+                        className={` text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3  lg:px-3  border-b-[3px]  focus:border-red-700 hover:border-b-[3px]  ${row.url === activeTab ? 'border-b-[3px] border-red-700' : 'border-transparent'}`}
+                        onClick={handleTabActive}
+                      >
+                        {row.label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="float-right absolute lg:static top-2  lg:top-0 right-4 lg:right-0">

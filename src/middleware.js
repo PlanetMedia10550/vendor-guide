@@ -25,6 +25,8 @@ export function middleware(request) {
     if(!cookie && (request.nextUrl.pathname.startsWith(`/vendor/dashboard`) || request.nextUrl.pathname.startsWith(`/manager/dashboard`) || request.nextUrl.pathname.startsWith(`/company/dashboard`))){
         return NextResponse.redirect(new URL(`/`, request.url))
     }
+
+
 }
  
 // See "Matching Paths" below to learn more

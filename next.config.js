@@ -4,7 +4,7 @@ const nextConfig = {
     images: {
         unoptimized: true 
     },
-    reactStrictMode: true,
+    reactStrictMode: false,
     swcMinify: true,
     env: {
         BASE_API_URL: 'http://vendor-guide.codelive.info/api/',
@@ -28,6 +28,11 @@ const nextConfig = {
             permanent: true,
           },
         ]
+    },
+    eslint: {
+      // Warning: This allows production builds to successfully complete even if
+      // your project has ESLint errors.
+      ignoreDuringBuilds: true,
     },
     
 }

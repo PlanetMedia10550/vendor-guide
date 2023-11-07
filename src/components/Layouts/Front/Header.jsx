@@ -10,8 +10,8 @@ import { useAuth } from "@/context/UserContext";
 import { getCookie } from 'cookies-next';
 import { usePathname,useRouter } from "next/navigation";
 
-const Header = (props) => {
-  const {user,logout}  = useAuth();
+  const Header = (props) => {
+  const {user,isLoding,logout}  = useAuth();
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const cookie = getCookie('token');
@@ -27,11 +27,18 @@ const Header = (props) => {
   const toggleClass = () => {
     setIsActive(!isActive);
   };
+
+ 
+    const [showMenu, setShowMenu] = useState(true);
+    const toggleMenu = (event) => {
+        setShowMenu((current) => !current);
+        // event.target.parentNode.nextElementSibling.classList.toggle("hidden");
+    };
   return (
     <>
       <header>
-        <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 lg:p-7 ">
-          <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
+        <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 ">
+          <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl py-3">
             <Link href="/" className="flex items-center md:ps-8 lg:ps-10">
               <Image
                 src={Logo}
@@ -90,7 +97,7 @@ const Header = (props) => {
               } lg:ml-auto justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
               id="mobile-menu-2"
             >
-              <ul className="flex flex-col mt-4 font-semibold lg:flex-row lg:space-x-8 lg:mt-0 text-base text-[#221F20]">
+              <ul className="flex items-center flex-col mt-4 font-semibold lg:flex-row lg:space-x-8 lg:mt-0 text-base text-[#221F20]">
                 <li className="hidden " id="Vendor_Guide_Logo2">
                   <Link
                     href="/"
@@ -105,38 +112,38 @@ const Header = (props) => {
                   </Link>
                 </li>
 
-                <li>
+                <li >
                   <Link
                     href="advertise"
-                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-grey-300  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
+                    className="text-base text-[#221F20] font-semibold block py-2 lg:pb-2 pr-4 pl-3  border-b border-grey-300  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     Advertise
                   </Link>
                 </li>
-                <li>
+                <li >
                   <Link
                     href="about"
                     onClick={(e) => {
                       e.preventDefault();
                     }}
-                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
+                    className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
                   >
                     About
                   </Link>
                 </li>
-                <li>
+                <li >
                   <Link
                     href="contact"
                     onClick={(e) => {
                       e.preventDefault();
                     }}
-                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
+                    className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
                   >
                     Contact
                   </Link>
                 </li>
-                <li>
-                  <div className="head_dropdown inline-block relative pb-2">
+                <li >
+                  <div className="head_dropdown inline-block relative lg:pb-2">
                     <button
                       type="button"
                       className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle pl-3"
@@ -226,19 +233,86 @@ const Header = (props) => {
                 </li>
                 {user?.data ?
                 (<li>
-                  <Link
+                  <div className="dropdown relative lg:pb-2">
+                  <button
+                    type="button"
+                    className="flex gap-x-4 items-center border-gray-50 text-white dropdown-toggle"
+                    id="page-header-user-dropdown"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="true"
+                    onClick={toggleMenu}
+                  >
+                    {/* <Image
+                      width="100"
+                      height="100"
+                      className="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2"
+                      src="/../../images&icons/profile.png"
+                      alt="Header Avatar"
+                    /> */}
+                    <div>
+                      <span className=" align-text-bottom text-[#221F20] text-base font-lato">
+                        {isLoding ? (
+                            <span>Loading...</span>
+                        ) : user?.data.name } 
+                        <FontAwesomeIcon icon={faAngleDown}  className="ps-2 text-[#B13634]"/>
+                      </span>
+                      {/* <span className="text-white block text-xs">
+                        Portfolio Manager
+                      </span> */}
+                    </div>
+                  </button>
+                  <div
+                    className={`dropdown-menu absolute top-[3.5rem] left-0 z-40 w-40 list-none rounded bg-white shadow ${showMenu? 'hidden': ""}`}
+                    id="profile/log"
+                    data-popper-placement=""
+                  >
+                    <div
+                      className="border border-gray-50  "
+                      aria-labelledby="navNotifications"
+                    >
+                      <div className="dropdown-item ">
+                        <Link
+                          className="px-3 py-2 hover:bg-gray-50/50 block"
+                          href="/manager/dashboard"
+                        >
+                          <i
+                            className="fa fa-user text-16 align-middle mr-1"
+                            aria-hidden="true"
+                          ></i>
+                          Dashboard
+                        </Link>
+                      </div>
+                      <hr className="border-gray-50 " />
+                      <div className="dropdown-item ">
+                        <Link
+                          className="p-3 hover:bg-gray-50/50 block"
+                          href="#"
+                          onClick={logout}
+                        >
+                          <i
+                            className="fa fa-sign-out text-16 align-middle mr-1"
+                            aria-hidden="true"
+                          ></i>
+                          Logout
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  {/* <Link
                     href=""
                     className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
                     onClick={logout}
                   >
                     Logout
-                  </Link>
+                  </Link> */}
                 </li>) :
                 (
                   <li>
                     <Link
                       href="/manager/login"
-                      className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0          "
+                      className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0          "
                     >
                       Login
                     </Link>

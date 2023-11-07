@@ -1,13 +1,20 @@
+"use client";
 import React from "react";
-import Link from "next/link";
 
-import TabComponent from "./TabComponent";
+
+
+import TabComponent from "../TabComponent";
+
+
+
 
   const DashBoardTableulli = (props) => {
+   
 
+  
     return(
         <>
-      <TabComponent />
+            <TabComponent/>
     </>
   );
 };

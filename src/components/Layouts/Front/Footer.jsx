@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import flogo from "@/../../public/images&icons/SVG/logo_white.svg"
+import starImg from "@/../../public/images&icons/SVG/star.svg"
 const Footer = () => {
   return (
     <>
@@ -17,9 +19,9 @@ const Footer = () => {
                 <Image
                   width="100"
                   height="100"
-                  src="../images&icons/SVG/logo_white.svg"
+                  src={flogo.src}
                   className="mr-3 h-6 sm:h-8 lg:h-9 w-auto"
-                  alt="Flowbite Logo"
+                  alt="Vendor Guide"
                 />
               </Link>
             </div>
@@ -52,7 +54,7 @@ const Footer = () => {
                 <li>Publications</li>
                 <li>Get in Touch</li>
                 <li>
-                  <Link href="resources" className="">
+                  <Link href="/resources" className="">
                     Resources{" "}
                   </Link>
                 </li>
@@ -80,9 +82,9 @@ const Footer = () => {
           <Image
             width="100"
             height="100"
-            src="../images&icons/SVG/star.svg"
+            src={starImg.src}
             className="mr-3 h-16 w-16 sm:h-16"
-            alt=""
+            alt="Star"
           />
         </div>
       </footer>

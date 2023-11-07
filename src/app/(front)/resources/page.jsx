@@ -1,7 +1,6 @@
 // import PaginationBar from "@/components/Front/Pagination";
 import ResourceListCards from "@/components/Front/ResourceListCards";
 import TopBarImage from "public/images&icons/resources/banner1.jpg";
-import Pagination from "@/components/Common/Pagination";
 import TopBanner from "@/components/Front/TopBanner";
 
 const Resources = () => {
@@ -15,7 +14,8 @@ const Resources = () => {
       <section className="product_section sm:pt-[42rem] md:pt-[44rem] lg:pt-64 xl:pt-[23rem] 2xl:pt-[25rem]">
         <ResourceListCards title="Read Our Latest Blogs" />
 
-        <Pagination />
+        {/* <Pagination /> */}
+        
       </section>
     </>
   );

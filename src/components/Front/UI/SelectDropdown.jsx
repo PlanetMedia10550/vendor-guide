@@ -7,6 +7,7 @@ const SelectDropdown = ({ options, onSelect }) => {
     const newValue = e.target.value;
     setSelectedOption(newValue);
     onSelect(newValue);
+    console.log(newValue)
   };
 
   return (
@@ -18,8 +19,8 @@ const SelectDropdown = ({ options, onSelect }) => {
       {/* <option value="" disabled>
         Select an option
       </option> */}
-      {options.map((option) => (
-        <option key={option} value={option}>
+      {options && options.map((option,index) => (
+        <option key={index} value={index}>
           {option}
         </option>
       ))}

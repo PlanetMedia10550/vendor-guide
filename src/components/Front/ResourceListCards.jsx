@@ -4,47 +4,39 @@ import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import Link from "next/link";
 import axios from 'axios';
+import Pagination from "../Common/Paginations";
 const ResourceListCards = (props) => {
   const [items, setItems] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
+  // console.log(items);
+  // const [pageCount, setPageCount] = useState(0);
   const [isLoading, setLoading] = useState(true)
-  const itemsPerPage = 10;
+  // const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(3); // Number of items per page
+  const nPages = Math.ceil(items.length / pageSize);
+
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, items.length);
+  const itemsToDisplay = items.slice(startIndex, endIndex);
+  // console.log(itemsToDisplay);
+  
   useEffect(() => {
     const getProducts = () => {
-      // const res = await fetch(
-      //   `https://dummyjson.com/products?skip=0&limit=${itemsPerPage}`
-      // );
-      // const data = await res.json();
-      // const totalCount = data.total;
-      // setPageCount(Math.ceil(totalCount / itemsPerPage));
-      // setItems(data.products);
+
       axios.get(`${process.env.BASE_API_URL+'blog?limit=5'}`).then(function(response) {
+        // console.log("hello");
         var result = response.data;
-        setPageCount(Math.ceil(totalCount / itemsPerPage));
+        // setPageCount(Math.ceil(totalCount / itemsPerPage));
         setItems(result.data);
         setLoading(false)
-          console.log(result)
       }).catch(function(error) {
           // console.log(error);
+          setLoading(false)
       });
     };
     getProducts();
   }, []);
-
-  const fetchProducts = async (currentPage) => {
-    const res = await fetch(
-      `${process.env.BASE_API_URL}blog?offset=${currentPage}&limit=${itemsPerPage}`
-    );
-    const data = await res.json();
-    return data;
-  };
-
-  // let currentItems = items.slice(itemOffset, endOffset);
-  const handlePageClick = async (event) => {
-    let currentPage = event.selected * itemsPerPage;
-    const productsFromServer = await fetchProducts(currentPage);
-    setItems(productsFromServer.products);
-  };
 
   console.log(items);
 
@@ -62,7 +54,7 @@ const ResourceListCards = (props) => {
           </div>
           <div className="xl:mt-16 lg:mt-12 sm:mt-8 grid grid-cols-1 gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-12">
             {isLoading==false &&
-              items.map((row, i) => {
+              itemsToDisplay.map((row, i) => {
                 return (
                   <div className="group relative" key={i}>
                     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
@@ -94,22 +86,14 @@ const ResourceListCards = (props) => {
                 );
               })}
           </div>
+          <Pagination
+    nPages={nPages}
+    currentPage={currentPage}
+    setCurrentPage={setCurrentPage}
+/>
         </div>
       </div>
 
-      {/* <ReactPaginate
-        breakLabel="..."
-        nextLabel=""
-        onPageChange={handlePageClick}
-        // pageRangeDisplayed={10}
-        pageCount={pageCount}
-        previousLabel=""
-        // renderOnZeroPageCount={null}
-        containerClassName="flex items-center justify-between  px-4 py-3 sm:px-6"
-        className="sm:flex sm:flex-1 sm:items-center sm:justify-center pb-10"
-        pageLinkClassName={`items-center px-2 py-2 text-sm font-semibold text-gray-900  hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex`}
-        activeLinkClassName={`border-b-2 border-red-400 z-10`}
-      /> */}
     </>
   );
 };

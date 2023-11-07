@@ -16,9 +16,12 @@ export function UserProvider({ children }) {
   // const [formErrors, setFormErrors] = useState(false);
   const token = getCookie('token');
   const is_module_type = getCookie('is_module_type');
+  
+  // console.log(is_module_type)
   const { errors,setErrors, renderFieldError, navigate } = useForm();
   useEffect(() => {
     const loadUserFromCookies = async () => {
+
       // const token = Cookies.get('token');
       setIsLoding(true);
       if (token) {
@@ -27,7 +30,7 @@ export function UserProvider({ children }) {
         try {
           const response = await axios.post(`${process.env.BASE_API_URL}user-info`); // Assuming you want to make a GET request for user info
           // const result = await response.json();
-          // console.log(result)
+          // console.log(response.data)
           setUser(response.data); // Assuming the user data is in the response
           setIsLogin(true);
           setCookie('token', token,{maxAge: 3600 });
@@ -38,6 +41,7 @@ export function UserProvider({ children }) {
             if(hasCookie('token')){
               deleteCookie('token');
               deleteCookie('is_module_type');
+              setUser(null);
               router.push(`/`);
             }
           }
@@ -57,6 +61,10 @@ export function UserProvider({ children }) {
   const login = async (requestUrl,data) => {
       setErrors(null);
       setIsLoding(true);
+      deleteCookie('token')
+      deleteCookie('is_maneger')
+      setUser(null); 
+      setIsLogin(false);
       await axios.post(`${process.env.BASE_API_URL}${requestUrl}/login`, data).then(response => {
         // console.log(response.data.data);
         setIsLoding(false);

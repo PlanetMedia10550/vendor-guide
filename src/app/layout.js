@@ -1,8 +1,9 @@
 import { UserProvider } from '@/context/UserContext'
 import './globals.css'
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 // import { Inter } from 'next/font/google'
-// import { ToastContainer } from "react-toastify";
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -14,10 +15,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <UserProvider>
+      
     <html lang="en">
       <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+      <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' precedence="default" />
       <body className="font-lato">
         {children}
+        <ToastContainer />
       </body>
     </html>
     </UserProvider>

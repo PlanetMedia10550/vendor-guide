@@ -1,13 +1,13 @@
 
 import Link  from "next/link"
-
+import Loading from "@/app/loadingScreen" 
 const DashBoardTable = (props) =>{
 
     const collums = props.data.collums
-const rows = props.data.rows
+    const rows = props.data.rows
+    
     return(
       <>
-       
     <div className="relative overflow-x-auto border-[1px] border-black ">
         <table id="datatable" className="table w-full  text-gray-700  dataTable no-footer dt-responsive" aria-describedby="datatable_info">
             <thead>
@@ -22,10 +22,11 @@ const rows = props.data.rows
                 </tr>
             </thead>
             <tbody>
- {
-rows.map((row,i) => {
+            
+ {rows && rows.map((row,i) => {
+
     return (
-        <tr key={i} className="odd font-semibold">
+        <tr key={`row${i}`} className="odd font-semibold">
                     
                 {
                     row.map((r1,j) => {
@@ -40,6 +41,7 @@ rows.map((row,i) => {
     )
 })
 }
+{(props.isLoading) ? <tr  className="odd font-semibold"><Loading/></tr> : ""}
             </tbody>
         </table>
    
