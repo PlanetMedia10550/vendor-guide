@@ -1,7 +1,7 @@
 "use client";
 
 import DetailsCarosuel from "@/components/Front/DetailsCarosuel";
-import DetailsHero from "@/components/Front/detailshero";
+import DetailsHero from "@/components/Front/DetailsHero";
 import Modal from "@/components/Modal";
 import TopBarImage from "public/images&icons/search_result/VendorGuideMagazine.jpg";
 import { useState,useEffect } from "react";
