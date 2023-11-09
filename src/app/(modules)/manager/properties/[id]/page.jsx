@@ -7,6 +7,7 @@ import Modal from "@/components/Modal";
 import { useAuth } from "@/context/UserContext";
 import EditForm from "../EditForm";
 import { toast } from 'react-toastify';
+import { useRouter } from "next/navigation";
 
 const Page = ({ params }) => {
   const {user,renderFieldError,isLoding,navigate}  = useAuth();
@@ -15,9 +16,12 @@ const Page = ({ params }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const hasCookie = getCookie('token')
 
-  if(!getCookie('token')){
-    navigate.push('/')
-  }
+  const router = useRouter();
+  useEffect(() => {
+    if(!getCookie('token')){
+      router.push('/');
+    }
+  }, []);
 
   const openModal = (e) => {
     e.preventDefault();
@@ -122,7 +126,7 @@ const Page = ({ params }) => {
         {user!=null ? (
           <>
           <h1 className="text-3xl font-medium" >Edit Property Form </h1>
-          <EditForm user={user} navigate={navigate} onClose={closeModal} propertie={propertie} setPropertie={setPropertie} />
+          <EditForm user={user} navigate={router} onClose={closeModal} propertie={propertie} setPropertie={setPropertie} />
           </>
         ) : (
           <>

@@ -111,6 +111,7 @@ const VendorCard = (props) => {
     };
 
     const getLocation = async () => {
+      if (typeof window !== 'undefined') {
       if('geolocation' in navigator) {
         // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
         navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -123,6 +124,7 @@ const VendorCard = (props) => {
         })
       }
       getLocationByFormatedAddress()
+       }
       bannerResponse();
       
     }

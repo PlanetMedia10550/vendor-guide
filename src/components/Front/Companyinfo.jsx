@@ -21,6 +21,22 @@ const Companyinfo = (params) => {
   // if(params.searchWord){ setSearchInput(params.searchWord); }
   useEffect(() => {
     if(params?.searchWord){ setSearchInput(params.searchWord); }
+    const categoriesResult = async () => {
+      var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${getCookie('token')}`
+        },
+          
+      })
+  
+      if (!response2.ok) {
+      throw new Error('Failed to submit the data. Please try again.')
+      }
+      var categoryResult = await response2.json();
+      setCategoryData(categoryResult.data)
+      // console.log(vendorResult)
+    }
     categoriesResult();
   }, [params.searchWord])
   const handleSearch = (e) => {
@@ -60,22 +76,7 @@ const Companyinfo = (params) => {
     vendorResponse()
   };
 
-  const categoriesResult = async () => {
-    var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
-      method: 'GET',
-      headers: {
-          'Authorization': `Bearer ${getCookie('token')}`
-      },
-        
-    })
 
-    if (!response2.ok) {
-    throw new Error('Failed to submit the data. Please try again.')
-    }
-    var categoryResult = await response2.json();
-    setCategoryData(categoryResult.data)
-    // console.log(vendorResult)
-  }
 
 
   return (

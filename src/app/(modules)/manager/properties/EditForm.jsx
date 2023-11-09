@@ -14,12 +14,9 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { toast } from 'react-toastify';
 import { getCookie } from "cookies-next";
 
-
 const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
     // console.log(user.data)
-    if(!getCookie('token')){
-        navigate.push('/')
-    }
+    
     const [options, setOptions] = useState(['Register New Property']);
     const options2 = ['Multi Family','Commercial Property','Residential Property'];
     const [isLoding, setIsLoding] = useState(false);
@@ -45,6 +42,9 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
    }
 
     useEffect(() => {
+        if(!getCookie('token')){
+            navigate.push('/')
+        }
         const loadPropertys = async () => {
             try {
               const response = await fetch(`${process.env.BASE_API_URL}property`,{
