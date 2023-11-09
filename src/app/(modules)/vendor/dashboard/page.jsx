@@ -1,9 +1,16 @@
+"use client";
 import Graph from "@/components/Front/NewRegionalmanagerDashboard/Graph";
 import Sideli from "@/components/Common/Sideli";
 import TabComponent from "@/components/Front/TabComponent";
 import { Suspense } from 'react'
+import { useAuth } from "@/context/UserContext";
+import { getCookie } from "cookies-next";
 
 const Dashboard = () => {
+  const {navigate}  = useAuth();
+  if(!getCookie('token')){
+    navigate.push('/')
+  }
   return (
     <>
       <section className="top_grid">

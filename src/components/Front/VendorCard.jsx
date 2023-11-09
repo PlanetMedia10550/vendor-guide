@@ -11,6 +11,7 @@ import { useAuth } from "@/context/UserContext";
 import PropartyForm from "@/components/PropartyForm";
 import vendorDefult from "@/../../public/images&icons/vendor-default.jpg"
 import Pagination from "../Common/Paginations";
+import { getCookie } from "cookies-next";
 
 const VendorCard = (props) => {
   const {user,renderFieldError,isLoding}  = useAuth();
@@ -29,7 +30,11 @@ const VendorCard = (props) => {
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = Math.min(startIndex + pageSize, vendorData.length);
   const itemsToDisplay = vendorData.slice(startIndex, endIndex);
-  
+  const [geoLatitude, setGeoLatitude] = useState(0);
+  const [geoLongitude, setGeoLongitude] = useState(0);
+  const [postalCode, setPostalCode] = useState("");
+  const [locality, setLocality] = useState("");
+
   const openModal = (id) => {
     // e.preventDefault();
     setIsModalOpen(true);
@@ -42,26 +47,98 @@ const VendorCard = (props) => {
   };
 
   useEffect(() => {
+    
     const params = new URLSearchParams()
+    
     const bannerResponse = async () => {
+      
       // params.set('limit',20)
       // params.set('offset',0)
+      params.set('latitude',geoLatitude);
+      params.set('longitude',geoLongitude);
+      params.set('zip_code',postalCode);
       if(search) {params.set('key_word',search) }else{ params.delete('key_word') }
       var urlString = params.toString();
-      const vendorResult = await getResponse('vendor?' + urlString)
+      const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlString}`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${getCookie('token')}`
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit the data. Please try again.')
+      }
+      var vendorResult = await response.json();
       setVendorData(vendorResult.data)
       setIsLoding(false)
       // console.log(totalPage)
     }
 
-    bannerResponse();
-  }, [search])
+    const getLocationByFormatedAddress = async () => {
+      const loc = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${geoLatitude},${geoLongitude}&result_type=postal_code&key=${process.env.GOOGLE_MAP_API_KEY}`,{
+        method: 'GET',
+      })
+      var resLoc = await loc.json();
+      // Check if the response contains results
+      if (resLoc.results && resLoc.results.length > 0) {
+        // Loop through address components to find postal code
+        const addressComponents = resLoc.results[0].address_components;
+        let postalCode;
+        let state;
+  
+        for (const component of addressComponents) {
+          // Check if the component has "postal_code" in its types
+          if (component.types.includes('postal_code')) {
+            postalCode = component.short_name;
+            
+            //break; // Stop the loop once postal code is found
+          }
+          if (component.types.includes('locality')) {
+            state = component.long_name;
+            
+            //break; // Stop the loop once postal code is found
+          }
+          if(postalCode && state){
+            break;
+          }
+        }
+        setPostalCode(postalCode);
+        setLocality(state);
+
+        // console.log(postalCode)
+      } 
+    };
+
+    const getLocation = async () => {
+      if('geolocation' in navigator) {
+        // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
+        navigator.geolocation.getCurrentPosition(({ coords }) => {
+          // console.log(coords)
+            const { latitude, longitude } = coords;
+            setGeoLatitude(latitude);
+            setGeoLongitude(longitude);
+            ;
+            
+        })
+      }
+      getLocationByFormatedAddress()
+      bannerResponse();
+      
+    }
+
+    getLocation();
+
+    
+    
+    
+  }, [search,geoLatitude,postalCode])
 
 
   
   return (
     <>
-      <Companyinfo searchWord={search} setIsLoding={setIsLoding} setVendorData={setVendorData} />
+      <Companyinfo searchWord={search} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} locality={locality} />
       
       <section className="contact_search bg-[#f7f9f8]">
         <div className="py-20 pt-8 px-10 md:px-10">
@@ -139,7 +216,7 @@ const VendorCard = (props) => {
               </div>)
               ) }
 
-              { nPages!=0 && 
+              { nPages>1 && 
               <Pagination
                   nPages={nPages}
                   currentPage={currentPage}
@@ -155,7 +232,7 @@ const VendorCard = (props) => {
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className="text-3xl font-medium" >Request a Quote !</h1>
         {user!=null ? (
-          <PropartyForm user={user} vendor_id={vendorId} onClose={closeModal} />
+          <PropartyForm user={user} vendor_id={vendorId} onClose={closeModal}  />
         ) : (
           <>
             <p className="text-xl mt-2">Kindly login or register to request a quote</p>

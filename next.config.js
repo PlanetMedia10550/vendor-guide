@@ -4,11 +4,13 @@ const nextConfig = {
     images: {
         unoptimized: true 
     },
+    // dynamicParams: false,
     reactStrictMode: false,
     swcMinify: true,
     env: {
         BASE_API_URL: 'http://vendor-guide.codelive.info/api/',
         NEXT_PUBLIC_API_URL: 'http://vendor-guide.codelive.info/api/',
+        GOOGLE_MAP_API_KEY: 'AIzaSyB-52FBisv-qbBxEhHmSra_EiijJV2WeEE',
     },
     async redirects() {
         return [

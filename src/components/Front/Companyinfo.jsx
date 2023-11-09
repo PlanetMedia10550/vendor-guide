@@ -2,17 +2,22 @@ import { usePathname, useSearchParams,useRouter } from "next/navigation";
 import { useState,useEffect } from "react";
 import { Label } from "reactstrap";
 import { getResponse } from "@/app/lib/load-api";
+import { getCookie } from "cookies-next";
 
 const Companyinfo = (params) => {
   const [searchInput, setSearchInput] = useState("");
   const [categoryInput, setCategoryInput] = useState("");
-  const [zipcodeInput, setZipcodeInput] = useState("");
+  const [zipCodeInput, setZipcodeInput] = useState(params.postalCode);
   const [categoryData, setCategoryData] = useState([]);
+  // const [getLatitude, setLatitude] = useState('');
+  // const [getLongitude, setLongitude] = useState('');
+  // console.log(params.postalCode)
   const Router = useRouter();
   const Pathname = usePathname();
   const searchParams = useSearchParams();
   const [urlString,setUrlString] = useState("");
   const urlParams = new URLSearchParams(searchParams)
+ 
   // if(params.searchWord){ setSearchInput(params.searchWord); }
   useEffect(() => {
     if(params?.searchWord){ setSearchInput(params.searchWord); }
@@ -29,21 +34,45 @@ const Companyinfo = (params) => {
     
     const vendorResponse = async () => {
       // params.setIsLoding(true)
-      urlParams.set('limit',5)
-      urlParams.set('offset',0)
+      // urlParams.set('limit',5)
+      // urlParams.set('offset',0)
+      urlParams.set('latitude',params.latitude);
+      urlParams.set('longitude',params.longitude);
       
       if(categoryInput) {urlParams.set('category_id',categoryInput) }else{ urlParams.delete('category_id') }
-      if(zipcodeInput) {urlParams.set('zip_code',zipcodeInput) }else{ urlParams.delete('zip_code') }
-      const vendorResult = await getResponse('vendor?' + urlParams.toString())
+      if(zipCodeInput) {urlParams.set('zip_code',zipCodeInput) }else{ urlParams.delete('zip_code') }
+      // const vendorResult = await getResponse('vendor?' + urlParams.toString())
+      const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlParams.toString()}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            },
+            
+        })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit the data. Please try again.')
+      }
+      var vendorResult = await response.json();
       params.setVendorData(vendorResult.data)
       params.setIsLoding(false)
-      // console.log(vendorResult)
     }
     vendorResponse()
   };
 
   const categoriesResult = async () => {
-    var categoryResult = await getResponse('category')
+    var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
+      method: 'GET',
+      headers: {
+          'Authorization': `Bearer ${getCookie('token')}`
+      },
+        
+    })
+
+    if (!response2.ok) {
+    throw new Error('Failed to submit the data. Please try again.')
+    }
+    var categoryResult = await response2.json();
     setCategoryData(categoryResult.data)
     // console.log(vendorResult)
   }
@@ -59,7 +88,7 @@ const Companyinfo = (params) => {
                 Search Results
               </h1>
               <p className="lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
-                { (params.searchWord) ? `Twin Cities ${params.searchWord}` : "" }
+                { (params.searchWord) ? `${params.locality} in ${params.searchWord}` : "" }
               </p>
             </div>
           </div>
@@ -112,14 +141,13 @@ const Companyinfo = (params) => {
                     
                     className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20]"
                   >
-                    Zip Code
+                    Zip Code 
                   </label>
                   <div className="col-span-7 lg:ml-4">
                     <input
                       type="text"
                       className="w-full lg:w-20 h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2 "
-                      
-                      value={zipcodeInput}
+                      value={zipCodeInput}
                       onChange={(e) => setZipcodeInput(e.target.value)}
                     />
                   </div>

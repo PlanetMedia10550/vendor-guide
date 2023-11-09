@@ -1,6 +1,13 @@
+"use client";
 import PropertieAllData from "@/components/Front/Properties/PropertieAllData";
+import { useAuth } from "@/context/UserContext";
+import { getCookie } from "cookies-next";
 
 const Properties = () => {
+  const {navigate}  = useAuth();
+  if(!getCookie('token')){
+    navigate.push('/')
+  }
   return (
     <>
       <section className="pt-14">
