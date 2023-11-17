@@ -64,6 +64,8 @@ const SearchAllData = () => {
           setLocality(state);
           setIsLoding(false);
           // console.log(postalCode)
+        }else{
+          setIsLoding(false);
         } 
       };
 
