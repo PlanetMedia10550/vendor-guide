@@ -4,44 +4,25 @@ import { Label } from "reactstrap";
 import { getResponse } from "@/app/lib/load-api";
 import { getCookie } from "cookies-next";
 
-const Companyinfo = (params) => {
-  const [searchInput, setSearchInput] = useState("");
+const Companyinfo = (props) => {
+  const [searchInput, setSearchInput] = useState(props.searchWord);
   const [categoryInput, setCategoryInput] = useState("");
-  const [zipCodeInput, setZipcodeInput] = useState(params.postalCode);
-  const [categoryData, setCategoryData] = useState([]);
-  // const [getLatitude, setLatitude] = useState('');
-  // const [getLongitude, setLongitude] = useState('');
-  // console.log(params.postalCode)
+  const [zipCodeInput, setZipcodeInput] = useState(props.postalCode);
+
   const Router = useRouter();
   const Pathname = usePathname();
   const searchParams = useSearchParams();
   const [urlString,setUrlString] = useState("");
   const urlParams = new URLSearchParams(searchParams)
- 
-  // if(params.searchWord){ setSearchInput(params.searchWord); }
+  // console.log(props.postalCode)
   useEffect(() => {
-    if(params?.searchWord){ setSearchInput(params.searchWord); }
-    const categoriesResult = async () => {
-      var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${getCookie('token')}`
-        },
-          
-      })
-  
-      if (!response2.ok) {
-      throw new Error('Failed to submit the data. Please try again.')
-      }
-      var categoryResult = await response2.json();
-      setCategoryData(categoryResult.data)
-      // console.log(vendorResult)
-    }
-    categoriesResult();
-  }, [params.searchWord])
+    // if(props?.searchWord){ setSearchInput(props.searchWord); }
+    // if(props?.postalCode){ setZipcodeInput(props.postalCode); }
+
+  }, [])
   const handleSearch = (e) => {
     e.preventDefault();
-    params.setIsLoding(true);
+    props.setIsLoding(true);
     
     if(searchInput) {urlParams.set('key_word',searchInput) }else{ urlParams.delete('key_word') }
     // setUrlString(urlParams.toString());
@@ -52,11 +33,14 @@ const Companyinfo = (params) => {
       // params.setIsLoding(true)
       // urlParams.set('limit',5)
       // urlParams.set('offset',0)
-      urlParams.set('latitude',params.latitude);
-      urlParams.set('longitude',params.longitude);
+
       
       if(categoryInput) {urlParams.set('category_id',categoryInput) }else{ urlParams.delete('category_id') }
       if(zipCodeInput) {urlParams.set('zip_code',zipCodeInput) }else{ urlParams.delete('zip_code') }
+
+      urlParams.set('latitude',props.latitude);
+      urlParams.set('longitude',props.longitude);
+      // urlParams.set('zip_code',zipCodeInput);
       // const vendorResult = await getResponse('vendor?' + urlParams.toString())
       const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlParams.toString()}`,{
             method: 'GET',
@@ -70,8 +54,8 @@ const Companyinfo = (params) => {
         throw new Error('Failed to submit the data. Please try again.')
       }
       var vendorResult = await response.json();
-      params.setVendorData(vendorResult.data)
-      params.setIsLoding(false)
+      props.setVendorData(vendorResult.data)
+      props.setIsLoding(false)
     }
     vendorResponse()
   };
@@ -89,7 +73,7 @@ const Companyinfo = (params) => {
                 Search Results
               </h1>
               <p className="lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
-                { (params.searchWord) ? `${params.locality} in ${params.searchWord}` : "" }
+                { (props.searchWord) ? `${props.locality} in ${props.searchWord}` : "" }
               </p>
             </div>
           </div>
@@ -129,7 +113,7 @@ const Companyinfo = (params) => {
                     
                     <select className="w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2" value={categoryInput} onChange={(e) => setCategoryInput(e.target.value)}>
                       <option value="">Select Category</option>
-                      {categoryData && categoryData.map((row,i)=>{
+                      {props.categoryData && props.categoryData.map((row,i)=>{
                         return(
                           <option key={i} value={row.id}>{row.title}</option>
                         )

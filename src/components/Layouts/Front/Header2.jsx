@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useAuth } from '@/context/UserContext';
 import { usePathname } from "next/navigation";
 import whiteLogo from "@/../../public/images&icons/SVG/logo_white.svg"
+import userDefult from "@/../../public/images&icons/profile.png"
 
 const Header = () => {
     const router = usePathname();
@@ -25,7 +26,9 @@ const Header = () => {
     const handleTabActive = (event) => {
       setActiveTab((current) => !current);
     };
-    // console.log(user.data)
+    const imagsrc = user ? user.image_url : null;
+    console.log(imagsrc);
+    console.log(user)
   return (
     <>
       <header>
@@ -60,14 +63,14 @@ const Header = () => {
                       width="100"
                       height="100"
                       className="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2"
-                      src="/../../images&icons/profile.png"
+                      src={imagsrc ? imagsrc : userDefult.src}
                       alt="Header Avatar"
                     />
                     <div>
                       <span className="text-left block align-middle text-white text-xs font-lato">
                         {isLoding ? (
                             <span>Loading...</span>
-                        ) : user?.data.name } <FontAwesomeIcon icon={faAngleDown}  />
+                        ) : user?.first_name } <FontAwesomeIcon icon={faAngleDown}  />
                       </span>
                       {/* <span className="text-white block text-xs">
                         Portfolio Manager
@@ -86,25 +89,13 @@ const Header = () => {
                       <div className="dropdown-item ">
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
-                          href=""
+                          href={'profile'}
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
                             aria-hidden="true"
                           ></i>
                           Profile
-                        </Link>
-                      </div>
-                      <div className="dropdown-item ">
-                        <Link
-                          className="px-3 py-2 hover:bg-gray-50/50 block"
-                          href=""
-                        >
-                          <i
-                            className="fa fa-user text-16 align-middle mr-1"
-                            aria-hidden="true"
-                          ></i>
-                          Lock Screen
                         </Link>
                       </div>
                       <hr className="border-gray-50 " />

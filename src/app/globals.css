@@ -164,3 +164,6 @@ button.custom-next-button {
   background: unset !important;
 }
 
+.flip-book .demo-book .stf__wrapper {
+  padding-bottom: 0px !important;
+}

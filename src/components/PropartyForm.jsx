@@ -2,10 +2,7 @@
 import Label from "@/components/Front/UI/Label";
 import Input from "@/components/Front/UI/Input";
 import Submit from "@/components/Front/UI/Submit";
-import TableCheckbox from "@/components/Front/Company/TableCheckbox";
-import Link from "next/link";
 import { useEffect, useState } from 'react';
-import SelectDropdown from "./Front/UI/SelectDropdown";
 import TextArea from "./Front/UI/TextArea";
 import axios from "axios";
 import {useForm} from "@/hooks/useForm";
@@ -13,27 +10,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { toast } from 'react-toastify';
 import { getCookie } from "cookies-next";
+import { DatePickerInput } from "./DatePickerInput";
 
-const PropartyForm = ({user,vendor_id,onClose}) => {
-    // console.log(user.data)
-    const [options, setOptions] = useState(['Register New Property']);
+const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
+    // console.log(user)
+    
+    const [priorityOptions, setPriorityOptions] = useState(['High','Medium','Low']);
     const options2 = ['Multi Family','Commercial Property','Residential Property'];
     const [isLoding, setIsLoding] = useState(false);
-    const [firstName, setFirstName] = useState(user.data.first_name);
-    const [lastName, setLastName] = useState(user.data.last_name);
+    const [firstName, setFirstName] = useState(user.first_name?user.first_name:"");
+    const [lastName, setLastName] = useState(user.last_name?user.last_name:"");
+    const [category, setCategory] = useState(0);
     const [propertyLocation, setPropertyLocation] = useState(0);
     const [propertyType, setPropertyType] = useState(options2[0]);
     const [propertyName, setPropertyName] = useState('');
     const [jobTitle, setJobTitle] = useState('');
-    const [address, setAddress] = useState(user.data.address);
+    const [address, setAddress] = useState(user.address?user.address:"");
     const [address2, setAddress2] = useState('');
-    const [city, setCity] = useState(user.data.city);
-    const [state, setState] = useState(user.data.state);
-    const [zipCode, setZipCode] = useState(user.data.postal_code);
-    const [mobile, setMobile] = useState(user.data.mobile);
+    const [city, setCity] = useState(user.city?user.city:"");
+    const [state, setState] = useState(user.state?user.state:"");
+    const [zipCode, setZipCode] = useState(user.postal_code?user.postal_code:"");
+    const [mobile, setMobile] = useState(user.mobile?user.mobile:"");
     const [projectType, setProjectType] = useState('');
     const [projectName, setProjectName] = useState('');
     const [projectDetails, setProjectDetails] = useState('');
+    const date2 = new Date();
+    date2.setDate(date2.getDate() + 1);
+    const year = date2.getFullYear();
+    const month = date2.getMonth() + 1; // Adding 1 to get the month in the range 1 to 12
+    const day = date2.getDate(); 
+    const [closeDate, setCloseDate] = useState(`${day}-${month}-${year}`);
+    const [priority, setPriority] = useState('');
     const [image_id, setImageId] = useState('');
     const { errors,setErrors, renderFieldError} = useForm();
     const [form, setForm] = useState({property_id:propertyLocation,property_type:propertyType,vendor_id:vendor_id});
@@ -41,83 +48,102 @@ const PropartyForm = ({user,vendor_id,onClose}) => {
     const [error, setError] = useState(null)
     const [imageSrc, setImageSrc] = useState(null)
     const [propertyData, setPropertyData] = useState([])
+    const [vendorList, setVendorList] = useState([])
+    const [vendorIds, setVendorIds] = useState([vendor_id])
 
+    const [optionProperty, setOptionProperty] = useState([]);
+// ['Register New Property']
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
         
    }
     
-   const handlePropartyLocation = async (e) => {
-        handleForm('property_id',e.target.value); 
-        setPropertyLocation(e.target.value)
-        
-        const response2 = await fetch(`${process.env.BASE_API_URL}property/${e.target.value}`,{
+   const handlePriority = async (e) => {
+        handleForm('priority',e.target.value); 
+        setPriority(e.target.value);
+   }
+
+   const handleCategory = async (e) => {
+        handleForm('category',e.target.value); 
+        setCategory(e.target.value);
+        if(e.target.value==""){
+            setVendorList([]);
+            setVendorIds([vendor_id]);
+            return;
+        }
+        console.log(e.target.value);
+        const params = new URLSearchParams();
+        params.append('category_id', e.target.value);
+        const response3 = await fetch(`${process.env.BASE_API_URL}vendor?${params.toString()}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${getCookie('token')}`
             },
         })
  
-        if (!response2.ok) {
+        if (!response3.ok) {
             throw new Error('Failed to submit the data. Please try again.')
         }
         
         // Handle response if necessary
-        var dataProp = await response2.json()
-        var singleProparty= dataProp.data;
+        var dataProp = await response3.json()
         // console.log(singleProparty)
-        if(singleProparty){
-            setPropertyName(singleProparty.property_name)
-            setPropertyType(singleProparty.property_type)
-            setZipCode(singleProparty.zip_code)
-            setState(singleProparty.state)
-            setCity(singleProparty.city)
-            setAddress(singleProparty.address)
-            setAddress2(singleProparty.address_2)
+        setVendorList(dataProp.data);
+        const extractedVendorIds = dataProp.data.map(vendor => vendor.id);
+        // const arrayIds = extractedVendorIds.split(',');
+        setVendorIds(prevVendorIds => [...prevVendorIds, ...extractedVendorIds]);
+        // console.log(vendorIds);
+        
+   }
+   
+   const handlePropartyLocation = async (e) => {
+        handleForm('property_id',e.target.value); 
+        setPropertyLocation(e.target.value)
+        setPropertyName("")
+        setPropertyType("")
+        setZipCode("")
+        setState("")
+        setCity("")
+        setAddress("")
+        setAddress2("")
+        if(e.target.value>0){
+            const response2 = await fetch(`${process.env.BASE_API_URL}property/${e.target.value}`,{
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${getCookie('token')}`
+                },
+            })
+    
+            if (!response2.ok) {
+                throw new Error('Failed to submit the data. Please try again.')
+            }
+            
+            // Handle response if necessary
+            var dataProp = await response2.json()
+            var singleProparty= dataProp.data;
+            // console.log(singleProparty)
+            if(singleProparty){
+                setPropertyName(singleProparty.property_name)
+                setPropertyType(singleProparty.property_type)
+                setZipCode(singleProparty.zip_code)
+                setState(singleProparty.state)
+                setCity(singleProparty.city)
+                setAddress(singleProparty.address)
+                setAddress2(singleProparty.address_2)
+            }
         }
    }
 
-    useEffect(() => {
-        const loadPropertys = async () => {
-            try {
-              const response = await fetch(`${process.env.BASE_API_URL}property`,{
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${getCookie('token')}`
-                    },
-                })
-         
-              if (!response.ok) {
-                throw new Error('Failed to submit the data. Please try again.')
-              }
-         
-              // Handle response if necessary
-            const pdata = await response.json()
-            if(pdata){
-                setPropertyData(pdata.data)
-                let newpd = pdata.data
-                const updatedOptions = [];
-                {newpd && newpd.map((row) => (
-                    updatedOptions[row.id] = row.property_name
-                )
-                )}
-                setOptions([...options, ...updatedOptions]);
-            }
-            } catch (error) {
-              // Capture the error message to display to the user
-              console.error(error)
-            }
-        }
-        loadPropertys();
-    }, [])
+    
     
     const makeRequest = async (e) => {
         e.preventDefault();
-        // console.log(form);
+        // console.log(vendorIds);
         setErrors(null);
         setIsLoding(true);
         var formData = new FormData(e.target);
-        formData.append('vendor_id',vendor_id);
+        formData.append('close_date',closeDate);
+        formData.append('vendor_id',vendorIds);
         await axios.post(`${process.env.BASE_API_URL}property`, formData).then(response => {
             // console.log(response.data.data);
             setIsLoding(false);
@@ -135,7 +161,20 @@ const PropartyForm = ({user,vendor_id,onClose}) => {
         }).catch(error => {
             setIsLoding(false);
             if(error?.response?.data?.errors) {
-                setErrors(error.response.data.errors);
+                // setErrors(error.response.data.errors);
+                const errorMessages = Object.values(error.response.data.errors)
+                    .map(errors => errors.join(', '))
+                    .join('<br>');
+                toast.error(<div dangerouslySetInnerHTML={{ __html: errorMessages }} />, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
             }
         });
 
@@ -176,6 +215,28 @@ const PropartyForm = ({user,vendor_id,onClose}) => {
         }
     }
 
+    useEffect(()=>{
+        const loadPropertys = async () => {
+            // console.log(getCookie('token'));
+            const responsePro = await fetch(`${process.env.BASE_API_URL}property`,{
+              method: 'GET',
+              headers: {
+                  'Authorization': `Bearer ${getCookie('token')}`
+              },
+            })
+      
+            if (!responsePro.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+            }
+      
+            // Handle response if necessary
+            let pdata = await responsePro.json();
+            setOptionProperty(pdata.data);
+
+        }
+        loadPropertys();
+    },[])
+
 
     return (
 
@@ -202,15 +263,49 @@ const PropartyForm = ({user,vendor_id,onClose}) => {
                         </div>
                     </div>
                     <div className="w-full my-2 pb-6" >
+                        <div className="grid grid-cols-2 gap-x-4">
+                            <div className="col-span-2 my-2" >
+                                <Label label="Category" required="" />
+
+                                <div className="mt-2.5">
+                                    <select name="category_id" value={category} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handleCategory} >
+                                        <option value="">Select Category</option>
+                                        {categoryData && categoryData.map((row,i)=>{
+                                            return(
+                                            <option key={i} value={row.id}>{row.title}</option>
+                                            )
+                                        })}
+                                    </select>
+                                </div>
+                                {renderFieldError('category_id')}
+                            </div>
+                            {vendorList.length > 0 && (
+                                <div className="col-span-2 border">
+                                    <Label label="Selected Vendors" className={`m-1`} required="" />
+                                    <hr />
+                                    {vendorList.map((vendor, i) => (
+                                    <span
+                                        key={i} // It's good to provide a unique key when mapping over arrays
+                                        className="inline-flex items-center rounded-md bg-[#c13e27] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-gray-500/10 m-1"
+                                    >
+                                        {vendor.name}
+                                    </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="w-full my-2 pb-6" >
                         <Label label="Property Location" required="required" />
 
                         <div className="mt-2.5">
                             <select name="property_id" value={propertyLocation} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handlePropartyLocation} >
-                                {options && options.map((option,index) => (
-                                    <option key={index} value={index}>
-                                    {option}
-                                    </option>
-                                ))}
+                                <option key="0" value="0">Register New Property</option>
+                                {optionProperty && optionProperty.map((row,i)=>{
+                                    return(
+                                    <option key={i} value={row.id}>{row.property_name}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                         {renderFieldError('property_id')}
@@ -314,6 +409,30 @@ const PropartyForm = ({user,vendor_id,onClose}) => {
                             </div>
                             {renderFieldError('project_name')}
                         </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Close Date" required="required" />
+
+                            <div className="mt-2.5">
+                                <DatePickerInput closeDate={closeDate} setCloseDate={setCloseDate} />
+                            </div>
+                            {renderFieldError('close_date')}
+                        </div>
+                    </div>
+                    <div className="w-full my-2 pb-6" >
+                        <Label label="Priority" required="required" />
+
+                        <div className="mt-2.5">
+                            <select name="priority" value={priority} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handlePriority} >
+                                {priorityOptions && priorityOptions.map((option,index) => (
+                                    <option key={index} value={option}>
+                                    {option}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        {renderFieldError('priority')}
                     </div>
                     <div className="w-half my-2 pb-6" >
                         <Label label="Project Details"  />

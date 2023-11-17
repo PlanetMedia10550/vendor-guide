@@ -4,7 +4,9 @@ import axios from 'axios'; // Import Axios properly
 import { setCookie,getCookie,deleteCookie,hasCookie } from 'cookies-next';
 import { NextResponse } from 'next/server';
 import {useForm} from "@/hooks/useForm";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserContext = createContext();
 
@@ -33,7 +35,7 @@ export function UserProvider({ children }) {
           const response = await axios.post(`${process.env.BASE_API_URL}user-info`); // Assuming you want to make a GET request for user info
           // const result = await response.json();
           // console.log(response.data)
-          setUser(response.data); // Assuming the user data is in the response
+          setUser(response.data.data); // Assuming the user data is in the response
           setIsLogin(true);
           setCookie('token', token,{maxAge: 3600 });
           setCookie('is_module_type', is_module_type,{maxAge: 3600 });
@@ -80,15 +82,37 @@ export function UserProvider({ children }) {
                   router.push(`/${requestUrl}/dashboard`);
                   
               }
+          }else{
+            toast.error(response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
           }
       }).catch(error => {
         setIsLoding(false);
-          // console.log(error.response);
-          if(error?.response?.data?.data.errors) {
+          // console.log(error.response.data);
+          if(error?.response?.data?.data?.errors) {
               if (error.response.data.data.errors) {
                   setErrors(error.response.data.data.errors);
                   
               }
+          }else{
+            toast.error(error?.response?.data?.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
           }
           
       });

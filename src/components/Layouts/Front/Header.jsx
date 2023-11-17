@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/UserContext";
 import { getCookie } from 'cookies-next';
 import { usePathname,useRouter } from "next/navigation";
+import HeaderDropdown from "./HeaderDropdown";
 
   const Header = (props) => {
   const {user,isLoding,logout}  = useAuth();
@@ -122,10 +123,7 @@ import { usePathname,useRouter } from "next/navigation";
                 </li>
                 <li >
                   <Link
-                    href="about"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
+                    href="/pages/about"
                     className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
                   >
                     About
@@ -133,10 +131,7 @@ import { usePathname,useRouter } from "next/navigation";
                 </li>
                 <li >
                   <Link
-                    href="contact"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
+                    href="/pages/contact-us"
                     className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
                   >
                     Contact
@@ -164,7 +159,7 @@ import { usePathname,useRouter } from "next/navigation";
                       <li className="py-1 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
                         <Link
                           className="px-3 text-sm font-bold block "
-                          href=""
+                          href="/resources"
                         >
                           <i className="mdi mdi-lock text-16 align-middle mr-1"></i>
                           Blog
@@ -188,50 +183,13 @@ import { usePathname,useRouter } from "next/navigation";
                               className="text-[#B13634]"
                             />
                           </button>
-                          <ul className="head_pulbication_dropdown-menu absolute left-[8.2rem] top-0  hidden w-[8rem] text-gray-700 pt-1 mt-2 z-50 bg-white shadow-solid-primary ">
-                            <li className="py-1">
-                              <Link
-                                className="px-3 pt-2 text-sm font-bold hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50"
-                                href=""
-                              >
-                                <i className="mdi mdi-face-man text-16 align-middle mr-1"></i>
-                                Minnesota
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                className="px-3 text-sm font-bold hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50"
-                                href=""
-                              >
-                                <i className="mdi mdi-lock text-16 align-middle mr-1"></i>
-                                Missouri
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                className="px-3 text-sm font-bold hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50"
-                                href=""
-                              >
-                                <i className="mdi mdi-logout text-16 align-middle mr-1"></i>
-                                Virginia
-                              </Link>
-                            </li>
-                            <li className="py-1">
-                              <Link
-                                className="px-3 pb-2 text-sm font-bold hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50"
-                                href=""
-                              >
-                                <i className="mdi mdi-lock text-16 align-middle mr-1"></i>
-                                Louisiana
-                              </Link>
-                            </li>
-                          </ul>
+                          <HeaderDropdown />
                         </div>
                       </li>
                     </ul>
                   </div>
                 </li>
-                {user?.data ?
+                {user?.name ?
                 (<li>
                   <div className="dropdown relative lg:pb-2">
                   <button
@@ -254,7 +212,7 @@ import { usePathname,useRouter } from "next/navigation";
                       <span className=" align-text-bottom text-[#221F20] text-base font-lato">
                         {isLoding ? (
                             <span>Loading...</span>
-                        ) : user?.data.name } 
+                        ) : user?.name } 
                         <FontAwesomeIcon icon={faAngleDown}  className="ps-2 text-[#B13634]"/>
                       </span>
                       {/* <span className="text-white block text-xs">

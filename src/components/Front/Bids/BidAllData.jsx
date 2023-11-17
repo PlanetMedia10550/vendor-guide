@@ -7,22 +7,32 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useAuth } from "@/context/UserContext";
 import BidFavoriteButton from "@/components/Front/BidFavoriteButton";
+import { useRouter } from "next/navigation";
 
+const BidVendorsButton = ({bid}) => {
+  const {navigate}  = useAuth();
+  const handleGoVendors = async () => {
+    navigate.push(`/manager/bids/${bid.id}`);
+  }
+
+  return (
+    <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleGoVendors} severity="info" rounded>View</Button>
+  )
+}
 
 const BidAllData = () => {
-  const {user,renderFieldError,isLoding}  = useAuth();
+  const {user,renderFieldError,isLoding,navigate}  = useAuth();
   const [requestsQuotes, setRequestsQuotes] = useState([]);
   const columns = [
       {field: 'bidenumber', header: 'Bid Number',sortable:'sortable'},
       {field: 'bidtitle', header: 'Bid Title'},
       {field: 'bidtype', header: 'Bid Type'},
       {field: 'property', header: 'Property'},
-      {field: 'bidder', header: 'Bidder'},
       {field: 'createddate', header: 'Creation Date'},
       {field: 'closedate', header: 'Est.Close Date'},
       {field: 'priority', header: 'Priority'},
       {field: 'status', header: 'Status'},
-      {field: 'favorite', header: 'Action', colbody: true},
+      {field: 'vendor', header: 'Vendors', colbody: true},
   ];
   const [tabnumber, settabNumber] = useState(1);
   // console.log(user.data.id)
@@ -53,16 +63,14 @@ const BidAllData = () => {
           'favorite':item.favourite,
           'favorite_id':item.favourite_id,
           'id':item.id,
-          'vendor_id':item.vendor_id,
           'manager_id':item.manager_id,
           'bidenumber':bidenumber+'-'+item.id,
           'bidtitle':item.project_name,
           'bidtype':item.project_type,
           'property':item.property_name,
-          'bidder':'-',
           'createddate':item.created_at,
-          'closedate':'-',
-          'priority':'-',
+          'closedate':item.close_date,
+          'priority':item.priority,
           'status':'Draft',
         }));
         setRequestsQuotes(updatedRows);
@@ -76,8 +84,9 @@ const BidAllData = () => {
     // console.log(requestsQuotes)
   }, [])
 
-  const favoriteBtn = (bid) => {
-      return <BidFavoriteButton bid={bid}  />;
+  const vendorBtn = (bid) => {
+    // navigate.push(`/manager/bids/${bid.id}`);
+    return <BidVendorsButton bid={bid}  />;
   };
 
   return (
@@ -87,7 +96,7 @@ const BidAllData = () => {
                 tbody:{className:'border-[1px] border-black'}
             }} >
                 {columns.map((col, i) => (
-                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.colbody?favoriteBtn:''}   style={{ width: '25%' }} pt={{
+                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.colbody?vendorBtn:''}   style={{ width: '25%' }} pt={{
                     headerCell:{className: 'p-4 pr-8 border-b-[1px] border-black  text-black sorting sorting_asc whitespace-nowrap text-black text-left '},
                     bodyCell:{className: 'p-4 pr-8  border-b-[1px] border-black sorting_1 whitespace-nowrap text-sm justify-around '}
                     }}  />
