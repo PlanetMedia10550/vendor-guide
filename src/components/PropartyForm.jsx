@@ -71,7 +71,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
             setVendorIds([vendor_id]);
             return;
         }
-        console.log(e.target.value);
+        // console.log(e.target.value);
         const params = new URLSearchParams();
         params.append('category_id', e.target.value);
         const response3 = await fetch(`${process.env.BASE_API_URL}vendor?${params.toString()}`, {
@@ -143,7 +143,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
         setIsLoding(true);
         var formData = new FormData(e.target);
         formData.append('close_date',closeDate);
-        formData.append('vendor_id',vendorIds);
+        // formData.append('vendor_id',vendorIds);
         await axios.post(`${process.env.BASE_API_URL}property`, formData).then(response => {
             // console.log(response.data.data);
             setIsLoding(false);
@@ -283,13 +283,15 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                                 <div className="col-span-2 border">
                                     <Label label="Selected Vendors" className={`m-1`} required="" />
                                     <hr />
+                                    <input type="hidden" name="vendor_id[]" value={vendor_id} />
                                     {vendorList.map((vendor, i) => (
-                                    <span
+                                    <label
                                         key={i} // It's good to provide a unique key when mapping over arrays
                                         className="inline-flex items-center rounded-md bg-[#c13e27] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-gray-500/10 m-1"
                                     >
-                                        {vendor.name}
-                                    </span>
+                                        <input type="checkbox" className="w-8 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" name="vendor_id[]" value={vendor.id} />
+                                        <span>{vendor.name}</span>
+                                    </label>
                                     ))}
                                 </div>
                             )}

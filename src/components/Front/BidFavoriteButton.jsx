@@ -7,6 +7,7 @@ const BidFavoriteButton = ({bid}) => {
     const [isLoading, setLoading] = useState(false)
     const [isFavorite, setIsFavorite] = useState(bid.favorite)
     const [favoriteId, setFavoriteId] = useState(bid.favorite_id)
+    // console.log(isFavorite)
     const handleFavorite = async () => {
     //   console.log(bid)
       setLoading(true);
