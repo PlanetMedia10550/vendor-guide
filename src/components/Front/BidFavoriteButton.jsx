@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 const BidFavoriteButton = ({bid}) => {
     const [isLoading, setLoading] = useState(false)
     const [isFavorite, setIsFavorite] = useState(bid.favorite)
+    const [favoriteId, setFavoriteId] = useState(bid.favorite_id)
     const handleFavorite = async () => {
     //   console.log(bid)
       setLoading(true);
@@ -29,6 +30,7 @@ const BidFavoriteButton = ({bid}) => {
         var dataProp = await favouriteRes.json()
         // var newData = dataProp.data;
         // console.log(dataProp.msg)
+        setFavoriteId(dataProp.data.id);
         toast.success(dataProp.msg, {
             position: "top-right",
             autoClose: 5000,
@@ -57,7 +59,7 @@ const BidFavoriteButton = ({bid}) => {
       
       try {
         const formData = new FormData()
-        const favouriteRes = await fetch(`${process.env.BASE_API_URL}favourite/${bid.favorite_id}`,{
+        const favouriteRes = await fetch(`${process.env.BASE_API_URL}favourite/${favoriteId}`,{
           method: 'DELETE',
           headers: {
               'Authorization': `Bearer ${getCookie('token')}`

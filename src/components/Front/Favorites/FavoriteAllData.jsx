@@ -16,6 +16,7 @@ const FavoriteAllData = () => {
       {field: 'vendorname', header: 'Vendor Name',sortable:'sortable'},
       {field: 'contact', header: 'Contact'},
       {field: 'phone', header: 'Phone'},
+      {field: 'vendor_id', header: 'Action', colbody: true},
   ];
   const [tabnumber, settabNumber] = useState(1);
   // console.log(user.data.id)
@@ -46,6 +47,10 @@ const FavoriteAllData = () => {
           'vendorname':item.vendor.name,
           'contact':item.vendor.email,
           'phone':item.vendor.mobile,
+          'vendor_id':item.vendor_id,
+          'manager_id':item.manager_id,
+          'favorite_id':item.id,
+          'favorite':1,
         }));
         setRequestsQuotes(updatedRows);
         // console.error(requestsQuotes)
@@ -57,6 +62,10 @@ const FavoriteAllData = () => {
     bidResponse();
     // console.log(requestsQuotes)
   }, [])
+
+  const favoriteBtn = (bid) => {
+    return <BidFavoriteButton bid={bid}  />;
+  };
 
 
   return (

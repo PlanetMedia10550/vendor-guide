@@ -6,6 +6,7 @@ import HTMLFlipBook from 'react-pageflip';
 import axios from 'axios';
 
 const PageCover = React.forwardRef((props, ref) => {
+  
   return (
     <div className="page page-cover" ref={ref} data-density="hard">
       <div className="page-content h-full">
@@ -42,6 +43,37 @@ const Pagefloop = ({params}) => {
   const [loading, setLoading] = useState(true);
   const [frontCover, setFrontData] = useState([]);
   const [endCover, setEndData] = useState([]);
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState(''); 
+  const [currentPageIndex, setCurrentPageIndex] = useState(''); 
+
+   
+  const trackPublication =  () => {
+    const currentUrl = window.location.href;
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude); 
+        }, 
+      );
+    }
+    if(latitude){
+      const data = {
+        'url' : currentUrl,
+        'latitude' : latitude,
+        'longitude' : longitude, 
+        'page_visit' : currentPageIndex,  
+      }; 
+      const response = axios.post(`${process.env.BASE_API_URL}track-publication`,data)
+    }
+   
+
+  };
+  useEffect(() => { 
+    trackPublication();  
+  }, [latitude]);
+
   
   useEffect(() => {
     axios.get(`${process.env.BASE_API_URL}magazine/${id}`)
@@ -70,15 +102,25 @@ const Pagefloop = ({params}) => {
     }
   }, [flipData]);
 
+   
+
+  
   const nextButtonClick = () => {
-    if (bookRef.current) {
-      bookRef.current.pageFlip().flipNext();
+    if (bookRef.current) { 
+      const pageFlip = bookRef.current.pageFlip();  
+      setCurrentPageIndex(pageFlip.pages.currentPageIndex);
+      pageFlip.flipNext(); 
+      trackPublication();
+     
     }
   };
 
   const prevButtonClick = () => {
-    if (bookRef.current) {
-      bookRef.current.pageFlip().flipPrev();
+    if (bookRef.current) { 
+      const pageFlip = bookRef.current.pageFlip();  
+      setCurrentPageIndex(pageFlip.pages.currentPageIndex); 
+      pageFlip.flipPrev();
+      trackPublication();
     }
   };
 
@@ -91,7 +133,7 @@ const Pagefloop = ({params}) => {
       <div className="container mx-auto" style={{ position: 'relative' }}>
         <div className="flip-book html-book demo-book stf__parent" style={{ display: 'block' }}>
         {flipData && flipData.length > 0 ? (
-            <HTMLFlipBook
+            <HTMLFlipBook  lipBook
               width={100}
               height={100}
               size="stretch"
@@ -104,6 +146,7 @@ const Pagefloop = ({params}) => {
               mobileScrollSupport={true}
               className="demo-book"
               ref={bookRef}
+              
             >
               <PageCover>
               <Image

@@ -5,20 +5,42 @@ import Submit from "@/components/Front/UI/Submit";
 import Right from "@/components/Front/Auth/Right";
 import TableCheckbox from "@/components/Front/Company/TableCheckbox"
 import Link from "next/link";
-import { useState } from 'react'
+import { useState,useEffect } from 'react';
 import { useAuth } from "@/context/UserContext";
 import Head from "next/head";
+import axios from "axios";
 
 const Page = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [company_id, setCompany] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [companies, setCompanies] = useState([]);
+  // console.log(companies);
   const {register,renderFieldError,isLoding}  = useAuth();
   // console.log(user);
+
+  useEffect(() => {
+    // Fetch companies data
+    axios.get(`${process.env.BASE_API_URL}company`)
+      .then(response => {
+        const result = response.data;
+        if (Array.isArray(result.data)) {
+          setCompanies(result.data);
+        } else {
+          console.error('API response data does not contain an array:', result.data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching companies:', error);
+      });
+  }, []);
+
   const makeRequest = (e) => {
       e.preventDefault();
       register('manager',{
+        company_id,
         name,
         email,
         password,
@@ -26,6 +48,9 @@ const Page = () => {
     })
 
   };
+
+ 
+
   return (
     <>
         <Head>
@@ -47,6 +72,29 @@ const Page = () => {
                   </div>
                   <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
                     <div className="">
+                    <div className="w-full my-2 pb-6">
+                      <Label label="Company" required="required" />
+                      <div className="mt-2.5">
+                        <select
+                          name="company_id"
+                          className="w-full bg-gray-200 border border-gray-200 text-sm py-3 px-4 pr-8 mb-3 rounded"
+                          value={company_id}
+                          onChange={e => setCompany(e.target.value)} 
+                        >
+                          <option key="0" value="">
+                            Select Company
+                            </option>
+                          {/* Map through companies and create options */}
+                          {companies.map((company, index) => (
+                            <option key={index} value={company.id}>
+                              {company.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {renderFieldError('company')}
+                    </div>
+
                       <div className="w-full my-2 " >
                         <Label label="Name" required="required" />
 
@@ -105,12 +153,7 @@ const Page = () => {
 
           </div>
         </div>
-      </div >
-
-
-
-
-
+      </div>
     </>
   );
 };

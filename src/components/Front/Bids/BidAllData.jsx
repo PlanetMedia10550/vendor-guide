@@ -64,7 +64,7 @@ const BidAllData = () => {
           'favorite_id':item.favourite_id,
           'id':item.id,
           'manager_id':item.manager_id,
-          'bidenumber':bidenumber+'-'+item.id,
+          'bidenumber':item.bid_number,
           'bidtitle':item.project_name,
           'bidtype':item.project_type,
           'property':item.property_name,

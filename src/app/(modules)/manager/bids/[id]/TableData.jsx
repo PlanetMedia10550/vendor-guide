@@ -49,6 +49,8 @@ const TableData = ({bidId}) => {
           'mobile':item.vendor.mobile,
           'vendor_id':item.vendor_id,
           'manager_id':item.bid.manager_id,
+          'favorite_id':item.bid?.favourites?.id,
+          'favorite':item.bid?.favourites?.manager_id?1:0,
         }));
         setVendorsData(updatedRows);
         
