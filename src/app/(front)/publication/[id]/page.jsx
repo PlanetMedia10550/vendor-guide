@@ -1,53 +1,53 @@
-'use client';
-// components/Pagefloop.js
-import React, { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
-import HTMLFlipBook from 'react-pageflip';
+"use client";
+import Image from "next/image";
+import HTMLFlipBook from "react-pageflip";
+import React, { Component, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
+
+
 const PageCover = React.forwardRef((props, ref) => {
-  
   return (
-    <div className="page page-cover" ref={ref} data-density="hard">
-      <div className="page-content h-full">
-        <div className="h-full">{props.children}</div>
+    <div className="page page-cover " ref={ref} data-density="hard" style={{ height:'500px'}}>
+      <div className="page-content" style={{ boxShadow:"inset -7px 0 30px -7px rgba(0,0,0,.4)"}}>
+        <h2>{props.children}</h2>
       </div>
     </div>
   );
-});
 
+});
 PageCover.displayName = 'PageCover';
 
 const Page = React.forwardRef((props, ref) => {
-       
   return (
-    <div className="page" ref={ref}>
-      <div className="page-content h-full">
-        <div className="page-image h-full">
-          {props.children}
-        </div>
-        <div className="page-text"></div>
-        <div className="page-footer">{props.number + 1}</div>
+    <div className="page " ref={ref}>
+      <div className="page-content" style={{ boxShadow:"inset -7px 0 30px -7px rgba(0,0,0,.4)"}}>
+        <div className="page-image">{props.children}</div>
       </div>
     </div>
   );
-});
 
+});
 Page.displayName = 'Page';
 
-const Pagefloop = ({params}) => {
+
+function Flipbook({params}) {
+
   const id = params.id;
   const bookRef = useRef(null);
   const [totalPage, setTotalPage] = useState(0);
   const [flipData, setFlipData] = useState([]);
+  const [isPortrait, setIsPortrait] = useState(false);
+  // console.log(flipData);
   const [loading, setLoading] = useState(true);
   const [frontCover, setFrontData] = useState([]);
   const [endCover, setEndData] = useState([]);
+
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState(''); 
   const [currentPageIndex, setCurrentPageIndex] = useState(''); 
 
-   
+
   const trackPublication =  () => {
     const currentUrl = window.location.href;
     if ('geolocation' in navigator) {
@@ -73,7 +73,6 @@ const Pagefloop = ({params}) => {
   useEffect(() => { 
     trackPublication();  
   }, [latitude]);
-
   
   useEffect(() => {
     axios.get(`${process.env.BASE_API_URL}magazine/${id}`)
@@ -95,108 +94,103 @@ const Pagefloop = ({params}) => {
       });
   }, []);
 
-
   useEffect(() => {
     if (bookRef.current) {
       setTotalPage(bookRef.current.pageFlip());
     }
   }, [flipData]);
 
-   
-
-  
   const nextButtonClick = () => {
-    if (bookRef.current) { 
-      const pageFlip = bookRef.current.pageFlip();  
-      setCurrentPageIndex(pageFlip.pages.currentPageIndex);
-      pageFlip.flipNext(); 
+    if (bookRef.current) {
+      bookRef.current.pageFlip().flipNext();
       trackPublication();
-     
     }
   };
 
   const prevButtonClick = () => {
-    if (bookRef.current) { 
-      const pageFlip = bookRef.current.pageFlip();  
-      setCurrentPageIndex(pageFlip.pages.currentPageIndex); 
-      pageFlip.flipPrev();
+    if (bookRef.current) {
+      bookRef.current.pageFlip().flipPrev();
       trackPublication();
     }
   };
 
+  const onChangeOrientation = () => {
+    setIsPortrait((prevState) => !prevState);
+  };
+  
+
   if (loading) {
-    return <div className="container mx-auto text-center pb-4">Loading...</div>;
+    return <div className="container mx-auto text-center">Loading...</div>;
   }
 
   return (
     <div className="demo-block bg-light pt-3 pb-3 overflow-hidden" id="demoBlock">
       <div className="container mx-auto" style={{ position: 'relative' }}>
-        <div className="flip-book html-book demo-book stf__parent" style={{ display: 'block' }}>
-        {flipData && flipData.length > 0 ? (
-            <HTMLFlipBook  lipBook
-              width={100}
-              height={100}
-              size="stretch"
-              minWidth={400}
-              maxWidth={600}
-              minHeight={400}
-              maxHeight={600}
-              maxShadowOpacity={0.5}
-              showCover={true}
-              mobileScrollSupport={true}
-              className="demo-book"
-              ref={bookRef}
-              
-            >
-              <PageCover>
+      <div className="flip-book html-book demo-book stf__parent" style={{ display: 'block' }}>
+      {flipData && flipData.length > 0 ? (
+          <HTMLFlipBook 
+          width={500} 
+          height={500}
+          minWidth={400}
+          minHeight={400}
+          maxWidth={1000}
+          showCover={true}
+          maxHeight={1000}
+          className="bg-red-800 mx-auto"
+          ref={bookRef}
+          flippingTime={2500}
+          usePortrait={isPortrait}
+          onChangeOrientation={onChangeOrientation}
+          maxShadowOpacity={0.5}
+          style={{ backgroundImage: "url(/images&icons/background.jpg)" }}
+          >
+      
+               <PageCover>
               <Image
                 src={frontCover}
                 alt="image 1"
-                className="h-full w-full object-fill"
+                className="h-full w-full object-fill max-w-none"
                 width="100" height="100"
+                style={{ height:'500px'}}
               />
             </PageCover>
-
-             {flipData.map((item, index) => (
+      {flipData.map((item, index) => (
                 <Page key={index} number={index + 1}>
                     <Image
                       src={item}
                       alt={`Image ${index + 1}`}
-                      className="h-full w-full object-fill"
+                      className="w-full h-full max-w-none object-fill"
                       width="100" height="100"
+                      style={{ height:'500px'}}
                     />
                 </Page>
               ))}
-
-            <PageCover>
+              <PageCover>
               <Image
                 src={endCover}
                 alt="image 1"
-                className="h-full w-full object-fill"
+                className="h-full w-full object-fill max-w-none"
                 width="100" height="100"
+                style={{ height:'500px'}}
               />
             </PageCover>
-
-            </HTMLFlipBook>
-          ) : (
-            <div>No data available.</div>
-          )}
-
-        </div>
+    </HTMLFlipBook>
+      ) : (
+        <div>No data available.</div>
+      )}
       </div>
-      <div className="container mx-auto py-14">
-        <div className="flex justify-center gap-4">
-          <button type="button" onClick={prevButtonClick} style={{ fontWeight: 700}}>
+    </div>
+      <div className="container mx-auto">
+        <div className="flex justify-center gap-4 py-4 font-semibold">
+          <button type="button" onClick={prevButtonClick}>
             Previous page
           </button>
-          <button type="button" onClick={nextButtonClick} style={{ fontWeight: 700}}>
+          <button type="button" onClick={nextButtonClick}>
             Next page
           </button>
         </div>
-        <div />
       </div>
     </div>
   );
-};
-
-export default Pagefloop;
+}
+export default Flipbook;

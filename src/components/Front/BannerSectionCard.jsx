@@ -30,7 +30,7 @@ const BannerSectionCard = () => {
               className="col-span-4 sm:col-span-2 lg:col-span-1  shadow-2xl h-full"
             >
               <div className="sm:mt-0 flex justify-center md:justify-end h-full items-center">
-                <Link href={`/search/`+ row.id }>
+                <Link href={`/search/`+ row.slug }>
                 <Image
                   src={row.image_url?row.image_url:""}
                   alt={row.name?row.name:""}

@@ -160,7 +160,7 @@ const VendorCard = (props) => {
                             <div className="flex items-center justify-center xl:gap-x-4 gap-x-6  md:text-center">
                               <div>
                                 <Link
-                                   href={`/search/`+ row.id }
+                                   href={`/search/`+ row.slug }
                                   className="rounded-[0.7rem] md:inline-block px-3.5 py-1 xl:text-[0.55rem] text-sm border-solid border-[1px] border-black font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                   Learn More

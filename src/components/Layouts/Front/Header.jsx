@@ -115,7 +115,7 @@ import HeaderDropdown from "./HeaderDropdown";
 
                 <li >
                   <Link
-                    href="advertise"
+                    href="/advertise"
                     className="text-base text-[#221F20] font-semibold block py-2 lg:pb-2 pr-4 pl-3  border-b border-grey-300  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     Advertise

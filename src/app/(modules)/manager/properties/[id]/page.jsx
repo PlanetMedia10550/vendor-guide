@@ -81,7 +81,7 @@ const Page = ({ params }) => {
               <p>{propertie?.address}</p>
             </div>
             <div className="flex pt-16 text-left font-semibold">
-              {/* <ul className="pr-10 text-lg leading-[1.4rem]">
+              <ul className="pr-10 text-lg leading-[1.4rem]">
                 <li>Regional Manager</li>
                 <li>Property Manager</li>
                 <li>Leasing Manager</li>
@@ -90,7 +90,7 @@ const Page = ({ params }) => {
                 <li>Clay Brooks</li>
                 <li>Noah Bennet</li>
                 <li>Jordyn Hamilton</li>
-              </ul> */}
+              </ul>
             </div>
             <div className="my-10">
               <form>
