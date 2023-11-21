@@ -103,7 +103,7 @@ const Details = (params) => {
             </div>
           </div>
           {/* end next section */}
-           <DetailsForm/>
+           {/* <DetailsForm/> */}
         </div>
       </section>
     </>
