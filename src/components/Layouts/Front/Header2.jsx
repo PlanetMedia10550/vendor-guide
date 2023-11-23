@@ -27,8 +27,8 @@ const Header = () => {
       setActiveTab((current) => !current);
     };
     const imagsrc = user ? user.image_url : null;
-    console.log(imagsrc);
-    console.log(user)
+    // console.log(imagsrc);
+    // console.log(user)
   return (
     <>
       <header>
