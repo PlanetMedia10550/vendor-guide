@@ -2,7 +2,7 @@
 import Label from "@/components/Front/UI/Label";
 import Input from "@/components/Front/UI/Input";
 import Submit from "@/components/Front/UI/Submit";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import SelectDropdown from "./Front/UI/SelectDropdown";
 // import TextArea from "./Front/UI/TextArea";
 import axios from "axios";
@@ -14,51 +14,125 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getCookie } from "cookies-next";
 import { useAuth } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import TextArea from "@/components/Front/UI/TextArea";
+import Select from 'react-select';
 
 const ProfileForm = ({user}) => {
-    console.log(user);
-    // return true;
     const [isLoding, setIsLoding] = useState(false);
     const [users, setUser] = useState(user);
-    // console.log(users);
-    // const [image_id, setImageId] = useState(user?.image_id);
     const [imageSrc, setImageSrc] = useState(user?.image_url);
     const [isImageLoading, setImageIsLoading] = useState(false);
+    const [isMultiImageLoading, setMultiImageIsLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const {errors,setErrors, renderFieldError} = useForm();
     const [form, setForm] = useState([]);
+    const [newGalleryIds, setNewGalleryIds] = useState([]);
+    const [newGalleryUrls, setNewGalleryUrls] = useState([]);
     const [error, setError] = useState(null);
+    const [multiFamilyCheck, setMultiFamilyCheck] = useState(user.multi_family);
+    const [commercialCheck, setCommercialCheck] = useState(user.commercial);
+    const [residentialCheck, setResidentialCheck] = useState(user.residential);
+    const [colourOptions, setColourOptions] = useState([]);
+    const [states, setStates] = useState([]);
+    const [value, setValue] = useState();
+    const [selectedStates, setSelectedStates] = useState([]);
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
         
-   }
+    }
 
+    useEffect(() => {
+        
+    const categoriesResult = async () => {
+        var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${getCookie('token')}`
+          },
+            
+        })
+    
+        if (!response2.ok) {
+        throw new Error('Failed to submit the data. Please try again.')
+        }
+        var categoryResult = await response2.json();
+        var newColourOptions = categoryResult.data.map((v) => ({
+            value: v.id,
+            label: v.title
+        }));
+          
+        setColourOptions(newColourOptions);
+    }
+    categoriesResult();
+
+    const statesResult = async () => {
+        var response2 = await fetch(`${process.env.BASE_API_URL}vendor-state-list`,{
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${getCookie('token')}`
+          },
+            
+        })
+    
+        if (!response2.ok) {
+        throw new Error('Failed to submit the data. Please try again.')
+        }
+        var categoryResult = await response2.json();
+        var newColourOptions = categoryResult.data.map((v) => ({
+            value: v.id,
+            label: v.name
+        }));
+          
+        setStates(newColourOptions);
+    }
+    statesResult();
+    
+    },[]);
 
     const makeRequest = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         setErrors(null);
         setIsLoding(true);
         var formData = new FormData(e.target);
-        formData.append('_method','PUT');
-        await axios.post(`${process.env.BASE_API_URL}vendor/${user.id}`, formData).then(response => {
-            // console.log(response.data);
-            setIsLoding(false);
-            // onClose(true)
-            toast.success(response.data.msg, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
-        }).catch(error => {
-            setIsLoding(false);
-            if(error?.response?.data?.errors) {
-                setErrors(error.response.data.errors);
+        formData.append('gallery_id[]',newGalleryIds);
+
+        const response = await fetch(`${process.env.BASE_API_URL}vendor-profile-update`,{
+            method: 'POST',
+            body:formData,
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
             }
+            
+        })
+ 
+        if (!response.ok) {
+            setIsLoding(false);
+            toast.error('Failed to submit the data. Please try again.', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+            });
+            // throw new Error('Failed to submit the data. Please try again.')
+        }
+    
+        // Handle response if necessary
+        const pdata = await response.json();
+        // console.log(pdata);
+        setIsLoding(false);
+        toast.success(pdata.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
         });
 
 
@@ -101,6 +175,44 @@ const ProfileForm = ({user}) => {
         } finally {
           setError(null);
           setImageIsLoading(false);
+        }
+      }
+    
+    async function onMultipleImageUpload(event) {
+        event.preventDefault();
+        setMultiImageIsLoading(true);
+        setError(null);
+        setImageSrc(null);
+    //   console.log(event.target.files[0]);return true;
+        try {
+            const formData = new FormData();
+            // formData.append('images[]', event.target.files[0]);
+            for (const file of event.target.files) {
+                formData.append('images[]', file, file.name);
+            }
+      
+          const response = await fetch(`${process.env.BASE_API_URL}multiple_image`, {
+            method: 'POST',
+            body: formData,
+          });
+      
+          if (!response.ok) {
+            throw new Error('Failed to submit the data. Please try again.');
+          }
+      
+          const responseData = await response.json();
+          var imgid = responseData.map(image => image.id);
+          var imgurl = responseData.map(image => image.image_url);
+          setNewGalleryIds([...imgid])
+          setNewGalleryUrls([...imgurl])
+            console.log(newGalleryIds);
+
+        } catch (error) {
+          setError(error.message);
+          console.error(error);
+        } finally {
+          setError(null);
+          setMultiImageIsLoading(false);
         }
       }
 
@@ -159,32 +271,16 @@ const ProfileForm = ({user}) => {
                             {renderFieldError('name')}
                         </div>
                         <div className="col-span-1 my-2 pb-6" >
-                            <Label label="Short Description" required="required" />
-                            <div className="mt-2.5">
-                                <Input name="short_description" id="short_description" value={users.short_description}  onChange={e => {handleForm('short_description',e.target.value);
-                                setUser({...users,short_description:e.target.value})}} />
-                            </div>
-                            {renderFieldError('short_description')}
-                        </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="Description" required="required" />
-
-                            <div className="mt-2.5">
-                                <Input name="description" id="description" value={users.description} onChange={e => {handleForm('description',e.target.value);setUser({...users,description:e.target.value})}} />
-                            </div>
-                            {renderFieldError('description')}
-                        </div>
-                        <div className="col-span-1 my-2 pb-6" >
                             <Label label="Email Address" required="" />
                             <div className="mt-2.5">
                                 <Input name="email" id="email" value={users.email} disable="disabled"/>
                             </div>
                             {renderFieldError('email')}
                         </div>
+                        
                     </div>
+                    
+                    
 
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-1 my-2 pb-6" >
@@ -204,13 +300,7 @@ const ProfileForm = ({user}) => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="City" required="required" />
-                            <div className="mt-2.5">
-                                <Input name="city" id="city" value={users.city} onChange={e => {handleForm('city',e.target.value);setUser({...users,city:e.target.value})}} />
-                            </div>
-                            {renderFieldError('city')}
-                        </div>
+                        
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="State" required="required" />
 
@@ -219,34 +309,181 @@ const ProfileForm = ({user}) => {
                             </div>
                             {renderFieldError('state')}
                         </div>
+                        <div className="col-span-1 my-2 pb-6" >
+                            <Label label="Zip Code" required="required" />
+                            <div className="mt-2.5">
+                                <Input name="zip_code" id="zip_code" value={users.zip_Code} onChange={e => {handleForm('zip_code',e.target.value);setUser({...users,zip_code:e.target.value})}} />
+                            </div>
+                            {renderFieldError('zip_code')}
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="Country" required="required" />
-                            <div className="mt-2.5">
-                                <Input name="country" id="country" value={users.country} onChange={e => {handleForm('country',e.target.value);setUser({...users,country:e.target.value})}} />
-                            </div>
-                            {renderFieldError('country')}
-                        </div>
-                        <div className="col-span-1 my-2 pb-6" >
-                        <Label label="Zip Code" required="required" />
-                        <div className="mt-2.5">
-                            <Input name="zip_code" id="zip_code" value={users.zip_Code} onChange={e => {handleForm('zip_code',e.target.value);setUser({...users,zip_code:e.target.value})}} />
-                        </div>
-                        {renderFieldError('zip_code')}
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
+                        <div className="col-span-2 my-2 pb-6" >
                             <Label label="Website" required="required" />
 
                             <div className="mt-2.5">
                                 <Input name="website_url" id="website_url" value={users.website_url} onChange={e => {handleForm('website_url',e.target.value);setUser({...users,website_url:e.target.value})}} />
                             </div>
-                            {renderFieldError('last_name')}
+                            {renderFieldError('website_url')}
                         </div>
                     </div>
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="YouTube URL" required="required" />
+
+                            <div className="mt-2.5">
+                                <Input name="youtube_url" id="youtube_url" value={users.youtube_url} onChange={e => {handleForm('youtube_url',e.target.value);setUser({...users,youtube_url:e.target.value})}} />
+                            </div>
+                            {renderFieldError('youtube_url')}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Short Description" required="required" />
+                            <div className="mt-2.5">
+                                <TextArea name="short_description" id="short_description" value={users.short_description}  onChange={e => {handleForm('short_description',e.target.value);
+                                setUser({...users,short_description:e.target.value})}} rows={3} />
+                            </div>
+                            {renderFieldError('short_description')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Description" required="required" />
+
+                            <div className="mt-2.5">
+                                <TextArea name="description" id="description" value={users.description} onChange={e => {handleForm('description',e.target.value);setUser({...users,description:e.target.value})}} rows={5} />
+                            </div>
+                            {renderFieldError('description')}
+                        </div>
+                        
+                    </div>
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Category" required="" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    isMulti
+                                    value={value}
+                                    name="category_id[]"
+                                    options={colourOptions}
+                                    className="basic-multi-select "
+                                    classNamePrefix="select"
+                                    onChange={(selectedOptions) => {
+                                        setValue([...selectedOptions]); // Creates a new array with the selected values
+                                    }}
+                                />
+                            </div>
+                            {renderFieldError('category_id')}
+                        </div>
+                        
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="States" required="" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    isMulti
+                                    defaultValue={selectedStates}
+                                    name="state_id[]"
+                                    options={states}
+                                    className="basic-multi-select "
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('state_id')}
+                        </div>
+                        
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Multi Family" required="required" />
+                            <div className="mt-2.5">
+                                <Input type="radio" name="multi_family" id="multi_family_yes" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('multi_family',e.target.value);
+                                setUser({...users,multi_family:e.target.value}); setMultiFamilyCheck(e.target.value) }} checked={multiFamilyCheck == 1 ? true : false} /> 
+                                <label htmlFor="multi_family_yes" className="ms-2 text-sm font-medium mr-2">Yes</label>
+
+                                <Input type="radio" name="multi_family" id="multi_family_no"  value={0} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('multi_family',e.target.value);
+                                setUser({...users,multi_family:e.target.value}); setMultiFamilyCheck(e.target.value) }} checked={multiFamilyCheck == 0 ? true : false} /> 
+                                <label htmlFor="multi_family_no" className="ms-2 text-sm font-medium mr-2">No</label>
+                            </div>
+                            {renderFieldError('multi_family')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <div className="mt-2.5">
+                                <TextArea name="multi_family_description" id="multi_family_description" value={users.multi_family_description} onChange={e => {handleForm('multi_family_description',e.target.value);setUser({...users,multi_family_description:e.target.value})}} rows={5} disabled={multiFamilyCheck == 0 ? true : false} />
+                            </div>
+                            {renderFieldError('multi_family_description')}
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Commercial" required="required" />
+                            <div className="mt-2.5">
+                                <Input type="radio" name="commercial" id="commercial_yes" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('commercial',e.target.value);
+                                setUser({...users,commercial:e.target.value}); setCommercialCheck(e.target.value) }} checked={commercialCheck == 1 ? true : false} /> 
+                                <label htmlFor="commercial_yes" className="ms-2 text-sm font-medium mr-2">Yes</label>
+
+                                <Input type="radio" name="commercial" id="commercial_no"  value={0} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('commercial',e.target.value);
+                                setUser({...users,commercial:e.target.value}); setCommercialCheck(e.target.value) }} checked={commercialCheck == 0 ? true : false} /> 
+                                <label htmlFor="commercial_no" className="ms-2 text-sm font-medium mr-2">No</label>
+                            </div>
+                            {renderFieldError('commercial')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <div className="mt-2.5">
+                                <TextArea name="commercial_description" id="commercial_description" value={users.commercial_description} onChange={e => {handleForm('commercial_description',e.target.value);setUser({...users,commercial_description:e.target.value})}} rows={5} disabled={commercialCheck == 0 ? true : false} />
+                            </div>
+                            {renderFieldError('commercial_description')}
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Residential" required="required" />
+                            <div className="mt-2.5">
+                                <Input type="radio" name="residential" id="residential_yes" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('residential',e.target.value);
+                                setUser({...users,residential:e.target.value}); setResidentialCheck(e.target.value) }} checked={residentialCheck == 1 ? true : false} /> 
+                                <label htmlFor="residential_yes" className="ms-2 text-sm font-medium mr-2">Yes</label>
+
+                                <Input type="radio" name="residential" id="residential_no"  value={0} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('residential',e.target.value);
+                                setUser({...users,residential:e.target.value}); setResidentialCheck(e.target.value)}} checked={residentialCheck == 0 ? true : false} /> 
+                                <label htmlFor="residential_no" className="ms-2 text-sm font-medium mr-2">No</label>
+                            </div>
+                            {renderFieldError('residential')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <div className="mt-2.5">
+                                <TextArea name="residential_description" id="residential_description" value={users.residential_description} onChange={e => {handleForm('residential_description',e.target.value);setUser({...users,residential_description:e.target.value})}} rows={5} disabled={residentialCheck == 0 ? true : false} />
+                            </div>
+                            {renderFieldError('residential_description')}
+                        </div>
+                    </div>
+
+                    <div className="w-half my-2 pb-6" >
+                        <Label label="Gallery Photos?"  />
+                        <div className="grid grid-cols-12 gap-x-4">
+                            
+                            <div className="col-span-12 mt-2.5">
+                                <Input type="file" name="galleryid" id="galleryid" multiple style={{width:'100%',float:'left'}}  onChange={onMultipleImageUpload} />
+                            
+                            </div>
+                            
+                        
+                        {renderFieldError('gallery_id')}
+                        {error && <div className="text-[#c13e27] text-sm font-normal">{error}</div>}
+                        </div>
+                        <div className="grid grid-cols-12 gap-x-4">
+                            {newGalleryUrls && newGalleryUrls.map((src,i)=>(
+                                <div className="col-span-2 mt-2" key={i}>
+                                    <img src={src} style={{height:'100px',width:'100px'}} className="mx-auto " />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     <div className="w-half my-2" >
                         <div className="my-4">
 
