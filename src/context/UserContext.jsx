@@ -14,9 +14,11 @@ export function UserProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [sitesetting, setSiteSetting] = useState();
-  // console.log(sitesetting);
+  const [metaData, setMetaData] =useState();
   const [isLogin, setIsLogin] = useState(false);
   const [isLoding, setIsLoding] = useState(false);
+  const [isInfoLoding, setIsInfoLoding] = useState(true);
+  const [loding, setLoding] = useState(true);
   // const [formErrors, setFormErrors] = useState(false);
   const token = getCookie('token');
   const is_module_type = getCookie('is_module_type');
@@ -26,6 +28,24 @@ export function UserProvider({ children }) {
 
   
   useEffect(() => {
+    const  loadMetaData = async () =>{
+      try{
+        const response22 =  await fetch(`${process.env.BASE_API_URL}post-meta`,{
+          method:'GET'
+        });
+        if (!response22.ok) {
+          throw new Error('Failed to submit the data. Please try again.');
+        }
+          const dropData1 = await response22.json();
+          // console.log(dropData);
+          setMetaData(dropData1.data);
+      }catch (error){
+        console.error(error);
+      }
+  }
+  loadMetaData();
+  setLoding(false);
+
     const loadUserFromCookies = async () => {
 
       // const token = Cookies.get('token');
@@ -66,7 +86,7 @@ export function UserProvider({ children }) {
   // header footer dynamic code
   useEffect(() => { 
     const loadUserCommonInfo = async () => {
-      setIsLoding(true);
+
         try {
           const response2 = await fetch(`${process.env.BASE_API_URL}site_setting`, {
             method: 'GET',
@@ -85,8 +105,9 @@ export function UserProvider({ children }) {
       
     }
     loadUserCommonInfo();
-    setIsLoding(false);
+    setIsInfoLoding(false);
   }, []);
+
 
 
 
@@ -182,7 +203,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{user,isLogin,login,register,logout,renderFieldError,isLoding,navigate,sitesetting}}>
+    <UserContext.Provider value={{user,isLogin,login,register,logout,renderFieldError,isLoding,isInfoLoding,navigate,sitesetting,metaData,loding}}>
       {children}
     </UserContext.Provider>
   );

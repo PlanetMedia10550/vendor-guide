@@ -1,22 +1,34 @@
-
+'use client'; 
 import BannerSectionCard from "@/components/Front/BannerSectionCard";
 import Carouselbanner from "@/components/Front/Carouselbanner";
 import FeaturSection from "@/components/Front/FeaturSection";
 import PartnerSection from "@/components/Front/PartnerSection";
 import SearchBar from "@/components/Front/SearchBar";
 import Link from "next/link";
+import { useAuth } from "@/context/UserContext";
+import { useState } from "react";
 
 const Home = () => {
+   const {metaData,loding} = useAuth();
+   const homeMeta = metaData?.home;
+  //  console.log(homeMeta);
 
   return (
     <>
      
       <section id="hero_section" className="sm:relative">
         <div className="hero_section_content relative h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh]  bg-[url('/images&icons/banner1.jpg')] bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[38vh] before:sm:h-[45vh]  before:md:h-[55vh] before:lg:h-[65vh] before:xl:h-[69vh] bg:opacity-25">
+          {loding ?  (
+               <div className=" absolute z-40 lg:top-40 md:top-[5.5rem] top-[2.5rem] w-full mx-auto text-center">
+                <main className="px-4 sm:px-6 lg:px-10 z-10 lg:w-[50rem] md:w-[35rem]  mx-auto">
+                   {/* Loading... */}
+                   </main>
+               </div>
+          ):(
           <SearchBar
-            title="Find the perfect vendor for the job."
-            btnTitle="Search"
+            homeMeta= {homeMeta}
           />
+            )}
         </div>
       </section>
       <section id="banner_section">
@@ -41,11 +53,15 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <PartnerSection
-          title="Partner with Vendor Guide."
-          content="Take the step to join our esteemed community by signing up today and becoming a valued member of our trusted vendor network."
+        {loding ?(
+             <div className="mx-auto max-w-7xl pt-0 px-6 py-8 lg:py-0 lg:pt-4 lg:px-8 text-center">
+              Loading..
+             </div>
+        ):(
+        <PartnerSection homeMeta={homeMeta}
           btnTitle="Get Started"
         />
+        )}
       </section>
     </>
   );
