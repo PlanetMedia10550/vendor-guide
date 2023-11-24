@@ -16,6 +16,7 @@ import axios from 'axios';
 
 const VendorCard = (props) => {
   const {user,renderFieldError,isLoding}  = useAuth();
+  console.log(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [vendorData, setVendorData] = useState([]);
   const [isLoading, setIsLoding] = useState(true);
@@ -127,7 +128,7 @@ const VendorCard = (props) => {
                         <div className="card-body">
                           <div className="text-center">
                           <div className="w-36 h-28 pt-2 mx-auto flex items-center">
-                            <Link href={`/search/`+ row.id } className="">
+                            <Link href={`/search/`+ row.slug } className="">
                             
                               <Image
                                 width="100"
@@ -139,7 +140,7 @@ const VendorCard = (props) => {
                             </Link>
                           </div>
                             <h5 className="text-16 text-gray-700 mb-1 text-ellipsis overflow-hidden">
-                              <Link href={`/search/`+ row.id } className="text-[#B13634] font-bold whitespace-nowrap">
+                              <Link href={`/search/`+ row.slug } className="text-[#B13634] font-bold whitespace-nowrap">
                                 {row.name}
                               </Link>
                             </h5>
@@ -161,7 +162,7 @@ const VendorCard = (props) => {
                               <div>
                                 <Link
                                    href={`/search/`+ row.slug }
-                                  className="rounded-[0.7rem] md:inline-block px-3.5 py-1 xl:text-[0.55rem] text-sm border-solid border-[1px] border-black font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                  className="rounded-[0.7rem] md:inline-block px-3.5 py-1 2xl:text-sm xl:text-[0.66rem] text-sm border-solid border-[1px] border-black font-extrabold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                   Learn More
                                 </Link>
@@ -169,7 +170,7 @@ const VendorCard = (props) => {
                               <div className="lg:mt-0  mt-0">
                                 <Link
                                   href=""
-                                  className="rounded-[0.7rem] md:inline-block px-3.5 py-1 xl:text-[0.55rem] text-sm border-solid border-[1px] border-black font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                  className="rounded-[0.7rem] md:inline-block px-3.5 py-1 2xl:text-sm xl:text-[0.66rem] text-sm border-solid border-[1px] border-black font-extrabold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                   onClick={(e)=>{e.preventDefault(); openModal(row.id)}}
                                 >
                                   Request Quote
