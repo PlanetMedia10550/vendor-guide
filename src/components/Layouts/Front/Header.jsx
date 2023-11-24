@@ -10,9 +10,11 @@ import { useAuth } from "@/context/UserContext";
 import { getCookie } from 'cookies-next';
 import { usePathname,useRouter } from "next/navigation";
 import HeaderDropdown from "./HeaderDropdown";
+import Loading from "@/app/loadingScreen";
 
   const Header = (props) => {
-  const {user,isLoding,logout}  = useAuth();
+  const {user,isLoding,logout,sitesetting}  = useAuth();
+  // console.log(sitesetting?.sidelogo_url);
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const cookie = getCookie('token');
@@ -35,6 +37,8 @@ import HeaderDropdown from "./HeaderDropdown";
         setShowMenu((current) => !current);
         // event.target.parentNode.nextElementSibling.classList.toggle("hidden");
     };
+
+
   return (
     <>
       <header>
@@ -42,10 +46,12 @@ import HeaderDropdown from "./HeaderDropdown";
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl py-3">
             <Link href="/" className="flex items-center md:ps-8 lg:ps-10">
               <Image
-                src={Logo}
+                src={sitesetting?.sidelogo_url}
                 className="mr-3 h-6 sm:h-9 w-auto"
                 alt="Vendor Guide Logo"
                 id="Vendor_Guide_Logo"
+                width= "100"
+                height ="100"
               />
             </Link>
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, use, useContext, useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios properly
 import { setCookie,getCookie,deleteCookie,hasCookie } from 'cookies-next';
 import { NextResponse } from 'next/server';
@@ -13,6 +13,8 @@ const UserContext = createContext();
 export function UserProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [sitesetting, setSiteSetting] = useState();
+  // console.log(sitesetting);
   const [isLogin, setIsLogin] = useState(false);
   const [isLoding, setIsLoding] = useState(false);
   // const [formErrors, setFormErrors] = useState(false);
@@ -59,6 +61,32 @@ export function UserProvider({ children }) {
     loadUserFromCookies();
     setIsLoding(false);
   }, [token]);
+
+
+  // header footer dynamic code
+  useEffect(() => { 
+    const loadUserCommonInfo = async () => {
+      setIsLoding(true);
+        try {
+          const response2 = await fetch(`${process.env.BASE_API_URL}site_setting`, {
+            method: 'GET',
+          });
+          // console.log('done');
+          if (!response2.ok) {
+            throw new Error('Failed to submit the data. Please try again.');
+          }
+          // Handle response if necessary
+          const dataProp = await response2.json();
+          // console.log(dataProp.data);
+          setSiteSetting(dataProp.data); 
+        } catch (error) {
+          console.error(error)
+        }
+      
+    }
+    loadUserCommonInfo();
+    setIsLoding(false);
+  }, []);
 
 
 
@@ -154,7 +182,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{user,isLogin,login,register,logout,renderFieldError,isLoding,navigate}}>
+    <UserContext.Provider value={{user,isLogin,login,register,logout,renderFieldError,isLoding,navigate,sitesetting}}>
       {children}
     </UserContext.Provider>
   );

@@ -1,8 +1,15 @@
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
-import flogo from "@/../../public/images&icons/SVG/logo_white.svg"
-import starImg from "@/../../public/images&icons/SVG/star.svg"
+import flogo from "@/../../public/images&icons/SVG/logo_white.svg";
+import starImg from "@/../../public/images&icons/SVG/star.svg";
+import { useAuth } from "@/context/UserContext";
+
+
 const Footer = () => {
+ const {sitesetting,isLoding} = useAuth();
+  // console.log(sitesetting?.sidelogo_url);
   return (
     <>
       <footer
@@ -19,7 +26,7 @@ const Footer = () => {
                 <Image
                   width="100"
                   height="100"
-                  src={flogo.src}
+                  src={sitesetting?.sidefooterlogo_url}
                   className="mr-3 h-6 sm:h-8 lg:h-9 w-auto"
                   alt="Vendor Guide"
                 />
@@ -44,8 +51,8 @@ const Footer = () => {
             <div className="flex flex-col">
               <label className="text-white pb-2 sm:pb-4">Advertise</label>
               <ul className="flex flex-col nav_list text-sm">
-                <li>(952) 460-1916</li>
-                <li>info@VendorGuideUSA.coms</li>
+                <li>{sitesetting?.side_phone}</li>
+                <li>{sitesetting?.side_email}</li>
               </ul>
             </div>
             <div className="flex flex-col">
@@ -63,26 +70,31 @@ const Footer = () => {
             <div className="flex flex-col">
               <label className="text-white pb-2 sm:pb-4">Visit</label>
               <ul className="flex flex-col nav_list text-sm">
-                <li>10550 Wayzata Blvd STE D,</li>
-                <li>Minnetonka, MN 55305</li>
+                <li>{sitesetting?.side_address}</li>
               </ul>
             </div>
             <div className="flex flex-col">
               <label className="text-white pb-2 sm:pb-4">Follow</label>
               <ul className="flex flex-col nav_list text-sm">
-                <li>Facebook</li>
-                <li>LinkedIn</li>
-                <li>Instagram</li>
+               {sitesetting?.side_facebook_url && (
+                <li><Link href={sitesetting?.side_facebook_url}>Facebook</Link></li>
+                )}
+                {sitesetting?.side_lingding_url && (
+               <li><Link href={sitesetting?.side_lingding_url}>LinkedIn</Link></li>
+               )}
+               {sitesetting?.side_instagram_url && (
+                <li><Link href={sitesetting?.side_instagram_url}>Instagram</Link></li>
+               )}
               </ul>
             </div>
           </div>
         </div>
         <div className="copy_right bg-[#ffffff] flex  items-center justify-center md:flex-row md:justify-center">
-          <span className="text-black font-bold text-xs">Powered by</span>
+          <span className="text-black font-bold text-xs">{sitesetting?.powered_by}</span>
           <Image
             width="100"
             height="100"
-            src={starImg.src}
+            src={sitesetting?.footerlogo_url}
             className="mr-3 h-16 w-16 sm:h-16"
             alt="Star"
           />

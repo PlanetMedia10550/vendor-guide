@@ -10,9 +10,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <section id="hero_section" className="sm:relative">
-        <Carouselbanner />
-      </section> */}
+     
       <section id="hero_section" className="sm:relative">
         <div className="hero_section_content relative h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh]  bg-[url('/images&icons/banner1.jpg')] bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[38vh] before:sm:h-[45vh]  before:md:h-[55vh] before:lg:h-[65vh] before:xl:h-[69vh] bg:opacity-25">
           <SearchBar
