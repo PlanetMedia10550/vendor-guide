@@ -9,10 +9,8 @@ import { useAuth } from "@/context/UserContext";
 import { useState } from "react";
 
 const Home = () => {
-   const {metaData,loding} = useAuth();
+const {metaData,loding} = useAuth();
    const homeMeta = metaData?.home;
-  //  console.log(homeMeta);
-
   return (
     <>
      

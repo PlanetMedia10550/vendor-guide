@@ -279,11 +279,11 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                                 </div>
                                 {renderFieldError('category_id')}
                             </div>
+                            <input type="hidden" name="vendor_id[]" value={vendor_id} />
                             {vendorList.length > 0 && (
                                 <div className="col-span-2 border">
                                     <Label label="Selected Vendors" className={`m-1`} required="" />
                                     <hr />
-                                    <input type="hidden" name="vendor_id[]" value={vendor_id} />
                                     {vendorList.map((vendor, i) => (
                                     <label
                                         key={i} // It's good to provide a unique key when mapping over arrays
