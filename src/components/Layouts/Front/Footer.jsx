@@ -4,18 +4,28 @@ import Link from "next/link";
 import Image from "next/image";
 import flogo from "@/../../public/images&icons/SVG/logo_white.svg";
 import starImg from "@/../../public/images&icons/SVG/star.svg";
-import { useAuth } from "@/context/UserContext";
+import { useAuth,useState } from "@/context/UserContext";
 
 
 const Footer = () => {
- const {sitesetting,isLoding} = useAuth();
+ const {sitesetting,isInfoLoding} = useAuth();
   // console.log(sitesetting?.sidelogo_url);
+
+  
   return (
     <>
+   
       <footer
         id=""
         className="bg-[#171717] text-white bottom-0 left-0 flex flex-col w-full gap-4  md:gap-8"
       >
+       {isInfoLoding ? (
+                <div className="px-4 lg:px-12 lg:py-5 py-7 text-center">
+                  Loading....
+                </div>
+       ):(
+
+    
         <div className="px-4 lg:px-12 lg:py-5 py-7">
           <div className="flex items-center gap-4 md:gap-7 justify-between md:flex-row md:mb-0 mb-4">
             <div className="flex flex-col gap-2">
@@ -26,7 +36,7 @@ const Footer = () => {
                 <Image
                   width="100"
                   height="100"
-                  src={sitesetting?.sidefooterlogo_url}
+                  src={sitesetting?.sidefooterlogo_url?sitesetting?.sidefooterlogo_url:flogo}
                   className="mr-3 h-6 sm:h-8 lg:h-9 w-auto"
                   alt="Vendor Guide"
                 />
@@ -89,6 +99,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
+         )}
+
+         {isInfoLoding ?(
+               <div className="copy_right bg-[#ffffff] text-black flex  items-center justify-center md:flex-row md:justify-center">
+                Loading...
+               </div>
+         ):(
         <div className="copy_right bg-[#ffffff] flex  items-center justify-center md:flex-row md:justify-center">
           <span className="text-black font-bold text-xs">{sitesetting?.powered_by}</span>
           <Image
@@ -99,7 +116,9 @@ const Footer = () => {
             alt="Star"
           />
         </div>
+       )}
       </footer>
+
     </>
   );
 };
