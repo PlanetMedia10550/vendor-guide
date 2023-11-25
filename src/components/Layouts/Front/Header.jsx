@@ -15,8 +15,7 @@ import { Button } from "primereact/button";
 import { useEffect } from "react";
 
   const Header = (props) => {
-  const {user,isLoding,logout,sitesetting}  = useAuth();
-  // console.log(sitesetting?.sidelogo_url);
+  const {user,isLoding,isInfoLoding,logout,sitesetting}  = useAuth();
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const [profileUrl, setProfileUrl] = useState("");
@@ -56,9 +55,19 @@ import { useEffect } from "react";
       <header>
         <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 ">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl py-3">
+            {isInfoLoding ? (
+              <Link href="/" className="flex items-center md:ps-8 lg:ps-10">
+                  <div className="loading-wave flex justify-center items-end">
+                    <div className="loading-bar bg-[#B13634] rounded-[5px] "></div>
+                    <div className="loading-bar bg-[#B13634] rounded-[5px]"></div>
+                    <div className="loading-bar bg-[#B13634] rounded-[5px]"></div>
+                    <div className="loading-bar bg-[#B13634] rounded-[5px]"></div>
+                  </div>
+              </Link>
+            ):(
             <Link href="/" className="flex items-center md:ps-8 lg:ps-10">
               <Image
-                src={sitesetting?.sidelogo_url}
+                src={sitesetting?.sidelogo_url?sitesetting?.sidelogo_url:Logo}
                 className="mr-3 h-6 sm:h-9 w-auto"
                 alt="Vendor Guide Logo"
                 id="Vendor_Guide_Logo"
@@ -66,7 +75,7 @@ import { useEffect } from "react";
                 height ="100"
               />
             </Link>
-
+            )}
             <div className="lg:ml-8 flex items-center lg:order-2">
               <Link
                 href="/search"

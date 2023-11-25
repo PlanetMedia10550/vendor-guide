@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SearchBar = (props) => {
+const SearchBar = ({homeMeta}) => {
   const [searchInput, setSearchInput] = useState("");
   const Router = useRouter();
   const Pathname = usePathname();
@@ -18,7 +18,7 @@ const SearchBar = (props) => {
       <main className="px-4 sm:px-6 lg:px-10 z-10 lg:w-[50rem] md:w-[35rem]  mx-auto">
         <div className="text-center">
           <h2 className="text-base sm:text-xl md:text-3xl tracking-tight leading-10 font-semibold text-white  lg:text-[2.65rem] px-5 ">
-            {props.title}
+            {homeMeta?.hero_title}
           </h2>
 
           <div className="mt-1 sm:mt-3 md:mt-7 sm: justify-center">
@@ -41,7 +41,7 @@ const SearchBar = (props) => {
                     type="submit"
                     className="text-white tracking-wide bg-[#B13634] hover:bg-red-800 focus:ring-1 focus:outline-none focus:ring-[#B13634] font-normal rounded-lg text-sm sm:text-lg lg:text-xl mt-3 sm:mt-0 px-4 sm:px-6 py-1 sm:py-2 lg:py-3 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-[#B13634]"
                   >
-                    {props.btnTitle}
+                    Search
                   </button>
                 </div>
                 <div className=" inset-y-0 left-0 flex items-center pl-5 sm:pl-28 md:pl-14 pointer-events-none mt-3 text-xs sm:text-base tracking-wider text-white">
