@@ -11,12 +11,15 @@ import { getCookie } from 'cookies-next';
 import { usePathname,useRouter } from "next/navigation";
 import HeaderDropdown from "./HeaderDropdown";
 import Loading from "@/app/loadingScreen";
+import { Button } from "primereact/button";
+import { useEffect } from "react";
 
   const Header = (props) => {
   const {user,isLoding,logout,sitesetting}  = useAuth();
   // console.log(sitesetting?.sidelogo_url);
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
+  const [profileUrl, setProfileUrl] = useState("");
   const cookie = getCookie('token');
   const pathname = usePathname()
   // console.log(pathname)
@@ -27,6 +30,15 @@ import Loading from "@/app/loadingScreen";
     // if(!cookie && pathname=='/manager/dashboard'){
     //   router.push('/manager/login')
     // }
+  useEffect(()=>{
+    if(getCookie('is_module_type')=='manager'){
+      setProfileUrl('/manager/dashboard');
+    }else if(getCookie('is_module_type')=='company'){
+      setProfileUrl('/company/dashboard');
+    }else if(getCookie('is_module_type')=='vendor'){
+      setProfileUrl('/vendor/dashboard');
+    }
+  },[])
   const toggleClass = () => {
     setIsActive(!isActive);
   };
@@ -238,7 +250,7 @@ import Loading from "@/app/loadingScreen";
                       <div className="dropdown-item ">
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
-                          href="/manager/dashboard"
+                          href={profileUrl}
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
@@ -249,9 +261,9 @@ import Loading from "@/app/loadingScreen";
                       </div>
                       <hr className="border-gray-50 " />
                       <div className="dropdown-item ">
-                        <Link
+                        <Button
                           className="p-3 hover:bg-gray-50/50 block"
-                          href="#"
+                          href=""
                           onClick={logout}
                         >
                           <i
@@ -259,7 +271,7 @@ import Loading from "@/app/loadingScreen";
                             aria-hidden="true"
                           ></i>
                           Logout
-                        </Link>
+                        </Button>
                       </div>
                     </div>
                   </div>

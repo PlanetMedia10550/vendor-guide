@@ -7,7 +7,8 @@ import SearchBar from "@/components/Front/SearchBar";
 import Link from "next/link";
 
 const Home = () => {
-
+  // geocoder = new google.maps.Geocoder();
+  // console.log(geocoder);
   return (
     <>
      

@@ -36,9 +36,9 @@ const ProfileForm = ({user}) => {
     const [states, setStates] = useState([]);
     const [value, setValue] = useState();
     const [selectedStates, setSelectedStates] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
-        
     }
 
     useEffect(() => {
@@ -62,6 +62,10 @@ const ProfileForm = ({user}) => {
         }));
           
         setColourOptions(newColourOptions);
+        setSelectedCategories(users.categories.map((v) => ({
+            value: v.id,
+            label: v.title
+        })));
     }
     categoriesResult();
 
@@ -84,9 +88,14 @@ const ProfileForm = ({user}) => {
         }));
           
         setStates(newColourOptions);
+        setSelectedStates(users.states.map((v) => ({
+            value: v.id,
+            label: v.name
+        })));
     }
     statesResult();
-    
+    setNewGalleryUrls(users?.vendoreimgedit?.map((v) => ([v.image_url])));
+    setNewGalleryIds(users?.vendoreimgedit?.map((v) => ([v.gallery_id])));
     },[]);
 
     const makeRequest = async (e) => {
@@ -94,7 +103,10 @@ const ProfileForm = ({user}) => {
         setErrors(null);
         setIsLoding(true);
         var formData = new FormData(e.target);
-        formData.append('gallery_id[]',newGalleryIds);
+        // formData.append('gallery_id[]',newGalleryIds.split(','));
+        newGalleryIds.forEach(id => {
+            formData.append('gallery_id[]', id);
+        });
 
         const response = await fetch(`${process.env.BASE_API_URL}vendor-profile-update`,{
             method: 'POST',
@@ -137,7 +149,7 @@ const ProfileForm = ({user}) => {
 
 
     };
-
+    console.log(users);
     async function onImageUpload(event) {
         event.preventDefault();
         setImageIsLoading(true);
@@ -205,7 +217,7 @@ const ProfileForm = ({user}) => {
           var imgurl = responseData.map(image => image.image_url);
           setNewGalleryIds([...imgid])
           setNewGalleryUrls([...imgurl])
-            console.log(newGalleryIds);
+            // console.log(newGalleryIds);
 
         } catch (error) {
           setError(error.message);
@@ -291,53 +303,27 @@ const ProfileForm = ({user}) => {
                             {renderFieldError('phone')}
                         </div>
                         <div className="col-span-1 my-2 pb-6" >
+                            <Label label="Zip Code" required="required" />
+                            <div className="mt-2.5">
+                                <Input name="postal_code" id="postal_code" value={users.postal_code} onChange={e => {handleForm('postal_code',e.target.value);setUser({...users,postal_code:e.target.value})}} />
+                            </div>
+                            {renderFieldError('postal_code')}
+                        </div>
+                        
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
                             <Label label="Address" required="required" />
                             <div className="mt-2.5">
-                            <Input name="address" id="address" value={users.address} onChange={e => {handleForm('address',e.target.value);setUser({...users,address:e.target.value})}} />
+                            <TextArea name="address" id="address" value={users.address} onChange={e => {handleForm('address',e.target.value);setUser({...users,address:e.target.value})}} />
                             </div>
                             {renderFieldError('address')}
                         </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-x-4">
                         
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="State" required="required" />
-
-                            <div className="mt-2.5">
-                                <Input name="state" id="state" value={users.state} onChange={e => {handleForm('state',e.target.value);setUser({...users,state:e.target.value})}} />
-                            </div>
-                            {renderFieldError('state')}
-                        </div>
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="Zip Code" required="required" />
-                            <div className="mt-2.5">
-                                <Input name="zip_code" id="zip_code" value={users.zip_Code} onChange={e => {handleForm('zip_code',e.target.value);setUser({...users,zip_code:e.target.value})}} />
-                            </div>
-                            {renderFieldError('zip_code')}
-                        </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-2 my-2 pb-6" >
-                            <Label label="Website" required="required" />
-
-                            <div className="mt-2.5">
-                                <Input name="website_url" id="website_url" value={users.website_url} onChange={e => {handleForm('website_url',e.target.value);setUser({...users,website_url:e.target.value})}} />
-                            </div>
-                            {renderFieldError('website_url')}
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-2 my-2 pb-6" >
-                            <Label label="YouTube URL" required="required" />
-
-                            <div className="mt-2.5">
-                                <Input name="youtube_url" id="youtube_url" value={users.youtube_url} onChange={e => {handleForm('youtube_url',e.target.value);setUser({...users,youtube_url:e.target.value})}} />
-                            </div>
-                            {renderFieldError('youtube_url')}
-                        </div>
-                    </div>
+                    
 
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-2 my-2 pb-6" >
@@ -358,20 +344,22 @@ const ProfileForm = ({user}) => {
                         </div>
                         
                     </div>
+
+                    
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-2 my-2 pb-6" >
                             <Label label="Category" required="" />
 
                             <div className="mt-2.5">
                                 <Select
+                                    value={selectedCategories}
                                     isMulti
-                                    value={value}
                                     name="category_id[]"
                                     options={colourOptions}
                                     className="basic-multi-select "
                                     classNamePrefix="select"
                                     onChange={(selectedOptions) => {
-                                        setValue([...selectedOptions]); // Creates a new array with the selected values
+                                        setSelectedCategories([...selectedOptions]); // Creates a new array with the selected values
                                     }}
                                 />
                             </div>
@@ -383,29 +371,57 @@ const ProfileForm = ({user}) => {
 
                             <div className="mt-2.5">
                                 <Select
+                                    value={selectedStates}
                                     isMulti
-                                    defaultValue={selectedStates}
                                     name="state_id[]"
                                     options={states}
                                     className="basic-multi-select "
                                     classNamePrefix="select"
+                                    onChange={(selectedOptions) => {
+                                        setSelectedStates([...selectedOptions]); // Creates a new array with the selected values
+                                    }}
                                 />
                             </div>
                             {renderFieldError('state_id')}
                         </div>
                         
                     </div>
+
+                    {users.website_url!='disabled' && (
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Website" required="required" />
+
+                            <div className="mt-2.5">
+                                <Input name="website_url" id="website_url" value={users.website_url!='disabled'?users.website_url:""} onChange={e => {handleForm('website_url',e.target.value);setUser({...users,website_url:e.target.value})}} disabled={users.website_url=='disabled'?true:false} />
+                            </div>
+                            {renderFieldError('website_url')}
+                        </div>
+                    </div>)}
+
+                    {users.youtube_url!='disabled' && (
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="YouTube URL" required="required" />
+
+                            <div className="mt-2.5">
+                                <Input name="youtube_url" id="youtube_url" value={users.youtube_url!='disabled'?users.youtube_url:""} onChange={e => {handleForm('youtube_url',e.target.value);setUser({...users,youtube_url:e.target.value})}} disabled={users.youtube_url=='disabled'?true:false} />
+                            </div>
+                            {renderFieldError('youtube_url')}
+                        </div>
+                    </div>)}
                     
+                    {multiFamilyCheck != 2 && (
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-2 my-2 pb-6" >
                             <Label label="Multi Family" required="required" />
                             <div className="mt-2.5">
                                 <Input type="radio" name="multi_family" id="multi_family_yes" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('multi_family',e.target.value);
-                                setUser({...users,multi_family:e.target.value}); setMultiFamilyCheck(e.target.value) }} checked={multiFamilyCheck == 1 ? true : false} /> 
+                                setUser({...users,multi_family:e.target.value}); setMultiFamilyCheck(e.target.value); setUser({...users,multi_family_description:""}) }} checked={multiFamilyCheck == 1 ? true : false} /> 
                                 <label htmlFor="multi_family_yes" className="ms-2 text-sm font-medium mr-2">Yes</label>
 
                                 <Input type="radio" name="multi_family" id="multi_family_no"  value={0} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('multi_family',e.target.value);
-                                setUser({...users,multi_family:e.target.value}); setMultiFamilyCheck(e.target.value) }} checked={multiFamilyCheck == 0 ? true : false} /> 
+                                setUser({...users,multi_family:e.target.value}); setMultiFamilyCheck(e.target.value); setUser({...users,multi_family_description:""}) }} checked={multiFamilyCheck == 0 ? true : false} /> 
                                 <label htmlFor="multi_family_no" className="ms-2 text-sm font-medium mr-2">No</label>
                             </div>
                             {renderFieldError('multi_family')}
@@ -416,18 +432,19 @@ const ProfileForm = ({user}) => {
                             </div>
                             {renderFieldError('multi_family_description')}
                         </div>
-                    </div>
+                    </div>)}
                     
+                    {commercialCheck != 2 && (
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-2 my-2 pb-6" >
                             <Label label="Commercial" required="required" />
                             <div className="mt-2.5">
                                 <Input type="radio" name="commercial" id="commercial_yes" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('commercial',e.target.value);
-                                setUser({...users,commercial:e.target.value}); setCommercialCheck(e.target.value) }} checked={commercialCheck == 1 ? true : false} /> 
+                                setUser({...users,commercial:e.target.value}); setCommercialCheck(e.target.value);setUser({...users,commercial_description:""}) }} checked={commercialCheck == 1 ? true : false} /> 
                                 <label htmlFor="commercial_yes" className="ms-2 text-sm font-medium mr-2">Yes</label>
 
                                 <Input type="radio" name="commercial" id="commercial_no"  value={0} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('commercial',e.target.value);
-                                setUser({...users,commercial:e.target.value}); setCommercialCheck(e.target.value) }} checked={commercialCheck == 0 ? true : false} /> 
+                                setUser({...users,commercial:e.target.value}); setCommercialCheck(e.target.value); setUser({...users,commercial_description:""}) }} checked={commercialCheck == 0 ? true : false} /> 
                                 <label htmlFor="commercial_no" className="ms-2 text-sm font-medium mr-2">No</label>
                             </div>
                             {renderFieldError('commercial')}
@@ -438,18 +455,19 @@ const ProfileForm = ({user}) => {
                             </div>
                             {renderFieldError('commercial_description')}
                         </div>
-                    </div>
+                    </div>)}
                     
+                    {residentialCheck != 2 && (
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-2 my-2 pb-6" >
                             <Label label="Residential" required="required" />
                             <div className="mt-2.5">
                                 <Input type="radio" name="residential" id="residential_yes" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('residential',e.target.value);
-                                setUser({...users,residential:e.target.value}); setResidentialCheck(e.target.value) }} checked={residentialCheck == 1 ? true : false} /> 
+                                setUser({...users,residential:e.target.value}); setResidentialCheck(e.target.value);setUser({...users,residential_description:""}) }} checked={residentialCheck == 1 ? true : false} /> 
                                 <label htmlFor="residential_yes" className="ms-2 text-sm font-medium mr-2">Yes</label>
 
                                 <Input type="radio" name="residential" id="residential_no"  value={0} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  onChange={e => {handleForm('residential',e.target.value);
-                                setUser({...users,residential:e.target.value}); setResidentialCheck(e.target.value)}} checked={residentialCheck == 0 ? true : false} /> 
+                                setUser({...users,residential:e.target.value}); setResidentialCheck(e.target.value);setUser({...users,residential_description:""}) }} checked={residentialCheck == 0 ? true : false} /> 
                                 <label htmlFor="residential_no" className="ms-2 text-sm font-medium mr-2">No</label>
                             </div>
                             {renderFieldError('residential')}
@@ -460,8 +478,9 @@ const ProfileForm = ({user}) => {
                             </div>
                             {renderFieldError('residential_description')}
                         </div>
-                    </div>
+                    </div>)}
 
+                    {users?.vendoreimgedit != "disabled" && (
                     <div className="w-half my-2 pb-6" >
                         <Label label="Gallery Photos?"  />
                         <div className="grid grid-cols-12 gap-x-4">
@@ -482,7 +501,7 @@ const ProfileForm = ({user}) => {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div>)}
 
                     <div className="w-half my-2" >
                         <div className="my-4">
