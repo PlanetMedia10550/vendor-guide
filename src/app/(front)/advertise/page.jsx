@@ -1,54 +1,27 @@
+"use client";
 import TopBarImage from "public/images&icons/advertise/banner1.jpg";
 import FeaturSection2 from "@/components/Front/FeaturSection2";
 import AdvertiseTable from "@/components/Front/AdvertiseTable";
 import Link from "next/link";
 import HeroSection from "@/components/Front/HeroSection";
 import PartnerSection2 from "@/components/Front/PartnerSection2";
+import { useAuth } from "@/context/UserContext";
+import { useEffect } from "react";
 
 const Advertise = () => {
+  const {metaData,loading} = useAuth();
+  const advertiseMeta = metaData?.advertise;
+
   return (
     <>
       <HeroSection
-        src={TopBarImage.src}
-        title={[
-          "We connect multifamily vendors with",
-          <br key="2" className="lg:block hidden" />,
-          "the property management professionals who need them.",
-        ]}
+        src={advertiseMeta?.advertise_background}
+        title={advertiseMeta?.advertise_title}
       />
       <section id="featurs_section" className="py-10 sm:pt-14 md:pt-8">
         <div className="overflow-hidden bg-white md:py-8 lg:py-12 px-3 xl:ps-16">
           <div className="mx-auto max-w-7xl px-4 md:px-9">
-            <FeaturSection2
-              rightSection={true}
-              firstText="Effortless Management & Bid Requests"
-              secondText="Managing your listing has never been simpler! Through your
-                        VendorGuide account and dashboard, easily update your
-                        information and receive valuable bid requests. Stay in control
-                        of your opportunities and make meaningful connections with
-                        property managers in need of your services."
-              img="images&icons/advertise/img1.png"
-            />
-            <FeaturSection2
-              leftSection={true}
-              firstText="Effortless Management & Bid Requests"
-              secondText="Managing your listing has never been simpler! Through your
-                        VendorGuide account and dashboard, easily update your
-                        information and receive valuable bid requests. Stay in control
-                        of your opportunities and make meaningful connections with
-                        property managers in need of your services."
-              img="images&icons/advertise/img1.png"
-            />
-            <FeaturSection2
-              rightSection={true}
-              firstText="Effortless Management & Bid Requests"
-              secondText="Managing your listing has never been simpler! Through your
-                            VendorGuide account and dashboard, easily update your
-                            information and receive valuable bid requests. Stay in control
-                            of your opportunities and make meaningful connections with
-                            property managers in need of your services."
-              img="images&icons/advertise/img1.png"
-            />
+            <FeaturSection2 />
           </div>
         </div>
       </section>

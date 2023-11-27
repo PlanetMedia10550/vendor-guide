@@ -18,7 +18,7 @@ export function UserProvider({ children }) {
   const [isLogin, setIsLogin] = useState(false);
   const [isLoding, setIsLoding] = useState(false);
   const [isInfoLoding, setIsInfoLoding] = useState(true);
-  const [loding, setLoding] = useState(true);
+  const [loading, setLoading] = useState(true);
   // const [formErrors, setFormErrors] = useState(false);
   const token = getCookie('token');
   const is_module_type = getCookie('is_module_type');
@@ -44,7 +44,7 @@ export function UserProvider({ children }) {
       }
   }
   loadMetaData();
-  setLoding(false);
+  setLoading(false);
 
     const loadUserFromCookies = async () => {
 
@@ -203,7 +203,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{user,isLogin,login,register,logout,renderFieldError,isLoding,isInfoLoding,navigate,sitesetting,metaData,loding}}>
+    <UserContext.Provider value={{user,isLogin,login,register,logout,renderFieldError,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
       {children}
     </UserContext.Provider>
   );

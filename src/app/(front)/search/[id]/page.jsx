@@ -63,7 +63,7 @@ const Details = (params) => {
   </div>
 ) : (
 <>
-      <DetailsHero src={TopBarImage.src} filterData={filterData} />
+      <DetailsHero  filterData={filterData} />
       <section id="featurs_section" className="py-9 md:py-5">
         <div className="container mx-auto overflow-hidden pt-5 md:pt-12 px-5 md:px-8 xl:px-24">
           <div className="mx-auto max-w-7xl">

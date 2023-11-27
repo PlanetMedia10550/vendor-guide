@@ -24,7 +24,7 @@ const ResourceListCards = (props) => {
   useEffect(() => {
     const getProducts = () => {
 
-      axios.get(`${process.env.BASE_API_URL+'blog?limit=5'}`).then(function(response) {
+      axios.get(`${process.env.BASE_API_URL+'blog?limit=9'}`).then(function(response) {
         // console.log("hello");
         var result = response.data;
         // setPageCount(Math.ceil(totalCount / itemsPerPage));

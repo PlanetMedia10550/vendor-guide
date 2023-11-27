@@ -1,14 +1,17 @@
 import Link from "next/link";
-
+import { useAuth } from "@/context/UserContext";
 const DetailsHero = ({src , filterData}) => {
-      
+  const {metaData,loading} = useAuth(); 
+  const vendor_details  = metaData?.vendor_details;
+  // console.log(vendor_details);
+
   return (
     <>
     <section
       id="hero_section"
       className=" bg-cover bg-center bg-no-repeat relative before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#08161eab] xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh]"
       style={{
-        backgroundImage: `url(${src})`,
+        backgroundImage: `url(${vendor_details?.details_background})`,
       }}
     >
       <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">

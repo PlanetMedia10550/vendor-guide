@@ -18,7 +18,8 @@ const FavoriteAllData = () => {
       {field: 'phone', header: 'Phone'},
       {field: 'vendor_id', header: 'Action', colbody: true},
   ];
-  const [tabnumber, settabNumber] = useState(1);
+
+  const [, settabNumber] = useState(1);
   // console.log(user.data.id)
 
   const paginatorLeft = <Button type="button"  className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-900  hover:bg-gray-50 focus:z-20 focus:outline-offset-0"  />;

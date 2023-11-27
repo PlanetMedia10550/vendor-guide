@@ -5,11 +5,13 @@ import { getResponse } from "@/app/lib/load-api";
 import { useEffect, useState } from "react";
 const FeaturSection = (props) => {
   const [advertiseData, setAdvertiseData] = useState();
+
+  // console.log(advertiseData);
   useEffect(() => {
     bannerResponse();
   }, [])
   const bannerResponse = async () => {
-    const blogResult = await getResponse('blog?limit=3&offset=0')
+    const blogResult = await getResponse('blog?limit=9&offset=0')
     setAdvertiseData(blogResult.data)
   }
   return (

@@ -1,4 +1,6 @@
+
 const HeroSection = (props) => {
+  
   return (
     <section
       id="hero_section"

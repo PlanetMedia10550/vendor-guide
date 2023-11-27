@@ -84,6 +84,10 @@ input{
   display: block;
 }
 
+.head_profile_dropdown:hover .head_profile_dropdown-menu {
+  display: block;
+}
+
 .shadow-solid-primary {
   box-shadow: 5px 5px 12px black;
 }

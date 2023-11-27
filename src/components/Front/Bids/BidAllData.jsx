@@ -23,6 +23,8 @@ const BidVendorsButton = ({bid}) => {
 const BidAllData = () => {
   const {user,renderFieldError,isLoding,navigate}  = useAuth();
   const [requestsQuotes, setRequestsQuotes] = useState([]);
+
+  // console.log(requestsQuotes)
   const columns = [
       {field: 'bidenumber', header: 'Bid Number',sortable:'sortable'},
       {field: 'bidtitle', header: 'Bid Title'},
@@ -57,7 +59,7 @@ const BidAllData = () => {
         // Handle response if necessary
         var dataProp = await response2.json()
         var newData = dataProp.data;
-        console.log(newData)
+        // console.log(newData)
         const bidenumber = new Date().getFullYear();
         const updatedRows = newData.map(item => ({
           'favorite':item.favourite,
