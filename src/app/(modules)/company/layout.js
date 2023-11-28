@@ -1,14 +1,7 @@
-import NewRegionalHeader  from '@/components/Layouts/Front/NewRegionalHeader'
-import Footer from '@/components/Layouts/Front/Footer'
-import Header from '@/components/Layouts/Front/Header2'
+import Navbar from './Navbar';
 
 export default function AuthLayout({ children }) {
-    
   return (
-    <>
-        <Header />
-        {children}
-        <Footer/>
-    </>
+    <Navbar>{children}</Navbar>
   )
 }
