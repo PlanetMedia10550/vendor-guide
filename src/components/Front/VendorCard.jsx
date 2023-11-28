@@ -16,7 +16,7 @@ import axios from 'axios';
 
 const VendorCard = (props) => {
   const {user,renderFieldError,isLoding}  = useAuth();
-  console.log(user);
+  // console.log(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [vendorData, setVendorData] = useState([]);
   const [isLoading, setIsLoding] = useState(true);
@@ -41,10 +41,8 @@ const VendorCard = (props) => {
 
   
   const openModal = (id) => {
-    // e.preventDefault();
     setIsModalOpen(true);
     setVendorId(id);
-    // console.log(id)
   };
 
   const closeModal = () => {
@@ -127,7 +125,7 @@ const VendorCard = (props) => {
                       <div className="card mb-0 bg-white px-3 shadow h-full relative">
                         <div className="card-body">
                           <div className="text-center">
-                          <div className="w-36 h-28 pt-2 mx-auto flex items-center">
+                          <div className="w-36 h-28 pt-2 mx-auto flex ">
                             <Link href={`/search/`+ row.slug } className="">
                             
                               <Image

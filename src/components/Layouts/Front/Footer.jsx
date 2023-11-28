@@ -108,13 +108,14 @@ const Footer = () => {
          ):(
         <div className="copy_right bg-[#ffffff] flex  items-center justify-center md:flex-row md:justify-center">
           <span className="text-black font-bold text-xs">{sitesetting?.powered_by}</span>
+          {sitesetting?.footerlogo_url && (
           <Image
             width="100"
             height="100"
             src={sitesetting?.footerlogo_url}
             className="mr-3 h-16 w-16 sm:h-16"
             alt="Star"
-          />
+          />)}
         </div>
        )}
       </footer>

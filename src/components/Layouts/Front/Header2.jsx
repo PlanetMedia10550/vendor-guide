@@ -10,16 +10,28 @@ import { useAuth } from '@/context/UserContext';
 import { usePathname } from "next/navigation";
 import whiteLogo from "@/../../public/images&icons/SVG/logo_white.svg"
 import userDefult from "@/../../public/images&icons/profile.png"
+import { getCookie } from "cookies-next";
+import { useEffect } from "react";
 
 const Header = () => {
     const router = usePathname();
     // var newArray = router.split('/');
     // var tab = newArray.filter((word) => word.length > 0);
-    // console.log(router)
     const {user,isLoding,logout}  = useAuth();
+    // console.log(getCookie('is_module_type'))
     const [showMenu, setShowMenu] = useState(true);
-    const [tabList, setTabList] = useState([{'label':'Dashboard','url':'/manager/dashboard'},{'label':'Properties','url':'/manager/properties'}]);
+    const [tabList, setTabList] = useState([]);
     const [activeTab, setActiveTab] = useState(router);
+
+    useEffect(()=>{
+      if(getCookie('is_module_type')=='manager'){
+        setTabList([{'label':'Dashboard','url':'/manager/dashboard'},{'label':'Properties','url':'/manager/properties'}]);
+      }else if(getCookie('is_module_type')=='company'){
+        setTabList([{'label':'Dashboard','url':'/company/dashboard'},{'label':'Properties','url':'/company/properties'}]);
+      }else if(getCookie('is_module_type')=='vendor'){
+        setTabList([{'label':'Dashboard','url':'/vendor/dashboard'}]);
+      }
+    },[])
     const toggleMenu = (event) => {
         setShowMenu((current) => !current);
     };

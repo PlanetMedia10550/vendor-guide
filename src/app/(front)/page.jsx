@@ -1,7 +1,6 @@
 import HomeComponent from "./homecomponent";
 
 const Home = () => {
- 
 
   return (
     <>
