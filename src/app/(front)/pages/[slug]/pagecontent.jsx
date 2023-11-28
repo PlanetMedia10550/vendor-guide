@@ -4,11 +4,16 @@
 import { useState,useEffect } from "react";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
+import { useAuth } from "@/context/UserContext"; 
 
 const ContentPages = ({params}) => {
   const slug = params.slug;
+  // console.log(slug);
   const [filterData, setFilterData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const {metaData,loading} = useAuth();
+  
+  const [selectedMeta, setSelectedMeta] = useState([]);
 
   useEffect(() => {
     const fetchData  = async () => {
@@ -30,6 +35,12 @@ const ContentPages = ({params}) => {
       }
     }
     fetchData ();
+    if (slug === 'contact-us' || slug === 'about') {
+      const specificMeta = metaData?.[slug];
+      // Set selectedMeta to specificMeta
+      setSelectedMeta(specificMeta || {});
+    }
+
   }, [slug]);
 
   return (
@@ -39,7 +50,7 @@ const ContentPages = ({params}) => {
       id="hero_section"
       className=" bg-cover bg-center bg-no-repeat relative before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#08161eab] xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh]"
       style={{
-        backgroundImage: `url(/images&icons/search_result/VendorGuideMagazine.jpg)`,
+        backgroundImage: `url(${selectedMeta?.background})`,
       }}
     >
       <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">

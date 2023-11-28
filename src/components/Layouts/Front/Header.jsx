@@ -218,10 +218,10 @@ import { useEffect } from "react";
                 </li>
                 {user?.name ?
                 (<li>
-                  <div className="dropdown relative lg:pb-2">
+                  <div className="head_profile_dropdown relative lg:pb-2">
                   <button
                     type="button"
-                    className="flex gap-x-4 items-center border-gray-50 text-white dropdown-toggle"
+                    className="flex gap-x-4 items-center border-gray-50 text-white "
                     id="page-header-user-dropdown"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"
@@ -248,7 +248,7 @@ import { useEffect } from "react";
                     </div>
                   </button>
                   <div
-                    className={`dropdown-menu absolute top-[3.5rem] left-0 z-40 w-40 list-none rounded bg-white shadow ${showMenu? 'hidden': ""}`}
+                    className="head_profile_dropdown-menu absolute top-[2.5rem] left-0 z-40 w-40 list-none rounded bg-white  hidden shadow-solid-primary"
                     id="profile/log"
                     data-popper-placement=""
                   >

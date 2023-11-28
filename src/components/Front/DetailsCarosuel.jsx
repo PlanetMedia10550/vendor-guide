@@ -13,7 +13,7 @@ const DetailsCarosuel = ({filterData}) => {
         return item.vendorimageview.image_url;
       });
     
-      console.log(extractedData);
+      // console.log(extractedData);
 
       const customRenderThumb = (children) =>
       children.map((row, index) => (

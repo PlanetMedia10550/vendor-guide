@@ -18,6 +18,7 @@ const FavoriteAllData = () => {
       {field: 'phone', header: 'Phone'},
       {field: 'vendor_id', header: 'Action', colbody: true},
   ];
+
   const [tabnumber, settabNumber] = useState(1);
   // console.log(user.data.id)
 

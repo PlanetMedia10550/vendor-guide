@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const PartnerSection = ({homeMeta}) => {
-  console.log(homeMeta);
+  // console.log(homeMeta);
   return (
     <>
       <div id="partner_section" className="relative isolate overflow-hidden ">
