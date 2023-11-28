@@ -6,7 +6,7 @@ const FeaturSection2 = (props) => {
 
   const [advertise2Data, setAdvertise2Data] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  console.log(advertise2Data);
+  // console.log(advertise2Data);
 
   useEffect(() => {
     const  loadData = async () =>{
