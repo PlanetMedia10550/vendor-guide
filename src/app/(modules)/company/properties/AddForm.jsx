@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import { getCookie } from "cookies-next";
 import Select from 'react-select';
 
-const AddForm = ({user,navigate,onClose,states}) => {
+const AddForm = ({user,navigate,onClose,states,setPropertieData}) => {
     // console.log(propertie)
     
     const [options, setOptions] = useState(['Register New Property']);
@@ -47,16 +47,46 @@ const AddForm = ({user,navigate,onClose,states}) => {
             navigate.push('/')
         }
     }, [])
+
+    const allResult = async () => {
+        try {
+            const response2 = await fetch(`${process.env.BASE_API_URL}property`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            },
+            })
+            if (!response2.ok) {
+                throw new Error('Failed to submit the data. Please try again.')
+            }
+            
+            // Handle response if necessary
+            var dataProp = await response2.json()
+            var newData = dataProp.data;
+            const updatedRows = newData.map(item => ({
+            'property_name':item.property_name,
+            'property_type':item.property_type,
+            'id':item.id,
+            }));
+            setPropertieData(updatedRows);
+            // console.error(requestsQuotes)
+        } catch (error) {
+            // Capture the error message to display to the user
+            console.error(error)
+        }
+    }
     
     const makeRequest = async (e) => {
         e.preventDefault();
         // console.log(form);
         setErrors(null);
         setIsLoding(true);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`; // Set the Authorization header for Axios
         var formData = new FormData(e.target);
         await axios.post(`${process.env.BASE_API_URL}property`, formData).then(response => {
             setIsLoding(false);
             onClose(true);
+            allResult()
             toast.success(response.data.msg, {
                 position: "top-right",
                 autoClose: 5000,
@@ -85,6 +115,7 @@ const AddForm = ({user,navigate,onClose,states}) => {
         setImageIsLoading(true)
         setError(null) // Clear previous errors when a new request starts
         setImageSrc(null);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`; // Set the Authorization header for Axios
         try {
           const formData = new FormData()
           formData.append('image',event.target.files[0]);
