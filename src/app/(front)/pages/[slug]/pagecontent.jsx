@@ -14,7 +14,7 @@ const ContentPages = ({params}) => {
   const {metaData,loading} = useAuth();
   
   const [selectedMeta, setSelectedMeta] = useState([]);
-
+comnsole.log(selectedMeta);
   useEffect(() => {
     const fetchData  = async () => {
       try {

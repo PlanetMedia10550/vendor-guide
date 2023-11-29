@@ -47,11 +47,11 @@ const Footer = () => {
                 type="text"
                 id="name"
                 placeholder=" "
-                className="block bg-white md:w-full sm:w-64 w-52 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md lg:py-3 px-4 md:px-12 lg:px-14 py-2 appearance-none leading-normal focus:border-gray-300"
+                className="block bg-white md:w-full sm:w-64 w-52 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md lg:py-3 px-4 md:px-12 lg:px-14 py-2 appearance-none leading-normal focus:border-gray-300 text-gray-900 font-base"
               />
               <label
                 htmlFor="name"
-                className="absolute top-3 md:top-1 lg:top-2 left-0 text-[#171717] pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-grey-darker font-semibold lg:text-xl sm:text-lg text-sm"
+                className="absolute top-3 md:top-1 lg:top-2 left-0 text-[#171717] pointer-events-none transition duration-200 ease-in-outbg-white px-3 text-gray-darker font-semibold lg:text-xl sm:text-lg text-sm"
               >
                 Subscribe to Our Newsletter
               </label>
