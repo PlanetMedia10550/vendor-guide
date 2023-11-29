@@ -8,13 +8,10 @@ import { useAuth } from "@/context/UserContext";
 
 const ContentPages = ({params}) => {
   const slug = params.slug;
-  // console.log(slug);
   const [filterData, setFilterData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {metaData,loading} = useAuth();
-  
   const [selectedMeta, setSelectedMeta] = useState([]);
-comnsole.log(selectedMeta);
   useEffect(() => {
     const fetchData  = async () => {
       try {
