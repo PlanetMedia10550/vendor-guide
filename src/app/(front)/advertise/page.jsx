@@ -50,11 +50,16 @@ const Advertise = () => {
             </div>
           </div>
         </div>
+        {loading ?(
+              <div className="partner_section relative isolate overflow-hidden pt-5 lg:pt-14 text-black text-center">
+                Loading...
+              </div>
+        ):(
         <PartnerSection2
-          title="Don&#39;t miss this chance to grow your business – get in
-                    touch with us now!"
+          title={advertiseMeta?.advertise_text}
           btnTitle="Contact Us Today"
         />
+        )}
       </section>
     </>
   );
