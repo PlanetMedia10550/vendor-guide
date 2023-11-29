@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 export default function Navbar({ children }) {
     const router = usePathname();
     var newArray = router?.split('/');
+    // console.log(newArray);
     const [activeTab, setActiveTab] = useState(newArray[2]?newArray[2]:'dashboard');
   return (
     <>

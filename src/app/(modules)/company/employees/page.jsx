@@ -6,23 +6,21 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AddForm from "./AddForm";
-import PropertieAllData from "./PropertieAllData";
+import EmployeesAllData from "./EmployeesAllData";
 
-const Properties = () => {
+const Employees = () => {
   const {user}  = useAuth();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [states, setStates] = useState([]);
-  const [propertieData, setPropertieData] = useState([]);
+  const [employees, setEmployees] = useState([]);
   
   useEffect(() => {
     if(!getCookie('token')){
       router.push('/');
     }
-
     const allResult = async () => {
       try {
-        const response2 = await fetch(`${process.env.BASE_API_URL}property`,{
+        const response2 = await fetch(`${process.env.BASE_API_URL}manager`,{
           method: 'GET',
           headers: {
               'Authorization': `Bearer ${getCookie('token')}`
@@ -36,11 +34,14 @@ const Properties = () => {
         var dataProp = await response2.json()
         var newData = dataProp.data;
         const updatedRows = newData.map(item => ({
-          'property_name':item.property_name,
-          'property_type':item.property_type,
+          'image_url':item.image_url,
+          'manager_name':item.name,
+          'email':item.email,
+          'mobile':item.mobile,
+          'manager_type':item.type,
           'id':item.id,
         }));
-        setPropertieData(updatedRows);
+        setEmployees(updatedRows);
         // console.error(requestsQuotes)
       } catch (error) {
         // Capture the error message to display to the user
@@ -48,28 +49,6 @@ const Properties = () => {
       }
     }
     allResult();
-
-    const statesResult = async () => {
-        var response2 = await fetch(`${process.env.BASE_API_URL}vendor-state-list`,{
-          method: 'GET',
-          headers: {
-              'Authorization': `Bearer ${getCookie('token')}`
-          },
-            
-        })
-    
-        if (!response2.ok) {
-        throw new Error('Failed to submit the data. Please try again.')
-        }
-        var categoryResult = await response2.json();
-        var newColourOptions = categoryResult.data.map((v) => ({
-            value: v.id,
-            label: v.name
-        }));
-          
-        setStates(newColourOptions);
-    }
-    statesResult();
   }, []);
 
   const openModal = (e) => {
@@ -86,20 +65,16 @@ const Properties = () => {
       <section className="pt-14">
         <div className="px-10">
           <div className="mb-10 text-right">
-          <Link
-                    href="#"
-                    onClick={openModal}
-                    className="rounded-[0.7rem]  px-7 py-1 text-sm border-solid  border border-gray-500 font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >Add</Link>
+          <Link href="#" onClick={openModal} className="rounded-[0.7rem]  px-7 py-1 text-sm border-solid  border border-gray-500 font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add</Link>
           </div>
-            <PropertieAllData propertieData={propertieData} />
+            <EmployeesAllData resultData={employees} />
 
 
           <Modal isOpen={isModalOpen} onClose={closeModal}>
             {user!=null ? (
               <>
-              <h1 className="text-3xl font-medium" >Add Property Form </h1>
-              <AddForm user={user} navigate={router} onClose={closeModal} states={states} setPropertieData={setPropertieData}  />
+              <h1 className="text-3xl font-medium" >Add Manager </h1>
+              <AddForm onClose={closeModal} employees={employees} setEmployees={setEmployees} />
               </>
             ) : (
               <>
@@ -117,4 +92,4 @@ const Properties = () => {
   );
 };
 
-export default Properties;
+export default Employees;

@@ -27,7 +27,7 @@ const Header = ({activeTab,setActiveTab}) => {
       if(getCookie('is_module_type')=='manager'){
         setTabList([{'tab':'dashboard','label':'Dashboard','url':'/manager/dashboard'},{'tab':'properties','label':'Properties','url':'/manager/properties'}]);
       }else if(getCookie('is_module_type')=='company'){
-        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/company/dashboard'},{'tab':'properties','label':'Properties','url':'/company/properties'}]);
+        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/company/dashboard'},{'tab':'properties','label':'Properties','url':'/company/properties'},{'tab':'employees','label':'Employees','url':'/company/employees'}]);
       }else if(getCookie('is_module_type')=='vendor'){
         setTabList([{'tab':'dashboard','label':'Dashboard','url':'/vendor/dashboard'}]);
       }
@@ -82,7 +82,7 @@ const Header = ({activeTab,setActiveTab}) => {
                       <span className="text-left block align-middle text-white text-xs font-lato">
                         {isLoding ? (
                             <span>Loading...</span>
-                        ) : user?.first_name } <FontAwesomeIcon icon={faAngleDown}  />
+                        ) : user?.name } <FontAwesomeIcon icon={faAngleDown}  />
                       </span>
                       {/* <span className="text-white block text-xs">
                         Portfolio Manager
