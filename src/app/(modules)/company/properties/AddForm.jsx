@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import { getCookie } from "cookies-next";
 import Select from 'react-select';
 
-const AddForm = ({user,navigate,onClose,states,setPropertieData}) => {
+const AddForm = ({user,navigate,onClose,states,setPropertieData,regionalManagerData,propertyManagerData,leasingManagerData,propertyManagementCompanyData,propertyTypeData}) => {
     // console.log(propertie)
     
     const [options, setOptions] = useState(['Register New Property']);
@@ -40,7 +40,7 @@ const AddForm = ({user,navigate,onClose,states,setPropertieData}) => {
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
         
-   }
+    }
 
     useEffect(() => {
         if(!getCookie('token')){
@@ -155,13 +155,12 @@ const AddForm = ({user,navigate,onClose,states,setPropertieData}) => {
                         <Label label="Property Type" required="required" />
 
                         <div className="mt-2.5">
-                            <select name="property_type" value={propertyType} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={e => {handleForm('property_type',e.target.value);setPropertyType(e.target.value);  }} >
-                                {options2 && options2.map((option1,index1) => (
-                                    <option key={index1} value={option1}>
-                                    {option1}
-                                    </option>
-                                ))}
-                            </select>
+                            <Select
+                                    name="property_type"
+                                    options={propertyTypeData}
+                                    className="basic-multi-select "
+                                    classNamePrefix="select"
+                                />
                         </div>
                         {renderFieldError('property_type')}
                     </div>
@@ -177,6 +176,19 @@ const AddForm = ({user,navigate,onClose,states,setPropertieData}) => {
                     </div>
                     
                     <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="State" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="state"
+                                    options={states}
+                                    className="basic-multi-select "
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('state')}
+                        </div>
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="City" required="required" />
 
@@ -193,20 +205,60 @@ const AddForm = ({user,navigate,onClose,states,setPropertieData}) => {
                             </div>
                             {renderFieldError('zip_code')}
                         </div>
+                    </div>
+                    <div className="grid grid-cols-4 gap-x-4">
                         <div className="col-span-2 my-2 pb-6" >
-                            <Label label="State" required="required" />
+                            <Label label="Regional Manager" required="required" />
 
                             <div className="mt-2.5">
                                 <Select
-                                    name="state"
-                                    options={states}
-                                    className="basic-multi-select "
+                                    name="regional_manager_id"
+                                    options={regionalManagerData}
+                                    className=""
                                     classNamePrefix="select"
                                 />
                             </div>
-                            {renderFieldError('state')}
+                            {renderFieldError('regional_manager_id')}
                         </div>
-                        
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Property Manager" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="property_manager_id"
+                                    options={propertyManagerData}
+                                    className=""
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('property_manager_id')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Leasing / Assistant Manager" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="leasing_manager_id"
+                                    options={leasingManagerData}
+                                    className=""
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('leasing_manager_id')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Property Management Company" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="property_company_manager_id"
+                                    options={propertyManagementCompanyData}
+                                    className=""
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('property_company_manager_id')}
+                        </div>
                     </div>
                     <div className="w-half my-2 pb-6" >
                         <Label label="Street Address" required="required" />
