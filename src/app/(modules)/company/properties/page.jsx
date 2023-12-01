@@ -14,15 +14,157 @@ const Properties = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [states, setStates] = useState([]);
   const [propertieData, setPropertieData] = useState([]);
+  const [regionalManagerData, setRegionalManagerData] = useState([]);
+  const [propertyManagerData, setPropertyManagerData] = useState([]);
+  const [leasingManagerData, setLeasingManagerData] = useState([]);
+  const [propertyManagementCompanyData, setPropertyManagementCompanyData] = useState([]);
+  const [propertyTypeData, setPropertyTypeData] = useState([]);
   
   useEffect(() => {
     if(!getCookie('token')){
       router.push('/');
     }
 
+    const propertyType = async () => {
+      try {
+          const type = 0;
+          const response = await fetch(`${process.env.BASE_API_URL}property-type`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.title
+          }));
+          setPropertyTypeData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+
+    propertyType();
+    
+    const regionalManager = async () => {
+      try {
+          const type = 0;
+          const response = await fetch(`${process.env.BASE_API_URL}manager?type=${type}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setRegionalManagerData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+    
+    const propertyManager = async () => {
+      try {
+          const type1 = 1;
+          const response1 = await fetch(`${process.env.BASE_API_URL}manager?type=${type1}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response1.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response1.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setPropertyManagerData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+    
+    const leasingManager = async () => {
+      try {
+          const type2 = 2;
+          const response2 = await fetch(`${process.env.BASE_API_URL}manager?type=${type2}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response2.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response2.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setLeasingManagerData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+    
+    const propertyManagementCompany = async () => {
+      try {
+          const type3 = 3;
+          const response3 = await fetch(`${process.env.BASE_API_URL}manager?type=${type3}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response3.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response3.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setPropertyManagementCompanyData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+
+    regionalManager();
+    propertyManager();
+    leasingManager();
+    propertyManagementCompany();
+
     const allResult = async () => {
       try {
-        const response2 = await fetch(`${process.env.BASE_API_URL}property`,{
+        var response2 = await fetch(`${process.env.BASE_API_URL}property`,{
           method: 'GET',
           headers: {
               'Authorization': `Bearer ${getCookie('token')}`
@@ -37,7 +179,7 @@ const Properties = () => {
         var newData = dataProp.data;
         const updatedRows = newData.map(item => ({
           'property_name':item.property_name,
-          'property_type':item.property_type,
+          'property_type':item?.property_types?.title,
           'id':item.id,
         }));
         setPropertieData(updatedRows);
@@ -54,7 +196,7 @@ const Properties = () => {
           method: 'GET',
           headers: {
               'Authorization': `Bearer ${getCookie('token')}`
-          },
+          }
             
         })
     
@@ -99,7 +241,7 @@ const Properties = () => {
             {user!=null ? (
               <>
               <h1 className="text-3xl font-medium" >Add Property Form </h1>
-              <AddForm user={user} navigate={router} onClose={closeModal} states={states} setPropertieData={setPropertieData}  />
+              <AddForm user={user} navigate={router} onClose={closeModal} states={states} setPropertieData={setPropertieData} regionalManagerData={regionalManagerData} propertyManagerData={propertyManagerData} leasingManagerData={leasingManagerData} propertyManagementCompanyData={propertyManagementCompanyData} propertyTypeData={propertyTypeData} />
               </>
             ) : (
               <>

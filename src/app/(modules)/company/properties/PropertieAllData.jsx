@@ -26,7 +26,7 @@ const PropertieAllData = ({propertieData}) => {
 
 
   const favoriteBtn = (property) => {
-      return <Link href={`properties/${property.id}`} type="button" className="bg-[#c1272d] text-white p-2" severity="info"  ><FontAwesomeIcon icon={faEye} /></Link>;
+      return <Link href={`properties/${property.id}`} type="button" className="rounded-[0.7rem]  px-7 py-1 text-sm border-solid  border border-gray-500 font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 bg-[#c1272d] text-white px-4 py-2" severity="info"  >View</Link>;
   };
 
   return (

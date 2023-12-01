@@ -8,12 +8,20 @@ import { useAuth } from "@/context/UserContext";
 import EditForm from "../EditForm";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
+import LoadingComponents from "@/components/LoadingComponents";
 
 const Page = ({ params }) => {
   const {user,renderFieldError,isLoding,navigate}  = useAuth();
   const id = params.id;
   const [propertie, setPropertie] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoad, setIsLoad] = useState(true);
+  const [states, setStates] = useState([]);
+  const [regionalManagerData, setRegionalManagerData] = useState([]);
+  const [propertyManagerData, setPropertyManagerData] = useState([]);
+  const [leasingManagerData, setLeasingManagerData] = useState([]);
+  const [propertyManagementCompanyData, setPropertyManagementCompanyData] = useState([]);
+  const [propertyTypeData, setPropertyTypeData] = useState([]);
   const hasCookie = getCookie('token')
 
   const router = useRouter();
@@ -21,6 +29,164 @@ const Page = ({ params }) => {
     if(!getCookie('token')){
       router.push('/');
     }
+
+    const propertyType = async () => {
+      try {
+          const type = 0;
+          const response = await fetch(`${process.env.BASE_API_URL}property-type`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.title
+          }));
+          setPropertyTypeData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+    propertyType();
+
+    const regionalManager = async () => {
+      try {
+          const type = 0;
+          const response = await fetch(`${process.env.BASE_API_URL}manager?type=${type}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setRegionalManagerData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+    
+    const propertyManager = async () => {
+      try {
+          const type1 = 1;
+          const response1 = await fetch(`${process.env.BASE_API_URL}manager?type=${type1}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response1.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response1.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setPropertyManagerData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+    
+    const leasingManager = async () => {
+      try {
+          const type2 = 2;
+          const response2 = await fetch(`${process.env.BASE_API_URL}manager?type=${type2}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response2.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response2.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setLeasingManagerData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+    
+    const propertyManagementCompany = async () => {
+      try {
+          const type3 = 3;
+          const response3 = await fetch(`${process.env.BASE_API_URL}manager?type=${type3}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${getCookie('token')}`
+            }
+          })
+          if (!response3.ok) {
+              throw new Error('Failed to submit the data. Please try again.')
+          }
+          
+          // Handle response if necessary
+          var dataProp = await response3.json()
+          var newReginalManagers = dataProp.data.map((v) => ({
+              value: v.id,
+              label: v.name
+          }));
+          setPropertyManagementCompanyData(newReginalManagers);
+      } catch (error) {
+          // Capture the error message to display to the user
+          console.error(error)
+      }
+    }
+
+    regionalManager();
+    propertyManager();
+    leasingManager();
+    propertyManagementCompany();
+
+    const statesResult = async () => {
+      var response2 = await fetch(`${process.env.BASE_API_URL}vendor-state-list`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${getCookie('token')}`
+        }
+          
+      })
+  
+      if (!response2.ok) {
+      throw new Error('Failed to submit the data. Please try again.')
+      }
+      var categoryResult = await response2.json();
+      var newColourOptions = categoryResult.data.map((v) => ({
+          value: v.id,
+          label: v.name
+      }));
+        
+      setStates(newColourOptions);
+  }
+  statesResult();
   }, []);
 
   const openModal = (e) => {
@@ -58,6 +224,7 @@ const Page = ({ params }) => {
         // Handle response if necessary
         var dataProp = await response2.json()
         setPropertie(dataProp.data);
+        setIsLoad(false);
         // const propertyRow = dataProp.data;
         // console.log(dataProp.data)
         // console.log(propertie)
@@ -69,15 +236,26 @@ const Page = ({ params }) => {
     }
     
     getPropertie();
-// console.log(propertie);
+
   }, [])
   return (
     <section className="py-14 bg-[#F6F7F8]">
+      {isLoad==true?(
+        <div className="text-center text-xl font-semibold text-[#171717] text-left leading-[1.5rem]">
+          <LoadingComponents />
+        </div>
+        ):(
+        <>
       <div className="px-10 md:px-16">
+        <div className="mb-10 text-right">
+        <Link href="/company/properties"
+                  className="rounded-[0.7rem]  px-7 py-1 text-sm border-solid  border border-gray-500 font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >Back</Link>
+        </div>
         <div className="grid grid-cols-2 gap-x-20 text-sm font-medium text-center border border-black  text-[#171717] p-5 bg-white">
           <div className="col-span-2 md:col-span-1 lg:pl-3">
             <div className="text-xl font-semibold text-[#171717] text-left leading-[1.5rem]">
-              <p className="lg:text-[1.5rem] md:text-xl text-xl font-medium">{propertie?.property_name}</p>
+              <p className="lg:text-[1.5rem] md:text-xl text-xl font-medium">{propertie?.property_name} {propertie?.property_types?.title && `(${propertie?.property_types?.title})`}</p>
               <p>{propertie?.address}</p>
             </div>
             <div className="flex pt-16 text-left font-semibold">
@@ -126,7 +304,7 @@ const Page = ({ params }) => {
         {user!=null ? (
           <>
           <h1 className="text-3xl font-medium" >Edit Property Form </h1>
-          <EditForm user={user} navigate={router} onClose={closeModal} propertie={propertie} setPropertie={setPropertie} />
+          <EditForm user={user} navigate={router} onClose={closeModal} propertie={propertie} setPropertie={setPropertie} states={states} regionalManagerData={regionalManagerData} propertyManagerData={propertyManagerData} leasingManagerData={leasingManagerData} propertyManagementCompanyData={propertyManagementCompanyData} propertyTypeData={propertyTypeData} />
           </>
         ) : (
           <>
@@ -138,6 +316,8 @@ const Page = ({ params }) => {
           </>
         )}
       </Modal>
+      </>
+      )}
     </section>
   );
 };

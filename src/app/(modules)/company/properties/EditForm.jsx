@@ -13,8 +13,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { toast } from 'react-toastify';
 import { getCookie } from "cookies-next";
+import Select from 'react-select';
 
-const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
+const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerData,propertyManagerData,leasingManagerData,propertyManagementCompanyData,states,propertyTypeData}) => {
     // console.log(propertie)
     
     const [options, setOptions] = useState(['Register New Property']);
@@ -34,7 +35,8 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
     const [isImageLoading, setImageIsLoading] = useState(false)
     const [error, setError] = useState(null)
     const [imageSrc, setImageSrc] = useState(propertie.image_url)
-    const [propertyData, setPropertyData] = useState([])
+    const [propertyData, setPropertyData] = useState([]);
+    const [propertyTypes, setPropertyTypes] = useState([]);
 
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
@@ -45,6 +47,14 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
         if(!getCookie('token')){
             navigate.push('/')
         }
+        // console.log(propertie?.property_types);
+        if(propertie?.property_types){
+            setPropertyTypes({
+                value: propertie?.property_types.id,
+                label: propertie?.property_types.title
+            });
+        }
+
         const loadPropertys = async () => {
             try {
               const response = await fetch(`${process.env.BASE_API_URL}property/${propertie.id}`,{
@@ -150,13 +160,16 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
                         <Label label="Property Type" required="required" />
 
                         <div className="mt-2.5">
-                            <select name="property_type" value={propertyType} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={e => {handleForm('property_type',e.target.value);setPropertyType(e.target.value);  }} >
-                                {options2 && options2.map((option1,index1) => (
-                                    <option key={index1} value={option1}>
-                                    {option1}
-                                    </option>
-                                ))}
-                            </select>
+                            <Select
+                                value={propertyTypes}
+                                name="property_type"
+                                options={propertyTypeData}
+                                className="basic-multi-select "
+                                classNamePrefix="select"
+                                onChange={(selectedOptions) => {
+                                    setPropertyTypes({...selectedOptions}); // Creates a new array with the selected values
+                                }}
+                            />
                         </div>
                         {renderFieldError('property_type')}
                     </div>
@@ -171,7 +184,20 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
                         </div>
                     </div>
                     
-                    <div className="grid grid-cols-3 gap-x-4">
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="State" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="state"
+                                    options={states}
+                                    className="basic-multi-select "
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('state')}
+                        </div>
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="City" required="required" />
 
@@ -181,20 +207,66 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
                             {renderFieldError('city')}
                         </div>
                         <div className="col-span-1 my-2 pb-6" >
-                            <Label label="State" required="required" />
-
-                            <div className="mt-2.5">
-                                <Input name="state" id="state" value={state} onChange={e => {handleForm('state',e.target.value);setState(e.target.value)}} />
-                            </div>
-                            {renderFieldError('state')}
-                        </div>
-                        <div className="col-span-1 my-2 pb-6" >
                             <Label label="Zip Code" required="required" />
 
                             <div className="mt-2.5">
                                 <Input name="zip_code" id="zip_code" value={zipCode} onChange={e => {handleForm('zip_code',e.target.value);setZipCode(e.target.value)}} />
                             </div>
                             {renderFieldError('zip_code')}
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-4 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Regional Manager" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="regional_manager_id"
+                                    options={regionalManagerData}
+                                    className=""
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('regional_manager_id')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Property Manager" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="property_manager_id"
+                                    options={propertyManagerData}
+                                    className=""
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('property_manager_id')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Leasing / Assistant Manager" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="leasing_manager_id"
+                                    options={leasingManagerData}
+                                    className=""
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('leasing_manager_id')}
+                        </div>
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Property Management Company" required="required" />
+
+                            <div className="mt-2.5">
+                                <Select
+                                    name="property_company_manager_id"
+                                    options={propertyManagementCompanyData}
+                                    className=""
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {renderFieldError('property_company_manager_id')}
                         </div>
                     </div>
                     <div className="w-half my-2 pb-6" >
