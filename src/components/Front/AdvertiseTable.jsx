@@ -5,7 +5,7 @@ const AdvertiseTable = (props) => {
   const [advertiseData, setAdvertiseData] = useState([]);
   const [headerData, setHeaderData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-   console.log(headerData);
+  //  console.log(headerData);
 
  const opacityValues = [1, 0.4, 0.1];
 
