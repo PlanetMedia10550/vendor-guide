@@ -5,6 +5,7 @@ const AdvertiseTable = (props) => {
   const [advertiseData, setAdvertiseData] = useState([]);
   const [headerData, setHeaderData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+   console.log(headerData);
 
  const opacityValues = [1, 0.4, 0.1];
 
@@ -36,27 +37,27 @@ const AdvertiseTable = (props) => {
   return (
     <>
     {isLoading ?(
-      <div className="text-center">Lading...</div>
+      <div className="text-center">Loading...</div>
     ):(
       <table className="table-responsive w-full text-sm md:text-lg font-bold text-left text-[#221F20] font-lato">
         <thead className="text-3xl text-[#221F20] font-bold  border-[#221F20] font-lato">
-          <tr className="text-center">
-          <th scope="col" className="px-3 py-3 border-collapse"></th>
-          {headerData.map((columnName, i) => (
-            <th
-              key={i}
-              scope="col"
-              className={`text-lg sm:text-xl md:text-2xl bg-[#C1272D] text-white px-3 py-3 border-2 border-[#221F20]`}
-              style={{ opacity: opacityValues[i] }}
-            >
-              {columnName} <br />{" "}
-              <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
-                Starting at $224/month
-              </span>
-            </th>
-            ))}
-          </tr>
-        </thead>
+  <tr className="text-center">
+    <th scope="col" className="px-3 py-3 border-collapse"></th>
+    {headerData.title.map((columnName, index) => (
+      <th
+        key={index}
+        scope="col"
+        className={`text-lg sm:text-xl md:text-2xl bg-[#C1272D] text-white px-3 py-3 border-2 border-[#221F20]`}
+        style={{ opacity: opacityValues[index] }}
+      >
+        {columnName} <br />
+        <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
+          Starting at ${parseFloat(headerData.price[index]).toFixed(2)}/month
+        </span>
+      </th>
+    ))}
+  </tr>
+</thead>
         <tbody className="text-xl md:text-2xl border-3 border-[#221F20]">
         {Object.keys(advertiseData).map((key, index) => (
             
