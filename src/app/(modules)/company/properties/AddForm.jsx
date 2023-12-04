@@ -65,7 +65,7 @@ const AddForm = ({user,navigate,onClose,states,setPropertieData,regionalManagerD
             var newData = dataProp.data;
             const updatedRows = newData.map(item => ({
             'property_name':item.property_name,
-            'property_type':item.property_type,
+            'property_type':item?.property_types?.title,
             'id':item.id,
             }));
             setPropertieData(updatedRows);

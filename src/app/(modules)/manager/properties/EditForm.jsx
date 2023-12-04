@@ -13,9 +13,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { toast } from 'react-toastify';
 import { getCookie } from "cookies-next";
+import Select from 'react-select';
 
-const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
-    // console.log(user.data)
+const EditForm = ({user,navigate,onClose,propertie,setPropertie,states,propertyTypeData,selectedStatets,setSelectedStatets}) => {
+    // console.log(propertie)
     
     const [options, setOptions] = useState(['Register New Property']);
     const options2 = ['Multi Family','Commercial Property','Residential Property'];
@@ -34,7 +35,9 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
     const [isImageLoading, setImageIsLoading] = useState(false)
     const [error, setError] = useState(null)
     const [imageSrc, setImageSrc] = useState(propertie.image_url)
-    const [propertyData, setPropertyData] = useState([])
+    const [propertyData, setPropertyData] = useState([]);
+    const [propertyTypes, setPropertyTypes] = useState([]);
+    
 
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
@@ -45,38 +48,20 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
         if(!getCookie('token')){
             navigate.push('/')
         }
-        const loadPropertys = async () => {
-            try {
-              const response = await fetch(`${process.env.BASE_API_URL}property`,{
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${getCookie('token')}`
-                    },
-                })
-         
-              if (!response.ok) {
-                throw new Error('Failed to submit the data. Please try again.')
-              }
-         
-              // Handle response if necessary
-            const pdata = await response.json()
-            if(pdata){
-                setPropertyData(pdata.data)
-                setPropertie(dataProp.data);
-                let newpd = pdata.data
-                const updatedOptions = [];
-                {newpd && newpd.map((row) => (
-                    updatedOptions[row.id] = row.property_name
-                )
-                )}
-                setOptions([...options, ...updatedOptions]);
-            }
-            } catch (error) {
-              // Capture the error message to display to the user
-              console.error(error)
-            }
+        // console.log(propertie?.property_types);
+        if(propertie?.property_types){
+            setPropertyTypes({
+                value: propertie?.property_types?.id,
+                label: propertie?.property_types?.title
+            });
         }
-        loadPropertys();
+        if(propertie?.state){
+            setSelectedStatets({
+                value: propertie?.states?.id,
+                label: propertie?.states?.name,
+            });
+        }
+
     }, [])
     
     const makeRequest = async (e) => {
@@ -87,10 +72,11 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
         var formData = new FormData(e.target);
         formData.append('_method','PUT');
         await axios.post(`${process.env.BASE_API_URL}property/${propertie.id}`, formData).then(response => {
-            // console.log(response.data.data);
             setIsLoding(false);
             onClose(true);
-            loadPropertys();
+            setPropertie(response.data.data);
+            // console.log(propertie);
+            // loadPropertys();
             toast.success(response.data.msg, {
                 position: "top-right",
                 autoClose: 5000,
@@ -158,13 +144,16 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
                         <Label label="Property Type" required="required" />
 
                         <div className="mt-2.5">
-                            <select name="property_type" value={propertyType} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={e => {handleForm('property_type',e.target.value);setPropertyType(e.target.value)}} >
-                                {options2 && options2.map((option1,index1) => (
-                                    <option key={index1} value={option1}>
-                                    {option1}
-                                    </option>
-                                ))}
-                            </select>
+                            <Select
+                                value={propertyTypes}
+                                name="property_type"
+                                options={propertyTypeData}
+                                className="basic-multi-select "
+                                classNamePrefix="select"
+                                onChange={(selectedOptions) => {
+                                    setPropertyTypes({...selectedOptions}); // Creates a new array with the selected values
+                                }}
+                            />
                         </div>
                         {renderFieldError('property_type')}
                     </div>
@@ -173,28 +162,30 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
                             <Label label="Property Name" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="property_name" id="property_name" value={propertyName} onChange={e => {handleForm('property_name',e.target.value);setPropertyName(e.target.value)}} />
+                                <Input name="property_name" id="property_name" value={propertyName} onChange={e => {handleForm('property_name',e.target.value);setPropertyName(e.target.value); }} />
                             </div>
                             {renderFieldError('property_name')}
                         </div>
                     </div>
-                    <div className="w-half my-2 pb-6" >
-                        <Label label="Street Address" required="required" />
+                    
+                    <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="State" required="required" />
 
-                        <div className="mt-2.5">
-                            <Input name="address" id="address" value={address} onChange={e => {handleForm('address',e.target.value);setAddress(e.target.value)}} />
+                            <div className="mt-2.5">
+                                <Select
+                                    value={selectedStatets}
+                                    name="state"
+                                    options={states}
+                                    className="basic-multi-select "
+                                    classNamePrefix="select"
+                                    onChange={(selectedOptions) => {
+                                        setSelectedStatets({...selectedOptions}); // Creates a new array with the selected values
+                                    }}
+                                />
+                            </div>
+                            {renderFieldError('state')}
                         </div>
-                        {renderFieldError('address')}
-                    </div>
-                    <div className="w-half my-2 pb-6" >
-                        <Label label="Address Line 2"  />
-
-                        <div className="mt-2.5">
-                            <Input name="address_2" id="address2" value={address2} onChange={e => {handleForm('address_2',e.target.value);setAddress2(e.target.value)}} />
-                        </div>
-                        {renderFieldError('address_2')}
-                    </div>
-                    <div className="grid grid-cols-3 gap-x-4">
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="City" required="required" />
 
@@ -204,14 +195,6 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
                             {renderFieldError('city')}
                         </div>
                         <div className="col-span-1 my-2 pb-6" >
-                            <Label label="State" required="required" />
-
-                            <div className="mt-2.5">
-                                <Input name="state" id="state" value={state} onChange={e => {handleForm('state',e.target.value);setState(e.target.value)}} />
-                            </div>
-                            {renderFieldError('state')}
-                        </div>
-                        <div className="col-span-1 my-2 pb-6" >
                             <Label label="Zip Code" required="required" />
 
                             <div className="mt-2.5">
@@ -219,6 +202,22 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie}) => {
                             </div>
                             {renderFieldError('zip_code')}
                         </div>
+                    </div>
+                    <div className="w-half my-2 pb-6" >
+                        <Label label="Street Address" required="required" />
+
+                        <div className="mt-2.5">
+                            <TextArea name="address" id="address" value={address} onChange={e => {handleForm('address',e.target.value);setAddress(e.target.value)}} />
+                        </div>
+                        {renderFieldError('address')}
+                    </div>
+                    <div className="w-half my-2 pb-6" >
+                        <Label label="Address Line 2"  />
+
+                        <div className="mt-2.5">
+                            <TextArea name="address_2" id="address2" value={address2} onChange={e => {handleForm('address_2',e.target.value);setAddress2(e.target.value)}} />
+                        </div>
+                        {renderFieldError('address_2')}
                     </div>
                     <div className="w-half my-2 pb-6" >
                         <Label label="Have Photos?"  />
