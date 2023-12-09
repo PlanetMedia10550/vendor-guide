@@ -67,7 +67,7 @@ const Employees = () => {
           <div className="mb-10 text-right">
           <Link href="#" onClick={openModal} className="rounded-[0.7rem]  px-7 py-1 text-sm border-solid  border border-gray-500 font-semibold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add</Link>
           </div>
-            <EmployeesAllData resultData={employees} />
+            <EmployeesAllData resultData={employees} setEmployees={setEmployees} />
 
 
           <Modal isOpen={isModalOpen} onClose={closeModal}>

@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import { getCookie } from "cookies-next";
 import Select from 'react-select';
 
-const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerData,propertyManagerData,leasingManagerData,propertyManagementCompanyData,states,propertyTypeData}) => {
+const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerData,propertyManagerData,leasingManagerData,propertyManagementCompanyData,states,propertyTypeData,selectedStatets,setSelectedStatets}) => {
     // console.log(propertie)
     
     const [options, setOptions] = useState(['Register New Property']);
@@ -37,6 +37,7 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerD
     const [imageSrc, setImageSrc] = useState(propertie.image_url)
     const [propertyData, setPropertyData] = useState([]);
     const [propertyTypes, setPropertyTypes] = useState([]);
+    
 
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
@@ -52,6 +53,12 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerD
             setPropertyTypes({
                 value: propertie?.property_types.id,
                 label: propertie?.property_types.title
+            });
+        }
+        if(propertie?.state){
+            setSelectedStatets({
+                value: propertie?.states.id,
+                label: propertie?.states.name,
             });
         }
 
@@ -91,7 +98,7 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerD
             setIsLoding(false);
             onClose(true);
             setPropertie(response.data.data);
-            console.log(propertie);
+            // console.log(propertie);
             // loadPropertys();
             toast.success(response.data.msg, {
                 position: "top-right",
@@ -190,10 +197,14 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerD
 
                             <div className="mt-2.5">
                                 <Select
+                                    value={selectedStatets}
                                     name="state"
                                     options={states}
                                     className="basic-multi-select "
                                     classNamePrefix="select"
+                                    onChange={(selectedOptions) => {
+                                        setSelectedStatets({...selectedOptions}); // Creates a new array with the selected values
+                                    }}
                                 />
                             </div>
                             {renderFieldError('state')}

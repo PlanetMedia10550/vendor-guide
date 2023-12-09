@@ -1,12 +1,8 @@
 import HomeComponent from "./homecomponent";
 
 const Home = () => {
-
   return (
-    <>
-
-     <HomeComponent/>
-    </>
+    <HomeComponent/>
   );
 }
 

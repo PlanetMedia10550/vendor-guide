@@ -161,7 +161,7 @@ const ProfileForm = ({user}) => {
                             <Label label="Email Address" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="email" id="email" value={email} onChange={e => {handleForm('email',e.target.value);setEmail(e.target.value)}} />
+                                <Input  id="email" value={email} onChange={e => {handleForm('email',e.target.value);setEmail(e.target.value)}} disabled />
                             </div>
                             {renderFieldError('email')}
                         </div>

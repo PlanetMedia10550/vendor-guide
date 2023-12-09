@@ -30,11 +30,11 @@ import { useEffect } from "react";
     //   router.push('/manager/login')
     // }
   useEffect(()=>{
-    if(getCookie('is_module_type')=='manager'){
+    if(getCookie('user-type')==1){
       setProfileUrl('/manager/dashboard');
-    }else if(getCookie('is_module_type')=='company'){
+    }else if(getCookie('user-type')==2){
       setProfileUrl('/company/dashboard');
-    }else if(getCookie('is_module_type')=='vendor'){
+    }else if(getCookie('user-type')==0){
       setProfileUrl('/vendor/dashboard');
     }
   },[])
@@ -248,7 +248,7 @@ import { useEffect } from "react";
                     </div>
                   </button>
                   <div
-                    className="head_profile_dropdown-menu absolute top-[2.5rem] left-0 z-40 w-40 list-none rounded bg-white  hidden shadow-solid-primary"
+                    className="head_profile_dropdown-menu absolute top-[2rem] left-0 z-40 w-40 list-none rounded bg-white  hidden shadow-solid-primary"
                     id="profile/log"
                     data-popper-placement=""
                   >
@@ -272,7 +272,6 @@ import { useEffect } from "react";
                       <div className="dropdown-item ">
                         <Button
                           className="p-3 hover:bg-gray-50/50 block"
-                          href=""
                           onClick={logout}
                         >
                           <i
@@ -296,7 +295,7 @@ import { useEffect } from "react";
                 (
                   <li>
                     <Link
-                      href="/manager/login"
+                      href="/login"
                       className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0          "
                     >
                       Login

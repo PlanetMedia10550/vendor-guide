@@ -23,6 +23,7 @@ const Page = ({ params }) => {
   const [propertyManagementCompanyData, setPropertyManagementCompanyData] = useState([]);
   const [propertyTypeData, setPropertyTypeData] = useState([]);
   const hasCookie = getCookie('token')
+  const [selectedStatets, setSelectedStatets] = useState([]);
 
   const router = useRouter();
   useEffect(() => {
@@ -238,6 +239,7 @@ const Page = ({ params }) => {
     getPropertie();
 
   }, [])
+  
   return (
     <section className="py-14 bg-[#F6F7F8]">
       {isLoad==true?(
@@ -284,11 +286,13 @@ const Page = ({ params }) => {
             </div>
           </div>
           <div className="col-span-2 md:col-span-1">
-            {/* <div className="text-base leading-5 font-semibold text-[#171717] text-right pb-4 pr-3">
-              <p>(952) 746-5343</p>
-              <p className=""> manager@solsticesprings.com</p>
-              <p className="">hello@solsticesprings.com</p>
-            </div> */}
+            <div className="text-base leading-5 font-semibold text-[#171717] text-right pb-4 pr-3">
+              <p>{propertie?.phone}</p>
+              {propertie?.email?.split(',').map((email)=>(
+                <p className="">{email}</p>
+              ))}
+              {/* <p className="">hello@solsticesprings.com</p> */}
+            </div>
             <div className="">
               <Image width="100" height="100"
                 src={propertie?.image_url}
@@ -304,7 +308,7 @@ const Page = ({ params }) => {
         {user!=null ? (
           <>
           <h1 className="text-3xl font-medium" >Edit Property Form </h1>
-          <EditForm user={user} navigate={router} onClose={closeModal} propertie={propertie} setPropertie={setPropertie} states={states} regionalManagerData={regionalManagerData} propertyManagerData={propertyManagerData} leasingManagerData={leasingManagerData} propertyManagementCompanyData={propertyManagementCompanyData} propertyTypeData={propertyTypeData} />
+          <EditForm user={user} navigate={router} onClose={closeModal} propertie={propertie} setPropertie={setPropertie} states={states} regionalManagerData={regionalManagerData} propertyManagerData={propertyManagerData} leasingManagerData={leasingManagerData} propertyManagementCompanyData={propertyManagementCompanyData} propertyTypeData={propertyTypeData} selectedStatets={selectedStatets} setSelectedStatets={setSelectedStatets} />
           </>
         ) : (
           <>

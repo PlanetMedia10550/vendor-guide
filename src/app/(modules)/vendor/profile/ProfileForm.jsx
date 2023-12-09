@@ -62,7 +62,7 @@ const ProfileForm = ({user}) => {
         }));
           
         setColourOptions(newColourOptions);
-        setSelectedCategories(users.categories.map((v) => ({
+        setSelectedCategories(users?.categories?.map((v) => ({
             value: v.id,
             label: v.title
         })));
@@ -88,7 +88,7 @@ const ProfileForm = ({user}) => {
         }));
           
         setStates(newColourOptions);
-        setSelectedStates(users.states.map((v) => ({
+        setSelectedStates(users?.states?.map((v) => ({
             value: v.id,
             label: v.name
         })));
@@ -149,7 +149,7 @@ const ProfileForm = ({user}) => {
 
 
     };
-    console.log(users);
+    // console.log(users);
     async function onImageUpload(event) {
         event.preventDefault();
         setImageIsLoading(true);
@@ -285,7 +285,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Email Address" required="" />
                             <div className="mt-2.5">
-                                <Input name="email" id="email" value={users.email} disable="disabled"/>
+                                <Input  id="email" value={users.email} disabled="disabled"/>
                             </div>
                             {renderFieldError('email')}
                         </div>

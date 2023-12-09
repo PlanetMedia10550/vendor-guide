@@ -5,6 +5,7 @@ import { getCookie } from "cookies-next";
 import { useAuth } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import ProfileForm from "./ProfileForm";
+import LoadingComponents from '@/components/LoadingComponents';
 
 const Page = () => {
     const {user}  = useAuth();
@@ -23,7 +24,10 @@ const Page = () => {
     return (
         <>
         {
-            isLoading ? 'Loading...' :<ProfileForm user={user} />
+            isLoading ? 
+            <div className="text-center text-xl font-semibold text-[#171717] text-left leading-[1.5rem] my-4">
+            <LoadingComponents />
+          </div> :<ProfileForm user={user} />
         }
             
         </>
