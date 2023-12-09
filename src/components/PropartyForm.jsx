@@ -144,7 +144,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
         var formData = new FormData(e.target);
         formData.append('close_date',closeDate);
         // formData.append('vendor_id',vendorIds);
-        await axios.post(`${process.env.BASE_API_URL}property`, formData).then(response => {
+        await axios.post(`${process.env.BASE_API_URL}bid`, formData).then(response => {
             // console.log(response.data.data);
             setIsLoding(false);
             onClose(true)
