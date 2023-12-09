@@ -144,6 +144,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
         var formData = new FormData(e.target);
         formData.append('close_date',closeDate);
         // formData.append('vendor_id',vendorIds);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
         await axios.post(`${process.env.BASE_API_URL}bid`, formData).then(response => {
             // console.log(response.data.data);
             setIsLoding(false);
