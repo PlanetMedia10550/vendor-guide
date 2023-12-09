@@ -12,6 +12,7 @@ import whiteLogo from "@/../../public/images&icons/SVG/logo_white.svg"
 import userDefult from "@/../../public/images&icons/profile.png"
 import { getCookie } from "cookies-next";
 import { useEffect } from "react";
+import { Button } from "primereact/button";
 
 const Header = ({activeTab,setActiveTab}) => {
     const router = usePathname();
@@ -24,11 +25,11 @@ const Header = ({activeTab,setActiveTab}) => {
     
 
     useEffect(()=>{
-      if(getCookie('is_module_type')=='manager'){
+      if(getCookie('user-type')==1){
         setTabList([{'tab':'dashboard','label':'Dashboard','url':'/manager/dashboard'},{'tab':'properties','label':'Properties','url':'/manager/properties'}]);
-      }else if(getCookie('is_module_type')=='company'){
+      }else if(getCookie('user-type')==2){
         setTabList([{'tab':'dashboard','label':'Dashboard','url':'/company/dashboard'},{'tab':'properties','label':'Properties','url':'/company/properties'},{'tab':'employees','label':'Employees','url':'/company/employees'}]);
-      }else if(getCookie('is_module_type')=='vendor'){
+      }else if(getCookie('user-type')==0){
         setTabList([{'tab':'dashboard','label':'Dashboard','url':'/vendor/dashboard'}]);
       }
     },[])
@@ -112,9 +113,8 @@ const Header = ({activeTab,setActiveTab}) => {
                       </div>
                       <hr className="border-gray-50 " />
                       <div className="dropdown-item ">
-                        <Link
+                        <Button
                           className="p-3 hover:bg-gray-50/50 block"
-                          href="#"
                           onClick={logout}
                         >
                           <i
@@ -122,7 +122,7 @@ const Header = ({activeTab,setActiveTab}) => {
                             aria-hidden="true"
                           ></i>
                           Logout
-                        </Link>
+                        </Button>
                       </div>
                     </div>
                   </div>

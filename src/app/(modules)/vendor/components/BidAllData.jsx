@@ -10,7 +10,7 @@ import { useAuth } from "@/context/UserContext";
 const BidVendorsButton = ({bid}) => {
   const {navigate}  = useAuth();
   const handleGoVendors = async () => {
-    navigate.push(`/vendor/bids/manager/${bid.id}`);
+    navigate.push(`/vendor/bids/${bid.id}`);
   }
 
   return (

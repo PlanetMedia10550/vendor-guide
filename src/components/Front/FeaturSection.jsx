@@ -11,7 +11,7 @@ const FeaturSection = (props) => {
     bannerResponse();
   }, [])
   const bannerResponse = async () => {
-    const blogResult = await getResponse('blog?limit=9&offset=0')
+    const blogResult = await getResponse('blog-home?limit=3&offset=0')
     setAdvertiseData(blogResult.data)
   }
   return (

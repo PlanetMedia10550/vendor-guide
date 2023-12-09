@@ -36,16 +36,15 @@ export const metadata = {
 // font-lato
 export default function RootLayout({ children }) {
   return (
-    <UserProvider>
-      
-    <html lang="en" style={myFont.style} >
-      <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-      <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' precedence="default" />
-      <body >
-        {children}
-        <ToastContainer />
-      </body>
-    </html>
-    </UserProvider>
+      <UserProvider>
+      <html lang="en" style={myFont.style} >
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css' precedence="default" />
+        <body >
+          {children}
+          <ToastContainer />
+        </body>
+      </html>
+      </UserProvider>
   )
 }

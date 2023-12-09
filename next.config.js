@@ -16,17 +16,17 @@ const nextConfig = {
         return [
           {
             source: '/manager',
-            destination: '/manager/login',
+            destination: '/login',
             permanent: true,
           },
           {
             source: '/vendor',
-            destination: '/vendor/login',
+            destination: '/login',
             permanent: true,
           },
           {
             source: '/company',
-            destination: '/company/login',
+            destination: '/login',
             permanent: true,
           },
         ]

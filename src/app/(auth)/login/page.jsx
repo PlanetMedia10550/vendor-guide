@@ -1,7 +1,11 @@
 import Right from "@/components/Front/Auth/Right";
-import LoginForm from "@/components/Front/Auth/Form";
+import LoginForm from "./LoginForm";
 
-const Login = () => {
+export const metadata = {
+  title: 'Vendor Guide | Sign UP',
+}
+
+const Page = () => {
   return (
     <>
 
@@ -9,7 +13,7 @@ const Login = () => {
         <div className="mx-auto max-w-7xl">
           <div className="lg:mx-auto  max-w-4xl grid grid-cols-2 md:gap-x-16 md:gap-y-16 lg:max-w-none">
 
-            <LoginForm type="vendor" />
+            <LoginForm  />
             <Right />
 
           </div>
@@ -24,4 +28,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Page;

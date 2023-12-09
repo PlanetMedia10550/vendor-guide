@@ -11,6 +11,17 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import BidFavoriteButton from "@/components/Front/BidFavoriteButton";
 
+const BidMessage = ({bid}) => {
+  const {navigate}  = useAuth();
+  const handleGoVendors = async () => {
+    navigate.push(`/manager/bids/${bid.id}/${bid.vendor_id}`);
+  }
+// console.log(bid)
+  return (
+    <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleGoVendors} severity="info" rounded>Message</Button>
+  )
+}
+
 const TableData = ({bidId}) => {
   const {user,renderFieldError,isLoding}  = useAuth();
   const [vendorsData, setVendorsData] = useState([]);
@@ -44,13 +55,14 @@ const TableData = ({bidId}) => {
         var newData = dataProp.data;
         // console.log(newData);
         const updatedRows = newData.map(item => ({
+          'id':item?.bid_id,
           'name':item.vendor.name,
           'email':item.vendor.email,
           'mobile':item.vendor.mobile,
-          'vendor_id':item.vendor_id,
-          'manager_id':item.bid.manager_id,
-          'favorite_id':item.bid?.favourites?.id,
-          'favorite':item.bid.favourites?1:0,
+          'vendor_id':item?.vendor_id,
+          'manager_id':item?.manager_id,
+          'favorite_id':item.bid?.favourites?.vendor_id==user?.id?item?.bid?.favourites?.id:0,
+          'favorite':item.bid?.favourites?.vendor_id==user?.id?1:0,
         }));
         setVendorsData(updatedRows);
         
@@ -64,7 +76,7 @@ const TableData = ({bidId}) => {
   }, [])
 
   const favoriteBtn = (bid) => {
-    return <BidFavoriteButton bid={bid}  />;
+    return <><BidFavoriteButton bid={bid}  /> <BidMessage bid={bid} /></>;
   };
 
   return (

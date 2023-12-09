@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, use, useContext, useEffect, useState } from 'react';
-import axios from 'axios'; // Import Axios properly
+//import axios from 'axios'; // Import Axios properly
+import axios from '@/lib/axios';
 import { setCookie,getCookie,deleteCookie,hasCookie } from 'cookies-next';
 import { NextResponse } from 'next/server';
 import {useForm} from "@/hooks/useForm";
@@ -21,13 +22,34 @@ export function UserProvider({ children }) {
   const [loading, setLoading] = useState(true);
   // const [formErrors, setFormErrors] = useState(false);
   const token = getCookie('token');
-  const is_module_type = getCookie('is_module_type');
+  const is_module_type = getCookie('type');
   
-  // console.log(is_module_type)
+  // console.log(is_module_type);return false;
   const { errors,setErrors, renderFieldError, navigate } = useForm();
 
-  
   useEffect(() => {
+    const loadUserCommonInfo = async () => {
+  
+      try {
+        const response2 = await fetch(`${process.env.BASE_API_URL}site_setting`, {
+          method: 'GET',
+        });
+        // console.log('done');
+        if (!response2.ok) {
+          throw new Error('Failed to submit the data. Please try again.');
+        }
+        // Handle response if necessary
+        const dataProp = await response2.json();
+        // console.log(dataProp.data);
+        setSiteSetting(dataProp.data); 
+      } catch (error) {
+        console.error(error)
+      }
+    
+    }
+    loadUserCommonInfo();
+    setIsInfoLoding(false);
+
     const  loadMetaData = async () =>{
       try{
         const response22 =  await fetch(`${process.env.BASE_API_URL}post-meta`,{
@@ -42,168 +64,212 @@ export function UserProvider({ children }) {
       }catch (error){
         console.error(error);
       }
-  }
-  loadMetaData();
-  setLoading(false);
+    }
+    loadMetaData();
+    setLoading(false);
+  },[]);
 
-    const loadUserFromCookies = async () => {
-
-      // const token = Cookies.get('token');
+  useEffect(() => {
+    const userInfo = async (formData) => {
       setIsLoding(true);
-      if (token) {
-        // console.log("Got a token in the cookies, let's see if it is valid");
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Set the Authorization header for Axios
-        try {
-          const response = await axios.post(`${process.env.BASE_API_URL}user-info`); // Assuming you want to make a GET request for user info
-          // const result = await response.json();
-          // console.log(response.data)
-          setUser(response.data.data); // Assuming the user data is in the response
-          setIsLogin(true);
-          setCookie('token', token,{maxAge: 3600 });
-          setCookie('is_module_type', is_module_type,{maxAge: 3600 });
-        } catch (error) {
-          // console.log(error.response.status)
-          if(error?.response?.status==401){
+      axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
+      await axios.post(`user-info`, formData).then(response => {
+          const res = response.data;
+          // console.log(res.data.data);
+          setIsLoding(false);
+          if(res.success==true) {
+              deleteCookie('token')
+              deleteCookie('name')
+              deleteCookie('user-type')
+              setCookie('token', res.data.token,{maxAge: 3600 });
+              setCookie('user-type', res.data.data.type,{maxAge: 3600 });
+              if(res.data.data.type==1){
+                setUser(res.data.data.managers)
+              }
+              if(res.data.data.type==0){
+                setUser(res.data.data.vendor)
+              }
+              if(res.data.data.type==2){
+                setUser(res.data.data.company)
+              }
+          }
+      }).catch(error => {
+          setIsLoding(false);
+          // console.log(error?.response?.data?.message);
+          // console.log(error?.response.status);
+          if(error?.response?.status==500){
             if(hasCookie('token')){
-              deleteCookie('token');
-              deleteCookie('is_module_type');
-              setUser(null);
-              router.push(`/`);
+              deleteCookie('token')
+              deleteCookie('user-type')
+              setUser(null); 
+              router.push(`/login`);
             }
           }
-          console.error('Error loading user info', error);
-          setUser(null); // Handle errors by setting user to null or implement error handling as needed.
-        }
-        
-      }
-    }
-
-    loadUserFromCookies();
-    setIsLoding(false);
-  }, [token]);
-
-
-  // header footer dynamic code
-  useEffect(() => { 
-    const loadUserCommonInfo = async () => {
-
-        try {
-          const response2 = await fetch(`${process.env.BASE_API_URL}site_setting`, {
-            method: 'GET',
-          });
-          // console.log('done');
-          if (!response2.ok) {
-            throw new Error('Failed to submit the data. Please try again.');
+          var errors = error?.response?.data?.data;
+          if(errors){
+              const errorArray = Object.keys(errors).map((key) => {
+                  toast.error(errors[key][0], {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "colored",
+                  });
+                  
+              });
+          }else if(error?.response?.data?.message){
+              toast.error(error?.response?.data?.message, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "colored",
+              });
           }
-          // Handle response if necessary
-          const dataProp = await response2.json();
-          // console.log(dataProp.data);
-          setSiteSetting(dataProp.data); 
-        } catch (error) {
-          console.error(error)
-        }
-      
+          
+      });
+    };
+    if(hasCookie('token')){
+      userInfo();
     }
-    loadUserCommonInfo();
-    setIsInfoLoding(false);
+    setIsLoding(false);
   }, []);
 
 
 
 
-  const login = async (requestUrl,data) => {
-      setErrors(null);
-      setIsLoding(true);
-      deleteCookie('token')
-      deleteCookie('is_maneger')
-      setUser(null); 
-      setIsLogin(false);
-      await axios.post(`${process.env.BASE_API_URL}${requestUrl}/login`, data).then(response => {
+
+  const register = async (formData) => {
+    setIsLoding(true);
+    await axios.post(`auth/register`, formData).then(response => {
         // console.log(response.data.data);
         setIsLoding(false);
         if(response.data.success==true) {
-          var token_new = response.data.data.token;
-          if (token_new) {
-                  setUser(response.data.data); 
-                  setCookie('token', token_new,{maxAge: 3600 });
-                  setCookie('is_module_type', requestUrl,{maxAge: 3600 });
-                  // console.log(user.data.name);
-                  router.push(`/${requestUrl}/dashboard`);
-                  
-              }
-          }else{
-            toast.error(response.data.message, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
-          }
-      }).catch(error => {
-        setIsLoding(false);
-          // console.log(error.response.data);
-          if(error?.response?.data?.data?.errors) {
-              if (error.response.data.data.errors) {
-                  setErrors(error.response.data.data.errors);
-                  
-              }
-          }else{
-            toast.error(error?.response?.data?.message, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
-          }
-          
-      });
-  };
-  
-  const register = async (requestUrl,data) => {
-      setErrors(null);
-      setIsLoding(true);
-      await axios.post(`${process.env.BASE_API_URL}${requestUrl}/register`, data).then(response => {
-        // console.log(response.data.data);
-        setIsLoding(false);
-        if(response.data.success==true) {
-            router.push(`/${requestUrl}/login`);
+            router.push(`/login`);
             
         }
-      }).catch(error => {
+    }).catch(error => {
         setIsLoding(false);
-          // console.log(error.response);
-          if(error?.response?.data?.data) {
-              if (error.response.data.data) {
-                  setErrors(error.response.data.data);
-                  
-              }
-          }
-          
-      });
+        // console.log(error.response.data);
+        var errors = error?.response?.data?.data;
+        if(errors){
+            const errorArray = Object.keys(errors).map((key) => {
+                toast.error(errors[key][0], {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+                
+            });
+        }else if(error?.response?.data?.message){
+            toast.error(error?.response?.data?.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        
+    });
+  };
+
+  const login = async (formData) => {
+    setIsLoding(true);
+    await axios.post(`auth/login`, formData).then(response => {
+        const res = response.data;
+        // console.log(res.data.data);
+        setIsLoding(false);
+        if(res.success==true) {
+            deleteCookie('token')
+            deleteCookie('name')
+            deleteCookie('user-type')
+            setCookie('token', res.data.token,{maxAge: 3600 });
+            setCookie('user-type', res.data.data.type,{maxAge: 3600 });
+            // setUser(res.data.data)
+            // router.push(`/`);
+            if(res.data.data.type==1){
+              setUser(res.data.data.managers)
+              router.push(`/manager/dashboard`);
+            }
+            if(res.data.data.type==0){
+              setUser(res.data.data.vendor);
+              router.push(`/vendor/dashboard`);
+            }
+            if(res.data.data.type==2){
+              setUser(res.data.data.company);
+              router.push(`/company/dashboard`);
+            }
+            toast.success(res.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+        }
+    }).catch(error => {
+        setIsLoding(false);
+        var errors = error?.response?.data?.data;
+        if(errors){
+            const errorArray = Object.keys(errors).map((key) => {
+                toast.error(errors[key][0], {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+                
+            });
+        }else if(error?.response?.data?.message){
+            toast.error(error?.response?.data?.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        
+    });
   };
 
   const logout = (e) => {
     e.preventDefault();
     if(hasCookie('token')){
       deleteCookie('token')
-      deleteCookie('is_maneger')
-      deleteCookie('is_module_type')
+      deleteCookie('user-type')
       setUser(null); 
-      setIsLogin(false);
-      router.push(`/`);
+      router.push(`/login`);
     }
   };
 
   return (
-    <UserContext.Provider value={{user,isLogin,login,register,logout,renderFieldError,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
+    <UserContext.Provider value={{user,isLogin,register,login,logout,renderFieldError,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
       {children}
     </UserContext.Provider>
   );

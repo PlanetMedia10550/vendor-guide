@@ -181,7 +181,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Email Address" required="" />
                             <div className="mt-2.5">
-                                <Input name="email" id="email" value={users.email} disable="disabled"/>
+                                <Input  id="email" value={users.email} disabled="disabled"/>
                             </div>
                             {renderFieldError('email')}
                         </div>
