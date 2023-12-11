@@ -141,9 +141,131 @@ export function UserProvider({ children }) {
     setIsLoding(false);
   }, []);
 
+  const forgetpassword = async (formData) => {
+    setIsLoding(true);
+    await axios.post(`forget-password`, formData).then(response => {
+        // console.log(response.data.data);
+        const res = response.data;
+        setIsLoding(false);
+        if(res.status==true) {
+          toast.success(res.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+             
+        }
+    }).catch(error => {
+        setIsLoding(false);
+        // console.log(error.response.data);
+        var errors = error?.response?.data?.data;
+        if(errors){
+            const errorArray = Object.keys(errors).map((key) => {
+                toast.error(errors[key][0], {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+                
+            });
+        }else if(error?.response?.data?.message){
+            toast.error(error?.response?.data?.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        
+    });
+  };
 
+  const resetpassword = async (formData) => {
+    setIsLoding(true);
+    await axios.post(`reset-password`, formData).then(response => {
+        //
+        const res = response.data;
+        // console.log(res);
+        setIsLoding(false);
 
+        if(res.status==true) {
+          if(hasCookie('token')){
+            deleteCookie('token')
+            deleteCookie('user-type')
+            setUser(null); 
+            router.push(`/login`);
+          }
+          toast.success(res.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+             
+        }else if(res.status==false){
+          toast.error(res.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
 
+    }).catch(error => {
+        setIsLoding(false);
+        console.log(error.response.data);
+        var errors = error?.response?.data?.data;
+        if(errors){
+            const errorArray = Object.keys(errors).map((key) => {
+                toast.error(errors[key][0], {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+                
+            });
+        }else if(error?.response?.data?.message){
+            toast.error(error?.response?.data?.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        
+    });
+  };
 
   const register = async (formData) => {
     setIsLoding(true);
@@ -269,7 +391,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{user,isLogin,register,login,logout,renderFieldError,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
+    <UserContext.Provider value={{user,isLogin,register,login,logout,renderFieldError,forgetpassword,resetpassword,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
       {children}
     </UserContext.Provider>
   );

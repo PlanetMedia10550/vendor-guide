@@ -6,15 +6,16 @@ import Link from "next/link";
 import { useState } from 'react'
 import Button from "@/components/Front/UI/Button";
 import { useAuth } from "@/context/UserContext";
-import ForgetPasswordForm from "../forget/ForgetPasswordForm";
 
-const LoginForm = () => {
-    const [loginData, setLoginData] = useState([]);
-    const {login,isLoding} = useAuth();
+
+const ForgetPasswordForm = () => {
+    const [forgetpasswordData, setForgetPasswordData] = useState([]);
+    const {forgetpassword,isLoding} = useAuth();
+    // console.log(forgetpassword);
     const makeRequest = (e) => {
         e.preventDefault();
         var formData = new FormData(e.target);
-        login(formData)
+        forgetpassword(formData)
     };
     return (
         <div className="md:col-span-2 lg:col-span-1 col-span-12 lg:-mr-16 order-2 sm:order-1 ">
@@ -24,7 +25,7 @@ const LoginForm = () => {
 
                     </div>
                     <div className=" text-left">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl  text-left">Login</h2>
+                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl  text-left">Forget Password</h2>
 
                     </div>
                     <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
@@ -33,42 +34,18 @@ const LoginForm = () => {
                                 <Label label="Email" required="required" />
 
                                 <div className="mt-2.5">
-                                    <Input name="email" id="email" value={loginData.email} onChange={(e) => {
+                                    <Input name="email" id="email" value={forgetpasswordData.email} onChange={(e) => {
                                         var value = e.target.value;
-                                        setLoginData({ ...loginData, email: value });
+                                        setForgetPasswordData({ ...forgetpasswordData, email: value });
                                     }
                                     } />
                                 </div>
                                 {/* {renderFieldError('email')} */}
                             </div>
-                            <div className="w-full my-2">
-                                <Label label="Password" required="required" />
-                                <div className="mt-2.5">
-                                    <Input type="password" name="password" id="password" value={loginData.password}
-                                        onChange={(e) => {
-                                            var value = e.target.value;
-                                            setLoginData({ ...loginData, password: value });
-                                        }
-                                        }
-                                    />
-                                </div>
-                                {/* {renderFieldError('password')} */}
-                            </div>
-                            <div className="flex gap-2 pt-3">
-                                <TableCheckbox />  <p className=" text-lg font-semibold"> Remember Me</p>
-                            </div>
-
+                        
                             <div className="my-4">
                                 <Button type="Submit" className="block sm:w-auto w-full rounded-md bg-[#c13e27] px-10 py-3 text-center text-base font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" is_loding={isLoding} disabled={isLoding} />
                             </div>
-
-                            <div>
-                                <Link href="register" className="text-[#c13e27] text-lg font-semibold">Register</Link>
-                            </div>
-                            <div>
-                                <Link href="forget/" className="text-[#c13e27] text-lg font-semibold">Forgot Password</Link>
-                            </div>
-
                         </div>
                         <div className="mt-2 mb-8" >
 
@@ -80,4 +57,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default ForgetPasswordForm
