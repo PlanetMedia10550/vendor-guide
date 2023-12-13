@@ -1,4 +1,5 @@
-import Advertisepage from "./advertisepage";
+import Advertisepage from "./Advertisepage";
+
 
 export const metadata = {
   title: 'Vendor Guide | Advertise'
