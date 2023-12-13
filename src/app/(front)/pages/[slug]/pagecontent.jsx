@@ -12,7 +12,7 @@ const ContentPages = ({params}) => {
   const [isLoading, setIsLoading] = useState(true);
   const {metaData,loading} = useAuth();
   const [selectedMeta, setSelectedMeta] = useState([]);
-  console.log(selectedMeta);
+  
   useEffect(() => {
     const fetchData  = async () => {
       try {
