@@ -53,7 +53,7 @@ const TableData = ({bidId}) => {
         // Handle response if necessary
         var dataProp = await response2.json()
         var newData = dataProp.data;
-        // console.log(newData);
+        console.log(newData);
         const updatedRows = newData.map(item => ({
           'id':item?.bid_id,
           'name':item.vendor.name,
@@ -61,8 +61,8 @@ const TableData = ({bidId}) => {
           'mobile':item.vendor.mobile,
           'vendor_id':item?.vendor_id,
           'manager_id':item?.manager_id,
-          'favorite_id':item.bid?.favourites?.vendor_id==user?.id?item?.bid?.favourites?.id:0,
-          'favorite':item.bid?.favourites?.vendor_id==user?.id?1:0,
+          'favorite_id':item.bid?.favourites?.vendor_id,
+          'favorite':item.bid?.favourites?.vendor_id,
         }));
         setVendorsData(updatedRows);
         
