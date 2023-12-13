@@ -193,7 +193,7 @@ export function UserProvider({ children }) {
     await axios.post(`auth/login`, formData).then(response => {
         const res = response.data;
         // console.log(res.data.data);
-        setIsLoding(false);
+        
         if(res.success==true) {
             deleteCookie('token')
             deleteCookie('name')
@@ -225,6 +225,7 @@ export function UserProvider({ children }) {
               theme: "colored",
             });
         }
+        setIsLoding(false);
     }).catch(error => {
         setIsLoding(false);
         var errors = error?.response?.data?.data;
