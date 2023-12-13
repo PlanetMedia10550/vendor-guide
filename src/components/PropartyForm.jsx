@@ -300,7 +300,6 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                     </div>
                     <div className="w-full my-2 pb-6" >
                         <Label label="Property Location" required="required" />
-
                         <div className="mt-2.5">
                             <select name="property_id" value={propertyLocation} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handlePropartyLocation} >
                                 <option key="0" value="0">Register New Property</option>
@@ -315,7 +314,6 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                     </div>
                     <div className="w-full my-2 pb-6" >
                         <Label label="Property Type" required="required" />
-
                         <div className="mt-2.5">
                             <select name="property_type" value={propertyType} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={e => {handleForm('property_type',e.target.value);setPropertyType(e.target.value)}} >
                                 {options2 && options2.map((option1,index1) => (

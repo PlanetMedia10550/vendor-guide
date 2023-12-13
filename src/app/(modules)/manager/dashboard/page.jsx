@@ -2,6 +2,10 @@ import Graph from "@/components/Front/NewRegionalmanagerDashboard/Graph";
 import Sideli from "@/components/Common/Sideli";
 import TabComponent from "@/components/Front/TabComponent";
 
+export const metadata = {
+  title: 'Vendor Guide | Dashboard'
+}
+
 const Dashboard =  () => {
   
   return (

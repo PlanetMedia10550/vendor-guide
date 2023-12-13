@@ -1,32 +1,14 @@
-"use client";
-import { useEffect, useState } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import { getCookie } from "cookies-next";
-import { useAuth } from "@/context/UserContext";
-import { useRouter } from "next/navigation";
-import ProfileForm from "./ProfileForm";
 
-const Page = () => {
-    const {user}  = useAuth();
+import Profilepage from './Profilepage';
 
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        if(!getCookie('token')){
-            router.push('/');
-        }
-        if(user){
-            setIsLoading(false);
-        }
-    }, [user]);
+export const metadata = {
+    title: 'Vendor Guide | Company Profile'
+}
   
+const Page = () => {
+    
     return (
-        <>
-        {
-            isLoading ? 'Loading...' :<ProfileForm user={user} />
-        }
-            
-        </>
+        <Profilepage />
     );
 };
 

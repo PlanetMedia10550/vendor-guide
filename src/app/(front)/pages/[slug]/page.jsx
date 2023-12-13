@@ -1,9 +1,12 @@
 
-
-// import DetailsHero from "@/components/Front/detailshero";
 import ContentPages from "./pagecontent";
 
+export const metadata = {
+  title: 'Vendor Guide | Page'
+}
+
 const SlugPages = ({params}) => {
+
   return (
     <>
       <ContentPages params={params}/>

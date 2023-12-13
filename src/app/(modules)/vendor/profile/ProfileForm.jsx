@@ -29,9 +29,9 @@ const ProfileForm = ({user}) => {
     const [newGalleryIds, setNewGalleryIds] = useState([]);
     const [newGalleryUrls, setNewGalleryUrls] = useState([]);
     const [error, setError] = useState(null);
-    const [multiFamilyCheck, setMultiFamilyCheck] = useState(user.multi_family);
-    const [commercialCheck, setCommercialCheck] = useState(user.commercial);
-    const [residentialCheck, setResidentialCheck] = useState(user.residential);
+    const [multiFamilyCheck, setMultiFamilyCheck] = useState(user?.multi_family);
+    const [commercialCheck, setCommercialCheck] = useState(user?.commercial);
+    const [residentialCheck, setResidentialCheck] = useState(user?.residential);
     const [colourOptions, setColourOptions] = useState([]);
     const [states, setStates] = useState([]);
     const [value, setValue] = useState();
@@ -246,7 +246,7 @@ const ProfileForm = ({user}) => {
                             }
                        </div>
                         <div className="col-span-9 mt-2.5">
-                            <Input type="hidden" name="image_id" id="image_id" value={users.image_id}  />
+                            <Input type="hidden" name="image_id" id="image_id" value={users?.image_id}  />
                             <Input type="file" name="image" id="image" style={{width:'100%',float:'left'}}  onChange={onImageUpload} />
                            
                         </div>
@@ -259,7 +259,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="First Name" required="required" />
                             <div className="mt-2.5">
-                                <Input name="first_name" id="first_name" value={users.first_name}  onChange={e => {handleForm('first_name',e.target.value);
+                                <Input name="first_name" id="first_name" value={users?.first_name}  onChange={e => {handleForm('first_name',e.target.value);
                                 setUser({...users,first_name:e.target.value})}} />
                             </div>
                             {renderFieldError('first_name')}
@@ -268,7 +268,7 @@ const ProfileForm = ({user}) => {
                             <Label label="Last Name" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="last_name" id="last_name" value={users.last_name} onChange={e => {handleForm('last_name',e.target.value);setUser({...users,last_name:e.target.value})}} />
+                                <Input name="last_name" id="last_name" value={users?.last_name} onChange={e => {handleForm('last_name',e.target.value);setUser({...users,last_name:e.target.value})}} />
                             </div>
                             {renderFieldError('last_name')}
                         </div>
@@ -277,7 +277,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Name" required="required" />
                             <div className="mt-2.5">
-                                <Input name="name" id="name" value={users.name}  onChange={e => {handleForm('name',e.target.value);
+                                <Input name="name" id="name" value={users?.name}  onChange={e => {handleForm('name',e.target.value);
                                 setUser({...users,name:e.target.value})}} />
                             </div>
                             {renderFieldError('name')}
@@ -285,7 +285,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Email Address" required="" />
                             <div className="mt-2.5">
-                                <Input  id="email" value={users.email} disabled="disabled"/>
+                                <Input  id="email" value={users?.email} disabled="disabled"/>
                             </div>
                             {renderFieldError('email')}
                         </div>
@@ -298,14 +298,14 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Phone Number" required="required" />
                             <div className="mt-2.5">
-                                <Input name="mobile" id="mobile" value={users.mobile} onChange={e => {handleForm('mobile',e.target.value);setUser({...users,mobile:e.target.value})}} />
+                                <Input name="mobile" id="mobile" value={users?.mobile} onChange={e => {handleForm('mobile',e.target.value);setUser({...users,mobile:e.target.value})}} />
                             </div>
                             {renderFieldError('phone')}
                         </div>
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Zip Code" required="required" />
                             <div className="mt-2.5">
-                                <Input name="postal_code" id="postal_code" value={users.postal_code} onChange={e => {handleForm('postal_code',e.target.value);setUser({...users,postal_code:e.target.value})}} />
+                                <Input name="postal_code" id="postal_code" value={users?.postal_code} onChange={e => {handleForm('postal_code',e.target.value);setUser({...users,postal_code:e.target.value})}} />
                             </div>
                             {renderFieldError('postal_code')}
                         </div>
@@ -316,7 +316,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-2 my-2 pb-6" >
                             <Label label="Address" required="required" />
                             <div className="mt-2.5">
-                            <TextArea name="address" id="address" value={users.address} onChange={e => {handleForm('address',e.target.value);setUser({...users,address:e.target.value})}} />
+                            <TextArea name="address" id="address" value={users?.address} onChange={e => {handleForm('address',e.target.value);setUser({...users,address:e.target.value})}} />
                             </div>
                             {renderFieldError('address')}
                         </div>
@@ -329,7 +329,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-2 my-2 pb-6" >
                             <Label label="Short Description" required="required" />
                             <div className="mt-2.5">
-                                <TextArea name="short_description" id="short_description" value={users.short_description}  onChange={e => {handleForm('short_description',e.target.value);
+                                <TextArea name="short_description" id="short_description" value={users?.short_description}  onChange={e => {handleForm('short_description',e.target.value);
                                 setUser({...users,short_description:e.target.value})}} rows={3} />
                             </div>
                             {renderFieldError('short_description')}
@@ -338,7 +338,7 @@ const ProfileForm = ({user}) => {
                             <Label label="Description" required="required" />
 
                             <div className="mt-2.5">
-                                <TextArea name="description" id="description" value={users.description} onChange={e => {handleForm('description',e.target.value);setUser({...users,description:e.target.value})}} rows={5} />
+                                <TextArea name="description" id="description" value={users?.description} onChange={e => {handleForm('description',e.target.value);setUser({...users,description:e.target.value})}} rows={5} />
                             </div>
                             {renderFieldError('description')}
                         </div>
@@ -393,7 +393,7 @@ const ProfileForm = ({user}) => {
                             <Label label="Website" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="website_url" id="website_url" value={users.website_url!='disabled'?users.website_url:""} onChange={e => {handleForm('website_url',e.target.value);setUser({...users,website_url:e.target.value})}} disabled={users.website_url=='disabled'?true:false} />
+                                <Input name="website_url" id="website_url" value={users?.website_url!='disabled'?users.website_url:""} onChange={e => {handleForm('website_url',e.target.value);setUser({...users,website_url:e.target.value})}} disabled={users.website_url=='disabled'?true:false} />
                             </div>
                             {renderFieldError('website_url')}
                         </div>
@@ -405,7 +405,7 @@ const ProfileForm = ({user}) => {
                             <Label label="YouTube URL" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="youtube_url" id="youtube_url" value={users.youtube_url!='disabled'?users.youtube_url:""} onChange={e => {handleForm('youtube_url',e.target.value);setUser({...users,youtube_url:e.target.value})}} disabled={users.youtube_url=='disabled'?true:false} />
+                                <Input name="youtube_url" id="youtube_url" value={users?.youtube_url!='disabled'?users.youtube_url:""} onChange={e => {handleForm('youtube_url',e.target.value);setUser({...users,youtube_url:e.target.value})}} disabled={users.youtube_url=='disabled'?true:false} />
                             </div>
                             {renderFieldError('youtube_url')}
                         </div>
@@ -428,7 +428,7 @@ const ProfileForm = ({user}) => {
                         </div>
                         <div className="col-span-2 my-2 pb-6" >
                             <div className="mt-2.5">
-                                <TextArea name="multi_family_description" id="multi_family_description" value={users.multi_family_description} onChange={e => {handleForm('multi_family_description',e.target.value);setUser({...users,multi_family_description:e.target.value})}} rows={5} disabled={multiFamilyCheck == 0 ? true : false} />
+                                <TextArea name="multi_family_description" id="multi_family_description" value={users?.multi_family_description} onChange={e => {handleForm('multi_family_description',e.target.value);setUser({...users,multi_family_description:e.target.value})}} rows={5} disabled={multiFamilyCheck == 0 ? true : false} />
                             </div>
                             {renderFieldError('multi_family_description')}
                         </div>
@@ -451,7 +451,7 @@ const ProfileForm = ({user}) => {
                         </div>
                         <div className="col-span-2 my-2 pb-6" >
                             <div className="mt-2.5">
-                                <TextArea name="commercial_description" id="commercial_description" value={users.commercial_description} onChange={e => {handleForm('commercial_description',e.target.value);setUser({...users,commercial_description:e.target.value})}} rows={5} disabled={commercialCheck == 0 ? true : false} />
+                                <TextArea name="commercial_description" id="commercial_description" value={users?.commercial_description} onChange={e => {handleForm('commercial_description',e.target.value);setUser({...users,commercial_description:e.target.value})}} rows={5} disabled={commercialCheck == 0 ? true : false} />
                             </div>
                             {renderFieldError('commercial_description')}
                         </div>
@@ -474,7 +474,7 @@ const ProfileForm = ({user}) => {
                         </div>
                         <div className="col-span-2 my-2 pb-6" >
                             <div className="mt-2.5">
-                                <TextArea name="residential_description" id="residential_description" value={users.residential_description} onChange={e => {handleForm('residential_description',e.target.value);setUser({...users,residential_description:e.target.value})}} rows={5} disabled={residentialCheck == 0 ? true : false} />
+                                <TextArea name="residential_description" id="residential_description" value={users?.residential_description} onChange={e => {handleForm('residential_description',e.target.value);setUser({...users,residential_description:e.target.value})}} rows={5} disabled={residentialCheck == 0 ? true : false} />
                             </div>
                             {renderFieldError('residential_description')}
                         </div>
