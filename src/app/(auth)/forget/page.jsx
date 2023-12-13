@@ -3,7 +3,7 @@ import Right from "@/components/Front/Auth/Right";
 import ForgetPasswordForm from "./ForgetPasswordForm";
 
 export const metadata = {
-  title: 'Vendor Guide | Sign UP',
+  title: 'Vendor Guide | Forget Password',
 }
 
 const Page = () => {
