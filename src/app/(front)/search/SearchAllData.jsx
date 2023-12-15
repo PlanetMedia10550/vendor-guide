@@ -90,7 +90,7 @@ const SearchAllData = () => {
               Search Results
             </h1>
             <p className="lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
-              { (locality) ? `${locality} in ${search}` : "" }
+              { (locality) ? `${search} in ${locality}` : "" }
             </p>
           </div>
         </div>

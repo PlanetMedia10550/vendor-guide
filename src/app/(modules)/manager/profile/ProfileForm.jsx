@@ -15,66 +15,25 @@ import { getCookie } from "cookies-next";
 import { useAuth } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import userDefult from "@/../../public/images&icons/profile.png"
+import AddressAutocomplete from "./AddressAutocomplete";
 
 const ProfileForm = ({user}) => {
-    // console.log(user);
-    // return true;
-    const [isLoding, setIsLoding] = useState(false);
-    const [firstName, setFirstName] = useState(user?.first_name?user.first_name:'');
-    const [lastName, setLastName] = useState(user?.last_name?user.last_name:'');
-    const [email, setEmail] = useState(user?.email?user.email:'');
-    // const [name, setPropertyName] = useState(user?.name?user.name:'');
-    const [address, setAddress] = useState(user?.address?user.address:'');
-    const [city, setCity] = useState(user?.city?user.city:'');
-    const [state, setState] = useState(user?.state?user.state:'');
-    const [country, setCountry] = useState(user?.country?user.country:'');
-    const [zipCode, setZipCode] = useState(user?.postal_code?user.postal_code:'');
-    const [mobile, setMobile] = useState(user?.mobile?user.mobile:'');
-    const [image_id, setImageId] = useState(user?.image_id);
-    // console.log(image_id);
+  
+    const [imageId, setImageId] = useState(user.image_id);
     const [isImageLoading, setImageIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [imageSrc, setImageSrc] = useState(user?.image_url);
-    // console.log(imageSrc);
-    // const [type, setType] = useState(user.type?user.type:'');
-    const [isLoading, setIsLoading] = useState(false);
     const { errors,setErrors, renderFieldError} = useForm();
     const [form, setForm] = useState([]);
-
-    const handleForm = (name, value) => {
-        setForm({...form, [name]: value});
-        
-   }
+    const [users, setUser] = useState(user);
+    const {updateprofile,isLoding} = useAuth();
 
     
     const makeRequest = async (e) => {
-        // e.preventDefault();
-        setErrors(null);
-        setIsLoding(true);
+        e.preventDefault();
         var formData = new FormData(e.target);
-        formData.append('_method','PUT');
-        await axios.post(`${process.env.BASE_API_URL}manager/${user.id}`, formData).then(response => {
-            console.log(response.data);
-            setIsLoding(false);
-            // onClose(true)
-            toast.success(response.data.msg, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
-        }).catch(error => {
-            setIsLoding(false);
-            if(error?.response?.data?.errors) {
-                setErrors(error.response.data.errors);
-            }
-        });
-
-
+        // formData.append('image_id', users.image_id);
+        updateprofile(formData);
     };
 
     async function onImageUpload(event) {
@@ -90,16 +49,20 @@ const ProfileForm = ({user}) => {
             method: 'POST',
             body: formData,
           })
-     
+    //  console.log(response);
           if (!response.ok) {
             throw new Error('Failed to submit the data. Please try again.')
           }
      
           // Handle response if necessary
           const data = await response.json()
-        //   console.log(data.image_url)
-          setImageSrc(data.file_path)
-          setImageId(data.file_id);
+          setImageSrc(data.image_url)
+          setImageId(data.id);
+          
+        //   setUser({
+        //     ...users,
+        //     image_id: data.id,
+        //   });
           setForm({...form, ['image_id']: data.id});
           // ...
         } catch (error) {
@@ -128,7 +91,7 @@ const ProfileForm = ({user}) => {
                        </div>
                         <div className="col-span-9 mt-2.5">
                         <Label label="Have Photos?"  />
-                            <Input type="hidden" name="image_id" id="image_id" value={image_id}  />
+                            <Input type="hidden" name="image_id" id="image_id" value={imageId}  />
                             <Input type="file" name="image" id="image" style={{width:'100%',float:'left'}}  onChange={onImageUpload} />
                            
                         </div>
@@ -141,8 +104,11 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="First Name" required="required" />
                             <div className="mt-2.5">
-                                <Input name="first_name" id="first_name" value={firstName}  onChange={e => {handleForm('first_name',e.target.value);
-                                setFirstName(e.target.value)}} />
+                                <Input name="first_name" id="first_name" value={users.first_Name}  onChange={(e) => { 
+                                    var value = e.target.value;
+                                    setUser({...users, first_Name: value})
+                                }
+                                } />
                             </div>
                             {renderFieldError('first_name')}
                         </div>
@@ -150,7 +116,7 @@ const ProfileForm = ({user}) => {
                             <Label label="Last Name" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="last_name" id="last_name" value={lastName} onChange={e => {handleForm('last_name',e.target.value);setLastName(e.target.value)}} />
+                                <Input name="last_name" id="last_name" value={users.last_name} onChange={(e) => { var value = e.target.value; setUser({...users, last_name: value})}} />
                             </div>
                             {renderFieldError('last_name')}
                         </div>
@@ -159,64 +125,22 @@ const ProfileForm = ({user}) => {
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Email Address" required="required" />
-
                             <div className="mt-2.5">
-                                <Input  id="email" value={email} onChange={e => {handleForm('email',e.target.value);setEmail(e.target.value)}} disabled />
+                                <Input name="email" id="email" value={users.email} onChange={(e) => { var value = e.target.value;  setUser({...users, email: value})}} disabled />
                             </div>
                             {renderFieldError('email')}
                         </div>
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Phone Number" required="required" />
                             <div className="mt-2.5">
-                                <Input name="mobile" id="phone" value={mobile} onChange={e => {handleForm('phone',e.target.value);setMobile(e.target.value)}} />
+                                <Input name="mobile" id="phone" value={users.mobile} onChange={(e) => { var value = e.target.value; setUser({...users, mobile: value})}} />
                             </div>
                             {renderFieldError('phone')}
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="Address" required="required" />
-                            <div className="mt-2.5">
-                            <Input name="address" id="address" value={address} onChange={e => {handleForm('address',e.target.value);setAddress(e.target.value)}} />
-                            </div>
-                            {renderFieldError('address')}
-                        </div>
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="City" required="required" />
-                            <div className="mt-2.5">
-                                <Input name="city" id="city" value={city} onChange={e => {handleForm('city',e.target.value);setCity(e.target.value)}} />
-                            </div>
-                            {renderFieldError('city')}
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="State" required="required" />
-
-                            <div className="mt-2.5">
-                                <Input name="state" id="state" value={state} onChange={e => {handleForm('state',e.target.value);setState(e.target.value)}} />
-                            </div>
-                            {renderFieldError('state')}
-                        </div>
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="Country" required="required" />
-                            <div className="mt-2.5">
-                                <Input name="country" id="country" value={country} onChange={e => {handleForm('country',e.target.value);setCountry(e.target.value)}} />
-                            </div>
-                            {renderFieldError('country')}
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
-                        <Label label="Zip Code" required="required" />
-                        <div className="mt-2.5">
-                            <Input name="postal_code" id="zip_code" value={zipCode} onChange={e => {handleForm('zip_code',e.target.value);setZipCode(e.target.value)}} />
-                        </div>
-                        {renderFieldError('zip_code')}
-                        </div>
+                        <AddressAutocomplete users ={users}/>
                     </div>
                     <div className="w-half my-2" >
                         <div className="my-4">

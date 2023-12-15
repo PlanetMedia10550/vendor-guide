@@ -79,7 +79,7 @@ const Header = ({activeTab,setActiveTab}) => {
                       src={imagsrc ? imagsrc : userDefult.src}
                       alt="Header Avatar"
                     />
-                    <div>
+                    <div class="w-14">
                       <span className="text-left block align-middle text-white text-xs font-lato">
                         {isLoding ? (
                             <span>Loading...</span>
@@ -91,7 +91,7 @@ const Header = ({activeTab,setActiveTab}) => {
                     </div>
                   </button>
                   <div
-                    className={`dropdown-menu absolute top-[3.2rem] -left-1 z-40 w-40 list-none rounded bg-white shadow ${showMenu? 'hidden': ""}`}
+                    className={`dropdown-menu absolute top-[3.2rem] -left-4 z-40 w-40 list-none rounded bg-white shadow ${showMenu? 'hidden': ""}`}
                     id="profile/log"
                     data-popper-placement=""
                   >

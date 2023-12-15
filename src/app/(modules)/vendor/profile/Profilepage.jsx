@@ -8,7 +8,7 @@ import ProfileForm from "./ProfileForm";
 
 const Profilepage = () => {
     const {user}  = useAuth();
-
+console.log(user);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {

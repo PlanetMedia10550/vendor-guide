@@ -5,9 +5,7 @@ const AdvertiseTable = (props) => {
   const [advertiseData, setAdvertiseData] = useState([]);
   const [headerData, setHeaderData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  //  console.log(headerData);
-
- const opacityValues = [1, 0.4, 0.1];
+  
 
   useEffect(() => {
     const loadpackage = async () => {
@@ -41,22 +39,40 @@ const AdvertiseTable = (props) => {
     ):(
       <table className="table-responsive w-full text-sm md:text-lg font-bold text-left text-[#221F20] font-lato">
         <thead className="text-3xl text-[#221F20] font-bold  border-[#221F20] font-lato">
-  <tr className="text-center">
-    <th scope="col" className="px-3 py-3 border-collapse"></th>
-    {headerData.title.map((columnName, index) => (
-      <th
-        key={index}
-        scope="col"
-        className={`text-lg sm:text-xl md:text-2xl bg-[#C1272D] text-white px-3 py-3 border-2 border-[#221F20]`}
-        style={{ opacity: opacityValues[index] }}
-      >
-        {columnName} <br />
-        <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
-          Starting at ${parseFloat(headerData.price[index]).toFixed(2)}/month
-        </span>
-      </th>
-    ))}
-  </tr>
+        <tr className="text-center">
+      <th scope="col" className="px-3 py-3 border-collapse"></th>
+      {headerData.title.map((columnName, index) => (
+        <th
+          key={index}
+          scope="col"
+          className={`text-lg sm:text-xl md:text-2xl bg-[#C1272D] text-white px-3 py-3 border-2 border-[#221F20]`}
+          
+        >
+          {columnName} <br />
+          {headerData.sold_price !== undefined && (
+            <>
+              <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap"> Price:</span>
+              {parseFloat(headerData.sold_price[index]) > 0 ? (
+                <>
+                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
+                    ${parseFloat(headerData.sold_price[index]).toFixed(2)}
+                  </span>
+                  <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
+                    <del>${parseFloat(headerData.price[index]).toFixed(2)}</del> 
+                  </span>
+                </>
+              ) : (
+                <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
+                  ${parseFloat(headerData.price[index]).toFixed(2)}
+                </span>
+              )}
+            </>
+          )}
+
+        </th>
+      ))}
+    </tr>
+
 </thead>
         <tbody className="text-xl md:text-2xl border-3 border-[#221F20]">
         {Object.keys(advertiseData).map((key, index) => (

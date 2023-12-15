@@ -7,8 +7,12 @@ import { useState } from 'react'
 import Button from "@/components/Front/UI/Button";
 import { useAuth } from "@/context/UserContext";
 import Select from 'react-select';
+import AddressAutocomplete from "./AddressAutocomplete";
+
 export const SignupForm = () => {
     const [registerData, setRegisterData] = useState([]);
+    const [address, setAddress] = useState('');
+    
     const [userTypes, setUserTypes] = useState([
         {
             value:0,
@@ -23,7 +27,10 @@ export const SignupForm = () => {
             label:'Company'
         }
     ]);
+
+
     const {register,isLoding} = useAuth();
+    
     const makeRequest = (e) => {
         e.preventDefault();
         var formData = new FormData(e.target);
@@ -42,6 +49,14 @@ export const SignupForm = () => {
                         className="basic-multi-select "
                         classNamePrefix="select"
                     />
+                    </div>
+                </div>
+            </div>
+            <div className="grid grid-cols-2 gap-x-4">
+                <div className="col-span-2 my-2" >
+                    <Label label="Address" required="required" />
+                    <div className="mt-2.5">
+                        <AddressAutocomplete />
                     </div>
                 </div>
             </div>
