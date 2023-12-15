@@ -73,7 +73,7 @@ const Companyinfo = (props) => {
                 Search Results
               </h1>
               <p className="lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
-                { (props.searchWord) ? `${props.locality} in ${props.searchWord}` : "" }
+                { (props.searchWord) ? `${props.searchWord} in  ${props.locality}` : "" }
               </p>
             </div>
           </div>

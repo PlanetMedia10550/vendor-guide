@@ -16,9 +16,10 @@ import { useAuth } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import TextArea from "@/components/Front/UI/TextArea";
 import Select from 'react-select';
+import AddressAutocomplete from "./AddressAutocomplete";
 
 const ProfileForm = ({user}) => {
-    const [isLoding, setIsLoding] = useState(false);
+    const [loding, setLoding] = useState(false);
     const [users, setUser] = useState(user);
     const [imageSrc, setImageSrc] = useState(user?.image_url);
     const [isImageLoading, setImageIsLoading] = useState(false);
@@ -40,9 +41,9 @@ const ProfileForm = ({user}) => {
     const handleForm = (name, value) => {
         setForm({...form, [name]: value});
     }
-
-    useEffect(() => {
-        
+    const {updateprofile,isloding} = useAuth();
+    
+    useEffect(() => { 
     const categoriesResult = async () => {
         var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
           method: 'GET',
@@ -101,54 +102,15 @@ const ProfileForm = ({user}) => {
     const makeRequest = async (e) => {
         e.preventDefault();
         setErrors(null);
-        setIsLoding(true);
+        setLoding(true);
         var formData = new FormData(e.target);
         // formData.append('gallery_id[]',newGalleryIds.split(','));
         newGalleryIds.forEach(id => {
             formData.append('gallery_id[]', id);
         });
-
-        const response = await fetch(`${process.env.BASE_API_URL}vendor-profile-update`,{
-            method: 'POST',
-            body:formData,
-            headers: {
-                'Authorization': `Bearer ${getCookie('token')}`
-            }
-            
-        })
- 
-        if (!response.ok) {
-            setIsLoding(false);
-            toast.error('Failed to submit the data. Please try again.', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-            });
-            // throw new Error('Failed to submit the data. Please try again.')
+        updateprofile(formData); 
         }
     
-        // Handle response if necessary
-        const pdata = await response.json();
-        // console.log(pdata);
-        setIsLoding(false);
-        toast.success(pdata.message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        });
-
-
-    };
     // console.log(users);
     async function onImageUpload(event) {
         event.preventDefault();
@@ -170,8 +132,9 @@ const ProfileForm = ({user}) => {
           }
       
           const data = await response.json();
-          console.log(data.image_url);
-      
+        //   console.log(data.image_url);
+        //   console.log(data.id);
+        setImageSrc(data.image_url)
           setUser({
             ...users,
             image_id: data.id,
@@ -302,27 +265,21 @@ const ProfileForm = ({user}) => {
                             </div>
                             {renderFieldError('phone')}
                         </div>
-                        <div className="col-span-1 my-2 pb-6" >
-                            <Label label="Zip Code" required="required" />
-                            <div className="mt-2.5">
-                                <Input name="postal_code" id="postal_code" value={users?.postal_code} onChange={e => {handleForm('postal_code',e.target.value);setUser({...users,postal_code:e.target.value})}} />
-                            </div>
-                            {renderFieldError('postal_code')}
-                        </div>
                         
+                        <AddressAutocomplete users ={users}/>
+
                     </div>
 
-                    <div className="grid grid-cols-2 gap-x-4">
+                    {/* <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-2 my-2 pb-6" >
                             <Label label="Address" required="required" />
                             <div className="mt-2.5">
-                            <TextArea name="address" id="address" value={users?.address} onChange={e => {handleForm('address',e.target.value);setUser({...users,address:e.target.value})}} />
+                            <AddressAutocomplete users ={users}/>
                             </div>
                             {renderFieldError('address')}
                         </div>
                         
-                    </div>
-
+                    </div> */}
                     
 
                     <div className="grid grid-cols-2 gap-x-4">
@@ -506,7 +463,7 @@ const ProfileForm = ({user}) => {
                     <div className="w-half my-2" >
                         <div className="my-4">
 
-                            <Submit button="Submit" is_loding={isLoding} disabled={isLoding} />
+                            <Submit button="Submit" is_loding={loding} disabled={loding} />
                         </div>
                     </div>
                 </div>

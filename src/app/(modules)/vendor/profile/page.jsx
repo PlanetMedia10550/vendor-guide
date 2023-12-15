@@ -1,4 +1,5 @@
-import ProfileForm from "./ProfileForm";
+
+import Profilepage from "./Profilepage";
 
 export const metadata = {
     title: 'Vendor Guide | Profile'
@@ -7,7 +8,7 @@ export const metadata = {
 const Page = () => {
    
     return (
-        <ProfileForm/>
+        <Profilepage/>
     );
 };
 

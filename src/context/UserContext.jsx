@@ -381,6 +381,34 @@ export function UserProvider({ children }) {
     });
   };
 
+  const updateprofile = async (formData) => {
+      
+    setIsLoding(true);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
+        await axios.post(`user-profile-update`, formData).then(response => {
+            // console.log(response);
+            setIsLoding(false);
+            // onClose(true)
+            // if(response.data.success == true){
+            toast.success(response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+              // }
+        }).catch(error => {
+            setIsLoding(false);
+            if(error?.response?.data?.errors) {
+                setErrors(error.response.data.errors);
+            }
+        });
+  };
+
   const logout = (e) => {
     e.preventDefault();
     if(hasCookie('token')){
@@ -392,7 +420,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{user,isLogin,register,login,logout,renderFieldError,forgetpassword,resetpassword,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
+    <UserContext.Provider value={{user,isLogin,register,login,logout,renderFieldError,forgetpassword,resetpassword,updateprofile,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
       {children}
     </UserContext.Provider>
   );

@@ -62,7 +62,7 @@ const DetailsRight = ({filterData}) => {
             height="100"
             src={imageUrl ? imageUrl : vendorDefult.src}
             alt="Product screenshot"
-            className="mx-auto md:mx-0 w-[16rem] h-[8rem]"
+            className="mx-auto md:mx-0 w-[10rem] h-[10rem]"
           />
         </div>
         <div className="py-8  lg:py-7 gap-x-4 block text-left">
@@ -84,7 +84,6 @@ const DetailsRight = ({filterData}) => {
          ):(
           ''
          )}
-          
         </div>
         <div className="block text-left">
           <Link
