@@ -114,7 +114,7 @@ const Header = ({activeTab,setActiveTab}) => {
                       <div className="dropdown-item ">
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
-                          href={'/reset-password'}
+                          href={'reset-password'}
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
