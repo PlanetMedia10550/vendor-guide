@@ -1,19 +1,9 @@
-"use client";
+
 import Graph from "@/components/Front/NewRegionalmanagerDashboard/Graph";
 import Sideli from "@/components/Common/Sideli";
-import { getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import TabComponent from "../components/TabComponent";
 
 const Dashboardpage = () => {
-  const router = useRouter();
-  
-  useEffect(() => {
-    if(!getCookie('token')){
-      router.push('/');
-    }
-  }, []);
 
   return (
     <>

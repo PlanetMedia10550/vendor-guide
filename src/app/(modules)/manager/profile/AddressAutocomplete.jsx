@@ -93,27 +93,27 @@ const AddressAutocomplete = ({users}) => {
       <div className="col-span-1 my-2 pb-6" >
           <Label label="State" required="required" />
               <div className="mt-2.5">
-              <Input type="text" name="state" value={state} />
+              <Input type="text" name="state" value={state} onchange={(e)=>{setState(e.taget.value)}} />
               </div>
         
       </div>                 
       <div className="col-span-1 my-2 pb-6" >
           <Label label="City" required="required" />
               <div className="mt-2.5">
-                   <Input type="text" name="city" value={city} />
+                   <Input type="text" name="city" value={city} onchange={(e)=>{setCity(e.taget.value)}} />
               </div>
       </div> 
       <div className="col-span-1 my-2 pb-6" >
           <Label label="Country" required="required" />
               <div className="mt-2.5">
-              <Input type="text" name="country" value={country} />
+              <Input type="text" name="country" value={country} onchange={(e)=>{setCountry(e.taget.value)}} />
               </div>
       </div>                 
     
       <div className="col-span-1 my-2 pb-6" >
           <Label label="Postal Code" required="required" />
               <div className="mt-2.5">
-                   <Input type="text" name="postal_code" value={postalCode} />
+                   <Input type="text" name="postal_code" value={postalCode} onchange={(e)=>{setPostalCode(e.taget.value)}} />
               </div>
       </div>   
     </>

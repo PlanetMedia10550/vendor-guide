@@ -3,13 +3,43 @@ import Loading from "@/app/loadingScreen"
 import { useState } from 'react';
 import { getCookie } from 'cookies-next';
 import { toast } from 'react-toastify';
-const BidFavoriteButton = ({bid}) => {
+const BidFavoriteButton = ({bid,setVendorsData ,vendorsData}) => {
     const [isLoading, setLoading] = useState(false)
-    const [isFavorite, setIsFavorite] = useState(bid.favorite)
-    const [favoriteId, setFavoriteId] = useState(bid.favorite_id)
-    // console.log(isFavorite)
+
+    const allBidResult = async () => {
+      try {
+        const response2 = await fetch(`${process.env.BASE_API_URL}bid-vendor/${bid.id}`,{
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${getCookie('token')}`
+          },
+        })
+        if (!response2.ok) {
+            throw new Error('Failed to submit the data. Please try again.')
+        }
+        
+        // Handle response if necessary
+        var dataProp = await response2.json()
+        var newData = dataProp.data;
+        const updatedRows = newData.map(item => ({
+          'bid':item?.bid,
+          'bid_status':item?.is_bid_status,
+          'id':item?.bid_id,
+          'name':item.manager.name,
+          'email':item.manager.email,
+          'mobile':item.manager.mobile,
+          'vendor_id':item?.vendor_id,
+          'manager_id':item?.manager_id,
+          'favorite':item.is_favourite,
+        }));
+        setVendorsData(updatedRows);
+      } catch (error) {
+        // Capture the error message to display to the user
+        console.error(error)
+      }
+    }
+
     const handleFavorite = async () => {
-    //   console.log(bid)
       setLoading(true);
       
       try {
@@ -29,9 +59,6 @@ const BidFavoriteButton = ({bid}) => {
         
         // Handle response if necessary
         var dataProp = await favouriteRes.json()
-        // var newData = dataProp.data;
-        // console.log(dataProp.msg)
-        setFavoriteId(dataProp.data.id);
         toast.success(dataProp.msg, {
             position: "top-right",
             autoClose: 5000,
@@ -42,25 +69,23 @@ const BidFavoriteButton = ({bid}) => {
             progress: undefined,
             theme: "colored",
             });
-        setLoading(false)
-        setIsFavorite(1)
-        // console.error(requestsQuotes)
+            allBidResult();
+            setLoading(false)
         
       } catch (error) {
         // Capture the error message to display to the user
         console.error(error)
         setLoading(false)
-        setIsFavorite(0)
+        // setIsFavorite(0)
       }
     }
     
     const handleRemoveFavorite = async () => {
-    //   console.log(bid.favorite_id)
       setLoading(true);
       
       try {
         const formData = new FormData()
-        const favouriteRes = await fetch(`${process.env.BASE_API_URL}favourite/${favoriteId}`,{
+        const favouriteRes = await fetch(`${process.env.BASE_API_URL}favourite/${bid?.favorite?.id}`,{
           method: 'DELETE',
           headers: {
               'Authorization': `Bearer ${getCookie('token')}`
@@ -72,8 +97,6 @@ const BidFavoriteButton = ({bid}) => {
         
         // Handle response if necessary
         var dataProp = await favouriteRes.json()
-        // var newData = dataProp.data;
-        // console.log(dataProp.msg)
         toast.error(dataProp.msg, {
             position: "top-right",
             autoClose: 5000,
@@ -84,19 +107,18 @@ const BidFavoriteButton = ({bid}) => {
             progress: undefined,
             theme: "colored",
             });
-        setLoading(false)
-        setIsFavorite(0)
-        // console.error(requestsQuotes)
+          allBidResult();
+          setLoading(false)
         
       } catch (error) {
         // Capture the error message to display to the user
         console.error(error)
         setLoading(false)
-        setIsFavorite(1)
+        // setIsFavorite(1)
       }
     }
 
-    return isFavorite==1 ? <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleRemoveFavorite} severity="info" rounded> {isLoading ? <Loading /> : "Remove from favorite"}  </Button> :<Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleFavorite} severity="info" rounded> {isLoading ? <Loading /> : "Add To favorite"}  </Button>;
+    return bid?.favorite ? <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleRemoveFavorite} severity="info" > {isLoading ? <Loading /> : "Remove from favorite"}  </Button> :<Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleFavorite} severity="info" > {isLoading ? <Loading /> : "Add To favorite"}  </Button>;
 }
 
 export default BidFavoriteButton;

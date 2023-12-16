@@ -6,13 +6,12 @@ import { useEffect } from 'react';
 
 const AddressAutocomplete = ({users}) => {
   // console.log(users)
-    const [postalCode, setPostalCode] = useState(users.postal_code);
-    const [city, setCity] = useState(users.city);
-    const [address, setAddress] = useState(users.address);
-    const [state, setState] = useState(users.state);
-    const [country, setCountry] = useState(users.country);
-    const [latitude, setLatitude] = useState(users.latitude);
-    const [longitude, setLongitude] = useState(users.longitude);
+    const [postalCode, setPostalCode] = useState(users?.postal_code);
+    const [city, setCity] = useState(users?.city);
+    const [address, setAddress] = useState(users?.address);
+    const [country, setCountry] = useState(users?.country);
+    const [latitude, setLatitude] = useState(users?.latitude);
+    const [longitude, setLongitude] = useState(users?.longitude);
   useEffect(() => {
     const gmapKey = process.env.GOOGLE_MAP_API_KEY;
     const gmapLib = 'places';
@@ -70,7 +69,6 @@ const AddressAutocomplete = ({users}) => {
       }
                 setCity(city);
                 setCountry(country);
-                setState(state);
                 setPostalCode(zipCode);
                 setLatitude(latitude);
                 setLongitude(longitude);
@@ -84,39 +82,32 @@ const AddressAutocomplete = ({users}) => {
     
     <Input type="hidden" name="latitude" value={latitude} />
     <Input type="hidden" name="longitude" value={longitude} /> 
-      <div className="col-span-1 my-2 pb-6" >
+      <div className="col-span-2 my-2 pb-6" >
           <Label label="Address" required="required" />
               <div className="mt-2.5">
                   <Input name="address" id="address" value={address} onchange={(e)=>{initializeAutocomplete(e.taget.value)}}/>
               </div>
         
-      </div> 
-      <div className="col-span-1 my-2 pb-6" >
-          <Label label="State" required="required" />
-              <div className="mt-2.5">
-              <Input type="text" name="state" value={state} />
-              </div>
-        
-      </div>                 
+      </div>                
       <div className="col-span-1 my-2 pb-6" >
           <Label label="City" required="required" />
               <div className="mt-2.5">
-                   <Input type="text" name="city" value={city} />
+                   <Input type="text" name="city" value={city} onchange={(e)=>{setCity(e.taget.value)}} />
               </div>
       </div> 
       <div className="col-span-1 my-2 pb-6" >
           <Label label="Country" required="required" />
               <div className="mt-2.5">
-              <Input type="text" name="country" value={country} />
+              <Input type="text" name="country" value={country} onchange={(e)=>{setCountry(e.taget.value)}} />
               </div>
       </div>                 
     
       <div className="col-span-1 my-2 pb-6" >
           <Label label="Postal Code" required="required" />
               <div className="mt-2.5">
-                   <Input type="text" name="postal_code" value={postalCode} />
+                   <Input type="text" name="postal_code" value={postalCode} onchange={(e)=>{setPostalCode(e.taget.value)}} />
               </div>
-      </div>              
+      </div>         
    
 
     </>

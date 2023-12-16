@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import userDefult from "@/../../public/images&icons/profile.png"
 import AddressAutocomplete from "./AddressAutocomplete";
 
-const ProfileForm = ({user}) => {
+const ProfileForm = ({user,userAllInfo}) => {
   
     const [imageId, setImageId] = useState(user.image_id);
     const [isImageLoading, setImageIsLoading] = useState(false);
@@ -26,6 +26,7 @@ const ProfileForm = ({user}) => {
     const { errors,setErrors, renderFieldError} = useForm();
     const [form, setForm] = useState([]);
     const [users, setUser] = useState(user);
+    const [usersInfo, setUserInfo] = useState(userAllInfo);
     const {updateprofile,isLoding} = useAuth();
 
     
@@ -49,7 +50,6 @@ const ProfileForm = ({user}) => {
             method: 'POST',
             body: formData,
           })
-    //  console.log(response);
           if (!response.ok) {
             throw new Error('Failed to submit the data. Please try again.')
           }
@@ -59,12 +59,7 @@ const ProfileForm = ({user}) => {
           setImageSrc(data.image_url)
           setImageId(data.id);
           
-        //   setUser({
-        //     ...users,
-        //     image_id: data.id,
-        //   });
           setForm({...form, ['image_id']: data.id});
-          // ...
         } catch (error) {
           // Capture the error message to display to the user
           setError(error.message)
@@ -101,12 +96,23 @@ const ProfileForm = ({user}) => {
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-x-4">
+                        <div className="col-span-2 my-2 pb-6" >
+                            <Label label="Name" required="required" />
+                            <div className="mt-2.5">
+                                <Input name="name" id="name" value={usersInfo.name}  onChange={(e) => { 
+                                    var value = e.target.value;
+                                    setUserInfo({...usersInfo, name: value})
+                                }
+                                } />
+                            </div>
+                            {renderFieldError('first_name')}
+                        </div>
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="First Name" required="required" />
                             <div className="mt-2.5">
-                                <Input name="first_name" id="first_name" value={users.first_Name}  onChange={(e) => { 
+                                <Input name="first_name" id="first_name" value={users.first_name}  onChange={(e) => { 
                                     var value = e.target.value;
-                                    setUser({...users, first_Name: value})
+                                    setUser({...users, first_name: value})
                                 }
                                 } />
                             </div>

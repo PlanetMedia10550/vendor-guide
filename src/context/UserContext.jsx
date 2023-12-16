@@ -14,6 +14,7 @@ const UserContext = createContext();
 export function UserProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [userAllInfo, setUserAllInfo] = useState(null);
   const [sitesetting, setSiteSetting] = useState();
   const [metaData, setMetaData] =useState();
   const [isLogin, setIsLogin] = useState(false);
@@ -24,7 +25,6 @@ export function UserProvider({ children }) {
   const token = getCookie('token');
   const is_module_type = getCookie('type');
   
-  // console.log(is_module_type);return false;
   const { errors,setErrors, renderFieldError, navigate } = useForm();
 
   useEffect(() => {
@@ -83,6 +83,7 @@ export function UserProvider({ children }) {
               deleteCookie('user-type')
               setCookie('token', res.data.token,{maxAge: 3600 });
               setCookie('user-type', res.data.data.type,{maxAge: 3600 });
+              
               if(res.data.data.type==1){
                 setUser(res.data.data.managers)
               }
@@ -92,6 +93,7 @@ export function UserProvider({ children }) {
               if(res.data.data.type==2){
                 setUser(res.data.data.company)
               }
+              setUserAllInfo(res.data.data);
           }
       }).catch(error => {
           setIsLoding(false);
@@ -324,6 +326,7 @@ export function UserProvider({ children }) {
             setCookie('user-type', res.data.data.type,{maxAge: 3600 });
             // setUser(res.data.data)
             // router.push(`/`);
+            setUserAllInfo(res.data.data)
             if(res.data.data.type==1){
               setUser(res.data.data.managers)
               router.push(`/manager/dashboard`);
@@ -415,12 +418,13 @@ export function UserProvider({ children }) {
       deleteCookie('token')
       deleteCookie('user-type')
       setUser(null); 
+      setUserAllInfo(null); 
       router.push(`/login`);
     }
   };
 
   return (
-    <UserContext.Provider value={{user,isLogin,register,login,logout,renderFieldError,forgetpassword,resetpassword,updateprofile,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading}}>
+    <UserContext.Provider value={{user,isLogin,register,login,logout,renderFieldError,forgetpassword,resetpassword,updateprofile,isLoding,isInfoLoding,navigate,sitesetting,metaData,loading,userAllInfo}}>
       {children}
     </UserContext.Provider>
   );

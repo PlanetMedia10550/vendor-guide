@@ -8,14 +8,11 @@ import ProfileForm from "./ProfileForm";
 import LoadingComponents from '@/components/LoadingComponents';
 
 const Profilepage = () => {
-    const {user}  = useAuth();
+    const {user,userAllInfo}  = useAuth();
 
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        if(!getCookie('token')){
-            router.push('/');
-        }
         if(user){
             setIsLoading(false);
         }
@@ -27,7 +24,7 @@ const Profilepage = () => {
             isLoading ? 
             <div className="text-center text-xl font-semibold text-[#171717] text-left leading-[1.5rem] my-4">
             <LoadingComponents />
-          </div> :<ProfileForm user={user} />
+          </div> :<ProfileForm user={user} userAllInfo={userAllInfo} />
         }
             
         </>

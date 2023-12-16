@@ -3,22 +3,17 @@ import Label from "@/components/Front/UI/Label";
 import Input from "@/components/Front/UI/Input";
 import Submit from "@/components/Front/UI/Submit";
 import { useEffect, useState } from 'react';
-// import SelectDropdown from "./Front/UI/SelectDropdown";
-// import TextArea from "./Front/UI/TextArea";
-import axios from "axios";
 import {useForm} from "@/hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getCookie } from "cookies-next";
 import { useAuth } from "@/context/UserContext";
-import { useRouter } from "next/navigation";
 import TextArea from "@/components/Front/UI/TextArea";
 import Select from 'react-select';
 import AddressAutocomplete from "./AddressAutocomplete";
 
-const ProfileForm = ({user}) => {
+const ProfileForm = ({user,userAllInfo}) => {
     const [loding, setLoding] = useState(false);
     const [users, setUser] = useState(user);
     const [imageSrc, setImageSrc] = useState(user?.image_url);
@@ -248,7 +243,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Email Address" required="" />
                             <div className="mt-2.5">
-                                <Input  id="email" value={users?.email} disabled="disabled"/>
+                                <Input  id="email" value={userAllInfo?.email} disabled="disabled"/>
                             </div>
                             {renderFieldError('email')}
                         </div>
@@ -269,17 +264,6 @@ const ProfileForm = ({user}) => {
                         <AddressAutocomplete users ={users}/>
 
                     </div>
-
-                    {/* <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-2 my-2 pb-6" >
-                            <Label label="Address" required="required" />
-                            <div className="mt-2.5">
-                            <AddressAutocomplete users ={users}/>
-                            </div>
-                            {renderFieldError('address')}
-                        </div>
-                        
-                    </div> */}
                     
 
                     <div className="grid grid-cols-2 gap-x-4">

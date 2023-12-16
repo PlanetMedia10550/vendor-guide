@@ -6,18 +6,19 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useAuth } from "@/context/UserContext";
-import BidFavoriteButton from "./BidFavoriteButton";
+import FavoriteButton from "./FavoriteButton";
 
 
 const FavoriteAllData = () => {
   const {user,renderFieldError,isLoding}  = useAuth();
   const [requestsQuotes, setRequestsQuotes] = useState([]);
   const columns = [
-      {field: 'vendorname', header: 'Vendor Name',sortable:'sortable'},
+      {field: 'managername', header: 'Manager Name',sortable:'sortable'},
       {field: 'contact', header: 'Contact'},
       {field: 'phone', header: 'Phone'},
-      {field: 'vendor_id', header: 'Action', colbody: true},
+      {field: 'manager_id', header: 'Action', actionButton: favoriteBtn},
   ];
+
   const [tabnumber, settabNumber] = useState(1);
   // console.log(user.data.id)
 
@@ -44,13 +45,12 @@ const FavoriteAllData = () => {
         // console.log(newData)
         // const bidenumber = new Date().getFullYear();
         const updatedRows = newData.map(item => ({
-          'vendorname':item.manager.name,
+          'managername':item.manager.name,
           'contact':item.manager.email,
           'phone':item.manager.mobile,
           'vendor_id':item.vendor_id,
           'manager_id':item.manager_id,
-          'favorite_id':item.id,
-          'favorite':1,
+          'id':item.id
         }));
         setRequestsQuotes(updatedRows);
         // console.error(requestsQuotes)
@@ -63,8 +63,8 @@ const FavoriteAllData = () => {
     // console.log(requestsQuotes)
   }, [])
 
-  const favoriteBtn = (bid) => {
-    return <BidFavoriteButton bid={bid}  />;
+  function favoriteBtn (row) {
+    return <FavoriteButton row={row} setRequestsQuotes={setRequestsQuotes}  />;
   };
 
 
@@ -75,7 +75,7 @@ const FavoriteAllData = () => {
                 tbody:{className:'border-[1px] border-black'}
             }} >
                 {columns.map((col, i) => (
-                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.colbody?favoriteBtn:''}   style={{ width: '25%' }} pt={{
+                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.actionButton}   style={{ width: '25%' }} pt={{
                     headerCell:{className: 'p-4 pr-8 border-b-[1px] border-black  text-black sorting sorting_asc whitespace-nowrap text-black text-left '},
                     bodyCell:{className: 'p-4 pr-8  border-b-[1px] border-black sorting_1 whitespace-nowrap text-sm justify-around '}
                     }}  />

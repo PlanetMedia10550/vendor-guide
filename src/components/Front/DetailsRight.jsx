@@ -69,7 +69,7 @@ const DetailsRight = ({filterData}) => {
           <h3 className="text-lg font-lato font-bold   text-[#647589]">
           {filterData.address}
           </h3>
-        {filterData.postal_code ?(
+        {(filterData.postal_code && filterData.address) ?(
              <h3 className="text-lg font-lato font-bold text-[#647589] py-3">
              {filterData.country} {filterData.postal_code }
              </h3>

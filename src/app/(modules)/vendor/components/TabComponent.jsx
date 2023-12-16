@@ -1,9 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useAuth } from "@/context/UserContext";
-import BidAllData from "./BidAllData";
-import FavoriteAllData from "./FavoriteAllData";
-
+import BidAllData from "../components/BidAllData";
+import FavoriteAllData from "../components/FavoriteAllData";
 
 const TabComponent = () => {
   const {user,renderFieldError,isLoding}  = useAuth();
