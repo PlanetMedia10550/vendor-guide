@@ -6,10 +6,8 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useAuth } from "@/context/UserContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import BidFavoriteButton from "@/components/Front/BidFavoriteButton";
+import AssignStatusButton from "@/app/(modules)/manager/bids/[id]/AssignStatusButton";
 
 const BidMessage = ({bid}) => {
   const {navigate}  = useAuth();
@@ -18,7 +16,7 @@ const BidMessage = ({bid}) => {
   }
 // console.log(bid)
   return (
-    <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleGoVendors} severity="info" rounded>Message</Button>
+    <Button type="button" className="bg-green-600 text-white p-2" onClick={handleGoVendors} severity="info" >Message</Button>
   )
 }
 
@@ -29,7 +27,8 @@ const TableData = ({bidId}) => {
       {field: 'name', header: 'Vendor Name',sortable:'sortable'},
       {field: 'email', header: 'Email'},
       {field: 'mobile', header: 'Mobile'},
-      {field: 'vendor_id', header: 'Action', colbody: true},
+      {field: 'assign_to', header: 'Issue To Bid', actionBtn: statusBtn},
+      {field: 'vendor_id', header: 'Action', actionBtn: favoriteBtn},
   ];
   // console.log(user.data.id)
 
@@ -53,16 +52,18 @@ const TableData = ({bidId}) => {
         // Handle response if necessary
         var dataProp = await response2.json()
         var newData = dataProp.data;
-        console.log(newData);
+        // console.log(newData);
         const updatedRows = newData.map(item => ({
+          'bid':item?.bid,
+          'bid_status':item?.is_bid_status,
           'id':item?.bid_id,
           'name':item.vendor.name,
           'email':item.vendor.email,
           'mobile':item.vendor.mobile,
           'vendor_id':item?.vendor_id,
           'manager_id':item?.manager_id,
-          'favorite_id':item.bid?.favourites?.vendor_id,
-          'favorite':item.bid?.favourites?.vendor_id,
+          'favorite':item.is_favourite,
+          'bid_assgin_vendor':item.is_bid_assgin,
         }));
         setVendorsData(updatedRows);
         
@@ -73,10 +74,16 @@ const TableData = ({bidId}) => {
       }
     }
     allResult();
+
+
   }, [])
 
-  const favoriteBtn = (bid) => {
-    return <><BidFavoriteButton bid={bid}  /> <BidMessage bid={bid} /></>;
+  function favoriteBtn (bid) {
+    return <><BidFavoriteButton bid={bid} setVendorsData={setVendorsData} vendorsData={vendorsData}  /> <BidMessage bid={bid} /></>;
+  };
+
+  function statusBtn(bid) {  
+    return <AssignStatusButton bid={bid} setVendorsData={setVendorsData} vendorsData={vendorsData} />; 
   };
 
   return (
@@ -86,7 +93,7 @@ const TableData = ({bidId}) => {
                 tbody:{className:'border-[1px] border-black'}
             }} >
                 {columns.map((col, i) => (
-                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.colbody?favoriteBtn:''}   style={{ width: '25%' }} pt={{
+                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.actionBtn}   style={{ width: '25%' }} pt={{
                     headerCell:{className: 'p-4 pr-8 border-b-[1px] border-black  text-black sorting sorting_asc whitespace-nowrap text-black text-left '},
                     bodyCell:{className: 'p-4 pr-8  border-b-[1px] border-black sorting_1 whitespace-nowrap text-sm justify-around '}
                     }}  />

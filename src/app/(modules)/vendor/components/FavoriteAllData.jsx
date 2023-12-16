@@ -44,9 +44,9 @@ const FavoriteAllData = () => {
         // console.log(newData)
         // const bidenumber = new Date().getFullYear();
         const updatedRows = newData.map(item => ({
-          'vendorname':item.vendor.name,
-          'contact':item.vendor.email,
-          'phone':item.vendor.mobile,
+          'vendorname':item.manager.name,
+          'contact':item.manager.email,
+          'phone':item.manager.mobile,
           'vendor_id':item.vendor_id,
           'manager_id':item.manager_id,
           'favorite_id':item.id,
