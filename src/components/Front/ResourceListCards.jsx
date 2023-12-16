@@ -38,7 +38,7 @@ const ResourceListCards = (props) => {
     getProducts();
   }, []);
 
-  console.log(items);
+ 
 
   return (
     <>
