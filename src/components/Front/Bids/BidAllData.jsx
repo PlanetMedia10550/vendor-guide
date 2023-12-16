@@ -8,6 +8,7 @@ import { Button } from 'primereact/button';
 import { useAuth } from "@/context/UserContext";
 import BidFavoriteButton from "@/components/Front/BidFavoriteButton";
 import { useRouter } from "next/navigation";
+import StatusButton from "@/app/(modules)/manager/bids/[id]/StatusButton";
 
 const BidVendorsButton = ({bid}) => {
   const {navigate}  = useAuth();
@@ -16,14 +17,14 @@ const BidVendorsButton = ({bid}) => {
   }
 
   return (
-    <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleGoVendors} severity="info" rounded>View</Button>
+    <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleGoVendors} severity="info" >View</Button>
   )
 }
 
 const BidAllData = () => {
   const {user,renderFieldError,isLoding,navigate}  = useAuth();
   const [requestsQuotes, setRequestsQuotes] = useState([]);
-
+  const [bidStatus, setBidStatus] = useState([]);
   // console.log(requestsQuotes)
   const columns = [
       {field: 'bidenumber', header: 'Bid Number',sortable:'sortable'},
@@ -33,8 +34,8 @@ const BidAllData = () => {
       {field: 'createddate', header: 'Creation Date'},
       {field: 'closedate', header: 'Est.Close Date'},
       {field: 'priority', header: 'Priority'},
-      {field: 'status', header: 'Status'},
-      {field: 'vendor', header: 'Vendors', colbody: true},
+      {field: 'status', header: 'Status',actionBtn: statusBtn},
+      {field: 'vendor', header: 'Vendors', actionBtn: vendorBtn},
   ];
   const [tabnumber, settabNumber] = useState(1);
   // console.log(user.data.id)
@@ -72,8 +73,8 @@ const BidAllData = () => {
           'property':item.property_name,
           'createddate':item.created_at,
           'closedate':item.close_date,
-          'priority':item.priority,
-          'status':'Draft',
+          'status':item.status,
+          'priority':item.priority
         }));
         setRequestsQuotes(updatedRows);
         // console.error(requestsQuotes)
@@ -84,11 +85,28 @@ const BidAllData = () => {
     }
     bidResponse();
     // console.log(requestsQuotes)
+
+    const bidStatusLoad = async () => {
+      const response2 = await fetch(`${process.env.BASE_API_URL}bid-status`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${getCookie('token')}`
+        },
+      })
+      var dataProp = await response2.json()
+      var newData = dataProp?.data;  
+      setBidStatus(newData)
+    }
+    bidStatusLoad();
   }, [])
 
-  const vendorBtn = (bid) => {
+  function vendorBtn (bid) {
     // navigate.push(`/manager/bids/${bid.id}`);
     return <BidVendorsButton bid={bid}  />;
+  };
+
+  function statusBtn(bid) {  
+    return <StatusButton bid={bid} setRequestsQuotes={setRequestsQuotes} requestsQuotes={requestsQuotes} bidStatus={bidStatus} />; 
   };
 
   return (
@@ -98,9 +116,9 @@ const BidAllData = () => {
                 tbody:{className:'border-[1px] border-black'}
             }} >
                 {columns.map((col, i) => (
-                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.colbody?vendorBtn:''}   style={{ width: '25%' }} pt={{
-                    headerCell:{className: 'p-4 pr-8 border-b-[1px] border-black  text-black sorting sorting_asc whitespace-nowrap text-black text-left '},
-                    bodyCell:{className: 'p-4 pr-8  border-b-[1px] border-black sorting_1 whitespace-nowrap text-sm justify-around '}
+                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.actionBtn}   style={{ width: '10%' }} pt={{
+                    headerCell:{className: 'p-4 pr-4 border-b-[1px] border-black  text-black sorting sorting_asc whitespace-nowrap text-black text-left '},
+                    bodyCell:{className: 'p-4 pr-4  border-b-[1px] border-black sorting_1 whitespace-nowrap text-sm justify-around '}
                     }}  />
                 ))}
     </DataTable>
