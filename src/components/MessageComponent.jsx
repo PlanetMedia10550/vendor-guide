@@ -48,35 +48,35 @@ export default function MessageComponent({bidId,receiverId,styles}) {
 
     }
 
-    // useEffect(()=>{
-    //     async function getMessages() {
-    //         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
-    //         await axios.get(`${process.env.BASE_API_URL}bid-message-list/${bidId}/${bidReceiverId}`).then(response => {
-    //             var messages = response.data;
-    //             if(messages.status==true){
-    //                 var newMessagesData = messages?.data?.list?.map((v) => ({
-    //                     sender: v.sender_id,
-    //                     receiver: v.receiver_id,
-    //                     receiver_name: v.receiver?.name,
-    //                     sender_name: v.sender?.name,
-    //                     message: v.message,
-    //                     images: v.bid_img,
-    //                     time: v.time,
-    //                     isload:false
-    //                 }));
-    //                 setTextBox(newMessagesData);
-    //                 setBidName(messages?.data?.bid?.project_name)
-    //                 setIsPageLoading(false)
-    //             }
-    //         }).catch(error => {
-    //             var errors = error?.response?.data?.data;
-    //         });
+    useEffect(()=>{
+        async function getMessages() {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
+            await axios.get(`${process.env.BASE_API_URL}bid-message-list/${bidId}/${bidReceiverId}`).then(response => {
+                var messages = response.data;
+                if(messages.status==true){
+                    var newMessagesData = messages?.data?.list?.map((v) => ({
+                        sender: v.sender_id,
+                        receiver: v.receiver_id,
+                        receiver_name: v.receiver?.name,
+                        sender_name: v.sender?.name,
+                        message: v.message,
+                        images: v.bid_img,
+                        time: v.time,
+                        isload:false
+                    }));
+                    setTextBox(newMessagesData);
+                    setBidName(messages?.data?.bid?.project_name)
+                    setIsPageLoading(false)
+                }
+            }).catch(error => {
+                var errors = error?.response?.data?.data;
+            });
         
-    //     };
+        };
 
-    //     getMessages()
-    //     scrollToBottom()
-    // },[message])
+        getMessages()
+        scrollToBottom()
+    },[message])
 
     async function formAction(e) {
         e.preventDefault();
