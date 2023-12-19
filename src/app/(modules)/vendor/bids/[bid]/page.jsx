@@ -1,7 +1,7 @@
 import TableData from "./TableData";
 
 const Page = ({ params }) => {
-  const id = params.id;
+  const id = params.bid;
 //   console.log(id)
   return (
     <section className="pt-14">
