@@ -19,12 +19,12 @@ const DetailsHero = ({src , filterData}) => {
           <div className="breadcrumb text-white py-4 text-lg">
             <Link href="#">Vendor Guide</Link>
             <span className="seprater"> / </span>
-            <span className="current text-xl font-lato">{filterData.name}</span>
+            <span className="current text-xl font-lato">{filterData?.name}</span>
           </div>
         </div>
         <main className="magazine_heading px-4 sm:px-6 lg:px-8 z-10 lg:py-12 relative text-center">
           <h2 className="text:sm sm:text-lg md:text-2xl lg:text-3xl xl:text-[3rem] font-lato -tracking-tight md:leading-10 lg:leading-[3.5rem] font-semibold  text-white   font-lato lg:px-10">
-            {filterData.name}
+            {filterData?.name}
           </h2>
         </main>
       </div>

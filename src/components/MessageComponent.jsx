@@ -38,7 +38,7 @@ export default function MessageComponent({bidId,receiverId,styles}) {
         setIsModalOpen(false);
     };
 
-    const scrollToBottom = () => {
+    function scrollToBottom () {
         if (messagesEndRef) {
             messagesEndRef.current.addEventListener('DOMNodeInserted', event => {
                 const { currentTarget: target } = event;
@@ -75,11 +75,8 @@ export default function MessageComponent({bidId,receiverId,styles}) {
         };
 
         getMessages()
-    },[])
-
-    useEffect(() => {
         scrollToBottom()
-    }, []);
+    },[message])
 
     async function formAction(e) {
         e.preventDefault();

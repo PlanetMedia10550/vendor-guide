@@ -150,7 +150,7 @@ import { useEffect } from "react";
                 </li>
                 <li >
                   <Link
-                    href="/pages/about"
+                    href="/about"
                     className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
                   >
                     About
@@ -158,7 +158,7 @@ import { useEffect } from "react";
                 </li>
                 <li >
                   <Link
-                    href="/pages/contact-us"
+                    href="/contact-us"
                     className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
                   >
                     Contact

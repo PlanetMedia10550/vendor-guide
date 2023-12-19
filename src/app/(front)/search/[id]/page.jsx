@@ -81,13 +81,13 @@ const Details = (params) => {
               <div>
                 <div>
                   <p className="text-[#647589] text-lg font-medium font-lato leading-8">
-                    {filterData.description}
+                    {filterData?.description}
                   </p>
                 </div>
                 {isLoading ? (
                     <div className="my-10 text-center text-gray-500">Loading...</div>
                   ) : (
-                    filterData.multi_family !== 0 ? (
+                    filterData?.multi_family !== 0 ? (
                       <div className="my-10">
                         <label
                           htmlFor=""
@@ -96,7 +96,7 @@ const Details = (params) => {
                           Multifamily Description
                         </label>
                         <p className="text-[#647589] text-lg font-medium font-lato leading-8">
-                          <span>{filterData.multi_family_description}</span>
+                          <span>{filterData?.multi_family_description}</span>
                         </p>
                       </div>
                     ) : (
@@ -108,7 +108,7 @@ const Details = (params) => {
              {isLoading ? (
                     <div className="my-10 text-center text-gray-500">Loading...</div>
                   ) : (
-                    filterData.commercial !== 0 ? (
+                    filterData?.commercial !== 0 ? (
                       <div className="my-10">
                         <label
                           htmlFor=""
@@ -117,7 +117,7 @@ const Details = (params) => {
                           Commercial Description
                         </label>
                         <p className="text-[#647589] text-lg font-medium font-lato leading-8">
-                          <span>{filterData.commercial_description}</span>
+                          <span>{filterData?.commercial_description}</span>
                         </p>
                       </div>
                     ) : (
@@ -129,7 +129,7 @@ const Details = (params) => {
              {isLoading ? (
                     <div className="my-10 text-center text-gray-500">Loading...</div>
                   ) : (
-                    filterData.residential !== 0 ? (
+                    filterData?.residential !== 0 ? (
                       <div className="my-10">
                         <label
                           htmlFor=""
@@ -138,7 +138,7 @@ const Details = (params) => {
                           Residential Description
                         </label>
                         <p className="text-[#647589] text-lg font-medium font-lato leading-8">
-                          <span>{filterData.residential_description}</span>
+                          <span>{filterData?.residential_description}</span>
                         </p>
                       </div>
                     ) : (
