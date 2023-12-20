@@ -6,6 +6,5 @@ export default function page({params}) {
     const bidReceiverId = params.id[1];
     return (
         <MessageComponent bidId={bidId} receiverId={bidReceiverId} styles={styles} />
-        // <h1>Hello</h1>
     );
 };

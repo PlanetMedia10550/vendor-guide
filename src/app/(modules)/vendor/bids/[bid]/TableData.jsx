@@ -11,7 +11,7 @@ import BidFavoriteButton from "../../components/BidFavoriteButton";
 const BidMessage = ({bid}) => {
   const {navigate}  = useAuth();
   const handleGoVendors = async () => {
-    navigate.push(`/vendor/bids/${bid.id}/${bid.manager_id}`);
+    navigate.push(`/vendor/message/${bid.id}/${bid.manager_id}`);
   }
 // console.log(bid)
   return (
