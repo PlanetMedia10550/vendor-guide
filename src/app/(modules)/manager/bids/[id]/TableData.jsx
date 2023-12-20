@@ -12,7 +12,7 @@ import AssignStatusButton from "@/app/(modules)/manager/bids/[id]/AssignStatusBu
 const BidMessage = ({bid}) => {
   const {navigate}  = useAuth();
   const handleGoVendors = async () => {
-    navigate.push(`/manager/bids/${bid.id}/${bid.vendor_id}`);
+    navigate.push(`/manager/message/${bid.id}/${bid.vendor_id}`);
   }
 // console.log(bid)
   return (
