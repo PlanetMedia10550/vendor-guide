@@ -57,6 +57,7 @@ const AssignStatusButton = ({ bid,setVendorsData ,vendorsData}) => {
       "Do you really want to Award to bid?"
     )
     if (confirmBox === true) {
+      setLoading(true);
       const data = {
         'bid_id': bid.id,
         'manager_id': bid.manager_id,
@@ -66,6 +67,7 @@ const AssignStatusButton = ({ bid,setVendorsData ,vendorsData}) => {
       const response = await axios.post(`${process.env.BASE_API_URL}bid-assgin-vendor`, data).then(response => {
           const result = response.data; 
           // setOStatus(currentStatus);
+          setLoading(false);
           allResult();
           toast.success(response.data.msg, {
             position: "top-right",
@@ -88,6 +90,7 @@ const AssignStatusButton = ({ bid,setVendorsData ,vendorsData}) => {
       "Do you really want to Awarded to remove?"
     )
     if (confirmBox === true) {
+      setLoading(true);
       const data = {
         'bid_id': bid.id,
         'manager_id': bid.manager_id,
@@ -97,6 +100,7 @@ const AssignStatusButton = ({ bid,setVendorsData ,vendorsData}) => {
       const response = await axios.post(`${process.env.BASE_API_URL}bid-assgin-vendor`, data).then(response => {
           const result = response.data; 
           // setOStatus(currentStatus);
+          setLoading(false);
           allResult();
           toast.success(response.data.msg, {
             position: "top-right",
@@ -120,14 +124,14 @@ const AssignStatusButton = ({ bid,setVendorsData ,vendorsData}) => {
       {bid.bid?.status==4 || bid.bid?.status==5 || bid.bid?.status==6 ? (
         <>
         {bid.bid_assgin_vendor?.id ? 
-          <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' disabled={(bid.bid?.status==5 || bid.bid?.status==6)?true:false} onClick={(e) => {handleStatusRemove();}} >Awarded</Button>
+          <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' disabled={(bid.bid?.status==5 || bid.bid?.status==6)?true:false} onClick={(e) => {handleStatusRemove();}} >{ isLoading ? <Loading /> : 'Awarded' }</Button>
 
             :
-          <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' disabled={(bid.bid?.status==5 || bid.bid?.status==6)?true:false} onClick={(e) => {handleStatusChange();}}>Contacted</Button>
+          <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' disabled={(bid.bid?.status==5 || bid.bid?.status==6)?true:false} onClick={(e) => {handleStatusChange();}}>{ isLoading ? <Loading /> : 'Contacted' }</Button>
             }
         </>
       ):
-      <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' onClick={(e) => {handleStatusChange();}} disabled={bid?.bid?.status==1?true:false}>Award</Button>
+      <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' onClick={(e) => {handleStatusChange();}} disabled={bid?.bid?.status==1?true:false}>{ isLoading ? <Loading /> : 'Award' }</Button>
       }
     </>
   );

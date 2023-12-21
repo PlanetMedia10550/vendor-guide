@@ -19,7 +19,8 @@ const FeaturSection = (props) => {
       {advertiseData && advertiseData.map((row, i) => {
         if (row.id % 2 === 0) {
           return (
-            <div key={i} className="lg:mx-auto grid  md:grid-cols-2 items-center max-w-4xl md:gap-x-8 gap-y-5 sm:gap-y-8 md:gap-y-16 lg:max-w-none">
+            <Link key={i} href={`/blog/${row.slug}`}>
+            <div  className="lg:mx-auto grid  md:grid-cols-2 items-center max-w-4xl md:gap-x-8 gap-y-5 sm:gap-y-8 md:gap-y-16 lg:max-w-none">
               <div className="hidden md:block lg:pt-4  md:col-span-1">
                 {row.mainTitle && (
                   <h2 className="text-2xl lg:block hidden md:text-3xl  font-semibold leading-7 text-grey-500 xl:mb-10">
@@ -70,9 +71,11 @@ const FeaturSection = (props) => {
                 </div>
               </div>
             </div>
+            </Link>
           )
         } else {
           return (
+            <Link key={i} href={`/blog/${row.slug}`}>
             <div key={i} className="mt-8 lg:mx-auto grid  justify-center md:justify-normal md:grid-cols-2 items-center max-w-4xl md:gap-x-8  gap-y-5 sm:gap-y-8 md:gap-y-16 lg:max-w-none">
               <div
                 className="md:col-span-1 relative w-full"
@@ -108,6 +111,7 @@ const FeaturSection = (props) => {
                 </div>
               </div>
             </div>
+            </Link>
           )
         }
       })}

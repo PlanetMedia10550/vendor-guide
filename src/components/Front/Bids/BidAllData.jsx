@@ -9,15 +9,18 @@ import { useAuth } from "@/context/UserContext";
 import BidFavoriteButton from "@/components/Front/BidFavoriteButton";
 import { useRouter } from "next/navigation";
 import StatusButton from "@/app/(modules)/manager/bids/[id]/StatusButton";
+import Loading from "@/app/loadingScreen" 
 
 const BidVendorsButton = ({bid}) => {
   const {navigate}  = useAuth();
+  const [meLoding,setMeLoding] = useState(false);
   const handleGoVendors = async () => {
+    setMeLoding(true);
     navigate.push(`/manager/bids/${bid.id}`);
   }
 
   return (
-    <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleGoVendors} severity="info" >View</Button>
+    <Button type="button" className="bg-[#c1272d] text-white p-2" onClick={handleGoVendors} severity="info" >{meLoding ? <Loading /> : "View"}</Button>
   )
 }
 

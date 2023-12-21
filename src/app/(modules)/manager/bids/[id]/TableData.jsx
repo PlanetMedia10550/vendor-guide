@@ -8,15 +8,18 @@ import { Button } from 'primereact/button';
 import { useAuth } from "@/context/UserContext";
 import BidFavoriteButton from "@/components/Front/BidFavoriteButton";
 import AssignStatusButton from "@/app/(modules)/manager/bids/[id]/AssignStatusButton";
+import Loading from "@/app/loadingScreen" 
 
 const BidMessage = ({bid}) => {
   const {navigate}  = useAuth();
+  const [meLoding,setMeLoding] = useState(false);
   const handleGoVendors = async () => {
+    setMeLoding(true);
     navigate.push(`/manager/message/${bid.id}/${bid.vendor_id}`);
   }
-// console.log(bid)
+
   return (
-    <Button type="button" className="bg-green-600 text-white p-2" onClick={handleGoVendors} severity="info" >Message</Button>
+    <Button type="button" className="bg-green-600 text-white p-2" onClick={handleGoVendors} severity="info" >{meLoding ? <Loading /> : "Message"}</Button>
   )
 }
 
@@ -27,7 +30,7 @@ const TableData = ({bidId}) => {
       {field: 'name', header: 'Vendor Name',sortable:'sortable'},
       {field: 'email', header: 'Email'},
       {field: 'mobile', header: 'Mobile'},
-      {field: 'assign_to', header: 'Issue To Bid', actionBtn: statusBtn},
+      {field: 'assign_to', header: 'Award To Bid', actionBtn: statusBtn},
       {field: 'vendor_id', header: 'Action', actionBtn: favoriteBtn},
   ];
   // console.log(user.data.id)

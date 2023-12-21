@@ -9,8 +9,6 @@ import { useAuth,useState } from "@/context/UserContext";
 
 const Footer = () => {
  const {sitesetting,isInfoLoding} = useAuth();
-  // console.log(sitesetting?.sidelogo_url);
-
   
   return (
     <>
@@ -68,8 +66,10 @@ const Footer = () => {
             <div className="flex flex-col">
               <label className="text-white pb-2 sm:pb-4">Explore</label>
               <ul className="flex flex-col nav_list text-sm">
-                <li>Publications</li>
-                <li>Get in Touch</li>
+                <li>
+                  <Link href="/advertise" className="">
+                    Advertise{" "}
+                  </Link></li>
                 <li>
                   <Link href="/resources" className="">
                     Resources{" "}

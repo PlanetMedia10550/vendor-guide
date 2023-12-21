@@ -46,7 +46,7 @@ const ResourceListCards = (props) => {
         <div className="mx-auto max-w-2xl px-10 pb-6 sm:px-6 lg:py-24 lg:max-w-7xl lg:px-8">
           <div className="text-center py-10 sm:py-0">
             <Link
-              href=""
+              href="#"
               className="inline-block px-10 sm:px-20 lg:px-40 2xl:px-56 py-2 lg:py-2 2xl:py-3 text-center rounded-full  bg-[#B13634] 2xl:text-3xl lg:text-2xl text:xl tracking-wide font-semibold font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B13634]"
             >
               {props.title}
@@ -69,13 +69,13 @@ const ResourceListCards = (props) => {
                     <div className="mt-4 md:ml-10 md:text-left text-center">
                       <div>
                         <h3 className="lg:text-xl text-lg  text-[#B13634] font-bold ">
-                          <a href="#">
+                          <Link href={`/blog/${row.slug}`}>
                             <span
                               aria-hidden="true"
                               className="absolute inset-0"
                             ></span>
                             {row.title}
-                          </a>
+                          </Link>
                         </h3>
                         <p className="mt-1 lg:text-xl text-lg text-[#221F20] font-medium ">
                           {row.short_description}
