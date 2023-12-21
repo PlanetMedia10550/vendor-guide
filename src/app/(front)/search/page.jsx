@@ -1,19 +1,17 @@
-import TopBannerSearch from "@/components/Front/TopBannerSearch";
-import TopBarImage from "public/images&icons/search_result/Asset2.jpg";
-import SearchAllData from "./SearchAllData";
+
+import Searchpage from "./SearchAllData";
 
 export const metadata = {
   title: 'Vendor Guide | Search'
 }
 
-const Searchpage = () => {
+const Page = () => {
   return (
     <>
-      <TopBannerSearch title="Search Results" image={TopBarImage.src} />
-      {/* <BannerSectionCard  /> */}
-      <SearchAllData />
+      <Searchpage/>
+  
     </>
   );
 };
 
-export default Searchpage;
+export default Page;

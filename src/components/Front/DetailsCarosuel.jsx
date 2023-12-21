@@ -28,7 +28,7 @@ const DetailsCarosuel = ({filterData}) => {
       ));
     
   return (
-    <div className="relative h-[16rem]">
+    <div className="relative h-full">
       <button className="custom-prev-button">
         <FontAwesomeIcon icon={faAngleLeft} />
       </button>
@@ -41,7 +41,7 @@ const DetailsCarosuel = ({filterData}) => {
             renderThumbs={customRenderThumb}
           >
             {extractedData.map((item, index) => (
-              <div key={index} className="h-[16rem]">
+              <div key={index} className="h-full">
                 <Image
                   src={item}
                   alt={`Image of ${item}`}
@@ -54,7 +54,7 @@ const DetailsCarosuel = ({filterData}) => {
           </Carousel>
         ) : (
           // Render a default image or a message when no images are available
-          <div className="h-[16rem] flex items-center justify-center">
+          <div className="h-full flex items-center justify-center">
             {/* <p>No images available</p> */}
             {/* or render a default image */}
             <Image
