@@ -9,8 +9,6 @@ import { useAuth,useState } from "@/context/UserContext";
 
 const Footer = () => {
  const {sitesetting,isInfoLoding} = useAuth();
-  // console.log(sitesetting?.sidelogo_url);
-
   
   return (
     <>
@@ -61,15 +59,17 @@ const Footer = () => {
             <div className="flex flex-col">
               <label className="text-white pb-2 sm:pb-4">Advertise</label>
               <ul className="flex flex-col nav_list text-sm">
-                <li>{sitesetting?.side_phone}</li>
-                <li>{sitesetting?.side_email}</li>
+                <li><Link href={`tel:${sitesetting?.side_phone}`} className="">{sitesetting?.side_phone}</Link></li>
+                <li><Link href={`mailto:${sitesetting?.side_email}`} className="">{sitesetting?.side_email}</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">
               <label className="text-white pb-2 sm:pb-4">Explore</label>
               <ul className="flex flex-col nav_list text-sm">
-                <li>Publications</li>
-                <li>Get in Touch</li>
+                <li>
+                  <Link href="/advertise" className="">
+                    Advertise{" "}
+                  </Link></li>
                 <li>
                   <Link href="/resources" className="">
                     Resources{" "}
@@ -87,13 +87,13 @@ const Footer = () => {
               <label className="text-white pb-2 sm:pb-4">Follow</label>
               <ul className="flex flex-col nav_list text-sm">
                {sitesetting?.side_facebook_url && (
-                <li><Link href={sitesetting?.side_facebook_url}>Facebook</Link></li>
+                <li><Link href={sitesetting?.side_facebook_url} rel="nofollow">Facebook</Link></li>
                 )}
                 {sitesetting?.side_lingding_url && (
-               <li><Link href={sitesetting?.side_lingding_url}>LinkedIn</Link></li>
+               <li><Link href={sitesetting?.side_lingding_url} rel="nofollow">LinkedIn</Link></li>
                )}
                {sitesetting?.side_instagram_url && (
-                <li><Link href={sitesetting?.side_instagram_url}>Instagram</Link></li>
+                <li><Link href={sitesetting?.side_instagram_url} rel="nofollow">Instagram</Link></li>
                )}
               </ul>
             </div>

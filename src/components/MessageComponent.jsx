@@ -38,7 +38,7 @@ export default function MessageComponent({bidId,receiverId,styles}) {
         setIsModalOpen(false);
     };
 
-    const scrollToBottom = () => {
+    function scrollToBottom () {
         if (messagesEndRef) {
             messagesEndRef.current.addEventListener('DOMNodeInserted', event => {
                 const { currentTarget: target } = event;
@@ -51,7 +51,7 @@ export default function MessageComponent({bidId,receiverId,styles}) {
     useEffect(()=>{
         async function getMessages() {
             axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
-            await axios.get(`bid-message-list/${bidId}/${bidReceiverId}`).then(response => {
+            await axios.get(`${process.env.BASE_API_URL}bid-message-list/${bidId}/${bidReceiverId}`).then(response => {
                 var messages = response.data;
                 if(messages.status==true){
                     var newMessagesData = messages?.data?.list?.map((v) => ({
@@ -75,11 +75,8 @@ export default function MessageComponent({bidId,receiverId,styles}) {
         };
 
         getMessages()
-    },[])
-
-    useEffect(() => {
         scrollToBottom()
-    }, []);
+    },[message])
 
     async function formAction(e) {
         e.preventDefault();

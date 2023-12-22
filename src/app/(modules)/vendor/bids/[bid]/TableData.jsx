@@ -7,15 +7,18 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { useAuth } from "@/context/UserContext";
 import BidFavoriteButton from "../../components/BidFavoriteButton";
+import Loading from "@/app/loadingScreen" 
 
 const BidMessage = ({bid}) => {
   const {navigate}  = useAuth();
+  const [meLoding,setMeLoding] = useState(false);
   const handleGoVendors = async () => {
-    navigate.push(`/vendor/bids/${bid.id}/${bid.manager_id}`);
+    setMeLoding(true);
+    navigate.push(`/vendor/message/${bid.id}/${bid.manager_id}`);
   }
 // console.log(bid)
   return (
-    <Button type="button" className="bg-green-600 text-white p-2" onClick={handleGoVendors} severity="info">Message</Button>
+    <Button type="button" className="bg-green-600 text-white p-2" onClick={handleGoVendors} severity="info">{meLoding ? <Loading /> : "Message"}</Button>
   )
 }
 

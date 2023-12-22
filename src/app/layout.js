@@ -31,9 +31,12 @@ const myFont = localFont({
 
 
 export const metadata = {
-  title: 'Vendor Guide | Home'
+  title: {
+    template: '%s | Vendor Guide',
+    default: 'Home'
+  },
 }
-// font-lato
+
 export default function RootLayout({ children }) {
   return (
       <UserProvider>

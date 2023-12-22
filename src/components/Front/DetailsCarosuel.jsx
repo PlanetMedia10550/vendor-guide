@@ -7,7 +7,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carous
 
 const DetailsCarosuel = ({filterData}) => {
       
-      const vendoreimgedit = filterData.vendoreimgedit || [];
+      const vendoreimgedit = filterData?.vendoreimgedit || [];
       
       const extractedData = vendoreimgedit.map((item, index) => {
         return item.vendorimageview.image_url;

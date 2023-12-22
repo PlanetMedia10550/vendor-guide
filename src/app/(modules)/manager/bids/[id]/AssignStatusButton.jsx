@@ -11,7 +11,7 @@ const AssignStatusButton = ({ bid,setVendorsData ,vendorsData}) => {
    
   const [isLoading, setLoading] = useState(false)
   const [oStatus, setOStatus] = useState()
-  const [statusOption, setStatusOption] = useState(['Issue','Not Issue'])
+  const [statusOption, setStatusOption] = useState(['Awarded','Award'])
   // console.log(bid.bid.status)
   const allResult = async () => {
     try {
@@ -51,48 +51,88 @@ const AssignStatusButton = ({ bid,setVendorsData ,vendorsData}) => {
   }
   
 
-  const handleStatusChange = async (currentStatus) => {
+  const handleStatusChange = async () => {
     // setChangeStatus(currentStatus) 
-    const data = {
-      'bid_id': bid.id,
-      'manager_id': bid.manager_id,
-      'vendor_id': bid.vendor_id
-    }; 
-    axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
-    const response = await axios.post(`${process.env.BASE_API_URL}bid-assgin-vendor`, data).then(response => {
-        const result = response.data; 
-        setOStatus(currentStatus);
-        allResult();
-        toast.success(response.data.msg, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          }); 
-             
-    })
+    const confirmBox = window.confirm(
+      "Do you really want to Award to bid?"
+    )
+    if (confirmBox === true) {
+      setLoading(true);
+      const data = {
+        'bid_id': bid.id,
+        'manager_id': bid.manager_id,
+        'vendor_id': bid.vendor_id
+      }; 
+      axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
+      const response = await axios.post(`${process.env.BASE_API_URL}bid-assgin-vendor`, data).then(response => {
+          const result = response.data; 
+          // setOStatus(currentStatus);
+          setLoading(false);
+          allResult();
+          toast.success(response.data.msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            }); 
+              
+      })
+    }
+  };
+  
+  const handleStatusRemove = async () => {
+    // setChangeStatus(currentStatus) 
+    const confirmBox = window.confirm(
+      "Do you really want to Awarded to remove?"
+    )
+    if (confirmBox === true) {
+      setLoading(true);
+      const data = {
+        'bid_id': bid.id,
+        'manager_id': bid.manager_id,
+        'vendor_id': bid.vendor_id
+      }; 
+      axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
+      const response = await axios.post(`${process.env.BASE_API_URL}bid-assgin-vendor`, data).then(response => {
+          const result = response.data; 
+          // setOStatus(currentStatus);
+          setLoading(false);
+          allResult();
+          toast.success(response.data.msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            }); 
+              
+      })
+    }
   };
   
 
   
   return (
-<> 
-      <select name="company_id" className="w-full bg-gray-100 border border-gray-100 text-sm py-3 px-4 pr-8 rounded"
-        value={bid.bid_assgin_vendor?.id?0:1} onChange={(e) => {
-          handleStatusChange(e.target.value);
-          // console.log(e.target.value)
-         }} disabled={bid?.bid?.status==1?true:false}
-      > 
-        {statusOption?.map((option, index) => (
-          <option key={index} value={index}>
-            {option}
-          </option>
-        ))}
-      </select> 
+    <> 
+      {bid.bid?.status==4 || bid.bid?.status==5 || bid.bid?.status==6 ? (
+        <>
+        {bid.bid_assgin_vendor?.id ? 
+          <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' disabled={(bid.bid?.status==5 || bid.bid?.status==6)?true:false} onClick={(e) => {handleStatusRemove();}} >{ isLoading ? <Loading /> : 'Awarded' }</Button>
+
+            :
+          <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' disabled={(bid.bid?.status==5 || bid.bid?.status==6)?true:false} onClick={(e) => {handleStatusChange();}}>{ isLoading ? <Loading /> : 'Contacted' }</Button>
+            }
+        </>
+      ):
+      <Button type="button" className='bg-cyan-500 text-white p-2 p-button p-component p-button-info' onClick={(e) => {handleStatusChange();}} disabled={bid?.bid?.status==1?true:false}>{ isLoading ? <Loading /> : 'Award' }</Button>
+      }
     </>
   );
 }

@@ -84,6 +84,7 @@ const StatusButton = ({ bid,setRequestsQuotes ,requestsQuotes,bidStatus}) => {
 <> 
       <select name="company_id" className="w-full bg-gray-100 border border-gray-100 text-sm py-3 px-4 pr-8 rounded"
         value={bid?.status} onChange={(e) => {handleStatusChange(e.target.value); }}
+        disabled={(bid?.status==5 || bid?.status==6)?true:false}
       > 
         {bidStatus?.map((status, index) => (
           <option key={index} value={status.id}>

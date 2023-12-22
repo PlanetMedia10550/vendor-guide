@@ -1,10 +1,10 @@
 "use client";
-
 // import DetailsHero from "@/components/Front/detailshero";
 import { useState,useEffect } from "react";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { useAuth } from "@/context/UserContext"; 
+import LoadingComponents from "@/components/LoadingComponents";
 
 const ContentPages = ({params}) => {
   const slug = params.slug;
@@ -72,9 +72,11 @@ const ContentPages = ({params}) => {
             <div className="mt-12">
               <div>
                 <div>
-                  <p className="text-[#647589] text-lg font-medium font-lato leading-8">
-                  {isLoading ? 'Loading...' : filterData.description}
-                  </p>
+                  {isLoading ? <div className="flex justify-center items-center h-full">
+            <LoadingComponents />
+        </div> :
+                  <div className="text-[#647589] text-lg font-medium font-lato leading-8" dangerouslySetInnerHTML={{ __html: filterData.description }} />
+                  }
                 </div>
               </div>
             </div>

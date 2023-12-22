@@ -79,7 +79,7 @@ const Header = ({activeTab,setActiveTab}) => {
                       src={imagsrc ? imagsrc : userDefult.src}
                       alt="Header Avatar"
                     />
-                    <div class="w-14">
+                    <div className="w-14">
                       <span className="text-left block align-middle text-white text-xs font-lato">
                         {isLoding ? (
                             <span>Loading...</span>
