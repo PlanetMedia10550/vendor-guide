@@ -134,6 +134,40 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
         }
    }
 
+
+   const darftRequest = async () =>{
+    // e.preventDefault();
+    setErrors(null);
+    setIsLoding(true);
+    // Assuming 'myForm' is the ID of your form
+    const formElement = document.getElementById('myForm');
+    const formData = new FormData(formElement);
+    formData.append('status',1);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
+        await axios.post(`${process.env.BASE_API_URL}bid`, formData).then(response => {
+            // console.log(response.data.data);
+            setIsLoding(false);
+            // onClose(true)
+        }).catch(error => {
+            setIsLoding(false);
+            if(error?.response?.data?.errors) {
+                // setErrors(error.response.data.errors);
+                const errorMessages = Object.values(error.response.data.errors)
+                    .map(errors => errors.join(', '))
+                    .join('<br>');
+                toast.error(<div dangerouslySetInnerHTML={{ __html: errorMessages }} />, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
+            }
+        });
+   }
     
     
     const makeRequest = async (e) => {
@@ -143,7 +177,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
         setIsLoding(true);
         var formData = new FormData(e.target);
         formData.append('close_date',closeDate);
-        // formData.append('vendor_id',vendorIds);
+        formData.append('status',2);
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookie('token')}`;
         await axios.post(`${process.env.BASE_API_URL}bid`, formData).then(response => {
             // console.log(response.data.data);
@@ -242,7 +276,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
     return (
 
         <div className="w-full">
-            <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
+            <form action="#" method="POST" id="myForm" className="mx-auto mt-6" onSubmit={makeRequest}>
                 <div className="w-full">
                     <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-1 my-2 pb-6" >
@@ -250,7 +284,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
 
                             <div className="mt-2.5">
                                 <Input name="first_name" id="first_name" value={firstName}  onChange={e => {handleForm('first_name',e.target.value);
-                                setFirstName(e.target.value)}} />
+                                setFirstName(e.target.value)}}  onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('first_name')}
                         </div>
@@ -258,7 +292,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="Last Name" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="last_name" id="last_name" value={lastName} onChange={e => {handleForm('last_name',e.target.value);setLastName(e.target.value)}} />
+                                <Input name="last_name" id="last_name" value={lastName} onChange={e => {handleForm('last_name',e.target.value);setLastName(e.target.value)}}  onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('last_name')}
                         </div>
@@ -269,7 +303,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                                 <Label label="Category" required="" />
 
                                 <div className="mt-2.5">
-                                    <select name="category_id" value={category} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handleCategory} >
+                                    <select name="category_id" value={category} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handleCategory} onBlur ={darftRequest}>
                                         <option value="">Select Category</option>
                                         {categoryData && categoryData.map((row,i)=>{
                                             return(
@@ -301,7 +335,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                     <div className="w-full my-2 pb-6" >
                         <Label label="Property Location" required="required" />
                         <div className="mt-2.5">
-                            <select name="property_id" value={propertyLocation} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handlePropartyLocation} >
+                            <select name="property_id" value={propertyLocation} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handlePropartyLocation} onBlur ={darftRequest}>
                                 <option key="0" value="0">Register New Property</option>
                                 {optionProperty && optionProperty.map((row,i)=>{
                                     return(
@@ -315,7 +349,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                     <div className="w-full my-2 pb-6" >
                         <Label label="Property Type" required="required" />
                         <div className="mt-2.5">
-                            <select name="property_type" value={propertyType} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={e => {handleForm('property_type',e.target.value);setPropertyType(e.target.value)}} >
+                            <select name="property_type" value={propertyType} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={e => {handleForm('property_type',e.target.value);setPropertyType(e.target.value)}} onBlur ={darftRequest}>
                                 {options2 && options2.map((option1,index1) => (
                                     <option key={index1} value={option1}>
                                     {option1}
@@ -330,7 +364,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="Property Name" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="property_name" id="property_name" value={propertyName} onChange={e => {handleForm('property_name',e.target.value);setPropertyName(e.target.value)}} />
+                                <Input name="property_name" id="property_name" value={propertyName} onChange={e => {handleForm('property_name',e.target.value);setPropertyName(e.target.value)}} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('property_name')}
                         </div>
@@ -338,7 +372,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="Job Title" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="job_title" id="job_title" value={jobTitle} onChange={e => {handleForm('job_title',e.target.value);setJobTitle(e.target.value)}} />
+                                <Input name="job_title" id="job_title" value={jobTitle} onChange={e => {handleForm('job_title',e.target.value);setJobTitle(e.target.value)}} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('job_title')}
                         </div>
@@ -347,7 +381,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                         <Label label="Street Address" required="required" />
 
                         <div className="mt-2.5">
-                            <Input name="address" id="address" value={address} onChange={e => {handleForm('address',e.target.value);setAddress(e.target.value)}} />
+                            <Input name="address" id="address" value={address} onChange={e => {handleForm('address',e.target.value);setAddress(e.target.value)}} onBlur ={darftRequest}/>
                         </div>
                         {renderFieldError('address')}
                     </div>
@@ -355,7 +389,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                         <Label label="Address Line 2"  />
 
                         <div className="mt-2.5">
-                            <Input name="address_2" id="address2" value={address2} onChange={e => {handleForm('address_2',e.target.value);setAddress2(e.target.value)}} />
+                            <Input name="address_2" id="address2" value={address2} onChange={e => {handleForm('address_2',e.target.value);setAddress2(e.target.value)}} onBlur ={darftRequest}/>
                         </div>
                         {renderFieldError('address_2')}
                     </div>
@@ -364,7 +398,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="City" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="city" id="city" value={city} onChange={e => {handleForm('city',e.target.value);setCity(e.target.value)}} />
+                                <Input name="city" id="city" value={city} onChange={e => {handleForm('city',e.target.value);setCity(e.target.value)}} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('city')}
                         </div>
@@ -372,7 +406,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="State" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="state" id="state" value={state} onChange={e => {handleForm('state',e.target.value);setState(e.target.value)}} />
+                                <Input name="state" id="state" value={state} onChange={e => {handleForm('state',e.target.value);setState(e.target.value)}} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('state')}
                         </div>
@@ -380,7 +414,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="Zip Code" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="zip_code" id="zip_code" value={zipCode} onChange={e => {handleForm('zip_code',e.target.value);setZipCode(e.target.value)}} />
+                                <Input name="zip_code" id="zip_code" value={zipCode} onChange={e => {handleForm('zip_code',e.target.value);setZipCode(e.target.value)}} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('zip_code')}
                         </div>
@@ -389,7 +423,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                         <Label label="Phone Number" required="required" />
 
                         <div className="mt-2.5">
-                            <Input name="phone" id="phone" value={mobile} onChange={e => {handleForm('phone',e.target.value);setMobile(e.target.value)}} />
+                            <Input name="phone" id="phone" value={mobile} onChange={e => {handleForm('phone',e.target.value);setMobile(e.target.value)}} onBlur ={darftRequest}/>
                         </div>
                         {renderFieldError('phone')}
                     </div>
@@ -398,7 +432,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="Project type" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="project_type" id="project_type" value={projectType} onChange={e => {handleForm('project_type',e.target.value);setProjectType(e.target.value)}} />
+                                <Input name="project_type" id="project_type" value={projectType} onChange={e => {handleForm('project_type',e.target.value);setProjectType(e.target.value)}} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('project_type')}
                         </div>
@@ -406,7 +440,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="Project Name" required="required" />
 
                             <div className="mt-2.5">
-                                <Input name="project_name" id="project_name" value={projectName} onChange={e => {handleForm('project_name',e.target.value);setProjectName(e.target.value)}} />
+                                <Input name="project_name" id="project_name" value={projectName} onChange={e => {handleForm('project_name',e.target.value);setProjectName(e.target.value)}} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('project_name')}
                         </div>
@@ -416,7 +450,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                             <Label label="Close Date" required="required" />
 
                             <div className="mt-2.5">
-                                <DatePickerInput closeDate={closeDate} setCloseDate={setCloseDate} />
+                                <DatePickerInput closeDate={closeDate} setCloseDate={setCloseDate} onBlur ={darftRequest}/>
                             </div>
                             {renderFieldError('close_date')}
                         </div>
@@ -425,7 +459,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                         <Label label="Priority" required="required" />
 
                         <div className="mt-2.5">
-                            <select name="priority" value={priority} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handlePriority} >
+                            <select name="priority" value={priority} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handlePriority} onBlur ={darftRequest}>
                                 {priorityOptions && priorityOptions.map((option,index) => (
                                     <option key={index} value={option}>
                                     {option}
@@ -439,7 +473,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                         <Label label="Project Details"  />
 
                         <div className="mt-2.5">
-                            <TextArea name="project_detail" id="project_detail" value={projectDetails} onChange={e => {handleForm('project_detail',e.target.value);setProjectDetails(e.target.value)}} rows="7" />
+                            <TextArea name="project_detail" id="project_detail" value={projectDetails} onChange={e => {handleForm('project_detail',e.target.value);setProjectDetails(e.target.value)}} rows="7" onBlur ={darftRequest}/>
                         </div>
                         {renderFieldError('project_detail')}
                     </div>
@@ -448,7 +482,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                         <div className="grid grid-cols-2 gap-x-4">
                         <div className="col-span-2 mt-2.5">
                             <Input type="hidden" name="image_id" id="image_id" value={image_id}  />
-                            <Input type="file" name="image" id="image" style={{width:'80%',float:'left'}}  onChange={onImageUpload} />
+                            <Input type="file" name="image" id="image" style={{width:'80%',float:'left'}}  onChange={onImageUpload} onBlur ={darftRequest}/>
                             {isImageLoading ? <div style={{width:'20%',float:'left'}}><FontAwesomeIcon icon={faSpinner} spin /></div> : ''}
                             {imageSrc &&
                                 <img src={imageSrc} style={{width:'20%',float:'left',height:'54px'}} className="pl-5" />
