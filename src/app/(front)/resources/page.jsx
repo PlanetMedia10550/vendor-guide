@@ -7,10 +7,10 @@ export async function generateMetadata({params}) {
 
   return {
     title: `${metaData?.title}`,
-    description: `${metaData?.short_description}`,
+    description: `${metaData?.description}`,
     openGraph:{
       title: `${metaData?.title}`,
-      description: `${metaData?.short_description}`,
+      description: `${metaData?.description}`,
       url: `/resources`,
       images: [
         {
@@ -20,7 +20,7 @@ export async function generateMetadata({params}) {
     },
     twitter: {
       title: `${metaData?.title}`,
-      description: `${metaData?.short_description}`,
+      description: `${metaData?.description}`,
       url: `/resources`,
       images: [`${metaData?.image_url}`],
     },

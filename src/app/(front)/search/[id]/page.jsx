@@ -12,10 +12,10 @@ export async function generateMetadata({params}) {
   console.log(metaData);
   return {
     title: `${metaData?.title?metaData?.title:metaData?.name}`,
-    description: `${metaData?.short_description}`,
+    description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
     openGraph:{
       title: `${metaData?.title?metaData?.title:metaData?.name}`,
-      description: `${metaData?.short_description}`,
+      description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
       url: `/blog/${metaData?.slug}`,
       images: [
         {
@@ -25,7 +25,7 @@ export async function generateMetadata({params}) {
     },
     twitter: {
       title: `${metaData?.title?metaData?.title:metaData?.name}`,
-      description: `${metaData?.short_description}`,
+      description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
       url: `/blog/${metaData?.slug}`,
       images: [`${metaData?.image_url}`],
     },

@@ -11,10 +11,10 @@ export async function generateMetadata({params}) {
   }
   return {
     title: `${metaData?.title}`,
-    description: `${metaData?.short_description}`,
+    description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
     openGraph:{
       title: `${metaData?.title}`,
-      description: `${metaData?.short_description}`,
+      description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
       url: `/${metaData?.slug}`,
       images: [
         {
@@ -24,7 +24,7 @@ export async function generateMetadata({params}) {
     },
     twitter: {
       title: `${metaData?.title}`,
-      description: `${metaData?.short_description}`,
+      description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
       url: `/${metaData?.slug}`,
       images: [`${metaData?.image_url}`],
     },
