@@ -31,9 +31,9 @@ const Page = React.forwardRef((props, ref) => {
 Page.displayName = 'Page';
 
 
-function Flipbook({params}) {
+function Flipbook({slug}) {
 
-  const id = params.id;
+  const id = slug;
   const bookRef = useRef(null);
   const [totalPage, setTotalPage] = useState(0);
   const [flipData, setFlipData] = useState([]);

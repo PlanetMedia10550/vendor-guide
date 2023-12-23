@@ -9,7 +9,7 @@ import { getCookie } from "cookies-next";
 
 
 const DetailsRight = ({filterData}) => {
-  const imageUrl = filterData.image_url;
+  const imageUrl = filterData?.image_url;
   const [categoryData, setCategoryData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [vendorId, setVendorId] = useState(filterData.id);

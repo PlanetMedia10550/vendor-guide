@@ -1,8 +1,31 @@
 import Advertisepage from "./Advertisepage";
 
 
-export const metadata = {
-  title: 'Vendor Guide | Advertise'
+// or Dynamic metadata
+export async function generateMetadata({params}) {
+  const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/advertise`).then((res) => res.json());
+  var metaData = seoMetaData?.data;
+
+  return {
+    title: `${metaData?.title}`,
+    description: `${metaData?.short_description}`,
+    openGraph:{
+      title: `${metaData?.title}`,
+      description: `${metaData?.short_description}`,
+      url: `/advertise`,
+      images: [
+        {
+          url: `${metaData?.image_url}`,
+        }
+      ],
+    },
+    twitter: {
+      title: `${metaData?.title}`,
+      description: `${metaData?.short_description}`,
+      url: `/advertise`,
+      images: [`${metaData?.image_url}`],
+    },
+  }
 }
 
 const Advertise = () => {

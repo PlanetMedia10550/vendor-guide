@@ -33,7 +33,7 @@ const myFont = localFont({
 export const metadata = {
   title: {
     template: '%s | Vendor Guide',
-    default: 'Home'
+    default: 'Vendor Guide'
   },
 }
 
