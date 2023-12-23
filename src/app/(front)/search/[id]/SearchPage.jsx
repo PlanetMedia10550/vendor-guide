@@ -70,7 +70,7 @@ const SearchPage = ({slug}) => {
                 </div>
               </div>
               {/* right section  */}
-              {filterData.length >0 && <DetailsRight filterData={filterData} />}
+              <DetailsRight filterData={filterData} />
             </div>
 
             <div className="mt-12">
