@@ -2,13 +2,9 @@
 
 import DetailsCarosuel from "@/components/Front/DetailsCarosuel";
 import DetailsHero from "@/components/Front/DetailsHero";
-import Modal from "@/components/Modal";
-import TopBarImage from "public/images&icons/search_result/VendorGuideMagazine.jpg";
 import { useState,useEffect } from "react";
-import DetailsForm from "@/components/Front/DetailsForm";
 import DetailsRight from "@/components/Front/DetailsRight";
 import { getCookie } from "cookies-next";
-
 
 const SearchPage = ({slug}) => {
   const vendorId = slug;

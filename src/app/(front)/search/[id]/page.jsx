@@ -1,4 +1,4 @@
-import SearchPage from "./searchPage";
+import SearchPage from "@/app/(front)/search/[id]/SearchPage";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
