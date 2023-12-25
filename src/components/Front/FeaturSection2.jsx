@@ -36,12 +36,11 @@ const FeaturSection2 = (props) => {
          if (row.id % 2 !== 0) {
           return(
         <div key={i} className="lg:mx-auto grid max-w-4xl grid-cols-1 items-center  gap-x-2 gap-y-8 md:gap-y-16  lg:max-w-none md:grid-cols-2">
-          <div className="lg:pt-4 text-center md:text-left order-last md:order-first">
-            <p className="md:mt-6 lg:leading-10 md:text-sm  lg:text-[1.40rem]  text-[#221F20] font-normal  font-maven">
-              <span className="text-2xl lg:text-3xl text-[#C1272D]  font-bold font-lato">
+          <div className="lg:pt-4 md:text-left order-last md:order-first">
+              <p className="text-2xl lg:text-3xl text-[#C1272D]  font-bold font-lato">
                 {row.title}
-              </span>
-              <br /> {row.description}
+              </p>
+            <p className="md:mt-2 lg:leading-10 md:text-sm  lg:text-[1.40rem]  text-[#221F20] font-normal  font-maven">{row.description}
             </p>
           </div>
           <div
@@ -71,14 +70,13 @@ const FeaturSection2 = (props) => {
             />
           </div>
           <div className="">
-            <div className="lg:ml-[-2rem] md:ml-[0rem] text-center md:text-left">
-              <p className="lg:leading-10 md:text-sm  lg:text-[1.40rem]  text-[#221F20] font-normal  font-maven md:pr-8">
-                <span className="text-xl lg:text-3xl text-[#C1272D] font-bold font-lato">
+            <div className="lg:ml-[-2rem] md:ml-[0rem] md:text-left">
+                <p className="text-2xl lg:text-3xl text-[#C1272D] font-bold font-lato">
                   {row.title}
-                </span>
-                <br />
-                {row.description}
-              </p>
+                </p>
+                <p className="md:mt-2 lg:leading-10 md:text-sm lg:text-[1.40rem] text-[#221F20] font-normal  font-maven md:pr-8">
+                  {row.description}
+                </p>
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ const ContentPages = ({params}) => {
   const [isLoading, setIsLoading] = useState(true);
   const {metaData,loading} = useAuth();
   const [selectedMeta, setSelectedMeta] = useState([]);
-  
+  console.log(selectedMeta);
   useEffect(() => {
     const fetchData  = async () => {
       try {
@@ -39,7 +39,7 @@ const ContentPages = ({params}) => {
       setSelectedMeta(specificMeta || {});
     }
 
-  }, [slug]);
+  }, [metaData]);
 
   return (
     <>
@@ -53,7 +53,8 @@ const ContentPages = ({params}) => {
     >
       <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">
         <div className="magazine_breadcrumb relative">
-          <div className="breadcrumb text-white py-4 text-lg">
+          <div className="breadcrumb text-white py-4 px-6 md:px-4 text-lg text-center 
+ md:text-left">
             <Link href="#">Vendor Guide</Link>
             <span className="seprater"> / </span>
             <span className="current text-xl font-lato">{filterData.title}</span>
@@ -69,7 +70,7 @@ const ContentPages = ({params}) => {
       <section id="featurs_section" className="py-9 md:py-5">
         <div className="container mx-auto overflow-hidden pt-5 md:pt-4 px-5 md:px-8 xl:px-24">
           <div className="mx-auto max-w-7xl">
-            <div className="mt-12">
+            <div className="md:mt-8">
               <div>
                 <div>
                   {isLoading ? <div className="flex justify-center items-center h-full">

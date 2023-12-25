@@ -83,12 +83,12 @@ const AdvertiseTable = (props) => {
               >
                 <th
                   scope="row"
-                  className="px-6 py-4 border-2 border-[#221F20]  font-semibold text-gray-900 whitespace-nowrap lg:text-2xl md:text-lg text-sm"
+                  className="px-4 md:px-6 py-4 border-2 border-[#221F20]  font-semibold text-gray-900 whitespace-nowrap lg:text-2xl md:text-lg text-sm"
                 >
                   {advertiseData[key][0]}
                 </th>
                 {advertiseData[key].slice(1).map((cellData, cellIndex) => (
-                <td key={cellIndex} className="px-6 py-4 border-2 border-[#221F20] font-medium lg:text-2xl md:text-lg text-sm">
+                <td key={cellIndex} className="px-4 md:px-6 py-4 border-2 border-[#221F20] font-medium lg:text-2xl md:text-lg text-sm">
                   {cellData}
                 </td>
                  ))} 

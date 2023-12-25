@@ -44,7 +44,7 @@ const FeaturSection = (props) => {
                 <Image
                   src={row.image_url}
                   alt="Product screenshot"
-                  className="mx-auto max-w-none rounded-xl ring-1 ring-gray-400/10 w-full sm:w-[25rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] md:-ml-4 lg:-ml-0 md:float-right"
+                  className="mx-auto max-w-none rounded-xl ring-1 ring-gray-400/10 w-auto w-full sm:w-[25rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] md:-ml-4 lg:-ml-0 md:float-right"
                   width="100"
                   height="100"
                 />
@@ -66,7 +66,7 @@ const FeaturSection = (props) => {
                       {row.title}
                     </span>
                     <br className="block lg:hidden" />
-                    {props.short_description}
+                    {row.short_description}
                   </p>
                 </div>
               </div>
@@ -84,7 +84,7 @@ const FeaturSection = (props) => {
                 <Image
                   src={row.image_url}
                   alt="Product screenshot"
-                  className="mx-auto max-w-none rounded-xl  ring-gray-400/10 w-full sm:w-[25rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] md:-ml-4 lg:-ml-0 float-left"
+                  className="mx-auto max-w-none rounded-xl ring-gray-400/10 w-auto w-full sm:w-[25rem] md:w-[20rem] lg:w-[25rem] xl:w-[30rem] md:-ml-4 lg:-ml-0 md:float-left"
                   width="100"
                   height="100"
                 />
@@ -100,7 +100,7 @@ const FeaturSection = (props) => {
                 <div className="lg:max-w-lg text-center md:text-left">
                   <p
                     className="text-base sm:text-xl lg:text-2xl lg:leading-10 sm:leading-7
-              text-[#221F20] font-medium font-lato"
+                    text-[#221F20] font-medium font-lato"
                   >
                     <span className="text-lg sm:text-xl lg:text-2xl text-red-700 font-semibold">
                       {row.title}
