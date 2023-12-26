@@ -75,7 +75,7 @@ function Flipbook({slug}) {
   }, [latitude]);
   
   useEffect(() => {
-    axios.get(`${process.env.BASE_API_URL}magazine/${id}`)
+    axios.get(`${process.env.BASE_API_URL}magazine/${id}?limit=4`)
       .then(function (response) {
         const result = response.data;
         // Check if result.data has an 'images' property and if it's an array
