@@ -21,13 +21,13 @@ const BannerSectionCard = () => {
 // 
   if (isLoading) return <LoadingScreen />;
   return (
-    <div className="grid grid-cols-5 items-center justify-center gap-3  lg:gap-5 xl:gap-4 md:gap-4 sm:mt-0 md:mt-0 px-2 sm:px-8 lg:px-12 pb-5 md:pb-10">
+    <div className="grid grid-cols-5 items-center justify-center gap-5 md:gap-5 sm:mt-4 lg:my-0 my-4">
       {vendorData &&
         vendorData.map((row, i) => {
           return (
             <div
               key={i}
-              className="sm:col-span-2 lg:col-span-1  shadow-2xl h-full"
+              className=" lg:col-span-1  shadow-2xl h-full"
             >
               <div className="sm:mt-0 flex justify-center md:justify-end h-full items-center">
                 <Link href={`/search/`+ row.slug }>

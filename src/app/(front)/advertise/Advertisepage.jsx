@@ -32,7 +32,7 @@ const Advertisepage = () => {
         className="bg-bottom-left
         bg-no-repeat bg-contain"
       >
-        <div className="py-5 lg:py-12 md:px-16 md:ps-16 overflow-x-auto">
+        <div className="py-5 px-8 lg:py-12 md:px-16 md:ps-16 overflow-x-auto">
           <div className="max-w-7xl lg:px-9 grid grid-cols-12 gap-5">
             <div className="col-span-12 xl:col-span-12">
               <div className="card ">

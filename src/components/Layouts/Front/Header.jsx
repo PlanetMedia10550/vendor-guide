@@ -109,7 +109,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 <li >
                   <Link
                     href="/advertise"
-                    className="text-base text-[#221F20] font-semibold block py-2 lg:pb-2 pr-4 pl-3  border-b border-grey-300  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
+                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-grey-300  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     Advertise
                   </Link>
@@ -117,7 +117,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 <li >
                   <Link
                     href="/about"
-                    className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
+                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     About
                   </Link>
@@ -125,7 +125,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 <li >
                   <Link
                     href="/contact-us"
-                    className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0"
+                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     Contact
                   </Link>
