@@ -32,7 +32,6 @@ const Page = () => {
   return (
     <>
       <Searchpage/>
-  
     </>
   );
 };

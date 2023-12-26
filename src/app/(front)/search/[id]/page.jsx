@@ -9,7 +9,7 @@ export async function generateMetadata({params}) {
     const blogData = await fetch(`${process.env.BASE_API_URL}vendor/${params.id}`).then((res) => res.json());
     var metaData = blogData?.data;
   }
-  console.log(metaData);
+  // console.log(metaData);
   return {
     title: `${metaData?.title?metaData?.title:metaData?.name}`,
     description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
