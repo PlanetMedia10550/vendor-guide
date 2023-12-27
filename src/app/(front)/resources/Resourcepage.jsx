@@ -22,7 +22,7 @@ const Resourcespage = () => {
       <TopBanner
         resourceMeta = {resourceMeta}/>
         )}
-      <section className="product_section sm:pt-[42rem] md:pt-[44rem] lg:pt-64 xl:pt-[23rem] 2xl:pt-[25rem]">
+      <section className="pt-[31rem] product_section sm:pt-[21rem] md:pt-[18rem] lg:pt-64 xl:pt-[25rem] 2xl:pt-[25rem]">
         <ResourceListCards title="Read Our Latest Blogs" />
 
         {/* <Pagination /> */}

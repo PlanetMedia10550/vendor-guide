@@ -58,8 +58,8 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
   return (
     <>
       <header>
-        <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 ">
-          <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl py-3">
+        <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 lg:p-7 ">
+          <div className="flex xl:flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
             {isInfoLoding ? (
               <Link href="/" className="flex items-center md:ps-8 lg:ps-10">
                   <div className="loading-wave flex justify-center items-end">
@@ -81,17 +81,62 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
               />
             </Link>
             )}
-            {UserType == 1 || !user ? (
+            {/* {UserType == 1 || !user ? (
+              <RequestQuotebtn user={user} />
+            ): ''} */}
+             <div className="lg:ml-8 flex items-center lg:order-2">
+               {UserType == 1 || !user ? (
               <RequestQuotebtn user={user} />
             ): ''}
 
+              <button
+                data-collapse-toggle="mobile-menu-2"
+                type="button"
+                className="inline-flex items-center p-1 sm:p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400    dark:focus:ring-gray-600"
+                aria-controls="mobile-menu-2"
+                aria-expanded="false"
+                onClick={toggleClass}
+              >
+                <span className="sr-only">{isActive ? 'Close' : 'Open'} main menu</span>
+                    {isActive ? (
+                      // Close icon (you can replace this with your own close icon)
+                      <svg
+                        className="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                    ) : (
+                      // Open icon (you can replace this with your own open icon)
+                      <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                    )}
+              </button>
+            </div>
+
             <div
               className={`  ${
-                !isActive ? "hidden " : " "
+                !isActive ? "hidden" : " "
               } lg:ml-auto justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
               id="mobile-menu-2"
             >
-              <ul className={`flex items-center flex-col mt-4 font-semibold lg:flex-row lg:space-x-8 lg:mt-0 text-base text-[#221F20] ${UserType == 1 || !user ? " " : "pr-10"}`}>
+              <ul className={`block lg:flex items-start lg:items-center flex-col mt-4 font-semibold lg:flex-row lg:space-x-8 lg:mt-0 text-base text-[#221F20] ${UserType == 1 || !user ? " " : "pr-10"}`}>
                 <li className="hidden " id="Vendor_Guide_Logo2">
                   <Link
                     href="/"
@@ -109,7 +154,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 <li >
                   <Link
                     href="/advertise"
-                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-grey-300  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
+                    className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     Advertise
                   </Link>
@@ -117,24 +162,24 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 <li >
                   <Link
                     href="/about"
-                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
+                    className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     About
                   </Link>
                 </li>
-                <li >
+                <li>
                   <Link
                     href="/contact-us"
-                    className="text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
+                    className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     Contact
                   </Link>
                 </li>
-                <li >
-                  <div className="head_dropdown inline-block relative lg:pb-2">
+                <li>
+                  <div className="head_dropdown block lg:inline-block relative py-2 lg:py-3 border-b border-gray-100 lg:border-0">
                     <button
                       type="button"
-                      className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle pl-3"
+                      className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle pl-4"
                       id="page-header-user-dropdown"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
@@ -159,7 +204,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                         </Link>
                       </li>
                       <li className="hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
-                        <div className="head_pulbication_dropdown inline-block relative pb-2 pr-8">
+                        <div className="head_pulbication_dropdown inline-block relative pb-2 pr-8 ">
                           <button
                             type="button"
                             className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle  dark:border-zinc-600  pl-3"
@@ -184,7 +229,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 </li>
                 {user?.name ?
                 (<li>
-                  <div className="head_profile_dropdown relative lg:pb-2">
+                  <div className="head_profile_dropdown relative py-2 lg:py-3 border-b border-gray-100 lg:border-0">
                   <button
                     type="button"
                     className="flex gap-x-4 items-center border-gray-50 text-white "
@@ -262,7 +307,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   <li>
                     <Link
                       href="/login"
-                      className="lg:pb-2 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0          "
+                      className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0          "
                     >
                       Login
                     </Link>

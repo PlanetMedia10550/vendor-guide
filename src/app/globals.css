@@ -98,8 +98,8 @@ box-shadow: 0px 1px 12px #575757;
 input[type="range"] {
 accent-color: #151515;
 }
-
-/* div#mobile-menu-2 {
+@media (max-width: 1023px){
+div#mobile-menu-2 {
   position: fixed;
   top: 0;
   z-index: 99;
@@ -108,7 +108,8 @@ accent-color: #151515;
   width: 313px;
   height: 100%;
   box-shadow: 0 0 11px #b1363475;
-} */
+}
+}
 @media (max-width:575px){
   .float-label-input {
     margin: 0px 0;     
