@@ -8,11 +8,13 @@ import Button from "@/components/Front/UI/Button";
 import { useAuth } from "@/context/UserContext";
 import Select from 'react-select';
 import AddressAutocomplete from "./AddressAutocomplete";
+import { useSearchParams } from "next/navigation";
 
 export const SignupForm = () => {
     const [registerData, setRegisterData] = useState([]);
     const [address, setAddress] = useState('');
-    
+    const serchParam = useSearchParams();
+    // console.log(serchParam.get('guest'));
     const [userTypes, setUserTypes] = useState([
         {
             value:0,
@@ -27,6 +29,7 @@ export const SignupForm = () => {
             label:'Company'
         }
     ]);
+    const [isGuest, setIsGuest] = useState(serchParam.get('guest')==1&&userTypes[0]);
 
 
     const {register,isLoding} = useAuth();
@@ -35,6 +38,10 @@ export const SignupForm = () => {
         e.preventDefault();
         var formData = new FormData(e.target);
         register(formData)
+    };
+    
+    const userTypeHandle = (e) => {
+        setIsGuest(e.target)
     };
     return (
         <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
@@ -45,9 +52,11 @@ export const SignupForm = () => {
                     <div className="mt-2.5">
                     <Select
                         name="type"
+                        value={isGuest}
                         options={userTypes}
                         className="basic-multi-select "
                         classNamePrefix="select"
+                        onChange={userTypeHandle}
                     />
                     </div>
                 </div>

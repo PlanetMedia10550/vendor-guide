@@ -51,14 +51,14 @@ const EditForm = ({user,navigate,onClose,propertie,setPropertie,regionalManagerD
         // console.log(propertie?.property_types);
         if(propertie?.property_types){
             setPropertyTypes({
-                value: propertie?.property_types.id,
-                label: propertie?.property_types.title
+                value: propertie?.property_types?.id,
+                label: propertie?.property_types?.title
             });
         }
         if(propertie?.state){
             setSelectedStatets({
-                value: propertie?.states.id,
-                label: propertie?.states.name,
+                value: propertie?.states?.id,
+                label: propertie?.states?.name,
             });
         }
 

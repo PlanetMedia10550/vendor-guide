@@ -9,7 +9,7 @@ import { useAuth } from "@/context/UserContext";
 import { useEffect } from "react";
 
 const Advertisepage = () => {
-  const {metaData,loading} = useAuth();
+  const {metaData,loading,user} = useAuth();
   const advertiseMeta = metaData?.advertise;
 
   return (
@@ -43,7 +43,7 @@ const Advertisepage = () => {
                 </div>
                 <div className="card-body">
                   <div className="relative overflow-x-auto overflow-y-hidden">
-                    <AdvertiseTable />
+                    <AdvertiseTable user={user} />
                   </div>
                 </div>
               </div>

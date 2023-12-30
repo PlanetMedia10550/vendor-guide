@@ -81,8 +81,10 @@ export function UserProvider({ children }) {
               deleteCookie('token')
               deleteCookie('name')
               deleteCookie('user-type')
+              deleteCookie('isSubscribe')
               setCookie('token', res.data.token,{maxAge: 3600 });
               setCookie('user-type', res.data.data.type,{maxAge: 3600 });
+              setCookie('isSubscribe', res.data.data?.vendor?.subscriptions?.stripe_status,{maxAge: 3600 });
               
               if(res.data.data.type==1){
                 setUser(res.data.data.managers)
@@ -98,11 +100,12 @@ export function UserProvider({ children }) {
       }).catch(error => {
           setIsLoding(false);
           // console.log(error?.response?.data?.message);
-          // console.log(error?.response.status);
-          if(error?.response?.status==500){
+          // console.log(error?.response?.data?.message);
+          if(error?.response?.data?.message=="Unauthenticated"){
             if(hasCookie('token')){
               deleteCookie('token')
               deleteCookie('user-type')
+              deleteCookie('isSubscribe')
               setUser(null); 
               router.push(`/login`);
             }
@@ -322,8 +325,10 @@ export function UserProvider({ children }) {
             deleteCookie('token')
             deleteCookie('name')
             deleteCookie('user-type')
+            deleteCookie('isSubscribe')
             setCookie('token', res.data.token,{maxAge: 3600 });
             setCookie('user-type', res.data.data.type,{maxAge: 3600 });
+            setCookie('isSubscribe', res.data.data?.vendor?.subscriptions?.stripe_status,{maxAge: 3600 });
             // setUser(res.data.data)
             // router.push(`/`);
             setUserAllInfo(res.data.data)
@@ -417,6 +422,7 @@ export function UserProvider({ children }) {
     if(hasCookie('token')){
       deleteCookie('token')
       deleteCookie('user-type')
+      deleteCookie('isSubscribe')
       setUser(null); 
       setUserAllInfo(null); 
       router.push(`/login`);

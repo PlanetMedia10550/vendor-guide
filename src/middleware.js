@@ -7,12 +7,18 @@ export function middleware(request) {
     const path = request.nextUrl.pathname;
     const token = request.cookies.get('token')?.value || '';
     const type = request.cookies.get('user-type')?.value || '';
+    const isSubscribe = request.cookies.get('isSubscribe')?.value || '';
     // console.log(path.startsWith(`/company`));
 
     const isPublicPath = path === '/login' || path === '/register' || path === '/manager/login' || path === '/vendor/login' || path === '/company/login'
+    const isPrivatePath = path.startsWith(`/plan`) === '/plan';
 
+    // console.log(request.cookies)
+    if(isSubscribe!="active" && type==0 && token && !path.startsWith(`/plan`)){
+        return NextResponse.redirect(new URL(`/advertise`, request.nextUrl));
+    }
+    
     if(isPublicPath && token){
-        // console.log(type)
         if(type==1){
             return NextResponse.redirect(new URL(`/manager/dashboard`, request.nextUrl));
         }
@@ -34,20 +40,6 @@ export function middleware(request) {
     }else if(token && type!=2 && path.startsWith(`/company`)){
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
-    
-    // if(cookie && request.nextUrl.pathname.startsWith(`/vendor/login`)){
-    //     return NextResponse.redirect(new URL(`/vendor/dashboard`, request.url))
-    // }else if(cookie && request.nextUrl.pathname.startsWith(`/manager/login`)){
-    //     return NextResponse.redirect(new URL(`/manager/dashboard`, request.url))
-    // }else if(cookie && request.nextUrl.pathname.startsWith(`/company/login`)){
-    //     return NextResponse.redirect(new URL(`/company/dashboard`, request.url))
-    // }
-
-    // // console.log(cookie);
-    // if(!cookie && (request.nextUrl.pathname.startsWith(`/vendor/dashboard`) || request.nextUrl.pathname.startsWith(`/manager/dashboard`) || request.nextUrl.pathname.startsWith(`/company/dashboard`))){
-    //     return NextResponse.redirect(new URL(`/`, request.url))
-    // }
-
 
 }
  
@@ -58,6 +50,7 @@ export const config = {
         '/login',
         '/manager/:path*',
         '/vendor/:path*',
-        '/company/:path*'
+        '/company/:path*',
+        '/plan/:path*'
     ],
 }

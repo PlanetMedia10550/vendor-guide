@@ -54,9 +54,9 @@ const ContentPages = ({params}) => {
       <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">
         <div className="magazine_breadcrumb relative">
           <div className="breadcrumb text-white py-4 text-lg">
-            <Link href="#">Vendor Guide</Link>
+            {/* <Link href="#">Vendor Guide</Link>
             <span className="seprater"> / </span>
-            <span className="current text-xl font-lato">{filterData.title}</span>
+            <span className="current text-xl font-lato">{filterData.title}</span> */}
           </div>
         </div>
         <main className="magazine_heading px-4 sm:px-6 lg:px-8 z-10 lg:py-12 relative text-center">
@@ -67,21 +67,15 @@ const ContentPages = ({params}) => {
       </div>
     </section>
       <section id="featurs_section" className="py-9 md:py-5">
-        <div className="container mx-auto overflow-hidden pt-5 md:pt-4 px-5 md:px-8 xl:px-24">
-          <div className="mx-auto max-w-7xl">
+          <div className="mx-auto ">
             <div className="mt-12">
-              <div>
-                <div>
                   {isLoading ? <div className="flex justify-center items-center h-full">
             <LoadingComponents />
         </div> :
                   <div className="text-[#647589] text-lg font-medium font-lato leading-8" dangerouslySetInnerHTML={{ __html: filterData.description }} />
                   }
-                </div>
-              </div>
             </div>
           </div>
-        </div>
       </section>
     </>
   );
