@@ -61,12 +61,13 @@ export function UserProvider({ children }) {
           const dropData1 = await response22.json();
           // console.log(dropData);
           setMetaData(dropData1.data);
+          setLoading(false);
       }catch (error){
         console.error(error);
       }
     }
     loadMetaData();
-    setLoading(false);
+    
   },[]);
 
   useEffect(() => {

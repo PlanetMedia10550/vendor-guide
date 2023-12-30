@@ -12,7 +12,7 @@ const ContentPages = ({params}) => {
   const [isLoading, setIsLoading] = useState(true);
   const {metaData,loading} = useAuth();
   const [selectedMeta, setSelectedMeta] = useState([]);
-  
+  // console.log(selectedMeta);
   useEffect(() => {
     const fetchData  = async () => {
       try {
@@ -39,7 +39,7 @@ const ContentPages = ({params}) => {
       setSelectedMeta(specificMeta || {});
     }
 
-  }, [slug]);
+  }, [metaData]);
 
   return (
     <>
@@ -55,6 +55,7 @@ const ContentPages = ({params}) => {
         <div className="magazine_breadcrumb relative">
           <div className="breadcrumb text-white py-4 text-lg">
             {/* <Link href="#">Vendor Guide</Link>
+
             <span className="seprater"> / </span>
             <span className="current text-xl font-lato">{filterData.title}</span> */}
           </div>

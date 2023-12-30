@@ -46,26 +46,41 @@ const AdvertiseTable = ({user}) => {
         <th
           key={index}
           scope="col"
-          className={`text-lg sm:text-xl md:text-2xl bg-[#C1272D] text-white px-3 py-3 border-2 border-[#221F20]`}
+          className={`align-baseline text-lg sm:text-xl md:text-2xl bg-[#C1272D] text-white px-3 py-3 border-2 border-[#221F20]`}
           
         >
           {columnName} <br />
           {headerData.sold_price !== undefined && (
             <>
-              <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap"> Price:</span>
+             
               {parseFloat(headerData.sold_price[index]) > 0 ? (
                 <>
-                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
-                    ${parseFloat(headerData.sold_price[index]).toFixed(2)}
-                  </span>
+                <div className="pt-4">
+                <div className="flex justify-start">
+                <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Price:</span>
                   <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
                     <del>${parseFloat(headerData.price[index]).toFixed(2)}</del> 
                   </span>
+                  </div>
+                <div className="flex justify-start">
+                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Introductory Price:</span>
+                  <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
+                    ${parseFloat(headerData.sold_price[index]).toFixed(2)}
+                  </span>
+                </div>
+                </div>
                 </>
               ) : (
-                <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
-                  ${parseFloat(headerData.price[index]).toFixed(2)}
-                </span>
+                <>
+                <div class="pt-4">
+                  <div className="flex justify-start">
+                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Price:</span>
+                    <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
+                      ${parseFloat(headerData.price[index]).toFixed(2)}
+                    </span>
+                    </div>
+                    </div>
+                  </>
               )}
             </>
           )}
@@ -84,12 +99,12 @@ const AdvertiseTable = ({user}) => {
               >
                 <th
                   scope="row"
-                  className="px-6 py-4 border-2 border-[#221F20]  font-semibold text-gray-900 whitespace-nowrap lg:text-2xl md:text-lg text-sm"
+                  className="px-4 md:px-6 py-4 border-2 border-[#221F20]  font-semibold text-gray-900 whitespace-nowrap lg:text-2xl md:text-lg text-sm"
                 >
                   {advertiseData[key][0]}
                 </th>
                 {advertiseData[key].slice(1).map((cellData, cellIndex) => (
-                <td key={cellIndex} className="px-6 py-4 border-2 border-[#221F20] font-medium lg:text-2xl md:text-lg text-sm">
+                <td key={cellIndex} className="px-4 md:px-6 py-4 border-2 border-[#221F20] font-medium lg:text-2xl md:text-lg text-sm">
                   {cellData}
                 </td>
                  ))} 
