@@ -1,11 +1,12 @@
-import PageComponent from "./pageComponent";
+
+import ContentPage from "@/app/(front)/(pages)/ContentPage";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
-  const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/blog_single_page`).then((res) => res.json());
+  const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/contact`).then((res) => res.json());
   var metaData = seoMetaData?.data;
   if(metaData==null){
-    const blogData = await fetch(`${process.env.BASE_API_URL+'blog'}/${params.slug}`).then((res) => res.json());
+    const blogData = await fetch(`${process.env.BASE_API_URL}page/contact`).then((res) => res.json());
     var metaData = blogData?.data;
   }
   return {
@@ -25,7 +26,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/blog/${metaData?.slug}`,
+      url: `/${metaData?.slug}`,
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -43,15 +44,20 @@ export async function generateMetadata({params}) {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/blog/${metaData?.slug}`,
+      url: `/${metaData?.slug}`,
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },
   }
 }
 
-export default function Page({params}) {
+const SlugPages = ({params}) => {
+
   return (
-    <PageComponent slug={params.slug} />
+    <>
+      <ContentPage slug='contact' />
+    </>
   );
 };
+
+export default SlugPages;

@@ -17,9 +17,9 @@ const SearchBar = ({homeMeta}) => {
     <div className=" absolute z-40 lg:top-40 md:top-[5.5rem] top-[2.5rem] w-full mx-auto text-center">
       <main className="px-4 sm:px-6 lg:px-10 z-10 lg:w-[50rem] md:w-[35rem]  mx-auto">
         <div className="text-center">
-          <h2 className="text-base sm:text-xl md:text-3xl tracking-tight leading-10 font-semibold text-white  lg:text-[2.65rem] px-5 ">
+          <h1 className="text-base sm:text-xl md:text-3xl tracking-tight leading-10 font-semibold text-white  lg:text-[2.65rem] px-5 ">
             {homeMeta?.hero_title}
-          </h2>
+          </h1>
 
           <div className="mt-1 sm:mt-3 md:mt-7 sm: justify-center">
             <div className="rounded-md ">

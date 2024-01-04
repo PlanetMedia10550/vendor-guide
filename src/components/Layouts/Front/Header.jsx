@@ -57,7 +57,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
 
   return (
     <>
-      <header>
+      <header className="fixed top-0 z-50 left-0 right-0">
         <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 lg:p-7 ">
           <div className="flex xl:flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
             {isInfoLoding ? (

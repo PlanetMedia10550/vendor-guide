@@ -7,9 +7,9 @@ const PartnerSection2 = (props) => {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto  max-w-2xl grid-cols-1  lg:max-w-none lg:grid-cols-2">
             <div className="mx-auto text-center">
-              <h2 className="text-lg lg:text-3xl md:text-xl font-bold  tracking-normal text-[#221F20]  font-lato md:pb-5">
+              <h3 className="text-lg lg:text-3xl md:text-xl font-bold  tracking-normal text-[#221F20]  font-lato md:pb-5">
                 {props.title}
-              </h2>
+              </h3>
               <div className="py-11 md:pb-20 gap-x-4 text-center block">
                 <Link
                   href=""

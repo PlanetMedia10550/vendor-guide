@@ -10,11 +10,16 @@ import BidFavoriteButton from "@/app/(modules)/vendor/components/BidFavoriteButt
 import Loading from "@/app/loadingScreen" 
 
 const BidMessage = ({bid}) => {
-  const {navigate}  = useAuth();
+  const {navigate,user}  = useAuth();
   const [meLoding,setMeLoding] = useState(false);
   const handleGoVendors = async () => {
     setMeLoding(true);
-    navigate.push(`/vendor/message/${bid.id}/${bid.manager_id}`);
+    // console.log(user)
+    if(user.type==1){
+      navigate.push(`/message/${bid.id}/${bid.vendor_id}`);
+    }else{
+      navigate.push(`/message/${bid.id}/${bid.manager_id}`);
+    }
   }
 // console.log(bid)
   return (
@@ -26,7 +31,7 @@ const TableData = () => {
   const {user,renderFieldError,isLoding}  = useAuth();
   const [vendorsData, setVendorsData] = useState([]);
   const columns = [
-      {field: 'name', header: 'Manager Name',sortable:'sortable'},
+      {field: 'name', header: 'Sender Name',sortable:'sortable'},
       {field: 'email', header: 'Email'},
       {field: 'mobile', header: 'Mobile'},
       {field: 'vendor_id', header: 'Action', colbody: true},
@@ -54,17 +59,31 @@ const TableData = () => {
         var dataProp = await response2.json()
         var newData = dataProp.data;
         // console.log(newData);
-        const updatedRows = newData.map(item => ({
-          'bid':item?.bid,
-          'bid_status':item?.is_bid_status,
-          'id':item?.bid_id,
-          'name':item.manager.name,
-          'email':item.manager.email,
-          'mobile':item.manager.mobile,
-          'vendor_id':item?.vendor_id,
-          'manager_id':item?.manager_id,
-          'favorite':item.is_favourite,
-        }));
+        if(user.type==1){
+          var updatedRows = newData.map(item => ({
+            'bid':item?.bid,
+            'bid_status':item?.is_bid_status,
+            'id':item?.bid_id,
+            'name':item.vendor.name,
+            'email':item.vendor.email,
+            'mobile':item.vendor.mobile,
+            'vendor_id':item?.vendor_id,
+            'manager_id':item?.manager_id,
+            'favorite':item.is_favourite,
+          }));
+        }else{
+          var updatedRows = newData.map(item => ({
+            'bid':item?.bid,
+            'bid_status':item?.is_bid_status,
+            'id':item?.bid_id,
+            'name':item.vendor.name,
+            'email':item.vendor.email,
+            'mobile':item.vendor.mobile,
+            'vendor_id':item?.vendor_id,
+            'manager_id':item?.manager_id,
+            'favorite':item.is_favourite,
+          }));
+        }
         setVendorsData(updatedRows);
         
         // console.error(requestsQuotes)

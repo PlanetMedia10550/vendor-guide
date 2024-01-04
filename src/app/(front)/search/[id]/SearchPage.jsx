@@ -76,21 +76,18 @@ const SearchPage = ({slug}) => {
             <div className="mt-12">
               <div>
                 <div>
-                  <p className="text-[#647589] text-lg font-medium font-lato leading-8">
-                    {filterData?.description}
-                  </p>
+                  <p className="text-[#647589] text-lg font-medium font-lato leading-8" dangerouslySetInnerHTML={{ __html: filterData?.description }} />
                 </div>
                 {isLoading ? (
                     <div className="my-10 text-center text-gray-500">Loading...</div>
                   ) : (
                     filterData?.multi_family !== 0 ? (
                       <div className="my-10">
-                        <label
-                          htmlFor=""
+                        <h2
                           className="text-[#c13e27] text-[1.2rem] font-medium font-lato"
                         >
                           Multifamily Description
-                        </label>
+                        </h2>
                         <p className="text-[#647589] text-lg font-medium font-lato leading-8">
                           <span>{filterData?.multi_family_description}</span>
                         </p>
@@ -106,12 +103,11 @@ const SearchPage = ({slug}) => {
                   ) : (
                     filterData?.commercial !== 0 ? (
                       <div className="my-10">
-                        <label
-                          htmlFor=""
+                        <h2
                           className="text-[#c13e27] text-[1.2rem] font-medium font-lato"
                         >
                           Commercial Description
-                        </label>
+                        </h2>
                         <p className="text-[#647589] text-lg font-medium font-lato leading-8">
                           <span>{filterData?.commercial_description}</span>
                         </p>
@@ -127,12 +123,11 @@ const SearchPage = ({slug}) => {
                   ) : (
                     filterData?.residential !== 0 ? (
                       <div className="my-10">
-                        <label
-                          htmlFor=""
+                        <h2
                           className="text-[#c13e27] text-[1.2rem] font-medium font-lato"
                         >
                           Residential Description
-                        </label>
+                        </h2>
                         <p className="text-[#647589] text-lg font-medium font-lato leading-8">
                           <span>{filterData?.residential_description}</span>
                         </p>

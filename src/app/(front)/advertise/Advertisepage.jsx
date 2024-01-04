@@ -37,9 +37,9 @@ const Advertisepage = () => {
             <div className="col-span-12 xl:col-span-12">
               <div className="card ">
                 <div className="card-body pb-8 md:pb-14">
-                  <h6 className="mb-1 text-xl  lg:text-4xl md:text-2xl text-[#221F20] font-bold font-lato">
+                  <h2 className="mb-1 text-xl  lg:text-4xl md:text-2xl text-[#221F20] font-bold font-lato">
                     Choose Your Advertising Package:
-                  </h6>
+                  </h2>
                 </div>
                 <div className="card-body">
                   <div className="relative overflow-x-auto overflow-y-hidden">

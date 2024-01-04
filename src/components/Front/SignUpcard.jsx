@@ -11,9 +11,9 @@ const SignUpcard = (props) => {
           <div className="rounded-xl overflow-hidden shadow-xl  flex flex-col  bg-white">
             <div className="flex items-center p-3 bg-[#B13634]"></div>
             <div className="text-center py-3 sm:py-3 md:py-4 lg:py-6">
-              <h1 className="lg:text-2xl text-xl font-bold tracking-tight  text-[#171717b] ">
+              <h2 className="lg:text-2xl text-xl font-bold tracking-tight  text-[#171717b] ">
                 {props.title}
-              </h1>
+              </h2>
             </div>
             
               {/* {vendorData.map((row, index) => {

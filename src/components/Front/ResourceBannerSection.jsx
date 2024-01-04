@@ -28,9 +28,9 @@ const ResourceBannerSection = (props) => {
           <div className="rounded-xl overflow-hidden shadow-[#0000004a] shadow-2xl  flex flex-col  bg-white">
             <div className="flex items-center p-3 bg-[#B13634]"></div>
             <div className="text-center px-2 sm:px-0 pt-3 md:pt-4 lg:pt-6">
-              <h1 className="lg:text-2xl sm:text-xl text-lg font-bold tracking-tight  text-[#171717b]">
+              <h2 className="lg:text-2xl sm:text-xl text-lg font-bold tracking-tight  text-[#171717b]">
                 {props.title}
-              </h1>
+              </h2>
             </div>
             <div class="hidden lg:block">
             <div className=" digital_grid  grid grid-cols-5  items-center justify-center gap-x-[0.15rem]  gap-y-5 xl:gap-y-0 py-4 sm:py-6 xl:py-10 ">

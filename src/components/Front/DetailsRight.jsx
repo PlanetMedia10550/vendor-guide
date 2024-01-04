@@ -79,7 +79,7 @@ const DetailsRight = ({filterData}) => {
          )} 
          {filterData?.mobile ? (
           <h3 className="text-lg font-lato font-bold   text-[#647589]">
-          Phone Number : {filterData.mobile}
+          Phone Number : <Link href={`tel:${filterData.mobile}`} className="">{filterData.mobile}</Link>
           </h3>
          ):(
           ''
@@ -97,6 +97,7 @@ const DetailsRight = ({filterData}) => {
             <Link
               href={filterData.website_url}
               className="px-10 lg:px-6 md:px-5 py-3 text-center inline-block rounded-md bg-[#c13e27] lg:text-lg md:text-lg text-sm tracking-wide font-semibold font-lato text-white shadow-sm hover:bg-[#783426] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
+              rel="nofollow"
             >
               Website
             </Link>

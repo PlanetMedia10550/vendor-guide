@@ -68,15 +68,15 @@ const ResourceListCards = (props) => {
                     </div>
                     <div className="mt-4 md:mx-6  xl:ml-10 md:text-left text-center">
                       <div>
-                        <h3 className="lg:text-xl text-lg  text-[#B13634] font-bold ">
                           <Link href={`/blog/${row.slug}`}>
-                            <span
+                        <h3 className="lg:text-xl text-lg  text-[#B13634] font-bold ">
+                            {/* <span
                               aria-hidden="true"
                               className="absolute inset-0"
-                            ></span>
+                            ></span> */}
                             {row.title}
-                          </Link>
                         </h3>
+                          </Link>
                         <p className="mt-1 lg:text-xl text-lg text-[#221F20] font-medium ">
                           {row.short_description}
                         </p>

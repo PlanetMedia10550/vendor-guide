@@ -11,7 +11,9 @@ const nextConfig = {
         BASE_API_URL: 'http://vendor-guide.codelive.info/api/',
         NEXT_PUBLIC_API_URL: 'http://vendor-guide.codelive.info/api/',
         GOOGLE_MAP_API_KEY: 'AIzaSyB-52FBisv-qbBxEhHmSra_EiijJV2WeEE',
-        NEXT_PUBLIC_STRIPE_PUBLIC_KEY:'pk_test_51HD2bgHFZYAuYDw1kf3xS6rQbV0cnei6ggqB6OTjfuWWYODN2kfX8dEuJBtentqIMfG4y6N9LPXFuLxYjZO1ETCe00MSuqop00'
+        NEXT_PUBLIC_STRIPE_PUBLIC_KEY:'pk_test_51HD2bgHFZYAuYDw1kf3xS6rQbV0cnei6ggqB6OTjfuWWYODN2kfX8dEuJBtentqIMfG4y6N9LPXFuLxYjZO1ETCe00MSuqop00',
+        SITE_NAME: 'Vendor Guide',
+        SITE_ID: 'Vendor Guide'
     },
     async redirects() {
         return [

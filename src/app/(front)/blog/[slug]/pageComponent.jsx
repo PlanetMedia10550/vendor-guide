@@ -38,9 +38,9 @@ export default function PageComponent({slug}) {
         }}>
           <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">
             <main className="magazine_heading px-4 sm:px-6 lg:px-8 z-10 lg:py-12 relative text-center">
-              <h2 className="text:sm sm:text-lg md:text-2xl lg:text-3xl xl:text-[3rem] font-lato -tracking-tight md:leading-10 lg:leading-[3.5rem] font-semibold  text-white   font-lato lg:px-10">
+              <h1 className="text:sm sm:text-lg md:text-2xl lg:text-3xl xl:text-[3rem] font-lato -tracking-tight md:leading-10 lg:leading-[3.5rem] font-semibold  text-white   font-lato lg:px-10">
                 {blog?.title}
-              </h2>
+              </h1>
             </main>
           </div>
         </section>
@@ -63,7 +63,7 @@ export default function PageComponent({slug}) {
                       </div>
                       <div className="col-span-2 mt-4 md:ml-10 md:text-left text-center">
                         <div>
-                          <h3 className="lg:text-xl text-lg  text-[#B13634] font-bold ">
+                          <h2 className="lg:text-xl text-lg  text-[#B13634] font-bold ">
                             
                               <span
                                 aria-hidden="true"
@@ -71,7 +71,7 @@ export default function PageComponent({slug}) {
                               ></span>
                               {blog?.title}
                             
-                          </h3>
+                          </h2>
                           <p className="mt-1 lg:text-xl text-lg text-[#221F20] font-medium ">
                             {blog?.description}
                           </p>

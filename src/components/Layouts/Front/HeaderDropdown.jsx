@@ -52,7 +52,7 @@ const HeaderDropdown = (props) => {
                 <li className="py-1" key={index}>
                 <Link
                   className="px-3 pt-2 text-sm font-bold hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50"
-                  href={`/publication/${item.id}`}
+                  href={`/publication/${item.slug}`}
                 >
                   <i className="mdi mdi-face-man text-16 align-middle mr-1"></i>
                   {item.title}

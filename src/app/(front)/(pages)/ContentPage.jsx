@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useAuth } from "@/context/UserContext"; 
 import LoadingComponents from "@/components/LoadingComponents";
 
-const ContentPages = ({params}) => {
-  const slug = params.slug;
+const ContentPage = ({slug}) => {
+  // const slug = params.slug;
   const [filterData, setFilterData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {metaData,loading} = useAuth();
@@ -33,13 +33,15 @@ const ContentPages = ({params}) => {
       }
     }
     fetchData ();
-    if (slug === 'contact-us' || slug === 'about') {
+    if (slug === 'contact' || slug === 'about') {
       const specificMeta = metaData?.[slug];
       // Set selectedMeta to specificMeta
       setSelectedMeta(specificMeta || {});
     }
 
   }, [metaData]);
+
+
 
   return (
     <>
@@ -61,20 +63,20 @@ const ContentPages = ({params}) => {
           </div>
         </div>
         <main className="magazine_heading px-4 sm:px-6 lg:px-8 z-10 lg:py-12 relative text-center">
-          <h2 className="text:sm sm:text-lg md:text-2xl lg:text-3xl xl:text-[3rem] font-lato -tracking-tight md:leading-10 lg:leading-[3.5rem] font-semibold  text-white   font-lato lg:px-10">
+          <h1 className="text:sm sm:text-lg md:text-2xl lg:text-3xl xl:text-[3rem] font-lato -tracking-tight md:leading-10 lg:leading-[3.5rem] font-semibold  text-white   font-lato lg:px-10">
             {filterData.title}
-          </h2>
+          </h1>
         </main>
       </div>
     </section>
       <section id="featurs_section" className="py-9 md:py-5">
           <div className="mx-auto ">
             <div className="mt-12">
-                  {isLoading ? <div className="flex justify-center items-center h-full">
+                  {/* {isLoading ? <div className="flex justify-center items-center h-full">
             <LoadingComponents />
-        </div> :
+        </div> : */}
                   <div className="text-[#647589] text-lg font-medium font-lato leading-8" dangerouslySetInnerHTML={{ __html: filterData.description }} />
-                  }
+                  {/* } */}
             </div>
           </div>
       </section>
@@ -82,4 +84,4 @@ const ContentPages = ({params}) => {
   );
 };
 
-export default ContentPages;
+export default ContentPage;

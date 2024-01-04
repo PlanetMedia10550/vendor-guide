@@ -137,16 +137,14 @@ const VendorCard = (props) => {
                               />
                             </Link>
                           </div>
-                            <h5 className="text-16 text-gray-700 mb-1 text-ellipsis overflow-hidden">
-                              <Link href={`/search/`+ row.slug } className="text-[#B13634] font-bold whitespace-nowrap">
-                                {row.name}
-                              </Link>
-                            </h5>
+                            <Link href={`/search/`+ row.slug } className="">
+                              <h3 className="text-[#B13634] font-bold whitespace-nowrap text-16  mb-1 text-ellipsis overflow-hidden">
+                                  {row.name}
+                              </h3>
+                            </Link>
                             <p className="text-black font-bold  mb-2 pt-5">{row.mobile}</p>
                             {row.short_description ? (
-                                <p className="text-gray-400 font-normal text-sm whitespace-nowrap text-ellipsis overflow-hidden">
-                                  {row.short_description}
-                                </p>
+                                <p className="text-gray-400 font-normal text-sm whitespace-nowrap text-ellipsis overflow-hidden" dangerouslySetInnerHTML={{ __html: row.short_description }} />
                               ) : (
                                 // Apply styles for when short_description is not accessible
                                 <div style={{ height: "1.3rem" }}></div>

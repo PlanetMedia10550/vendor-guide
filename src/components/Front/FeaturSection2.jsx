@@ -37,9 +37,9 @@ const FeaturSection2 = (props) => {
           return(
         <div key={i} className="lg:mx-auto grid max-w-4xl grid-cols-1 items-center  gap-x-2 gap-y-8 md:gap-y-16  lg:max-w-none md:grid-cols-2">
           <div className="lg:pt-4 md:text-left order-last md:order-first">
-              <p className="text-2xl lg:text-3xl text-[#C1272D]  font-bold font-lato">
+              <h2 className="text-2xl lg:text-3xl text-[#C1272D]  font-bold font-lato">
                 {row.title}
-              </p>
+              </h2>
             <p className="md:mt-2 lg:leading-10 md:text-sm  lg:text-[1.40rem]  text-[#221F20] font-normal  font-maven">{row.description}
             </p>
           </div>

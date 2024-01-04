@@ -57,14 +57,14 @@ const Footer = () => {
           </div>
           <div className="footer_grid grid gap-2.5 grid-cols-1 sm:justify-items-center sm:grid-cols-2 md:grid-cols-4 px-20  md:mr-20 md:ml-20 lg:mr-48 lg:ml-36 px-7 md:px-0 md:pt-5 lg:pt-10">
             <div className="flex flex-col">
-              <label className="text-white pb-2 sm:pb-4">Advertise</label>
+              <h4 className="text-white pb-2 sm:pb-4">Advertise</h4>
               <ul className="flex flex-col nav_list text-sm">
                 <li><Link href={`tel:${sitesetting?.side_phone}`} className="">{sitesetting?.side_phone}</Link></li>
                 <li><Link href={`mailto:${sitesetting?.side_email}`} className="">{sitesetting?.side_email}</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">
-              <label className="text-white pb-2 sm:pb-4">Explore</label>
+              <h4 className="text-white pb-2 sm:pb-4">Explore</h4>
               <ul className="flex flex-col nav_list text-sm">
                 <li>
                   <Link href="/advertise" className="">
@@ -78,13 +78,13 @@ const Footer = () => {
               </ul>
             </div>
             <div className="flex flex-col">
-              <label className="text-white pb-2 sm:pb-4">Visit</label>
+              <h4 className="text-white pb-2 sm:pb-4">Visit</h4>
               <ul className="flex flex-col nav_list text-sm">
-                <li>{sitesetting?.side_address}</li>
+                <li><Link href="//g.page/planet-media-wayzata?share">{sitesetting?.side_address}</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">
-              <label className="text-white pb-2 sm:pb-4">Follow</label>
+              <h4 className="text-white pb-2 sm:pb-4">Follow</h4>
               <ul className="flex flex-col nav_list text-sm">
                {sitesetting?.side_facebook_url && (
                 <li><Link href={sitesetting?.side_facebook_url} rel="nofollow">Facebook</Link></li>
@@ -94,6 +94,9 @@ const Footer = () => {
                )}
                {sitesetting?.side_instagram_url && (
                 <li><Link href={sitesetting?.side_instagram_url} rel="nofollow">Instagram</Link></li>
+               )}
+               {sitesetting?.side_twitter_url && (
+                <li><Link href={sitesetting?.side_twitter_url} rel="nofollow">Twitter</Link></li>
                )}
               </ul>
             </div>

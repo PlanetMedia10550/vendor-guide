@@ -29,7 +29,7 @@ const BannerSectionCard = () => {
               key={i}
               className=" lg:col-span-1  shadow-2xl h-full"
             >
-              <div className="sm:mt-0 flex justify-center md:justify-end h-full items-center">
+              <div className="sm:mt-0 flex justify-center md:justify-end h-full items-center p-1">
                 <Link href={`/search/`+ row.slug }>
                 <Image
                   src={row.image_url?row.image_url:""}

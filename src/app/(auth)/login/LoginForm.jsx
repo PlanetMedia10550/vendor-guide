@@ -24,7 +24,7 @@ const LoginForm = () => {
 
                     </div>
                     <div className=" text-left">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl  text-left">Login</h2>
+                        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl  text-left">Login</h1>
 
                     </div>
                     <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
