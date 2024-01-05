@@ -44,24 +44,7 @@ const SearchBar = ({homeMeta}) => {
                     Search
                   </button>
                 </div>
-                {/* <div className=" inset-y-0 left-0 flex items-center pl-5 sm:pl-28 md:pl-14 pointer-events-none mt-3 text-xs sm:text-base tracking-wider text-white">
-                  <svg
-                    className="w-4 h-4 text-xs text-white dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                  <span className="pl-2 text-white ">Advanced Search</span>
-                </div> */}
+                
               </form>
             </div>
           </div>

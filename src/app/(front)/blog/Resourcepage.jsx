@@ -1,7 +1,6 @@
  "use client";
 
 import ResourceListCards from "@/components/Front/ResourceListCards";
-import TopBarImage from "public/images&icons/resources/banner1.jpg";
 import TopBanner from "@/components/Front/TopBanner";
 import { useAuth } from "@/context/UserContext";
 

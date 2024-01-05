@@ -3,10 +3,10 @@ import ContentPage from "@/app/(front)/(pages)/ContentPage";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
-  const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/about`).then((res) => res.json());
+  const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/contact-us`).then((res) => res.json());
   var metaData = seoMetaData?.data;
   if(metaData==null){
-    const blogData = await fetch(`${process.env.BASE_API_URL}page/about`).then((res) => res.json());
+    const blogData = await fetch(`${process.env.BASE_API_URL}page/contact-us`).then((res) => res.json());
     var metaData = blogData?.data;
   }
   return {
@@ -55,7 +55,7 @@ const SlugPages = ({params}) => {
 
   return (
     <>
-      <ContentPage slug='about' />
+      <ContentPage slug='contact-us' />
     </>
   );
 };

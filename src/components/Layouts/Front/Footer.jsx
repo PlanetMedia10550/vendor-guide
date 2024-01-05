@@ -71,8 +71,8 @@ const Footer = () => {
                     Advertise{" "}
                   </Link></li>
                 <li>
-                  <Link href="/resources" className="">
-                    Resources{" "}
+                  <Link href="/blog" className="">
+                    Blog{" "}
                   </Link>
                 </li>
               </ul>

@@ -57,7 +57,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
 
   return (
     <>
-      <header className="fixed top-0 z-50 left-0 right-0">
+      <header className="fixed top-0 z-50 left-0 right-0 border-b-2">
         <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 lg:p-7 ">
           <div className="flex xl:flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
             {isInfoLoding ? (
@@ -161,7 +161,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 </li>
                 <li >
                   <Link
-                    href="/about"
+                    href="/about-us"
                     className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     About
@@ -169,7 +169,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="/contact-us"
                     className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
                   >
                     Contact
@@ -197,7 +197,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                       <li className="py-1 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
                         <Link
                           className="px-3 text-sm font-bold block "
-                          href="/resources"
+                          href="/blog"
                         >
                           <i className="mdi mdi-lock text-16 align-middle mr-1"></i>
                           Blog

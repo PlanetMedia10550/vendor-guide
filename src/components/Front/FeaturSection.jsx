@@ -39,7 +39,7 @@ const FeaturSection = (props) => {
               </div>
               <div
                 className="md:col-span-1 relative w-full"
-                style={{ position: "relative" }}
+                
               >
                 <Image
                   src={row.image_url}
@@ -79,7 +79,7 @@ const FeaturSection = (props) => {
             <div key={i} className="mt-8 lg:mx-auto grid  justify-center md:justify-normal md:grid-cols-2 items-center max-w-4xl md:gap-x-8  gap-y-5 sm:gap-y-8 md:gap-y-16 lg:max-w-none">
               <div
                 className="md:col-span-1 relative w-full"
-                style={{ position: "relative" }}
+                
               >
                 <Image
                   src={row.image_url}

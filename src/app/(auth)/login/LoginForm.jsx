@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from 'react'
 import Button from "@/components/Front/UI/Button";
 import { useAuth } from "@/context/UserContext";
-import ForgetPasswordForm from "../forget/ForgetPasswordForm";
+import ForgetPasswordForm from "../forget-password/ForgetPasswordForm";
 
 const LoginForm = () => {
     const [loginData, setLoginData] = useState([]);
@@ -66,7 +66,7 @@ const LoginForm = () => {
                                 <Link href="register" className="text-[#c13e27] text-lg font-semibold">Register</Link>
                             </div>
                             <div>
-                                <Link href="forget/" className="text-[#c13e27] text-lg font-semibold">Forgot Password</Link>
+                                <Link href="forget-password/" className="text-[#c13e27] text-lg font-semibold">Forget Password</Link>
                             </div>
 
                         </div>

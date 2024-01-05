@@ -33,7 +33,7 @@ const ContentPage = ({slug}) => {
       }
     }
     fetchData ();
-    if (slug === 'contact' || slug === 'about') {
+    if (slug === 'contact-us' || slug === 'about-us') {
       const specificMeta = metaData?.[slug];
       // Set selectedMeta to specificMeta
       setSelectedMeta(specificMeta || {});
