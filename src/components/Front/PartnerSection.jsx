@@ -8,9 +8,10 @@ const PartnerSection = ({homeMeta}) => {
         <div className="mx-auto max-w-7xl pt-0 px-6 py-8 lg:py-0 lg:pt-4 lg:px-8">
           <div className="mx-auto  max-w-2xl grid-cols-1  lg:max-w-none lg:grid-cols-2">
             <div className="max-w-2xl  mx-auto text-center">
+              {homeMeta?.partner_title &&
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold  tracking-normal text-[#B13634]  font-lato">
                    {homeMeta?.partner_title}
-              </h2>
+              </h2>}
               <p className="mt-3 text-lg sm:text-xl lg:text-[1.400rem] lg:leading-9 text-[#221F20] font-medium md:font-semibold font-lato">
                    {homeMeta?.partner_text}
               </p>

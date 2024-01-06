@@ -82,7 +82,7 @@ const SearchAllData = () => {
     <>
       {(isLoading) ? 
       <>
-      <section className="search-section bg-[#f7f9f8]">
+      <div className="search-section bg-[#f7f9f8]">
       <div className=" isolate px-6   lg:px-8">
         <div className="mx-auto max-w-2xl py-5 lg:py-12 md:pt-10  lg:pt-8">
           <div className="text-center">
@@ -95,8 +95,8 @@ const SearchAllData = () => {
           </div>
         </div>
       </div>
-      </section>
-      <section className="contact_search bg-[#f7f9f8]">
+      </div>
+      <div className="contact_search bg-[#f7f9f8]">
         <div className="py-20 pt-8 px-10 md:px-10">
           <div className="grid grid-cols-12 md:gap-12">
             <div className="col-span-12  md:col-span-12 lg:col-span-12  order-2 sm:order-1">
@@ -106,7 +106,7 @@ const SearchAllData = () => {
               </div>
             </div>
           </div>
-      </section>
+      </div>
       </>
       :<VendorCard lat={geoLatitude} long={geoLongitude} postalCode={postalCode} locality={locality} />
       }

@@ -32,7 +32,7 @@ const ResourceBannerSection = (props) => {
                 {props.title}
               </h2>
             </div>
-            <div class="hidden lg:block">
+            <div className="hidden lg:block">
             <div className=" digital_grid  grid grid-cols-5  items-center justify-center gap-x-[0.15rem]  gap-y-5 xl:gap-y-0 py-4 sm:py-6 xl:py-10 ">
               {isLoading==false && magazineData.map((row, i) => {
                 return (
@@ -65,11 +65,11 @@ const ResourceBannerSection = (props) => {
               })}
             </div>
             </div>
-            <div class="block lg:hidden px-4 py-4">
-              <div class="flex gap-6  overflow-x-auto whitespace-nowrap">
+            <div className="block lg:hidden px-4 py-4">
+              <div className="flex gap-6  overflow-x-auto whitespace-nowrap">
             {isLoading==false && magazineData.map((row, i) => {
                 return (
-                    <div  key={i} class="w-full">
+                    <div  key={i} className="w-full">
                       <div className="sm:mt-0 sm:px-4 md:px-4 xl:px-9">
                         <Image
                           src={row.image_url}

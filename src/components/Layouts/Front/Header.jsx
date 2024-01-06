@@ -137,7 +137,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
               id="mobile-menu-2"
             >
               <ul className={`block lg:flex items-start lg:items-center flex-col mt-4 font-semibold lg:flex-row lg:space-x-8 lg:mt-0 text-base text-[#221F20] ${UserType == 1 || !user ? " " : "pr-10"}`}>
-                <li className="hidden " id="Vendor_Guide_Logo2">
+                <li className="hidden " >
                   <Link
                     href="/"
                     className="flex items-center px-4 pb-4 lg:ps-4"
@@ -180,7 +180,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                     <button
                       type="button"
                       className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle pl-4"
-                      id="page-header-user-dropdown"
+                      id="page-header-user-dropdown1"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="true"
@@ -208,7 +208,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                           <button
                             type="button"
                             className="text-base text-[#221F20] font-semibold flex items-center  dropdown-toggle  dark:border-zinc-600  pl-3"
-                            id="page-header-user-dropdown"
+                            id="page-header-user-dropdown2"
                             data-bs-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="true"
@@ -233,7 +233,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   <button
                     type="button"
                     className="flex gap-x-4 items-center border-gray-50 text-white "
-                    id="page-header-user-dropdown"
+                    id="page-header-user-dropdown3"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="true"

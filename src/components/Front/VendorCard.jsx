@@ -109,7 +109,7 @@ const VendorCard = (props) => {
     <>
       <Companyinfo searchWord={search} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} locality={props.locality} categoryData={categoryData} />
       
-      <section className="contact_search bg-[#f7f9f8]">
+      <div className="contact_search bg-[#f7f9f8]">
         <div className="py-20 pt-8 px-10 md:px-10">
           <div className="grid grid-cols-12 md:gap-12">
             <div className="col-span-12  md:col-span-12 lg:col-span-12  order-2 sm:order-1">
@@ -195,7 +195,7 @@ const VendorCard = (props) => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className="text-3xl font-medium" >Request a Quote !</h1>
         {user!=null ? (

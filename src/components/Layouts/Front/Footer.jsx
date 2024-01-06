@@ -14,7 +14,6 @@ const Footer = () => {
     <>
    
       <footer
-        id=""
         className="bg-[#171717] text-white bottom-0 left-0 flex flex-col w-full gap-4  md:gap-8"
       >
        {isInfoLoding ? (

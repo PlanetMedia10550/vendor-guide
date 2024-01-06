@@ -25,12 +25,12 @@ export default function PageComponent({slug}) {
     }, []);
   return (
     <Fragment>
-        {loading ? <section className="top_banner sm:relative">
+        {loading ? <div className="top_banner sm:relative">
           <div className="text-center">
           Loading...
           </div>
-        </section>:
-        <section
+        </div>:
+        <div
         id="hero_section"
         className=" bg-cover bg-center bg-no-repeat relative before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#08161eab] xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh]"
         style={{
@@ -43,9 +43,9 @@ export default function PageComponent({slug}) {
               </h1>
             </main>
           </div>
-        </section>
+        </div>
         }
-      <section id="featurs_section" className="py-9 md:py-5">
+      <div id="featurs_section" className="py-9 md:py-5">
         <div className="container mx-auto overflow-hidden pb-5 pt-5 md:pt-12 px-5 md:px-8 xl:px-24">
           <div className="mx-auto max-w-7xl">
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-3 xl:gap-x-5 relative">
@@ -83,7 +83,7 @@ export default function PageComponent({slug}) {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </Fragment>
   );
 };

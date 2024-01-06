@@ -6,9 +6,9 @@ export default function AuthLayout({ children }) {
   return (
     <>
         <Header />
-        <div className='sm:relative pt-24 z-40'>
+        <section className='sm:relative pt-24 z-40'>
           {children}
-        </div>
+        </section>
         <Footer/>
     </>
   )

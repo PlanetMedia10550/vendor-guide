@@ -65,7 +65,7 @@ const Companyinfo = (props) => {
 
   return (
     <>
-      <section className="search-section bg-[#f7f9f8]">
+      <div className="search-section bg-[#f7f9f8]">
         <div className=" isolate px-6   lg:px-8">
           <div className="mx-auto max-w-2xl py-5 lg:py-12 md:pt-10  lg:pt-8">
             <div className="text-center">
@@ -147,7 +147,7 @@ const Companyinfo = (props) => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };

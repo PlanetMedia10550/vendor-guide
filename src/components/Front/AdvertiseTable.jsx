@@ -72,7 +72,7 @@ const AdvertiseTable = ({user}) => {
                 </>
               ) : (
                 <>
-                <div class="pt-4">
+                <div className="pt-4">
                   <div className="flex justify-start">
                   <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Price:</span>
                     <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">

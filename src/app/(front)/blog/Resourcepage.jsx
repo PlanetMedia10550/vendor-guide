@@ -11,22 +11,22 @@ const Resourcespage = () => {
   return (
     <>
      {loading ? (
-      <section className="top_banner sm:relative">
+      <div className="top_banner sm:relative">
         <div className="text-center">
          Loading...
         </div>
-      </section>
+      </div>
       
      ):(
       <TopBanner
         resourceMeta = {resourceMeta}/>
         )}
-      <section className="pt-[31rem] product_section sm:pt-[21rem] md:pt-[18rem] lg:pt-64 xl:pt-[25rem] 2xl:pt-[25rem]">
+      <div className="pt-[31rem] product_section sm:pt-[21rem] md:pt-[18rem] lg:pt-64 xl:pt-[25rem] 2xl:pt-[25rem]">
         <ResourceListCards title="Read Our Latest Blogs" />
 
         {/* <Pagination /> */}
         
-      </section>
+      </div>
     </>
   );
 };

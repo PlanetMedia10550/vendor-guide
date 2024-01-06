@@ -1,6 +1,6 @@
 const Modal = ({ isOpen, onClose, children }) => {
     return isOpen ? (
-        <div data-modal-backdrop="static" data-modal-placement="top-center" tabIndex="-1" aria-hidden="true" className="fixed  left-0 right-0 z-50  w-full p-6 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-0rem)] max-h-full bg-gray-500 bg-opacity-50 transition-opacity">
+        <div data-modal-backdrop="static" data-modal-placement="top-center" tabIndex="-1" aria-hidden="true" className="fixed  left-0 right-0 z-50  w-full p-6 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-0rem)] max-h-full bg-gray-500 bg-opacity-50 transition-opacity z-50">
         <div className="relative w-full max-w-4xl max-h-full mx-auto" >
            <div className="relative bg-white rounded-md shadow-lg " >
             <div className="py-2 px-2">

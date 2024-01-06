@@ -3,7 +3,7 @@ import ResourceBannerSection from "./ResourceBannerSection";
 const TopBanner = ({resourceMeta}) => {
   return (
     <>
-      <section className="top_banner sm:relative">
+      <div className="top_banner sm:relative">
         <div
           className="relative h-[44vh] sm:h-[60vh] md:h-[72vh] lg:h-[80vh] xl:h-[83vh] 2xl-h-[83vh] bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[44vh] before:sm:h-[60vh]  before:md:h-[72vh] before:lg:h-[80vh] before:xl:h-[83vh] 2xl-h-[83vh] bg:opacity-25"
           style={{ backgroundImage: `url(${resourceMeta?.resources_background})` }}
@@ -22,7 +22,7 @@ const TopBanner = ({resourceMeta}) => {
           </div>
           <ResourceBannerSection title="Exolore Our Digital Magazine Editions" />
         </div>
-      </section>
+      </div>
     </>
   );
 };

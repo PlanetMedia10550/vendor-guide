@@ -17,7 +17,7 @@ const Page = ({params}) => {
             src={advertiseMeta?.advertise_background}
             title={advertiseMeta?.advertise_title}
         />
-        <section
+        <div
       id="featurs_section"
       style={{ backgroundImage: `url(${patternImage})`,backgroundSize: '100% 100%' }}
       className="py-9 md:py-5 bg-[#F6F7F8]"
@@ -31,10 +31,10 @@ const Page = ({params}) => {
                 <p className="lg:mt-1 md:mt-6 sm:mt-0 mt-10 lg:leading-10 md:text-[1.02rem] text-[1.02rem] lg:text-[1.45rem]  text-[#221F20] font-medium  font-maven">
                   <span className="text-xl lg:text-[1.80rem] text-[#B13634] font-bold font-lato">Ready to take your business to new heights?</span>
                   <br/>
-                  Join Vendor Guide's exclusive network and propel your brand
+                  <span>Join Vendor Guide's exclusive network and propel your brand
                                 htmlForward. Our plathtmlForm offers you the tools and opportunities
                                 you need to efhtmlFortlessly manage your listings and secure
-                                valuable bid requests.
+                                valuable bid requests.</span>
                 </p>
               </div>
               <div className="md:pt-10 py-10 md:py-5 lg:pt-24 text-center md:text-left ">
@@ -54,7 +54,7 @@ const Page = ({params}) => {
                         & Impact
                       </span>
                       <br/>
-                      As a member of our community, your services are showcased to a vast network of property managers actively looking to collaborate with vendors like you. Harness the power of our plathtmlForm to elevate your reach, engaging with potential clients on a whole new level.
+                      <span>As a member of our community, your services are showcased to a vast network of property managers actively looking to collaborate with vendors like you. Harness the power of our plathtmlForm to elevate your reach, engaging with potential clients on a whole new level.</span>
                     </p>
                   </div>
                 </div>
@@ -76,11 +76,11 @@ const Page = ({params}) => {
                         & Bid Requests
                       </span>
                       <br/>
-                      Through your intuitive Vendor Guide dashboard,
+                      <span>Through your intuitive Vendor Guide dashboard,
                                             you can easily update your inhtmlFormation and receive
                                             bid requests that matter and make meaningful
                                             connections with property managers actively
-                                            seeking your services.
+                                            seeking your services.</span>
                     </p>
                   </div>
                 </div>
@@ -102,10 +102,10 @@ const Page = ({params}) => {
                         Data Insights
                       </span>
                       <br/>
-                      Gain a competitive edge with Vendor Guide's
+                      <span>Gain a competitive edge with Vendor Guide's
                                             insights. Understand trends, preferences, and
                                             demands within your industry, enabling you to tailor
-                                            your offerings effectively.
+                                            your offerings effectively.</span>
                     </p>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ const Page = ({params}) => {
         </div>
         
       </div>
-    </section>
+    </div>
      </>
     
   );

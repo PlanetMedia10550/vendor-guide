@@ -129,12 +129,12 @@ function Flipbook({slug}) {
 
   return (
     <>
-    {loading ? <section className="top_banner sm:relative">
+    {loading ? <div className="top_banner sm:relative">
           <div className="text-center">
           Loading...
           </div>
-        </section>:
-        <section
+        </div>:
+        <div
         id="hero_section"
         className=" bg-cover bg-center bg-no-repeat relative before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#08161eab] xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh]"
         style={{
@@ -147,7 +147,7 @@ function Flipbook({slug}) {
               </h1>
             </main>
           </div>
-        </section>
+        </div>
         }
     <div className="demo-block bg-light pt-3 pb-3 overflow-hidden" id="demoBlock">
       <div className="container mx-auto" style={{ position: 'relative' }}>

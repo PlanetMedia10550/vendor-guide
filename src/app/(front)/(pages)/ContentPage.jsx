@@ -46,7 +46,7 @@ const ContentPage = ({slug}) => {
   return (
     <>
 
-    <section
+    <div
       id="hero_section"
       className=" bg-cover bg-center bg-no-repeat relative before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#08161eab] xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh]"
       style={{
@@ -68,8 +68,8 @@ const ContentPage = ({slug}) => {
           </h1>
         </main>
       </div>
-    </section>
-      <section id="featurs_section" className="py-9 md:py-5">
+    </div>
+      <div id="featurs_section" className="py-9 md:py-5">
           <div className="mx-auto ">
             <div className="mt-12">
                   {/* {isLoading ? <div className="flex justify-center items-center h-full">
@@ -79,7 +79,7 @@ const ContentPage = ({slug}) => {
                   {/* } */}
             </div>
           </div>
-      </section>
+      </div>
     </>
   );
 };

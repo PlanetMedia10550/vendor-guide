@@ -28,13 +28,12 @@ const FeaturSection = (props) => {
                   </h2>
                 )}
                 <div className="text-center md:text-left">
-                  <p className="sm:mt-3 md:mt-[1rem] text-base sm:text-xl lg:text-2xl  lg:leading-10  md:leading-7 text-[#171717] font-medium font-lato sm:order-1 order-2">
+                  <div className="sm:mt-3 md:mt-[1rem] text-base sm:text-xl lg:text-2xl  lg:leading-10  md:leading-7 text-[#171717] font-medium font-lato sm:order-1 order-2">
                     <h3 className="text-lg sm:text-xl lg:text-2xl text-red-700 font-semibold">
                       {row.title}
                     </h3>
-                    <br className="block lg:hidden" />
-                    {row.short_description}
-                  </p>
+                    <span>{row.short_description}</span>
+                  </div>
                 </div>
               </div>
               <div
@@ -61,13 +60,12 @@ const FeaturSection = (props) => {
                   {row.mainTitle}
                 </h2>
                 <div className="text-center md:text-left">
-                  <p className="sm:mt-3 md:mt-[1rem] text-base sm:text-xl lg:text-2xl  lg:leading-10  md:leading-7 text-[#171717] font-medium font-lato sm:order-1 order-2">
-                    <span className="text-lg sm:text-xl text-red-700  font-semibold">
+                  <div className="sm:mt-3 md:mt-[1rem] text-base sm:text-xl lg:text-2xl  lg:leading-10  md:leading-7 text-[#171717] font-medium font-lato sm:order-1 order-2">
+                    <h3 className="text-lg sm:text-xl text-red-700  font-semibold">
                       {row.title}
-                    </span>
-                    <br className="block lg:hidden" />
-                    {row.short_description}
-                  </p>
+                    </h3>
+                    <span>{row.short_description}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,16 +96,15 @@ const FeaturSection = (props) => {
               </div>
               <div className="lg:pr-8 lg:pt-4 md:col-span-1 xl:-ml-16 mb-8">
                 <div className="lg:max-w-lg text-center md:text-left">
-                  <p
+                  <div
                     className="text-base sm:text-xl lg:text-2xl lg:leading-10 sm:leading-7
                     text-[#221F20] font-medium font-lato"
                   >
                     <h3 className="text-lg sm:text-xl lg:text-2xl text-red-700 font-semibold">
                       {row.title}
                     </h3>
-                    <br className="block lg:hidden" />
-                    {row.short_description}
-                  </p>
+                    <span>{row.short_description}</span>
+                  </div>
                 </div>
               </div>
             </div>

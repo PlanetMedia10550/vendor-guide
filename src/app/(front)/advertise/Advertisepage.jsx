@@ -18,14 +18,14 @@ const Advertisepage = () => {
         src={advertiseMeta?.advertise_background}
         title={advertiseMeta?.advertise_title}
       />
-      <section id="featurs_section" className="py-10 sm:pt-14 md:pt-8">
+      <div id="featurs_section" className="py-10 sm:pt-14 md:pt-8">
         <div className="overflow-hidden bg-white md:py-8 lg:py-12 px-3 xl:ps-16">
           <div className="mx-auto max-w-7xl px-4 md:px-9">
             <FeaturSection2 />
           </div>
         </div>
-      </section>
-      <section
+      </div>
+      <div
         id="advertise_section"
         style={{backgroundImage:`url(images&icons/advertise/pattern.png)`,
         }}
@@ -60,7 +60,7 @@ const Advertisepage = () => {
           btnTitle="Contact Us Today"
         />
         )}
-      </section>
+      </div>
     </>
   );
 };
