@@ -62,11 +62,12 @@ const ContentPage = ({slug}) => {
             <span className="current text-xl font-lato">{filterData.title}</span> */}
           </div>
         </div>
-        <main className="magazine_heading px-4 sm:px-6 lg:px-8 z-10 lg:py-12 relative text-center">
+        <div className="magazine_heading px-4 sm:px-6 lg:px-8 z-10 lg:py-12 relative text-center">
+        {filterData.title && 
           <h1 className="text:sm sm:text-lg md:text-2xl lg:text-3xl xl:text-[3rem] font-lato -tracking-tight md:leading-10 lg:leading-[3.5rem] font-semibold  text-white   font-lato lg:px-10">
             {filterData.title}
-          </h1>
-        </main>
+          </h1>}
+        </div>
       </div>
     </div>
       <div id="featurs_section" className="py-9 md:py-5">

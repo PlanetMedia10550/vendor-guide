@@ -60,7 +60,7 @@ const FeaturSection2 = (props) => {
           else {
             return (
         <div key={i} className="my-10 lg:my-40 lg:mx-auto grid max-w-4xl grid-cols-1 gap-y-8 md:gap-y-16  lg:max-w-none md:grid-cols-2 ">
-          <div className="relative w-full" style={{ position: "relative" }}>
+          <div className="relative w-full" >
             <Image
               src={row.image_url}
               alt="Product screenshot"
@@ -71,9 +71,9 @@ const FeaturSection2 = (props) => {
           </div>
           <div className="">
             <div className="lg:ml-[-2rem] md:ml-[0rem] md:text-left">
-                <p className="text-2xl lg:text-3xl text-[#C1272D] font-bold font-lato">
+                <h2 className="text-2xl lg:text-3xl text-[#C1272D] font-bold font-lato">
                   {row.title}
-                </p>
+                </h2>
                 <p className="md:mt-2 lg:leading-10 md:text-sm lg:text-[1.40rem] text-[#221F20] font-normal  font-maven md:pr-8">
                   {row.description}
                 </p>

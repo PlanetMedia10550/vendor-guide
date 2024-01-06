@@ -43,6 +43,7 @@ export default function RootLayout({ children }) {
       <html lang="en" >
         {/* style={myFont.style} */}
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+        <meta name="next-size-adjust"/>
         <body className={myFont.className}>
           {children}
           <ToastContainer />
