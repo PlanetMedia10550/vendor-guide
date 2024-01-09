@@ -12,7 +12,7 @@ const PartnerSection2 = (props) => {
               </h3>
               <div className="py-11 md:pb-20 gap-x-4 text-center block">
                 <Link
-                  href=""
+                  href="/contact-us"
                   className="px-10 md:px-16 py-3 text-center flex-none rounded-md bg-[#221F20] md:text-xl sm:text-lg text-sm tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#221F20] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
                 >
                   {props.btnTitle}

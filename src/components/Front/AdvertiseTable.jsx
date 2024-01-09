@@ -56,13 +56,13 @@ const AdvertiseTable = ({user}) => {
               {parseFloat(headerData.sold_price[index]) > 0 ? (
                 <>
                 <div className="pt-4">
-                <div className="flex justify-start">
+                <div className="flex justify-center">
                 <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Price:</span>
                   <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
                     <del>${parseFloat(headerData.price[index]).toFixed(2)}</del> 
                   </span>
                   </div>
-                <div className="flex justify-start">
+                <div className="flex justify-center">
                   <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Introductory Price:</span>
                   <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
                     ${parseFloat(headerData.sold_price[index]).toFixed(2)}
@@ -73,7 +73,7 @@ const AdvertiseTable = ({user}) => {
               ) : (
                 <>
                 <div className="pt-4">
-                  <div className="flex justify-start">
+                  <div className="flex justify-center">
                   <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Price:</span>
                     <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
                       ${parseFloat(headerData.price[index]).toFixed(2)}

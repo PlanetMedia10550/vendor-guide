@@ -1,22 +1,13 @@
-'use client';
 import Link from "next/link";
 import Image from "next/image";
 import { getResponse } from "@/app/lib/load-api";
-import { useEffect, useState } from "react";
-const FeaturSection = (props) => {
-  const [advertiseData, setAdvertiseData] = useState();
 
-  // console.log(advertiseData);
-  useEffect(() => {
-    bannerResponse();
-  }, [])
-  const bannerResponse = async () => {
-    const blogResult = await getResponse('blog-home?limit=3&offset=0')
-    setAdvertiseData(blogResult.data)
-  }
+export default async function FeaturSection({blogs}) {
+  const advertiseData = blogs;
+
   return (
     <>
-      {advertiseData && advertiseData.map((row, i) => {
+      {advertiseData && advertiseData?.data.map((row, i) => {
         if (row.id % 2 === 0) {
           return (
             <Link key={i} href={`/blog/${row.slug}`}>
@@ -115,4 +106,3 @@ const FeaturSection = (props) => {
     </>
   );
 }
-export default FeaturSection;

@@ -27,7 +27,7 @@ const Footer = () => {
           <div className="flex items-center gap-3 md:gap-7 justify-between md:flex-row md:mb-0 mb-4">
             <div className="flex flex-col gap-2">
               <Link
-                href="/"
+                href=""
                 className="flex items-center md:ps-8 sm:ps-7"
               >
                 <Image
@@ -79,23 +79,23 @@ const Footer = () => {
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Visit</h4>
               <ul className="flex flex-col nav_list text-sm">
-                <li><Link href="//g.page/planet-media-wayzata?share">{sitesetting?.side_address}</Link></li>
+                <li><Link href="//g.page/planet-media-wayzata?share" target="_blank">{sitesetting?.side_address}</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Follow</h4>
               <ul className="flex flex-col nav_list text-sm">
                {sitesetting?.side_facebook_url && (
-                <li><Link href={sitesetting?.side_facebook_url} rel="nofollow">Facebook</Link></li>
+                <li><Link href={sitesetting?.side_facebook_url} rel="nofollow" target="_blank">Facebook</Link></li>
                 )}
                 {sitesetting?.side_lingding_url && (
-               <li><Link href={sitesetting?.side_lingding_url} rel="nofollow">LinkedIn</Link></li>
+               <li><Link href={sitesetting?.side_lingding_url} rel="nofollow" target="_blank">LinkedIn</Link></li>
                )}
                {sitesetting?.side_instagram_url && (
-                <li><Link href={sitesetting?.side_instagram_url} rel="nofollow">Instagram</Link></li>
+                <li><Link href={sitesetting?.side_instagram_url} rel="nofollow" target="_blank">Instagram</Link></li>
                )}
                {sitesetting?.side_twitter_url && (
-                <li><Link href={sitesetting?.side_twitter_url} rel="nofollow">Twitter</Link></li>
+                <li><Link href={sitesetting?.side_twitter_url} rel="nofollow" target="_blank">Twitter</Link></li>
                )}
               </ul>
             </div>

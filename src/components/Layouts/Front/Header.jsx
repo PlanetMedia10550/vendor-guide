@@ -70,7 +70,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   </div>
               </Link>
             ):(
-            <Link href="/" className="flex items-center md:ps-8 lg:ps-10">
+            <Link href="" className="flex items-center md:ps-8 lg:ps-10">
               <Image
                 src={sitesetting?.sidelogo_url?sitesetting?.sidelogo_url:Logo}
                 className="mr-3 h-6 sm:h-9 w-auto"
@@ -139,7 +139,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
               <ul className={`block lg:flex items-start lg:items-center flex-col mt-4 font-semibold lg:flex-row lg:space-x-8 lg:mt-0 text-base text-[#221F20] ${UserType == 1 || !user ? " " : "pr-10"}`}>
                 <li className="hidden " >
                   <Link
-                    href="/"
+                    href=""
                     className="flex items-center px-4 pb-4 lg:ps-4"
                   >
                     <Image

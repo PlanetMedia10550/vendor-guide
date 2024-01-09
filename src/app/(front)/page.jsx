@@ -7,7 +7,7 @@ export async function generateMetadata({params}) {
 
   return {
     alternates: {
-      canonical: '/',
+      canonical: '',
       languages: {
         'en-US': '/en-US'
       },
@@ -22,7 +22,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: `/`,
+      url: '',
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -40,19 +40,32 @@ export async function generateMetadata({params}) {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: `/`,
+      url: '',
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },
   }
 }
 
-const Home = () => {
+async function getBlogs() {
+  const res = await fetch(`${process.env.BASE_API_URL}blog-home?limit=3&offset=0`, { cache: 'no-store' })
+  const blogRes = await res.json()
+  return blogRes
+}
+
+async function getVendors() {
+  const res = await fetch(`${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`, { cache: 'no-store' })
+  const vendorRes = await res.json()
+  return vendorRes
+}
+
+export default async function Home() {
+  const blogs = await getBlogs();
+  const vendors = await getVendors();
   return (
-    <HomeComponent/>
+    <HomeComponent blogs={blogs} vendors={vendors} />
   );
 }
 
-export default Home;
 
 

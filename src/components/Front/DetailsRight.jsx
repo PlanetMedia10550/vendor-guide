@@ -98,6 +98,7 @@ const DetailsRight = ({filterData}) => {
               href={filterData.website_url}
               className="px-10 lg:px-6 md:px-5 py-3 text-center inline-block rounded-md bg-[#c13e27] lg:text-lg md:text-lg text-sm tracking-wide font-semibold font-lato text-white shadow-sm hover:bg-[#783426] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
               rel="nofollow"
+              target="_blank"
             >
               Website
             </Link>

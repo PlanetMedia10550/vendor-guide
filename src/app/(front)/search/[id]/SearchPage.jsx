@@ -81,7 +81,7 @@ const SearchPage = ({slug}) => {
                 {isLoading ? (
                     <div className="my-10 text-center text-gray-500">Loading...</div>
                   ) : (
-                    filterData?.multi_family !== 0 ? (
+                    (filterData?.multi_family !== 0 && filterData?.multi_family_description!="") ? (
                       <div className="my-10">
                         <h2
                           className="text-[#c13e27] text-[1.2rem] font-medium font-lato"
@@ -101,7 +101,7 @@ const SearchPage = ({slug}) => {
              {isLoading ? (
                     <div className="my-10 text-center text-gray-500">Loading...</div>
                   ) : (
-                    filterData?.commercial !== 0 ? (
+                    (filterData?.commercial !== 0 && filterData?.commercial_description!=null) ? (
                       <div className="my-10">
                         <h2
                           className="text-[#c13e27] text-[1.2rem] font-medium font-lato"
@@ -121,7 +121,7 @@ const SearchPage = ({slug}) => {
              {isLoading ? (
                     <div className="my-10 text-center text-gray-500">Loading...</div>
                   ) : (
-                    filterData?.residential !== 0 ? (
+                    (filterData?.residential !== 0 && filterData?.residential_description != null) ? (
                       <div className="my-10">
                         <h2
                           className="text-[#c13e27] text-[1.2rem] font-medium font-lato"

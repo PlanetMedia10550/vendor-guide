@@ -5,25 +5,11 @@ import { useEffect, useState } from "react";
 import { LoadingScreen } from "./LoadingScreen";
 import Link from "next/link";
 
-const BannerSectionCard = () => {
-  const [vendorData, setVendorData] = useState([]);
-  const [isLoading, setIsLoding] = useState(true);
-  useEffect(() => {
-    const bannerResponse = async () => {
-      const vendorResult = await getResponse(
-        "vendor-advertisement?limit=5&offset=0"
-      );
-      setVendorData(vendorResult.data);
-      setIsLoding(false);
-    };
-    bannerResponse();
-  }, []);
-// 
-  if (isLoading) return <LoadingScreen />;
+const BannerSectionCard = ({vendors}) => {
+
   return (
     <div className="grid grid-cols-5 items-center justify-center gap-5 md:gap-5 sm:mt-4 lg:my-0 my-4">
-      {vendorData &&
-        vendorData.map((row, i) => {
+      {vendors && vendors?.data.map((row, i) => {
           return (
             <div
               key={i}

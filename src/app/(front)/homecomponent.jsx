@@ -9,7 +9,7 @@ import { useAuth } from "@/context/UserContext";
 import { useEffect, useState } from "react";
 
 
-const HomeComponent = () => {
+const HomeComponent = ({blogs,vendors}) => {
    const {metaData,loading} = useAuth();
    const homeMeta = metaData?.home;
    const [backgroundImage,setBackgroundImage] = useState('');
@@ -19,7 +19,7 @@ const HomeComponent = () => {
     }
    },[homeMeta?.hero_background]);
   //  var backgroundImage = ;
-   console.log(backgroundImage);
+  //  console.log(backgroundImage);
   return (
     < >
      {homeMeta?.hero_background!=undefined &&
@@ -30,7 +30,7 @@ const HomeComponent = () => {
       </div>}
       <div id="banner_section">
         <div className="container mx-auto py-3 px-8 md:py-4">
-            <BannerSectionCard  />
+            <BannerSectionCard vendors={vendors} />
         </div>
       </div>
       <div id="featurs_section" className="lg:py-16 lg:pt-12 xl:pt-20">
@@ -39,7 +39,7 @@ const HomeComponent = () => {
             In The News
           </h2>
           <div className="mx-auto xl:max-w-[90rem] lg:max-w-7xl px-2 sm:px-7">
-                  <FeaturSection />
+                  <FeaturSection blogs={blogs} />
             <div className="py-9 md:py-12 lg:float-right text-center">
               <Link
                 href="blog"
