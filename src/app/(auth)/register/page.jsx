@@ -8,9 +8,9 @@ export async function generateMetadata({params}) {
   var metaData = seoMetaData?.data;
   return {
     alternates: {
-      canonical: '/',
+      canonical: `/${metaData?.slug?metaData?.slug:'register'}`,
       languages: {
-        'en-US': '/en-US'
+        'en-US': `/${metaData?.slug?metaData?.slug:'register'}`
       },
     },
     title: `${metaData?.title}`,

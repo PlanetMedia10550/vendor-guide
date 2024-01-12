@@ -1,3 +1,4 @@
+import { getBlogs, getVendors } from "@/app/lib/server-api";
 import HomeComponent from "./homecomponent";
 
 // or Dynamic metadata
@@ -7,9 +8,9 @@ export async function generateMetadata({params}) {
 
   return {
     alternates: {
-      canonical: '',
+      canonical: '/',
       languages: {
-        'en-US': '/en-US'
+        'en-US': '/'
       },
     },
     title: `${metaData?.title}`,
@@ -22,7 +23,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: '',
+      url: '/',
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -33,31 +34,21 @@ export async function generateMetadata({params}) {
           alt: `${metaData?.title}`,
         }
       ],
-      locale: 'en_US',
+      locale: 'en',
       type: 'website',
     },
     twitter: {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: '',
+      url: '/',
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },
   }
 }
 
-async function getBlogs() {
-  const res = await fetch(`${process.env.BASE_API_URL}blog-home?limit=3&offset=0`, { cache: 'no-store' })
-  const blogRes = await res.json()
-  return blogRes
-}
 
-async function getVendors() {
-  const res = await fetch(`${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`, { cache: 'no-store' })
-  const vendorRes = await res.json()
-  return vendorRes
-}
 
 export default async function Home() {
   const blogs = await getBlogs();

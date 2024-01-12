@@ -8,9 +8,9 @@ export async function generateMetadata({params}) {
   var metaData = seoMetaData?.data;
   return {
     alternates: {
-      canonical: '/',
+      canonical: `/${metaData?.slug?metaData?.slug:'forget-password'}`,
       languages: {
-        'en-US': '/en-US'
+        'en-US': `/${metaData?.slug?metaData?.slug:'forget-password'}`
       },
     },
     title: `${metaData?.title}`,
@@ -23,7 +23,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: `/${metaData?.slug}`,
+      url: `/${metaData?.slug?metaData?.slug:'forget-password'}`,
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -34,14 +34,14 @@ export async function generateMetadata({params}) {
           alt: `${metaData?.title}`,
         }
       ],
-      locale: 'en_US',
+      locale: 'en',
       type: 'website',
     },
     twitter: {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/${metaData?.slug}`,
+      url: `/${metaData?.slug?metaData?.slug:'forget-password'}`,
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },

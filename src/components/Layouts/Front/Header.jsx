@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
 
-  const Header = (props) => {
+  const Header = ({categories,magazines}) => {
   const {user,isLoding,isInfoLoding,logout,sitesetting}  = useAuth();
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
@@ -24,14 +24,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
   const cookie = getCookie('token');
   const pathname = usePathname()
   const  UserType  = getCookie('user-type');
-  // console.log(pathname)
-    // if(cookie && pathname=='/manager/login'){
-    //   router.push('/manager/dashboard')
 
-    // }
-    // if(!cookie && pathname=='/manager/dashboard'){
-    //   router.push('/manager/login')
-    // }
   useEffect(()=>{
     if(getCookie('user-type')==1){
       setProfileUrl('/manager/dashboard');
@@ -50,7 +43,6 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
     const [showMenu, setShowMenu] = useState(true);
     const toggleMenu = (event) => {
         setShowMenu((current) => !current);
-        // event.target.parentNode.nextElementSibling.classList.toggle("hidden");
     };
 
     
@@ -70,7 +62,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   </div>
               </Link>
             ):(
-            <Link href="" className="flex items-center md:ps-8 lg:ps-10">
+            <Link href="/" className="flex items-center md:ps-8 lg:ps-10">
               <Image
                 src={sitesetting?.sidelogo_url?sitesetting?.sidelogo_url:Logo}
                 className="mr-3 h-6 sm:h-9 w-auto"
@@ -86,7 +78,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
             ): ''} */}
              <div className="lg:ml-8 flex items-center lg:order-2">
                {UserType == 1 || !user ? (
-              <RequestQuotebtn user={user} />
+              <RequestQuotebtn user={user} categories={categories} />
             ): ''}
 
               <button
@@ -221,7 +213,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                               className="text-[#B13634]"
                             />
                           </button>
-                          <HeaderDropdown />
+                          <HeaderDropdown magazines={magazines} />
                         </div>
                       </li>
                     </ul>

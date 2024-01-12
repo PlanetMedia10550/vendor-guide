@@ -37,12 +37,13 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children,props }) {
+
   return (
       <UserProvider>
       <html lang="en" >
         {/* style={myFont.style} */}
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        {/* <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/> */}
         <body className={myFont.className}>
           {children}
           <ToastContainer />

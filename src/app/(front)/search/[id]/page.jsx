@@ -12,9 +12,9 @@ export async function generateMetadata({params}) {
   // console.log(metaData);
   return {
     alternates: {
-      canonical: '/',
+      canonical: `/search/${metaData?.slug}`,
       languages: {
-        'en-US': '/en-US'
+        'en-US': `/search/${metaData?.slug}`
       },
     },
     title: `${metaData?.title?metaData?.title:metaData?.name}`,
@@ -27,7 +27,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title?metaData?.title:metaData?.name}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/blog/${metaData?.slug}`,
+      url: `/search/${metaData?.slug}`,
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -45,7 +45,7 @@ export async function generateMetadata({params}) {
       card:`${metaData?.title?metaData?.title:metaData?.name}`,
       title: `${metaData?.title?metaData?.title:metaData?.name}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/blog/${metaData?.slug}`,
+      url: `/search/${metaData?.slug}`,
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },

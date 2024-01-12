@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getResponse } from "@/app/lib/load-api";
 
-export default async function FeaturSection({blogs}) {
+export default function FeaturSection({blogs}) {
   const advertiseData = blogs;
 
   return (

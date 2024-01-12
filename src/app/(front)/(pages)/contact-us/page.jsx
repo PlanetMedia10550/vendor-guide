@@ -1,5 +1,6 @@
 
 import ContentPage from "@/app/(front)/(pages)/ContentPage";
+import { getPages } from "@/app/lib/server-api";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
@@ -11,9 +12,9 @@ export async function generateMetadata({params}) {
   }
   return {
     alternates: {
-      canonical: '/',
+      canonical: `/${metaData?.slug?metaData?.slug:'contact-us'}`,
       languages: {
-        'en-US': '/en-US'
+        'en-US': `/${metaData?.slug?metaData?.slug:'contact-us'}`
       },
     },
     title: `${metaData?.title}`,
@@ -26,7 +27,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/${metaData?.slug}`,
+      url: `/${metaData?.slug?metaData?.slug:'contact-us'}`,
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -37,25 +38,25 @@ export async function generateMetadata({params}) {
           alt: `${metaData?.title}`,
         }
       ],
-      locale: 'en_US',
+      locale: 'en',
       type: 'website',
     },
     twitter: {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/${metaData?.slug}`,
+      url: `/${metaData?.slug?metaData?.slug:'contact-us'}`,
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },
   }
 }
 
-const SlugPages = ({params}) => {
-
+const SlugPages = async ({params}) => {
+  const pages = await getPages('contact-us');
   return (
     <>
-      <ContentPage slug='contact-us' />
+      <ContentPage page='contact-us' pageData={pages?.data} />
     </>
   );
 };

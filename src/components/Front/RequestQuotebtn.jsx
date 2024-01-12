@@ -1,4 +1,4 @@
-
+"use client";
 import Link from "next/link";
 import Logo from "/public/images&icons/SVG/logo.svg";
 import Image from "next/image";
@@ -6,39 +6,14 @@ import { useAuth } from "@/context/UserContext";
 import { getCookie } from "cookies-next";
 import Modal from "@/components/Modal";
 import PropartyForm from "@/components/PropartyForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const RequestQuotebtn = ({user}) => {
-    // console.log(user);
+const RequestQuotebtn = ({user,categories}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [categoryData, setCategoryData] = useState([]);
     const [isActive, setIsActive] = useState(false);
     const [vendorId, setVendorId] = useState(0);
     const  UserType  = getCookie('user-type');
-    // setUserType(res.data.data.type);
-// console.log(setUserType);
-    useEffect(() => {
-        const categoriesResult = async () => {
-          var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${getCookie('token')}`
-            },
-              
-          })
-      
-          if (!response2.ok) {
-          throw new Error('Failed to submit the data. Please try again.')
-          }
-          var categoryResult = await response2.json();
-          setCategoryData(categoryResult.data)
-          // console.log(vendorResult)
-        }
-        categoriesResult();
-        
-      }, [])
-
-  
 
     // for model code
     const openModal = () => {
@@ -68,7 +43,7 @@ const RequestQuotebtn = ({user}) => {
         <h1 className="text-3xl font-medium" >Request a Quote !</h1>
         {user!=null ? (
             UserType !== '0' ? (
-                <PropartyForm user={user} vendor_id={vendorId} onClose={closeModal} categoryData={categoryData} />
+                <PropartyForm user={user} vendor_id={vendorId} onClose={closeModal} categoryData={categories} />
               ) : (
                 <div className="mt-10 -tracking-2">This feature is not available for Vendor</div>
               )

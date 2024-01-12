@@ -305,7 +305,7 @@ const PropartyForm = ({user,vendor_id,onClose,categoryData}) => {
                                 <div className="mt-2.5">
                                     <select name="category_id" value={category} className="w-full bg-gray-200 border border-gray-200 text-[#c13e27] text-lg py-3 px-4 pr-8 mb-3 rounded"  onChange={handleCategory} onBlur ={darftRequest}>
                                         <option value="">Select Category</option>
-                                        {categoryData && categoryData.map((row,i)=>{
+                                        {categoryData && categoryData?.data.map((row,i)=>{
                                             return(
                                             <option key={i} value={row.id}>{row.title}</option>
                                             )

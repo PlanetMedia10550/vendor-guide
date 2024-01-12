@@ -1,5 +1,6 @@
 
 import ContentPage from "@/app/(front)/(pages)/ContentPage";
+import { getPages } from "@/app/lib/server-api";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
@@ -11,51 +12,52 @@ export async function generateMetadata({params}) {
   }
   return {
     alternates: {
-      canonical: '/',
+      canonical: `/${metaData?.slug?metaData?.slug:'about-us'}`,
       languages: {
-        'en-US': '/en-US'
+        'en-US': `/${metaData?.slug?metaData?.slug:'about-us'}`
       },
     },
     title: `${metaData?.title}`,
     description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
     robots: {
-      index: true,
-      follow: true,
-      nocache: true,
+      index: false,
+      follow: false,
+      nocache: false,
     },
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/${metaData?.slug}`,
+      url: `/${metaData?.slug?metaData?.slug:'about-us'}`,
       siteName: process.env.SITE_NAME,
       images: [
         {
-          url: `${metaData?.image_url}`,
-          secure_url: `${metaData?.image_url}`,
+          url: `${metaData?.image_url?metaData?.image_url:''}`,
+          secure_url: `${metaData?.image_url?metaData?.image_url:''}`,
           width: 725,
           height: 405,
           alt: `${metaData?.title}`,
         }
       ],
-      locale: 'en_US',
+      locale: 'en',
       type: 'website',
     },
     twitter: {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/${metaData?.slug}`,
-      images: [`${metaData?.image_url}`],
+      url: `/${metaData?.slug?metaData?.slug:'about-us'}`,
+      images: [`${metaData?.image_url?metaData?.image_url:''}`],
       siteId: process.env.SITE_ID,
     },
   }
 }
 
-const SlugPages = ({params}) => {
-
+const SlugPages = async ({params}) => {
+  const pages = await getPages('about-us');
+  // console.log(pages)
   return (
     <>
-      <ContentPage slug='about-us' />
+      <ContentPage page='about-us' pageData={pages?.data} />
     </>
   );
 };

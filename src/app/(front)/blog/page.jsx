@@ -7,9 +7,9 @@ export async function generateMetadata({params}) {
 
   return {
     alternates: {
-      canonical: '/',
+      canonical: '/blog',
       languages: {
-        'en-US': '/en-US'
+        'en-US': '/blog'
       },
     },
     title: `${metaData?.title}`,
@@ -22,7 +22,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: `/resources`,
+      url: `/blog`,
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -40,7 +40,7 @@ export async function generateMetadata({params}) {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: `/resources`,
+      url: `/blog`,
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },

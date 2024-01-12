@@ -10,9 +10,9 @@ export async function generateMetadata({params}) {
   }
   return {
     alternates: {
-      canonical: '/',
+      canonical: `/blog/${metaData.slug}`,
       languages: {
-        'en-US': '/en-US'
+        'en-US': `/blog/${metaData.slug}`
       },
     },
     title: `${metaData?.title}`,

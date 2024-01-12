@@ -7,9 +7,9 @@ export async function generateMetadata({params}) {
   var metaData = seoMetaData?.data;
   return {
     alternates: {
-      canonical: '/',
+      canonical: `/${metaData?.slug?metaData?.slug:'login'}`,
       languages: {
-        'en-US': '/en-US'
+        'en-US': `/${metaData?.slug?metaData?.slug:'login'}`
       },
     },
     title: `${metaData?.title}`,
@@ -22,7 +22,7 @@ export async function generateMetadata({params}) {
     openGraph:{
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
-      url: `/${metaData?.slug}`,
+      url: `/${metaData?.slug?metaData?.slug:'login'}`,
       siteName: process.env.SITE_NAME,
       images: [
         {
@@ -40,7 +40,7 @@ export async function generateMetadata({params}) {
       card:`${metaData?.title}`,
       title: `${metaData?.title}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-      url: `/${metaData?.slug}`,
+      url: `/${metaData?.slug?metaData?.slug:'login'}`,
       images: [`${metaData?.image_url}`],
       siteId: process.env.SITE_ID,
     },
