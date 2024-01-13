@@ -27,7 +27,7 @@ const Footer = () => {
           <div className="flex items-center gap-3 md:gap-7 justify-between md:flex-row md:mb-0 mb-4">
             <div className="flex flex-col gap-2">
               <Link
-                href=""
+                href="/"
                 className="flex items-center md:ps-8 sm:ps-7"
               >
                 <Image
@@ -58,19 +58,19 @@ const Footer = () => {
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Advertise</h4>
               <ul className="flex flex-col nav_list text-sm">
-                <li><Link href={`tel:${sitesetting?.side_phone}`} className="">{sitesetting?.side_phone}</Link></li>
-                <li><Link href={`mailto:${sitesetting?.side_email}`} className="">{sitesetting?.side_email}</Link></li>
+                <li><Link href={`tel:${sitesetting?.side_phone}`} >{sitesetting?.side_phone}</Link></li>
+                <li><Link href={`mailto:${sitesetting?.side_email}`} >{sitesetting?.side_email}</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Explore</h4>
               <ul className="flex flex-col nav_list text-sm">
                 <li>
-                  <Link href="/advertise" className="">
+                  <Link href="/advertise" >
                     Advertise{" "}
                   </Link></li>
                 <li>
-                  <Link href="/blog" className="">
+                  <Link href="/blog" >
                     Blog{" "}
                   </Link>
                 </li>
