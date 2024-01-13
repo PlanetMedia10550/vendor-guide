@@ -79,7 +79,7 @@ const Footer = () => {
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Visit</h4>
               <ul className="flex flex-col nav_list text-sm">
-                <li><Link href="//g.page/planet-media-wayzata?share" target="_blank">{sitesetting?.side_address}</Link></li>
+                <li><Link href="//g.page/planet-media-wayzata?share" rel="nofollow" target="_blank">{sitesetting?.side_address}</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">

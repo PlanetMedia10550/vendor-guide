@@ -63,10 +63,10 @@ const LoginForm = () => {
                             </div>
 
                             <div>
-                                <Link href="register" className="text-[#c13e27] text-lg font-semibold">Register</Link>
+                                <Link href="/register" className="text-[#c13e27] text-lg font-semibold">Register</Link>
                             </div>
                             <div>
-                                <Link href="forget-password/" className="text-[#c13e27] text-lg font-semibold">Forget Password</Link>
+                                <Link href="/forget-password" className="text-[#c13e27] text-lg font-semibold">Forget Password</Link>
                             </div>
 
                         </div>
