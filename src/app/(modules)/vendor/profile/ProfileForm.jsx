@@ -17,6 +17,7 @@ const ProfileForm = ({user,userAllInfo}) => {
     const [loding, setLoding] = useState(false);
     const [users, setUser] = useState(user);
     const [imageSrc, setImageSrc] = useState(user?.image_url);
+    const [imageId, setImageId] = useState(user.image_id);
     const [isImageLoading, setImageIsLoading] = useState(false);
     const [isMultiImageLoading, setMultiImageIsLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -129,11 +130,12 @@ const ProfileForm = ({user,userAllInfo}) => {
           const data = await response.json();
         //   console.log(data.image_url);
         //   console.log(data.id);
-        setImageSrc(data.image_url)
+        setImageSrc(data.file_path);
+        setImageId(data.file_id);
           setUser({
             ...users,
-            image_id: data.id,
-            image_url: data.image_url,
+            image_id: data.file_id,
+            image_url: data.file_path,
           });
           setForm({
             ...form,
@@ -204,7 +206,7 @@ const ProfileForm = ({user,userAllInfo}) => {
                             }
                        </div>
                         <div className="col-span-9 mt-2.5">
-                            <Input type="hidden" name="image_id" id="image_id" value={users?.image_id}  />
+                            <Input type="hidden" name="image_id" id="image_id" value={imageId}  />
                             <Input type="file" name="image" id="image" style={{width:'100%',float:'left'}}  onChange={onImageUpload} />
                            
                         </div>

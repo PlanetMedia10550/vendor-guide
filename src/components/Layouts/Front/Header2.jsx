@@ -26,11 +26,11 @@ const Header = ({activeTab,setActiveTab}) => {
 
     useEffect(()=>{
       if(getCookie('user-type')==1){
-        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/manager/dashboard'},{'tab':'properties','label':'Properties','url':'/manager/properties'}]);
+        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/manager/dashboard'},{'tab':'properties','label':'Properties','url':'/manager/properties'},{'tab':'profile','label':'Profile','url':'/manager/profile'}]);
       }else if(getCookie('user-type')==2){
-        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/company/dashboard'},{'tab':'properties','label':'Properties','url':'/company/properties'},{'tab':'employees','label':'Employees','url':'/company/employees'}]);
+        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/company/dashboard'},{'tab':'properties','label':'Properties','url':'/company/properties'},{'tab':'employees','label':'Employees','url':'/company/employees'},{'tab':'profile','label':'Profile','url':'/company/profile'}]);
       }else if(getCookie('user-type')==0){
-        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/vendor/dashboard'}]);
+        setTabList([{'tab':'dashboard','label':'Dashboard','url':'/vendor/dashboard'},{'tab':'profile','label':'Profile','url':'/vendor/profile'}]);
       }
     },[])
     const toggleMenu = (event) => {

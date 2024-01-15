@@ -51,7 +51,7 @@ export default function RootLayout({ children,props }) {
             "name": "Vendor Guide USA",
             "alternateName": "Vendor Guide",
             "url": "/",
-            "logo": "${process.env.BASE_LARAVEL_URL}/image/1700727849.png",
+            "logo": "${process.env.BASE_LARAVEL_URL}image/1700727849.png",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "952-460-1916",

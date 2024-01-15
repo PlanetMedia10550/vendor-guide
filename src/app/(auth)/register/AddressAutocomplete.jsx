@@ -3,14 +3,14 @@ import Input from "@/components/Front/UI/Input";
 import { useState } from "react";
 import { useEffect } from 'react';
 
-const AddressAutocomplete = () => {
-    const [postalCode, setPostalCode] = useState("");
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
+const AddressAutocomplete = ({users}) => {
+    const [postalCode, setPostalCode] = useState(users.zip_code);
+    const [address, setAddress] = useState(users.address);
+    const [city, setCity] = useState(users.city);
+    const [state, setState] = useState(users.state);
+    const [country, setCountry] = useState(users.country);
+    const [latitude, setLatitude] = useState(users.latitude);
+    const [longitude, setLongitude] = useState(users.longitude);
     
   useEffect(() => {
     const gmapKey = process.env.GOOGLE_MAP_API_KEY;
@@ -45,8 +45,8 @@ const AddressAutocomplete = () => {
       setAddress(formattedAddress);
       const addressComponents = place.address_components;
       let city, state, country, zipCode;
-       const latitude = place.geometry.location.lat();
-       const longitude = place.geometry.location.lng();
+       var latitude = place.geometry.location.lat();
+       var longitude = place.geometry.location.lng();
 
       for (let i = 0; i < addressComponents.length; i++) {
         const addressType = addressComponents[i].types[0];
@@ -79,7 +79,7 @@ const AddressAutocomplete = () => {
 
   return (
     <>
-    <Input name="address" id="address"/>
+    <Input name="address" id="address" value={address} />
     <Input type="hidden" name="city" value={city} />
     <Input type="hidden" name="state" value={state} />
     <Input type="hidden" name="country" value={country} />

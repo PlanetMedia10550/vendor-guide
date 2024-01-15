@@ -56,8 +56,8 @@ const ProfileForm = ({user,userAllInfo}) => {
      
           // Handle response if necessary
           const data = await response.json()
-          setImageSrc(data.image_url)
-          setImageId(data.id);
+          setImageId(data.file_id);
+          setImageSrc(data.file_path);
           
           setForm({...form, ['image_id']: data.id});
         } catch (error) {
@@ -79,13 +79,13 @@ const ProfileForm = ({user,userAllInfo}) => {
                 <div className="w-full">
                 <div className="w-half my-2 pb-6" >
                         
-                        <div className="grid grid-cols-12 gap-x-4">
+                    <div className="grid grid-cols-12 gap-x-4">
                         <div className="col-span-3 mt-2">
                         {isImageLoading ? <div style={{width:'20%',float:'left'}}><FontAwesomeIcon icon={faSpinner} spin /></div> : ''}
                         <img src={imageSrc?imageSrc:userDefult.src} style={{height:'100px',width:'100px'}} className=" rounded-full" />
                        </div>
                         <div className="col-span-9 mt-2.5">
-                        <Label label="Have Photos?"  />
+                            <Label label="Have Photos?"  />
                             <Input type="hidden" name="image_id" id="image_id" value={imageId}  />
                             <Input type="file" name="image" id="image" style={{width:'100%',float:'left'}}  onChange={onImageUpload} />
                            

@@ -20,7 +20,7 @@ const ProfileForm = ({user}) => {
     
     const [users, setUser] = useState(user);
     // console.log(users);
-    const [image_id, setImageId] = useState(user.image_id);
+    const [image_id, setImageId] = useState(user?.image_id);
     const [imageSrc, setImageSrc] = useState(user?.image_url);
     const [isImageLoading, setImageIsLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -55,12 +55,14 @@ const ProfileForm = ({user}) => {
           }
       
           const data = await response.json();
-    console.log(data);
+            // console.log(data);
           setUser({
             ...users,
-            image_id: data.id,
-            image_url: data.image_url,
+            image_id: data.file_id,
+            image_url: data.file_path,
           });
+          setImageId(data.file_id);
+          setImageSrc(data.file_path);
           setForm({
             ...form,
             image_id: data.file_id,
@@ -163,7 +165,7 @@ const ProfileForm = ({user}) => {
                         <div className="col-span-1 my-2 pb-6" >
                             <Label label="Phone Number" required="required" />
                             <div className="mt-2.5">
-                                <Input name="phone" id="phone" value={users.phone} onChange={e => {var value = e.target.value; setUser({...users, phone: value})}} />
+                                <Input name="mobile" id="phone" value={users.phone} onChange={e => {var value = e.target.value; setUser({...users, phone: value})}} />
                             </div>
                             {renderFieldError('phone')}
                         </div>
