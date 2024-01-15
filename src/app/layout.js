@@ -43,7 +43,7 @@ export default function RootLayout({ children,props }) {
       <UserProvider>
       <html lang="en" >
         {/* style={myFont.style} */}
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+        {/* <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/> */}
         <Script type="application/ld+json">
           {`
             "@context": "https://schema.org",
