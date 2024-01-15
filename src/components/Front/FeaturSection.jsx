@@ -46,9 +46,10 @@ export default function FeaturSection({blogs}) {
                 />
               </div>
               <div className="block md:hidden lg:pt-4  md:col-span-1">
+              {row.mainTitle && 
                 <h2 className="text-2xl lg:block hidden md:text-3xl  font-semibold leading-7 text-grey-500 xl:mb-10">
                   {row.mainTitle}
-                </h2>
+                </h2>}
                 <div className="text-center md:text-left">
                   <div className="sm:mt-3 md:mt-[1rem] text-base sm:text-xl lg:text-2xl  lg:leading-10  md:leading-7 text-[#171717] font-medium font-lato sm:order-1 order-2">
                     <h3 className="text-lg sm:text-xl text-red-700  font-semibold">

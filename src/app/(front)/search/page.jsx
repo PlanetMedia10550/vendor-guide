@@ -1,5 +1,6 @@
 
 import Searchpage from "@/app/(front)/search/Searchpage";
+import { getVendors } from "@/app/lib/server-api";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
@@ -48,10 +49,11 @@ export async function generateMetadata({params}) {
   }
 }
 
-const Page = () => {
+const Page = async () => {
+  const vendors = await getVendors();
   return (
     <>
-      <Searchpage/>
+      <Searchpage vendors={vendors} />
     </>
   );
 };

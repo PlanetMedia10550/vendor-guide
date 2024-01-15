@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import BannerSectionCard from "./BannerSectionCard";
-const SignUpcard = (props) => {
+const SignUpcard = ({title,vendors}) => {
 
   return (
     <>
@@ -12,7 +12,7 @@ const SignUpcard = (props) => {
             <div className="flex items-center p-3 bg-[#B13634]"></div>
             <div className="text-center py-3 sm:py-3 md:py-4 lg:py-6">
               <h2 className="lg:text-2xl text-xl font-bold tracking-tight  text-[#171717b] ">
-                {props.title}
+                {title}
               </h2>
             </div>
             
@@ -33,7 +33,7 @@ const SignUpcard = (props) => {
                   </>
                 );
               })} */}
-              <BannerSectionCard />
+              <BannerSectionCard vendors={vendors} />
           </div>
         </div>
       </div>
