@@ -1,19 +1,26 @@
 import Link from "next/link";
 import { useAuth } from "@/context/UserContext";
-const DetailsHero = ({src , filterData}) => {
-  const {metaData,loading} = useAuth(); 
-  const vendor_details  = metaData?.vendor_details.details_background;
+import Image from "next/image";
+const DetailsHero = ({src , filterData,backgroundImage}) => {
+
+  const vendor_details  = backgroundImage.details_background;
 
   return (
     <>
     <section
       id="hero_section"
       className=" bg-cover bg-center bg-no-repeat relative before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0  xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh]"
-      style={{
-        backgroundImage: `url(${vendor_details})`,
-      }}
+    
     >
-      <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">
+      <Image
+              src={vendor_details}
+              alt="Product screenshot"
+              className="mx-auto max-w-none xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh] object-cover w-full"
+              width="100"
+              height="100"
+            />
+
+      <div className="absolute top-0 left-0 right-0 z-40 sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">
         <div className="magazine_breadcrumb relative">
           <div className="breadcrumb text-white py-4 text-lg">
             <Link href="#">Vendor Guide</Link>

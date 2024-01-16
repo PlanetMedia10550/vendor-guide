@@ -8,12 +8,13 @@ export const metadata = {
   title: 'Vendor Guide | Search'
 }
 
-const Searchpage = ({vendors}) => {
-  const {metaData,loading} = useAuth();
-  const searchMeta = metaData?.search.search_background;
+const Searchpage = ({vendors,bannerContent}) => {
+
+  const searchMeta = bannerContent.search_background;
+
   return (
     <>
-      <TopBannerSearch title="Search Results" image={searchMeta} vendors={vendors} />
+      <TopBannerSearch title="Search Results" backgroundimage={searchMeta} vendors={vendors} />
       {/* <BannerSectionCard  /> */}
       <SearchAllData />
     </>

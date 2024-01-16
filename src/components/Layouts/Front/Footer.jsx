@@ -31,7 +31,7 @@ const Footer = () => {
 
     
         <div className="px-4 lg:px-12 lg:py-5 py-7">
-          <div className="flex items-center gap-3 md:gap-7 justify-between md:flex-row md:mb-0 mb-4">
+          <div className="footer_content flex items-center gap-3 md:gap-7 justify-between md:flex-row md:mb-0 mb-4">
             <div className="flex flex-col gap-2">
               <Link
                 href="/"
@@ -47,7 +47,7 @@ const Footer = () => {
                 />
               </Link>
             </div>
-            <div className="flex flex-col gap-4 xsm:flex-row md:p-0 relative float-label-input md:me-8 sm:my-0">
+            <div className="subscribe_input flex flex-col gap-4 xsm:flex-row md:p-0 relative float-label-input md:me-8 sm:my-0">
               <input
                 type="text"
                 id="name"
@@ -101,26 +101,34 @@ const Footer = () => {
             </div>
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Follow</h4>
-              <ul className="flex flex-col nav_list text-sm pl-10 sm:pl-0">
+              <ul className="flex nav_list text-sm pl-10 sm:pl-0">
                {sitesetting?.side_facebook_url && (
-                <li className="flex items-center py-1">
-                  <FontAwesomeIcon icon={faFacebook} className="pr-2" />
-                  <Link href={sitesetting?.side_facebook_url} rel="nofollow" target="_blank">Facebook</Link></li>
+                <li>
+                  <Link href={sitesetting?.side_facebook_url} rel="nofollow" target="_blank" className="p-1 text-xl">
+                    <FontAwesomeIcon icon={faFacebook} className="pr-2" />
+                  </Link>
+                  </li>
                 )}
                 {sitesetting?.side_lingding_url && (
-               <li className="flex items-center py-1">
-                <FontAwesomeIcon icon={faLinkedin} className="pr-2" />
-                <Link href={sitesetting?.side_lingding_url} rel="nofollow" target="_blank">LinkedIn</Link></li>
+               <li>
+                  <Link href={sitesetting?.side_lingding_url} rel="nofollow" target="_blank" className="p-1 text-xl">
+                    <FontAwesomeIcon icon={faLinkedin} className="pr-2" />
+                  </Link>
+                </li>
                )}
                {sitesetting?.side_instagram_url && (
-                <li className="flex items-center py-1">
-                  <FontAwesomeIcon icon={faInstagram} className="pr-2" />
-                  <Link href={sitesetting?.side_instagram_url} rel="nofollow" target="_blank">Instagram</Link></li>
+                <li>
+                  <Link href={sitesetting?.side_instagram_url} rel="nofollow" target="_blank" className="p-1 text-xl">
+                    <FontAwesomeIcon icon={faInstagram} className="pr-2" />
+                  </Link>
+                </li>
                )}
                {sitesetting?.side_twitter_url && (
-                <li className="flex items-center py-1">
-                  <FontAwesomeIcon icon={faTwitter} className="pr-2" />
-                  <Link href={sitesetting?.side_twitter_url} rel="nofollow" target="_blank">Twitter</Link></li>
+                  <li>
+                    <Link href={sitesetting?.side_twitter_url} rel="nofollow" target="_blank" className="p-1 text-xl">
+                      <FontAwesomeIcon icon={faTwitter} className="pr-2" />
+                    </Link>
+                  </li>
                )}
               </ul>
             </div>
@@ -133,7 +141,7 @@ const Footer = () => {
                 Loading...
                </div>
          ):(
-        <div className="copy_right bg-[#ffffff] flex  items-center justify-center md:flex-row md:justify-center">
+        <div className="copy_right bg-[#ffffff] flex  items-center justify-center md:flex-row md:justify-center py-4">
           <span className="text-black font-bold text-xs">{sitesetting?.powered_by}</span>
           {sitesetting?.footerlogo_url && (
           <Image

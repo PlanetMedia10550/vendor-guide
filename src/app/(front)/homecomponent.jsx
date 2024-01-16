@@ -11,32 +11,23 @@ import Image from "next/image";
 
 
 const HomeComponent = ({blogs,vendors,bannerContent}) => {
-  // console.log(bannerContent)
-   const {metaData,loading} = useAuth();
-   const homeMeta = metaData?.home;
-   const [backgroundImage,setBackgroundImage] = useState(bannerContent.hero_background);
-   console.log(backgroundImage);
-  //  useEffect(() => {
-  //   if(bannerContent.hero_background!=undefined){
-  //     setBackgroundImage(`url(${bannerContent.hero_background})`);
-  //   }
-  //  },[bannerContent.hero_background]);
-  //  var backgroundImage = ;
-  //
+   const backgroundImage = bannerContent.hero_background;
+  
+
   
   return (
     < >
      {backgroundImage!=undefined &&
       <div id="hero_section" >
-          <div className={`hero_section_content relative h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh]   bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[38vh] before:sm:h-[45vh]  before:md:h-[55vh] before:lg:h-[65vh] before:xl:h-[69vh] bg:opacity-25 `}>
+          <div className={`hero_section_content relative h-[38vh] sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] bg-cover bg-no-repeat before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] bg:opacity-25 `}>
           <Image
               src={backgroundImage}
               alt="Product screenshot"
-              className="mx-auto max-w-none h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] w-full"
+              className="mx-auto max-w-none h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] object-cover w-full"
               width="100"
               height="100"
             />
-          <SearchBar  homeMeta={homeMeta} />
+          <SearchBar  homeMeta={bannerContent} />
          </div>
       </div>}
       <div id="banner_section">
@@ -62,7 +53,7 @@ const HomeComponent = ({blogs,vendors,bannerContent}) => {
           </div>
         </div>
         
-        <PartnerSection homeMeta={homeMeta}
+        <PartnerSection homeMeta={bannerContent}
           btnTitle="Get Started"
         />
       </div>

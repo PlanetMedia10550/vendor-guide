@@ -8,7 +8,7 @@ import Link from "next/link";
 const BannerSectionCard = ({vendors}) => {
 
   return (
-    <div className="grid grid-cols-5 items-center justify-center gap-2 md:gap-5 sm:mt-4 lg:my-0 my-4">
+    <div className="grid grid-cols-5 items-center justify-center gap-2 md:gap-5 sm:mt-4 md:px-8 lg:my-8 my-4">
       {vendors && vendors?.data.map((row, i) => {
           return (
             <div

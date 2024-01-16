@@ -6,7 +6,7 @@ const SignUpcard = ({title,vendors}) => {
 
   return (
     <>
-      <div className="image_grid  absolute left-0 right-0 top-[2rem] md:top-[3rem] lg:top-[4rem] xl:top-[5rem]  2xl:top-[3rem] md:px-16 lg:px-16 xl:px-24 px-5 ">
+      <div className="image_grid  absolute z-40 left-0 right-0 top-[2rem] md:top-[3rem] lg:top-[4rem] xl:top-[5rem]  2xl:top-[3rem] md:px-16 lg:px-16 xl:px-24 px-5 ">
         <div className="">
           <div className="rounded-xl overflow-hidden shadow-xl  flex flex-col  bg-white">
             <div className="flex items-center p-3 bg-[#B13634]"></div>
