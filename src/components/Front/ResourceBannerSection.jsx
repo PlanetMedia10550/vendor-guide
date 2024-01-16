@@ -23,9 +23,9 @@ const ResourceBannerSection = (props) => {
 
   return (
     <>
-      <div className="image_grid block relative left-0 right-0 bottom-[-8rem] sm:bottom-[121px] lg:bottom-[30px] xl:bottom-[-2rem]  2xl:bottom-[-3rem] md:px-16 lg:px-8 xl:px-20 px-10">
+      <div className="image_grid block relative left-0 right-0 bottom-[-2rem] sm:bottom-[121px] lg:bottom-[30px] xl:bottom-[7rem]  2xl:bottom-[-3rem] md:px-16 lg:px-8 xl:px-20 px-10">
         <div className="">
-          <div className="rounded-xl overflow-hidden shadow-[#0000004a] shadow-2xl  flex flex-col  bg-white">
+          <div className="rounded-xl overflow-hidden shadow-[#0000004a] md:shadow-2xl shadow-lg flex flex-col  bg-white">
             <div className="flex items-center p-3 bg-[#B13634]"></div>
             <div className="text-center px-2 sm:px-0 pt-3 md:pt-4 lg:pt-6">
               <h2 className="lg:text-2xl sm:text-xl text-lg font-bold tracking-tight  text-[#171717b]">

@@ -57,7 +57,7 @@ const Advertisepage = ({bannerContent}) => {
               </div>
         ):(
         <PartnerSection2
-          title={advertiseMeta?.advertise_text}
+          title={pagemetaData?.advertise_text}
           btnTitle="Contact Us Today"
         />
         )}
