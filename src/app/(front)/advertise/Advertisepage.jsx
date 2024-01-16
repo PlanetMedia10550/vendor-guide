@@ -8,15 +8,16 @@ import PartnerSection2 from "@/components/Front/PartnerSection2";
 import { useAuth } from "@/context/UserContext";
 import { useEffect } from "react";
 
-const Advertisepage = () => {
+const Advertisepage = ({bannerContent}) => {
+  
+  const pagemetaData = bannerContent;
   const {metaData,loading,user} = useAuth();
   const advertiseMeta = metaData?.advertise;
 
   return (
     <>
       <HeroSection
-        src={advertiseMeta?.advertise_background}
-        title={advertiseMeta?.advertise_title}
+        bannerData={pagemetaData}
       />
       <div id="featurs_section" className="py-10 sm:pt-14 md:pt-8">
         <div className="overflow-hidden bg-white md:py-8 lg:py-12 px-3 xl:ps-16">

@@ -63,7 +63,7 @@ const AdvertiseTable = ({user}) => {
                   </span>
                   </div>
                 <div className="flex justify-center">
-                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Introductory Price:</span>
+                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Introductory Price :</span>
                   <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
                     ${parseFloat(headerData.sold_price[index]).toFixed(2)}
                   </span>
@@ -74,7 +74,7 @@ const AdvertiseTable = ({user}) => {
                 <>
                 <div className="pt-4">
                   <div className="flex justify-center">
-                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Price:</span>
+                  <span className="pr-4 text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">Price :</span>
                     <span className="text-sm sm:text-lg md:text-xl font-medium font-lato whitespace-nowrap">
                       ${parseFloat(headerData.price[index]).toFixed(2)}
                     </span>
@@ -104,7 +104,7 @@ const AdvertiseTable = ({user}) => {
                   {advertiseData[key][0]}
                 </th>
                 {advertiseData[key].slice(1).map((cellData, cellIndex) => (
-                <td key={cellIndex} className="px-4 md:px-6 py-4 border-2 border-[#221F20] font-medium lg:text-2xl md:text-lg text-sm">
+                <td key={cellIndex} className="px-6 md:px-6 py-4 border-2 border-[#221F20] font-medium lg:text-2xl md:text-lg text-sm whitespace-nowrap md:whitespace-normal">
                   {cellData}
                 </td>
                  ))} 
@@ -117,7 +117,7 @@ const AdvertiseTable = ({user}) => {
               className="px-6 py-3.5 border-collapse dark:border-zinc-600 font-semibold text-gray-900 whitespace-nowrap"
             ></th>
             {headerData?.slug?.map((slug, index) => (
-            <td className="pt-8 md:px-0 py-3.5 border-collapse">
+            <td className="sign_btn pt-8 md:px-0 py-3.5 border-collapse">
               <Link
                 href={user?`/plan/${slug}`:'register?guest=1'}
                 className="text-center flex-none rounded-md bg-[#B13634] px-4 md:px-11 py-3 md:py-4 text-base md:text-xl text-sm tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B13634]"

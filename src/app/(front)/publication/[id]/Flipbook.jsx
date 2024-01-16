@@ -50,6 +50,7 @@ function Flipbook({slug}) {
   const [longitude, setLongitude] = useState(''); 
   const [currentPageIndex, setCurrentPageIndex] = useState(''); 
 
+  // const isMobile = window.innerWidth <= 375;
 
   const trackPublication =  () => {
     const currentUrl = window.location.href;
@@ -161,7 +162,7 @@ function Flipbook({slug}) {
           maxWidth={1000}
           showCover={true}
           maxHeight={1000}
-          className="bg-red-800 mx-auto"
+          className="bg-red-800 mx-auto  mainflipbook"
           ref={bookRef}
           flippingTime={2500}
           usePortrait={isPortrait}

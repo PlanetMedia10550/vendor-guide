@@ -24,6 +24,20 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
   const cookie = getCookie('token');
   const pathname = usePathname()
   const  UserType  = getCookie('user-type');
+  
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(()=>{
     if(getCookie('user-type')==1){
@@ -34,11 +48,14 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
       setProfileUrl('/vendor/dashboard');
     }
   },[])
-  const toggleClass = () => {
-    setIsActive(!isActive);
-  };
 
-
+    const toggleClass = () => {
+      setIsActive(!isActive);
+    };
+    // console.log(toggleClass);
+    const menuClick = () =>{
+      setIsActive(false);
+    }
  
     const [showMenu, setShowMenu] = useState(true);
     const toggleMenu = (event) => {
@@ -49,7 +66,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
 
   return (
     <>
-      <header className="fixed top-0 z-50 left-0 right-0 border-b-2">
+      <header className={`border-b-2 ${scrollPosition > 0 ? "sticky z-50 bg-red-400 top-0 left-0 right-0" : ""}`}>
         <nav className="bg-white border-gray-200 px-4 lg:px-6 p-4 lg:p-7 ">
           <div className="flex xl:flex-wrap justify-between items-center mx-auto max-w-screen-xxl">
             {isInfoLoding ? (
@@ -147,7 +164,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   <Link
                     href="/advertise"
                     className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100  hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
-                  >
+                    onClick={menuClick} >
                     Advertise
                   </Link>
                 </li>
@@ -155,6 +172,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   <Link
                     href="/about-us"
                     className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
+                    onClick={menuClick}
                   >
                     About
                   </Link>
@@ -163,6 +181,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   <Link
                     href="/contact-us"
                     className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0"
+                    onClick={menuClick}
                   >
                     Contact
                   </Link>
@@ -190,6 +209,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                         <Link
                           className="px-3 text-sm font-bold block "
                           href="/blog"
+                          onClick={menuClick}
                         >
                           <i className="mdi mdi-lock text-16 align-middle mr-1"></i>
                           Blog
@@ -213,7 +233,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                               className="text-[#B13634]"
                             />
                           </button>
-                          <HeaderDropdown magazines={magazines} />
+                          <HeaderDropdown magazines={magazines} activemenu={menuClick}/>
                         </div>
                       </li>
                     </ul>

@@ -7,29 +7,40 @@ import SearchBar from "@/components/Front/SearchBar";
 import Link from "next/link";
 import { useAuth } from "@/context/UserContext";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 
-const HomeComponent = ({blogs,vendors}) => {
+const HomeComponent = ({blogs,vendors,bannerContent}) => {
+  // console.log(bannerContent)
    const {metaData,loading} = useAuth();
    const homeMeta = metaData?.home;
-   const [backgroundImage,setBackgroundImage] = useState('');
-   useEffect(() => {
-    if(homeMeta?.hero_background!=undefined){
-      setBackgroundImage(`url(${homeMeta?.hero_background})`);
-    }
-   },[homeMeta?.hero_background]);
+   const [backgroundImage,setBackgroundImage] = useState(bannerContent.hero_background);
+   console.log(backgroundImage);
+  //  useEffect(() => {
+  //   if(bannerContent.hero_background!=undefined){
+  //     setBackgroundImage(`url(${bannerContent.hero_background})`);
+  //   }
+  //  },[bannerContent.hero_background]);
   //  var backgroundImage = ;
-  //  console.log(backgroundImage);
+  //
+  
   return (
     < >
-     {homeMeta?.hero_background!=undefined &&
+     {backgroundImage!=undefined &&
       <div id="hero_section" >
-          <div className={`hero_section_content relative h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh]   bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[38vh] before:sm:h-[45vh]  before:md:h-[55vh] before:lg:h-[65vh] before:xl:h-[69vh] bg:opacity-25 `} style={{ backgroundImage: `url(${homeMeta?.hero_background})` }}>
+          <div className={`hero_section_content relative h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh]   bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[38vh] before:sm:h-[45vh]  before:md:h-[55vh] before:lg:h-[65vh] before:xl:h-[69vh] bg:opacity-25 `}>
+          <Image
+              src={backgroundImage}
+              alt="Product screenshot"
+              className="mx-auto max-w-none h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] w-full"
+              width="100"
+              height="100"
+            />
           <SearchBar  homeMeta={homeMeta} />
-        </div>
+         </div>
       </div>}
       <div id="banner_section">
-        <div className="container mx-auto py-3 px-8 md:py-4">
+        <div className="container mx-auto py-3 px-6 md:px-8 md:py-4">
             <BannerSectionCard vendors={vendors} />
         </div>
       </div>

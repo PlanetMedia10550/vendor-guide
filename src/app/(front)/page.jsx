@@ -1,4 +1,4 @@
-import { getBlogs, getVendors } from "@/app/lib/server-api";
+import { getBlogs, getVendors,getPostMeta} from "@/app/lib/server-api";
 import HomeComponent from "./homecomponent";
 
 // or Dynamic metadata
@@ -53,8 +53,10 @@ export async function generateMetadata({params}) {
 export default async function Home() {
   const blogs = await getBlogs();
   const vendors = await getVendors();
+  const pageMeta = await getPostMeta();
+  
   return (
-    <HomeComponent blogs={blogs} vendors={vendors} />
+    <HomeComponent blogs={blogs} vendors={vendors} bannerContent={pageMeta?.data.home} />
   );
 }
 

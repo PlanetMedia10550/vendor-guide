@@ -24,7 +24,7 @@ const SearchBar = ({homeMeta}) => {
           <div className="mt-1 sm:mt-3 md:mt-7 sm: justify-center">
             <div className="rounded-md ">
               <form onSubmit={handleSearch}>
-                <div className="relative sm:flex  justify-center gap-5 md:gap-7">
+                <div className="relative flex sm:flex  justify-center gap-5 md:gap-7">
                   <input
                     type="text"
                     name="keyword"
@@ -39,7 +39,7 @@ const SearchBar = ({homeMeta}) => {
 
                   <button
                     type="submit"
-                    className="text-white tracking-wide bg-[#B13634] hover:bg-red-800 focus:ring-1 focus:outline-none focus:ring-[#B13634] font-normal rounded-lg text-sm sm:text-lg lg:text-xl mt-3 sm:mt-0 px-4 sm:px-6 py-1 sm:py-2 lg:py-3 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-[#B13634]"
+                    className="text-white tracking-wide bg-[#B13634] hover:bg-red-800 focus:ring-1 focus:outline-none focus:ring-[#B13634] font-normal rounded-lg text-sm sm:text-lg lg:text-xl  sm:mt-0 px-4 sm:px-6 py-1 sm:py-2 lg:py-3 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-[#B13634]"
                   >
                     Search
                   </button>

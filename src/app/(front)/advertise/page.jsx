@@ -1,5 +1,5 @@
 import Advertisepage from "./Advertisepage";
-
+import { getPostMeta } from "@/app/lib/server-api";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
@@ -48,12 +48,12 @@ export async function generateMetadata({params}) {
   }
 }
 
-const Advertise = () => {
- 
+const Advertise = async () => {
+  const pageMeta = await getPostMeta();
   return (
-     
-      <Advertisepage />
-    
+    <>
+      <Advertisepage bannerContent={pageMeta?.data.advertise}/>
+    </>
   );
 };
 
