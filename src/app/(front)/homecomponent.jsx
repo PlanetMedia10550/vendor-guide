@@ -11,6 +11,11 @@ import Image from "next/image";
 
 
 const HomeComponent = ({blogs,vendors,bannerContent}) => {
+  // console.log(bannerContent)
+  //  const {metaData,loading} = useAuth();
+  //  const homeMeta = metaData?.home;
+  //  const [backgroundImage,setBackgroundImage] = useState(bannerContent.hero_background);
+
    const backgroundImage = bannerContent.hero_background;
   
 
