@@ -32,15 +32,13 @@ const Page = React.forwardRef((props, ref) => {
 Page.displayName = 'Page';
 
 
-function Flipbook({slug}) {
-  const {metaData,loading} = useAuth();
-  const resourceMeta = metaData?.publication;
+   function Flipbook({slug,bannerContent}) {
+
   const id = slug;
   const bookRef = useRef(null);
   const [totalPage, setTotalPage] = useState(0);
   const [flipData, setFlipData] = useState([]);
   const [isPortrait, setIsPortrait] = useState(false);
-  // console.log(flipData);
   const [isLoading, setIsLoading] = useState(true);
   const [frontCover, setFrontData] = useState([]);
   const [endCover, setEndData] = useState([]);
@@ -130,18 +128,20 @@ function Flipbook({slug}) {
 
   return (
     <>
-    {loading ? <div className="top_banner sm:relative">
-          <div className="text-center">
-          Loading...
-          </div>
-        </div>:
+    
         <div
         id="hero_section"
         className=" bg-cover bg-center bg-no-repeat relative before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#08161eab] xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh]"
-        style={{
-          backgroundImage: `url(${resourceMeta?.hero_background})`,
-        }}>
-          <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">
+        
+        >
+          <Image
+              src={bannerContent?.hero_background}
+              alt="Product screenshot"
+              className="mx-auto max-w-none xl:h-[40vh] lg:h-[40vh] md:h-[40vh] sm:h-[40vh] h:[40vh] object-cover w-full"
+              width="100"
+              height="100"
+            />
+          <div className="absolute top-0 left-0 right-0 sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[36vh] w-full max-w-5xl mx-auto">
             <main className="magazine_heading px-4 sm:px-6 lg:px-8 z-10 lg:py-12 relative text-center">
               <h1 className="text:sm sm:text-lg md:text-2xl lg:text-3xl xl:text-[3rem] font-lato -tracking-tight md:leading-10 lg:leading-[3.5rem] font-semibold  text-white   font-lato lg:px-10">
                 {allData?.title}
@@ -149,8 +149,7 @@ function Flipbook({slug}) {
             </main>
           </div>
         </div>
-        }
-    <div className="demo-block bg-light pt-3 pb-3 overflow-hidden" id="demoBlock">
+    <div className="demo-block bg-light py-8 overflow-hidden" id="demoBlock">
       <div className="container mx-auto" style={{ position: 'relative' }}>
       <div className="flip-book html-book demo-book stf__parent" style={{ display: 'block' }}>
       {flipData && flipData.length > 0 ? (

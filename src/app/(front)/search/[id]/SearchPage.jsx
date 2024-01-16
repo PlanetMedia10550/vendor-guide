@@ -6,7 +6,7 @@ import { useState,useEffect } from "react";
 import DetailsRight from "@/components/Front/DetailsRight";
 import { getCookie } from "cookies-next";
 
-const SearchPage = ({slug}) => {
+const SearchPage = ({slug,bannerContent}) => {
   const vendorId = slug;
   const [isLoading, setIsLoading] = useState(true);
   const [filterData, setFilterData] = useState([]);
@@ -59,7 +59,7 @@ const SearchPage = ({slug}) => {
   </div>
 ) : (
 <>
-      <DetailsHero  filterData={filterData} />
+      <DetailsHero  filterData={filterData} backgroundImage={bannerContent}/>
       <section id="featurs_section" className="py-9 md:py-5">
         <div className="container mx-auto overflow-hidden pt-5 md:pt-12 px-5 md:px-8 xl:px-24">
           <div className="mx-auto max-w-7xl">

@@ -14,7 +14,7 @@ const HeroSection = ({bannerData}) => {
         width="100"
         height="100"
       />
-      <div className="absolute z-40  top-0 sm:h-[65vh] md:h-[65vh] lg:h-[80vh] h-[40vh] w-full flex items-center justify-center text-center">
+      <div className="absolute z-40 left-0 right-0 top-0 sm:h-[65vh] md:h-[65vh] lg:h-[80vh] h-[28vh] w-full flex items-center justify-center text-center">
         <div className="px-4 sm:px-6 lg:px-8 z-10 lg:pb-8">
           <div className="text-center2">
             {bannerData.advertise_title && 

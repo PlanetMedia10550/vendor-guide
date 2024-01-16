@@ -1,5 +1,5 @@
 import Flipbook from "./Flipbook";
-
+import { getPostMeta } from "@/app/lib/server-api";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
@@ -51,9 +51,11 @@ export async function generateMetadata({params}) {
   }
 }
 
-const Page = ({params}) => {
+const Page = async ({params}) => {
+  const pageMeta = await getPostMeta();
+
   return (
-       <Flipbook slug={params.id} />  
+      <Flipbook slug={params.id} bannerContent={pageMeta?.data.publication}  />  
   );
 }
 export default Page;

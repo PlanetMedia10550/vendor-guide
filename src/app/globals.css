@@ -249,6 +249,9 @@ div#mobile-menu-2 {
 .magazine_heading  h1 {
   font-size: 30px;
 }
+.magazine_heading {
+  padding-top: 3rem;
+}
 .mainflipbook.stf__parent {
   max-width: 100% !important;
   height: auto;
@@ -259,5 +262,29 @@ div#mobile-menu-2 {
   max-width: 100%;
   height: auto;
 }
-
+.readblog_btn {
+  padding: 0.5rem 2rem;
+}
+div#hero_sectio, .hero_section_img{
+  height: 160px;
+}
+.subscribe_input {
+  margin-top: 15px;
+}
+.footer_content {
+  flex-flow: wrap;
+  justify-content: center;
+}
+.subscribe_input input {
+  padding: 6px;
+  font-size: 15px;
+}
+.subscribe_input label {
+  top: 8px;
+  left: 4px;
+  right: 0;
+}
+.home_position {
+  top: 3.5rem;
+}
 }
