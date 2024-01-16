@@ -15,14 +15,6 @@ const HomeComponent = ({blogs,vendors,bannerContent}) => {
    const {metaData,loading} = useAuth();
    const homeMeta = metaData?.home;
    const [backgroundImage,setBackgroundImage] = useState(bannerContent.hero_background);
-   console.log(backgroundImage);
-  //  useEffect(() => {
-  //   if(bannerContent.hero_background!=undefined){
-  //     setBackgroundImage(`url(${bannerContent.hero_background})`);
-  //   }
-  //  },[bannerContent.hero_background]);
-  //  var backgroundImage = ;
-  //
   
   return (
     < >

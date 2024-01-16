@@ -116,7 +116,7 @@ const VendorCard = (props) => {
             {(isLoading) ? <div className="loading-screen text-center">
             <p className="text-[#221F20] font-bold text-md">Please wait, we are finding the best Vendors for your project.</p>
         </div> : (
-              itemsToDisplay.length == 0 ? <DataNotFound /> : 
+              itemsToDisplay.length == 0 ? <DataNotFound /> : (<>
               <div className="grid_system grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  xl:grid-cols-5 2xl:grid-cols-5 gap-6  xl:gap-8 items-center" >
               {itemsToDisplay.length>0 && itemsToDisplay.map((row, index) => {
                 return (
@@ -181,17 +181,19 @@ const VendorCard = (props) => {
                 );
               })}
               </div>
+              
+             
+                { nPages>1 && 
+                <Pagination
+                    nPages={nPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                />
+                }
+              </>
+              )
+
               ) }
-
-              { nPages>1 && 
-              <Pagination
-                  nPages={nPages}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-              />
-              }
-
-
             </div>
           </div>
         </div>
