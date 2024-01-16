@@ -37,7 +37,7 @@ const FeaturSection2 = (props) => {
           return(
         <div key={i} className="lg:mx-auto grid max-w-4xl grid-cols-1 items-center  gap-x-2 gap-y-8 md:gap-y-16  lg:max-w-none md:grid-cols-2">
           <div className="lg:pt-4 md:text-left order-last md:order-first">
-              <h2 className="text-2xl lg:text-3xl text-[#C1272D]  font-bold font-lato">
+              <h2 className="advertise_heading text-2xl lg:text-3xl text-[#C1272D]  font-bold font-lato">
                 {row.title}
               </h2>
             <p className="md:mt-2 lg:leading-10 md:text-sm  lg:text-[1.40rem]  text-[#221F20] font-normal  font-maven">{row.description}
@@ -45,7 +45,6 @@ const FeaturSection2 = (props) => {
           </div>
           <div
             className="relative w-full md:ml-4 order-first md:order-last"
-            style={{ position: "relative" }}
           >
             <Image
               src={row.image_url}
@@ -71,7 +70,7 @@ const FeaturSection2 = (props) => {
           </div>
           <div className="">
             <div className="lg:ml-[-2rem] md:ml-[0rem] md:text-left">
-                <h2 className="text-2xl lg:text-3xl text-[#C1272D] font-bold font-lato">
+                <h2 className="advertise_heading text-2xl lg:text-3xl text-[#C1272D] font-bold font-lato">
                   {row.title}
                 </h2>
                 <p className="md:mt-2 lg:leading-10 md:text-sm lg:text-[1.40rem] text-[#221F20] font-normal  font-maven md:pr-8">

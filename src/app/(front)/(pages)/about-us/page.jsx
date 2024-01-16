@@ -1,6 +1,6 @@
 
 import ContentPage from "@/app/(front)/(pages)/ContentPage";
-import { getPages } from "@/app/lib/server-api";
+import { getPages,getPostMeta } from "@/app/lib/server-api";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
@@ -55,9 +55,11 @@ export async function generateMetadata({params}) {
 const SlugPages = async ({params}) => {
   const pages = await getPages('about-us');
   // console.log(pages)
+  const pageMeta = await getPostMeta();
+
   return (
     <>
-      <ContentPage page='about-us' pageData={pages?.data} />
+      <ContentPage page='about-us' pageData={pages?.data} bannerContent={pageMeta?.data}/>
     </>
   );
 };

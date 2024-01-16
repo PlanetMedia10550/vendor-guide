@@ -5,7 +5,14 @@ import Image from "next/image";
 import flogo from "@/../../public/images&icons/SVG/logo_white.svg";
 import starImg from "@/../../public/images&icons/SVG/star.svg";
 import { useAuth,useState } from "@/context/UserContext";
-
+import { faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
  const {sitesetting,isInfoLoding} = useAuth();
@@ -35,6 +42,7 @@ const Footer = () => {
                   height="100"
                   src={sitesetting?.sidefooterlogo_url?sitesetting?.sidefooterlogo_url:flogo}
                   className="mr-3 h-6 sm:h-8 lg:h-9 w-auto"
+                  id="Vendor_Guide_Logo"
                   alt="Vendor Guide"
                 />
               </Link>
@@ -57,14 +65,21 @@ const Footer = () => {
           <div className="footer_grid grid gap-2.5 grid-cols-1 sm:justify-items-center sm:grid-cols-2 md:grid-cols-4 px-20  md:mr-20 md:ml-20 lg:mr-48 lg:ml-36 px-7 md:px-0 md:pt-5 lg:pt-10">
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Advertise</h4>
-              <ul className="flex flex-col nav_list text-sm">
-                <li><Link href={`tel:${sitesetting?.side_phone}`} >{sitesetting?.side_phone}</Link></li>
-                <li><Link href={`mailto:${sitesetting?.side_email}`} >{sitesetting?.side_email}</Link></li>
+              <ul className="flex flex-col nav_list text-sm pl-10 sm:pl-0">
+                <li className="py-1">
+                  <FontAwesomeIcon icon={faPhoneVolume} className="pr-2" />
+                  <Link href={`tel:${sitesetting?.side_phone}`} >{sitesetting?.side_phone}</Link>
+                </li>
+                <li className="flex items-center py-1">
+                  {/* <FontAwesomeIcon icon={faEnvelope} className="pr-2" /> */}
+                  <FontAwesomeIcon icon={faEnvelope} className="pr-2" />
+                  <Link href={`mailto:${sitesetting?.side_email}`} >{sitesetting?.side_email}</Link>
+                </li>
               </ul>
             </div>
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Explore</h4>
-              <ul className="flex flex-col nav_list text-sm">
+              <ul className="flex flex-col nav_list text-sm pl-10 sm:pl-0">
                 <li>
                   <Link href="/advertise" >
                     Advertise{" "}
@@ -78,24 +93,34 @@ const Footer = () => {
             </div>
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Visit</h4>
-              <ul className="flex flex-col nav_list text-sm">
-                <li><Link href="//g.page/planet-media-wayzata?share" rel="nofollow" target="_blank">{sitesetting?.side_address}</Link></li>
+              <ul className="flex flex-col nav_list text-sm pl-10 sm:pl-0">
+                <li className="flex py-1">
+                <FontAwesomeIcon icon={faLocationDot} className="pr-2"/>
+                  <Link href="//g.page/planet-media-wayzata?share" rel="nofollow" target="_blank">{sitesetting?.side_address}</Link></li>
               </ul>
             </div>
             <div className="flex flex-col">
               <h4 className="text-white pb-2 sm:pb-4">Follow</h4>
-              <ul className="flex flex-col nav_list text-sm">
+              <ul className="flex flex-col nav_list text-sm pl-10 sm:pl-0">
                {sitesetting?.side_facebook_url && (
-                <li><Link href={sitesetting?.side_facebook_url} rel="nofollow" target="_blank">Facebook</Link></li>
+                <li className="flex items-center py-1">
+                  <FontAwesomeIcon icon={faFacebook} className="pr-2" />
+                  <Link href={sitesetting?.side_facebook_url} rel="nofollow" target="_blank">Facebook</Link></li>
                 )}
                 {sitesetting?.side_lingding_url && (
-               <li><Link href={sitesetting?.side_lingding_url} rel="nofollow" target="_blank">LinkedIn</Link></li>
+               <li className="flex items-center py-1">
+                <FontAwesomeIcon icon={faLinkedin} className="pr-2" />
+                <Link href={sitesetting?.side_lingding_url} rel="nofollow" target="_blank">LinkedIn</Link></li>
                )}
                {sitesetting?.side_instagram_url && (
-                <li><Link href={sitesetting?.side_instagram_url} rel="nofollow" target="_blank">Instagram</Link></li>
+                <li className="flex items-center py-1">
+                  <FontAwesomeIcon icon={faInstagram} className="pr-2" />
+                  <Link href={sitesetting?.side_instagram_url} rel="nofollow" target="_blank">Instagram</Link></li>
                )}
                {sitesetting?.side_twitter_url && (
-                <li><Link href={sitesetting?.side_twitter_url} rel="nofollow" target="_blank">Twitter</Link></li>
+                <li className="flex items-center py-1">
+                  <FontAwesomeIcon icon={faTwitter} className="pr-2" />
+                  <Link href={sitesetting?.side_twitter_url} rel="nofollow" target="_blank">Twitter</Link></li>
                )}
               </ul>
             </div>

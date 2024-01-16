@@ -6,13 +6,13 @@ import Link from "next/link";
 import { useAuth } from "@/context/UserContext"; 
 import LoadingComponents from "@/components/LoadingComponents";
 
-const ContentPage = ({page,pageData}) => {
+const ContentPage = ({page,pageData,bannercontent}) => {
   // const slug = params.slug;
   const [filterData, setFilterData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {metaData,loading} = useAuth();
   const [selectedMeta, setSelectedMeta] = useState(metaData?.[page]);
-  // console.log(metaData?.[page]);
+
   useEffect(() => {
       const specificMeta = metaData?.[page];
       setSelectedMeta(specificMeta || {});
@@ -30,6 +30,13 @@ const ContentPage = ({page,pageData}) => {
         backgroundImage: `url(${selectedMeta?.background?selectedMeta?.background:''})`,
       }}
     >
+      <Image
+              src={backgroundImage}
+              alt="Product screenshot"
+              className="mx-auto max-w-none h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] w-full"
+              width="100"
+              height="100"
+            />
       <div className="sm:h-[40vh] md:h-[40vh] lg:h-[40vh] h-[40vh] w-full max-w-5xl mx-auto">
         <div className="magazine_breadcrumb relative">
           <div className="breadcrumb text-white py-4 text-lg">
