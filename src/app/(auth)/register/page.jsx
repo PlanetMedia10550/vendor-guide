@@ -51,7 +51,7 @@ export async function generateMetadata({params}) {
 const Page = () => {
 
   return (
-    <div className="container mx-auto overflow-hidden px-24">
+    <div className="container mx-auto overflow-hidden md:px-24">
       <div className="mx-auto max-w-7xl">
         <div className="lg:mx-auto  max-w-4xl grid grid-cols-2 md:gap-x-16 md:gap-y-16 lg:max-w-none">
           <div className="md:col-span-2 lg:col-span-1 col-span-12 lg:-mr-16 order-2 sm:order-1 ">

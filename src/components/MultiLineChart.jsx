@@ -25,7 +25,7 @@ const MultiLineChart = ({lineData}) => {
 //   [2, 23, 15,56]
 // ];
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 overflow-x-scroll sm:overflow-hidden">
       {/* <Head>
         <title>MultiLineChart</title>
       </Head> */}

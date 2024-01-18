@@ -74,18 +74,18 @@ const ProfileForm = ({user,userAllInfo}) => {
     return (
         <div className="mx-auto max-w-3xl">
 
-        <div className="w-full">
-            <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
+        <div className="w-full  px-8">
+            <form action="#" method="POST" id="profile_form" className="mx-auto mt-6" onSubmit={makeRequest}>
                 <div className="w-full">
-                <div className="w-half my-2 pb-6" >
+                <div className="w-half my-2 pb-3 sm:pb-6" >
                         
-                    <div className="grid grid-cols-12 gap-x-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-4">
                         <div className="col-span-3 mt-2">
                         {isImageLoading ? <div style={{width:'20%',float:'left'}}><FontAwesomeIcon icon={faSpinner} spin /></div> : ''}
                         <img src={imageSrc?imageSrc:userDefult.src} style={{height:'100px',width:'100px'}} className=" rounded-full" />
                        </div>
                         <div className="col-span-9 mt-2.5">
-                            <Label label="Have Photos?"  />
+                            {/* <Label label="Have Photos?"  /> */}
                             <Input type="hidden" name="image_id" id="image_id" value={imageId}  />
                             <Input type="file" name="image" id="image" style={{width:'100%',float:'left'}}  onChange={onImageUpload} />
                            
@@ -96,7 +96,7 @@ const ProfileForm = ({user,userAllInfo}) => {
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-2 my-2 pb-6" >
+                        <div className="col-span-2 my-2 pb-3 sm:pb-6" >
                             <Label label="Name" required="required" />
                             <div className="mt-2.5">
                                 <Input name="name" id="name" value={usersInfo.name}  onChange={(e) => { 
@@ -107,7 +107,7 @@ const ProfileForm = ({user,userAllInfo}) => {
                             </div>
                             {renderFieldError('first_name')}
                         </div>
-                        <div className="col-span-1 my-2 pb-6" >
+                        <div className="col-span-2 sm:col-span-1 my-2 pb-3 sm:pb-6" >
                             <Label label="First Name" required="required" />
                             <div className="mt-2.5">
                                 <Input name="first_name" id="first_name" value={users.first_name}  onChange={(e) => { 
@@ -118,7 +118,7 @@ const ProfileForm = ({user,userAllInfo}) => {
                             </div>
                             {renderFieldError('first_name')}
                         </div>
-                        <div className="col-span-1 my-2 pb-6" >
+                        <div className="col-span-2 sm:col-span-1 my-2 pb-3 sm:pb-6" >
                             <Label label="Last Name" required="required" />
 
                             <div className="mt-2.5">
@@ -129,14 +129,14 @@ const ProfileForm = ({user,userAllInfo}) => {
                     </div>
                     
                     <div className="grid grid-cols-2 gap-x-4">
-                        <div className="col-span-1 my-2 pb-6" >
+                        <div className="col-span-2 sm:col-span-1 my-2 pb-3 sm:pb-6" >
                             <Label label="Email Address" required="required" />
                             <div className="mt-2.5">
                                 <Input name="email" id="email" value={users.email} onChange={(e) => { var value = e.target.value;  setUser({...users, email: value})}} disabled />
                             </div>
                             {renderFieldError('email')}
                         </div>
-                        <div className="col-span-1 my-2 pb-6" >
+                        <div className="col-span-2 sm:col-span-1 my-2 pb-3 sm:pb-6" >
                             <Label label="Phone Number" required="required" />
                             <div className="mt-2.5">
                                 <Input name="mobile" id="phone" value={users.mobile} onChange={(e) => { var value = e.target.value; setUser({...users, mobile: value})}} />
@@ -149,7 +149,7 @@ const ProfileForm = ({user,userAllInfo}) => {
                         <AddressAutocomplete users ={users}/>
                     </div>
                     <div className="w-half my-2" >
-                        <div className="my-4">
+                        <div className="my-4 submit_button">
 
                             <Submit button="Submit" is_loding={isLoding} disabled={isLoding} />
                         </div>

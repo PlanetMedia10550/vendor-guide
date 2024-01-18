@@ -42,7 +42,7 @@ const Footer = () => {
                   height="100"
                   src={sitesetting?.sidefooterlogo_url?sitesetting?.sidefooterlogo_url:flogo}
                   className="mr-3 h-6 sm:h-8 lg:h-9 w-auto"
-                  id="Vendor_Guide_Logo"
+                  id="Vendor_Guide_Logo2"
                   alt="Vendor Guide"
                 />
               </Link>

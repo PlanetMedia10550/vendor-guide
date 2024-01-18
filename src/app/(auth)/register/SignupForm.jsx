@@ -44,9 +44,9 @@ export const SignupForm = () => {
         setIsGuest(e.target)
     };
     return (
-        <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
+        <form action="#" method="POST" className="mx-auto mt-6" id="register_form" onSubmit={makeRequest}>
             <div className="">
-            <div className="grid grid-cols-2 gap-x-4">
+            <div className="grid grid-cols-2 gap-x-4 pb-2">
                 <div className="col-span-2 my-2" >
                     <Label label="User Type" required="required" />
                     <div className="mt-2.5">
@@ -54,14 +54,14 @@ export const SignupForm = () => {
                         name="type"
                         value={isGuest}
                         options={userTypes}
-                        className="basic-multi-select "
+                        className="basic-multi-select"
                         classNamePrefix="select"
                         onChange={userTypeHandle}
                     />
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-2 gap-x-4">
+            <div className="grid grid-cols-2 gap-x-4 pb-2">
                 <div className="col-span-2 my-2" >
                     <Label label="Address" required="required" />
                     <div className="mt-2.5">
@@ -69,7 +69,7 @@ export const SignupForm = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full my-2 " >
+            <div className="w-full my-2 pb-3" >
                 <Label label="Name" required="required" />
 
                 <div className="mt-2.5">
@@ -81,7 +81,7 @@ export const SignupForm = () => {
                 </div>
                 {/* {renderFieldError('name')} */}
             </div>
-            <div className="w-full my-2" >
+            <div className="w-full my-2 pb-3" >
                 <Label label="Email" required="required" />
 
                 <div className="mt-2.5">
@@ -93,7 +93,7 @@ export const SignupForm = () => {
                 </div>
                 {/* {renderFieldError('email')} */}
             </div>
-            <div className="w-full my-2">
+            <div className="w-full my-2 pb-3">
                 <Label label="Password" required="required" />
                 <div className="mt-2.5">
                 <Input type="password" name="password" id="password" value={registerData.password} 
@@ -106,7 +106,7 @@ export const SignupForm = () => {
                 </div>
                 {/* {renderFieldError('password')} */}
             </div>
-            <div className="w-full my-2">
+            <div className="w-full my-2 pb-3">
                 <Label label="Confirm Password" required="required" />
                 <div className="mt-2.5">
                 <Input type="password" name="password_confirmation" id="password_confirmation" value={registerData.passwordConfirmation} onChange={(e) => {
@@ -117,11 +117,11 @@ export const SignupForm = () => {
                 </div>
                 {/* {renderFieldError('password_confirmation')} */}
             </div>
-            <div className="flex gap-2 pt-3">
+            <div className="flex gap-2 pt-3 pb-3">
                 <TableCheckbox />  <p className=" text-lg font-semibold"> Remember Me</p>
             </div>
 
-            <div className="my-4">
+            <div className="my-4 submit_button">
                 <Button type="Submit" className="block sm:w-auto w-full rounded-md bg-[#c13e27] px-10 py-3 text-center text-base font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" is_loding={isLoding} disabled={isLoding}  />
             </div>
 

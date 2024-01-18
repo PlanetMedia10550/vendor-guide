@@ -5,7 +5,7 @@ import { faSort } from '@fortawesome/free-solid-svg-icons'
 import MultiLineChart from "@/components/MultiLineChart";
 const Graph = ({dashboardData}) =>{
     return(
-      <div className="col-span-3  md:col-span-2 lg:col-span-2   order-1 md:order-2  sm:mb-0 mb-5">
+      <div className="col-span-3  md:col-span-2 lg:col-span-2   order-1 md:order-2  sm:mb-0 mb-8">
       <div className="border-solid border-[1px] border-black bg-white mt-12">
           <div className="grid grid-cols-12 sm:gap-8 ">
               <div className="col-span-12 lg:col-span-7 md:col-span-7  order-2 sm:order-1 ">

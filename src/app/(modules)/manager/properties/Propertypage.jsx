@@ -113,9 +113,9 @@ const Propertypage = () => {
 
   return (
     <>
-      <section className="pt-14">
+      <section className="pt-8 sm:pt-14">
         <div className="px-10">
-          <div className="mb-10 text-right">
+          <div className="mb-8 sm:mb-10 text-right">
           <Link
                     href="#"
                     onClick={openModal}
