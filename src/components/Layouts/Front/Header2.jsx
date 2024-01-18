@@ -21,8 +21,9 @@ const Header = ({activeTab,setActiveTab}) => {
     const {user,isLoding,logout}  = useAuth();
     // console.log(getCookie('is_module_type'))
     const [showMenu, setShowMenu] = useState(true);
-    const [tabList, setTabList] = useState([]);
     
+    const [tabList, setTabList] = useState([]);
+    const [isActive, setIsActive] = useState(false);
 
     useEffect(()=>{
       if(getCookie('user-type')==1){
@@ -33,9 +34,23 @@ const Header = ({activeTab,setActiveTab}) => {
         setTabList([{'tab':'dashboard','label':'Dashboard','url':'/vendor/dashboard'},{'tab':'profile','label':'Profile','url':'/vendor/profile'}]);
       }
     },[])
+
+    const toggleClass = () => {
+      setIsActive(!isActive);
+    };
+
+    const menuClick = () =>{
+      setIsActive(false);
+    }
+
     const toggleMenu = (event) => {
         setShowMenu((current) => !current);
     };
+
+    const menuClick2 = () =>{
+      setShowMenu(true);
+    }
+
     const handleTabActive = (event) => {
       setActiveTab((current) => !current);
     };
@@ -56,7 +71,7 @@ const Header = ({activeTab,setActiveTab}) => {
                   width="100"
                   height="100"
                   src={whiteLogo.src}
-                  className="mr-3 h-3 sm:h-6 w-full"
+                  className="dashboard_header mr-3 h-3 sm:h-6 w-full"
                   alt="Vendor Guide"
                 />
               </Link>
@@ -103,6 +118,7 @@ const Header = ({activeTab,setActiveTab}) => {
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
                           href={'profile'}
+                          onClick={menuClick2}
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
@@ -115,6 +131,7 @@ const Header = ({activeTab,setActiveTab}) => {
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
                           href={'reset-password'}
+                          onClick={menuClick2}
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
@@ -146,16 +163,33 @@ const Header = ({activeTab,setActiveTab}) => {
         </div>
         <nav className="relative bg-white py-1 lg:py-0 px-4 lg:px-6 border-b border-[#171717]">
           <div className="container mx-auto">
-            <div className="flex flex-wrap justify-between items-center gap-x-5 mx-auto max-w-screen-xxl lg:ps-14">
+            <div className="nav_bar flex flex-wrap justify-between items-center gap-x-5 mx-auto max-w-screen-xxl lg:ps-14">
               <button
-                data-collapse-toggle="mobile-menu-2"
+                data-collapse-toggle="mobile-menu-3"
                 type="button"
                 className="inline-flex items-center p-2 ml-1 text-sm text-[#221F20] rounded-lg md:hidden  focus:outline-none  focus:ring-gray-200"
-                aria-controls="mobile-menu-2"
+                aria-controls="mobile-menu-3"
                 aria-expanded="false"
+                onClick={toggleClass}
               >
-                <span className="sr-only">Open main menu</span>
-                <svg
+                <span className="sr-only">{isActive ? 'Close' : 'Open'} main menu</span>
+                {isActive ? (
+                      // Close icon (you can replace this with your own close icon)
+                      <svg
+                        className="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                    ) : (
+                      // Open icon (you can replace this with your own open icon)
+                      <svg
                   className="w-6 h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -167,22 +201,11 @@ const Header = ({activeTab,setActiveTab}) => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <svg
-                  className="hidden w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
+                    )}
               </button>
               <div
-                className="hidden justify-between items-center gap-x-20 w-full md:flex md:w-auto"
-                id="mobile-menu-2"
+                className={`${!isActive ? 'hidden': '' } justify-between items-center gap-x-20 w-full md:flex md:w-auto`}
+                id="mobile-menu-3"
               >
                 <div className="">
                   <h6 className="hidden lg:block mb-1 lg:text-xl  md:text-lg font-semibold text-[#171717]">
@@ -191,10 +214,10 @@ const Header = ({activeTab,setActiveTab}) => {
                 </div>
                 <ul className="flex flex-col gap-x-5 mt-4 font-semibold md:flex-row  md:mt-0 text-base text-[#221F20]">
                   {tabList && tabList.map((row,i) => (
-                    <li key={`tab-${i}`}>
+                    <li key={`tab-${i}`} onClick={menuClick} >
                       <Link
                         href={row.url}
-                        className={` text-base lg:text-lg text-[#221F20] font-semibold block py-1 lg:py-3 pr-4 pl-3  lg:px-3  border-b-[3px]  focus:border-red-700 hover:border-b-[3px]  ${row.tab === activeTab ? 'border-b-[3px] border-red-700' : 'border-transparent'}`}
+                        className={` text-base lg:text-lg text-[#221F20] font-semibold block py-2 sm:py-1 lg:py-3 pr-4 pl-3  lg:px-3  border-b-[3px]  focus:border-red-700 hover:border-b-[3px]  ${row.tab === activeTab ? 'border-b-[3px] border-red-700' : 'border-transparent'}`}
                         onClick={handleTabActive}
                       >
                         {row.label}

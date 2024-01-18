@@ -241,7 +241,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                 </li>
                 {user?.name ?
                 (<li>
-                  <div className="head_profile_dropdown relative py-2 lg:py-3 border-b border-gray-100 lg:border-0">
+                  <div className="head_profile_dropdown relative px-4 md:px-0 py-2 lg:py-3 border-b border-gray-100 lg:border-0">
                   <button
                     type="button"
                     className="flex gap-x-4 items-center border-gray-50 text-white "
@@ -283,6 +283,7 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                         <Link
                           className="px-3 py-2 hover:bg-gray-50/50 block"
                           href={profileUrl}
+                          onClick={menuClick}
                         >
                           <i
                             className="fa fa-user text-16 align-middle mr-1"
@@ -319,7 +320,8 @@ import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
                   <li>
                     <Link
                       href="/login"
-                      className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0          "
+                      className="lg:py-3 text-base text-[#221F20] font-semibold block py-2 pr-4 pl-4  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0   -700 lg:p-0 "
+                      onClick={menuClick}
                     >
                       Login
                     </Link>

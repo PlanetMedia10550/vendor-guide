@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useEffect } from 'react';
 
 const AddressAutocomplete = ({users}) => {
-    const [postalCode, setPostalCode] = useState(users.zip_code);
-    const [address, setAddress] = useState(users.address);
-    const [city, setCity] = useState(users.city);
-    const [state, setState] = useState(users.state);
-    const [country, setCountry] = useState(users.country);
-    const [latitude, setLatitude] = useState(users.latitude);
-    const [longitude, setLongitude] = useState(users.longitude);
+    const [postalCode, setPostalCode] = useState(users?.zip_code);
+    const [address, setAddress] = useState(users?.address);
+    const [city, setCity] = useState(users?.city);
+    const [state, setState] = useState(users?.state);
+    const [country, setCountry] = useState(users?.country);
+    const [latitude, setLatitude] = useState(users?.latitude);
+    const [longitude, setLongitude] = useState(users?.longitude);
     
   useEffect(() => {
     const gmapKey = process.env.GOOGLE_MAP_API_KEY;

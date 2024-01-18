@@ -86,6 +86,7 @@ const PropertieAllData = ({propertieData,setPropertieData}) => {
   };
 
   return (
+    <div class="overflow-x-auto">
     <DataTable className="table w-full  text-gray-700  dataTable no-footer dt-responsive " value={propertieData} paginator rows={10} paginatorTemplate="  PrevPageLink CurrentPageReport NextPageLink "
             currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} pt={{
                 thead:{className:'border-[1px] border-black'},
@@ -98,6 +99,7 @@ const PropertieAllData = ({propertieData,setPropertieData}) => {
                     }}  />
                 ))}
     </DataTable>
+    </div>
   )
 }
 

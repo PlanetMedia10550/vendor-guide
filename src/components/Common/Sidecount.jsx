@@ -5,7 +5,7 @@ import Link from "next/link";
 // import Button from 'react-bootstrap/Button';
 
 const Sidecount = (props) => {
-  console.log(props);
+ 
   return (
     <li>
       <Link

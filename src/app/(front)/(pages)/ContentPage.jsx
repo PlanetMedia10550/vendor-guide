@@ -8,6 +8,7 @@ import LoadingComponents from "@/components/LoadingComponents";
 import Image from "next/image";
 
 const ContentPage = ({page,pageData,bannerContent}) => {
+  // console.log(pageData);
   const [filterData, setFilterData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {metaData,loading} = useAuth();
