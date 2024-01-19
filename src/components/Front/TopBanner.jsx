@@ -6,12 +6,12 @@ const TopBanner = ({resourceMeta}) => {
     <>
       <div className="top_banner sm:relative">
         <div
-          className="relative h-[44vh] sm:h-[60vh] md:h-[72vh] lg:h-[80vh] xl:h-[83vh] 2xl-h-[83vh] bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[44vh] before:sm:h-[60vh]  before:md:h-[72vh] before:lg:h-[80vh] before:xl:h-[83vh] 2xl-h-[83vh] bg:opacity-25"  
+          className="relative h-[40vh] sm:h-[60vh] md:h-[72vh] lg:h-[80vh] xl:h-[83vh] 2xl-h-[83vh] bg-cover bg-no-repeat  before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] before:h-[40vh] before:sm:h-[60vh]  before:md:h-[72vh] before:lg:h-[80vh] before:xl:h-[83vh] 2xl-h-[83vh] bg:opacity-25"  
         >
           <Image
               src={resourceMeta.resources_background}
               alt="Product screenshot"
-              className="mx-auto max-w-none h-[44vh] sm:h-[60vh] md:h-[72vh] lg:h-[80vh] xl:h-[83vh] 2xl-h-[83vh] object-cover w-full"
+              className="mx-auto max-w-none h-[40vh] sm:h-[60vh] md:h-[72vh] lg:h-[80vh] xl:h-[83vh] 2xl-h-[83vh] object-cover w-full"
               width="100"
               height="100"
             />

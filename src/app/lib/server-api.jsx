@@ -31,3 +31,9 @@ export async function getPostMeta() {
     const pageMetaRes = await res.json()
     return pageMetaRes
 }
+
+export async function getSiteSetting() {
+    const res = await fetch(`${process.env.BASE_API_URL}site_setting`, { cache: 'force-cache' })
+    const siteSettingRes = await res.json()
+    return siteSettingRes
+}

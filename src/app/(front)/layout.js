@@ -1,21 +1,21 @@
 import Footer from '@/components/Layouts/Front/Footer'
 import Header from '@/components/Layouts/Front/Header'
 import { Fragment} from 'react'
-import { getCategories, getMagazines } from '@/app/lib/server-api';
+import { getCategories, getMagazines, getSiteSetting } from '@/app/lib/server-api';
 
 export default async function AuthLayout({ children }) {
   const categories = await getCategories();
   const magazines = await getMagazines();
-  
-  
+  const sitesetting = await getSiteSetting();
 
+  
   return (
     <Fragment>
-        <Header categories={categories} magazines={magazines} />
+        <Header categories={categories} magazines={magazines}  sitesetting={sitesetting.data}/>
         <main className='sm:relative'>
           {children}
         </main>
-        <Footer  />
+        <Footer  sitesetting={sitesetting.data}/>
     </Fragment>
   )
 }

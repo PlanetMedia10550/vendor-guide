@@ -14,8 +14,8 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Footer = () => {
- const {sitesetting,isInfoLoding} = useAuth();
+const Footer = ({sitesetting}) => {
+
   
   return (
     <>
@@ -23,13 +23,6 @@ const Footer = () => {
       <footer
         className="bg-[#171717] text-white bottom-0 left-0 flex flex-col w-full gap-4  md:gap-8"
       >
-       {isInfoLoding ? (
-                <div className="px-4 lg:px-12 lg:py-5 py-7 text-center">
-                  Loading....
-                </div>
-       ):(
-
-    
         <div className="px-4 lg:px-12 lg:py-5 py-7">
           <div className="footer_content flex items-center gap-3 md:gap-7 justify-between md:flex-row md:mb-0 mb-4">
             <div className="flex flex-col gap-2">
@@ -134,13 +127,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-         )}
+ 
 
-         {isInfoLoding ?(
-               <div className="copy_right bg-[#ffffff] text-black flex  items-center justify-center md:flex-row md:justify-center">
-                Loading...
-               </div>
-         ):(
         <div className="copy_right bg-[#ffffff] flex  items-center justify-center md:flex-row md:justify-center py-4">
           <span className="text-black font-bold text-xs">{sitesetting?.powered_by}</span>
           {sitesetting?.footerlogo_url && (
@@ -152,7 +140,7 @@ const Footer = () => {
             alt="Star"
           />)}
         </div>
-       )}
+       
       </footer>
 
     </>

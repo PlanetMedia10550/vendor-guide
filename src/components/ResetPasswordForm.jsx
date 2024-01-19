@@ -29,21 +29,9 @@ const ResetPasswordForm = () => {
                         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl  text-left">Change Password</h2>
 
                     </div>
-                    <form action="#" method="POST" className="mx-auto mt-6" onSubmit={makeRequest}>
+                    <form action="#" method="POST" id="password_change" className="mx-auto mt-6" onSubmit={makeRequest}>
                         <div className="">
-                            {/* <div className="w-full my-2" >
-                                <Label label="Email" required="required" />
-
-                                <div className="mt-2.5">
-                                    <Input name="email" id="email" value={forgetpasswordData.email} onChange={(e) => {
-                                        var value = e.target.value;
-                                        setForgetPasswordData({ ...forgetpasswordData, email: value });
-                                    }
-                                    } />
-                                </div>
-                                {/* {renderFieldError('email')} */}
-                            {/* </div> */} 
-                            <div className="w-full my-2">
+                            <div className="w-full my-2 pb-4">
                                 <Label label="Old Password" required="required" />
                                 <div className="mt-2.5">
                                     <Input type="password" name="old_password" id="password" value={resetpasswordData.old_password}
@@ -56,7 +44,7 @@ const ResetPasswordForm = () => {
                                 </div>
                                 {/* {renderFieldError('password')} */}
                             </div>
-                            <div className="w-full my-2">
+                            <div className="w-full my-2 pb-4">
                                 <Label label="New Password" required="required" />
                                 <div className="mt-2.5">
                                     <Input type="password" name="new_password" id="password" value={resetpasswordData.new_password}
@@ -69,7 +57,7 @@ const ResetPasswordForm = () => {
                                 </div>
                                 {/* {renderFieldError('password')} */}
                             </div>
-                            <div className="w-full my-2">
+                            <div className="w-full my-2 pb-4">
                                 <Label label="Confirm Password" required="required" />
                                 <div className="mt-2.5">
                                     <Input type="password" name="confirm_password" id="password" value={resetpasswordData.confirm_password}
@@ -83,7 +71,7 @@ const ResetPasswordForm = () => {
                                 {/* {renderFieldError('password')} */}
                             </div>
                         
-                            <div className="my-4">
+                            <div className="my-4 pb-4 submit_button">
                                 <Button type="Submit" className="block sm:w-auto w-full rounded-md bg-[#c13e27] px-10 py-3 text-center text-base font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" is_loding={isLoding} disabled={isLoding} />
                             </div>
                         </div>

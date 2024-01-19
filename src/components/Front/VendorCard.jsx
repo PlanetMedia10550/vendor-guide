@@ -125,13 +125,13 @@ const VendorCard = (props) => {
                       <div className="card mb-0 bg-white px-3 shadow h-full relative">
                         <div className="card-body">
                           <div className="text-center">
-                          <div className="w-36 h-28 pt-2 mx-auto flex ">
+                          <div className="w-36 h-28 pt-2 mx-auto flex justify-center">
                             <Link href={`/search/`+ row.slug } className="flex justify-center items-center h-full">
                             
                               <Image
                                 width="100"
                                 height="100"
-                                className="w-full"
+                                className={`${vendorDefult.src ? 'w-full ': 'w-full'} h-full`}
                                 src={row.image_url ? row.image_url : vendorDefult.src}
                                 alt={row.name}
                               />
@@ -163,7 +163,7 @@ const VendorCard = (props) => {
                                   Learn More
                                 </Link>
                               </div>
-                              <div className="lg:mt-0  mt-0">
+                              <div className="sm:mt-0  mt-5">
                                 <Link
                                   href=""
                                   className="rounded-[0.7rem] md:inline-block px-3.5 py-1 2xl:text-sm xl:text-[0.66rem] text-sm border-solid border-[1px] border-black font-extrabold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
