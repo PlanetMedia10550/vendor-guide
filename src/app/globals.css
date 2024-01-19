@@ -241,7 +241,11 @@ button.custom-next-button {
 }
 
 @media (max-width:375px){
-img#Vendor_Guide_Logo {
+  /* .head_profile_dropdown-menu {
+    top: 3rem;
+    left: 1rem;
+} */
+#Vendor_Guide_Logo {
     width: 125px;
     height: auto;
 }
@@ -249,8 +253,8 @@ img#Vendor_Guide_Logo {
   width: 160px;
   height: auto;
 }
-div#mobile-menu-2 {
-  width: 250px;
+#mobile-menu-2 {
+  width: 250px !important; 
 }
 #mobile-menu-3 {
   width: 215px;
@@ -282,7 +286,7 @@ div#mobile-menu-2 {
 .readblog_btn {
   padding: 0.5rem 2rem;
 }
-div#hero_sectio, .hero_section_img{
+#hero_sectio, .hero_section_img{
   height: 160px;
 }
 .subscribe_input {
@@ -320,10 +324,35 @@ div#hero_sectio, .hero_section_img{
 img.dashboard_header {
   height: 1.05rem;
 }
-form#profile_form input , .submit_button button, #register_form input {
+#profile_form input , .submit_button button, #register_form input ,#password_change input  {
   padding: 0.55rem 0.85rem;
 }
 .nav_bar ul {
   margin-top: 25px;
+}
+.magazine_breadcrumb .breadcrumb{
+  padding: 10px 16px;
+}
+.request_qoute{
+  margin-bottom: 10px;
+}
+.request_title {
+  font-size: 26px;
+}
+.request_paragraph {
+  font-size: 16px;
+  line-height: 24px;
+}
+.request_button a {
+  width: 40%;
+  text-align: center;
+}
+.request_button_guest a {
+  width: 83%;
+  text-align: center;
+}
+button.close_button {
+  width: 2rem;
+  height: 2rem;
 }
 }

@@ -16,8 +16,8 @@ import { useEffect } from "react";
 
 import RequestQuotebtn from "@/components/Front/RequestQuotebtn";
 
-  const Header = ({categories,magazines}) => {
-  const {user,isLoding,isInfoLoding,logout,sitesetting}  = useAuth();
+  const Header = ({categories,magazines,sitesetting}) => {
+  const {user,isLoding,isInfoLoding,logout}  = useAuth();
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const [profileUrl, setProfileUrl] = useState("");

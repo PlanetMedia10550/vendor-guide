@@ -62,7 +62,7 @@ const DetailsRight = ({filterData}) => {
             height="150"
             src={imageUrl ? imageUrl : vendorDefult.src}
             alt="Product screenshot"
-            className="mx-auto md:mx-0 "
+            className={`mx-auto md:mx-0`}
           />
         </div>
         <div className="py-8  lg:py-7 gap-x-4 block text-left">

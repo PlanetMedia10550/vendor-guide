@@ -10,7 +10,7 @@ export default async function AuthLayout({ children }) {
   return (
     <>
         <Header categories={categories} magazines={magazines} />
-        <section className='sm:relative md:pt-24 z-40'>
+        <section className='sm:relative  z-40'>
           {children}
         </section>
         <Footer/>
