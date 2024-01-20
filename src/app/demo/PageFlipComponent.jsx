@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { PageFlip } from 'page-flip';
 import pageimage from "@/../../public/images&icons/resources/Asset1.jpg";
 import pageimage2 from "@/../../public/images&icons/resources/Asset2.jpg";
-import filpcss  from  "./style.module.css";
+import filpcss  from  "@/app/demo/Style.module.css";
 import Image from 'next/image';
 
 const PageFlipComponent = () => {
