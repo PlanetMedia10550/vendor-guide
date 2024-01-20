@@ -27,6 +27,7 @@
     "cookies-next": "^4.0.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "flipping-pages": "^3.1.0",
     "flowbite": "^2.0.0",
     "flowbite-react": "^0.6.4",
     "formik": "^2.4.4",

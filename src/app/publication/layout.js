@@ -1,6 +1,6 @@
-import '@/app/globals.css'
-import Footer from '@/components/Layouts/Front/Footer'
-import Header from '@/components/Layouts/Front/Header'
+
+import Footer from './Footer'
+import Header from './Header'
 import { Fragment} from 'react'
 import { getCategories, getMagazines, getSiteSetting } from '@/app/lib/server-api';
 

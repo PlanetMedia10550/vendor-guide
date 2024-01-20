@@ -56,7 +56,7 @@ const DetailsRight = ({filterData}) => {
     <div className="brand-star md:col-span-1 col-span-12   order-1 sm:order-2  sm:gap-x-5 md:px-16">
     <div className=" rounded-2xl overflow-hidden  flex flex-col  bg-white">
       <div className="text-center pb-6">
-        <div className="">
+        <div className="Search_details_img">
           <Image
             width="275"
             height="150"

@@ -38,6 +38,7 @@ const DetailsCarosuel = ({filterData}) => {
             showIndicators={false}
             showStatus={false}
             showThumbs={true}
+            
             renderThumbs={customRenderThumb}
           >
             {extractedData.map((item, index) => (
@@ -66,7 +67,7 @@ const DetailsCarosuel = ({filterData}) => {
             />
           </div>
         )}
-    <button className="custom-next-button">
+      <button className="custom-next-button">
         <FontAwesomeIcon icon={faAngleRight} />
       </button>
     </div>
