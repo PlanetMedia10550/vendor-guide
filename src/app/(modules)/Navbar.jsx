@@ -5,7 +5,7 @@ import Header from '@/components/Layouts/Front/Header2'
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-export default function Navbar({ children }) {
+export default function Navbar({ children,sitesetting }) {
     const router = usePathname();
     var newArray = router?.split('/');
     // console.log(newArray);
@@ -14,7 +14,7 @@ export default function Navbar({ children }) {
     <>
         <Header activeTab={activeTab} setActiveTab={setActiveTab} />
         {children}
-        <Footer/>
+        <Footer sitesetting={sitesetting} />
     </>
   )
 }
