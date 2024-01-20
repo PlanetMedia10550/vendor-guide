@@ -1,3 +1,4 @@
+import '@/app/globals.css'
 import Navbar from './Navbar';
 import { getSiteSetting } from '@/app/lib/server-api';
 

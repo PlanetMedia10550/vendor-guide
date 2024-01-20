@@ -1,5 +1,5 @@
 import { UserProvider } from '@/context/UserContext'
-import './globals.css'
+
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import localFont  from 'next/font/local'
 import { ToastContainer } from "react-toastify";
