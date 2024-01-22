@@ -5,12 +5,14 @@ import DetailsHero from "@/components/Front/DetailsHero";
 import { useState,useEffect } from "react";
 import DetailsRight from "@/components/Front/DetailsRight";
 import { getCookie } from "cookies-next";
+import { useAuth } from "@/context/UserContext";
 
 const SearchPage = ({slug,bannerContent}) => {
   const vendorId = slug;
   const [isLoading, setIsLoading] = useState(true);
   const [filterData, setFilterData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const {user}  = useAuth();
 
   useEffect(() => {
     const fetchData  = async () => {
@@ -70,7 +72,7 @@ const SearchPage = ({slug,bannerContent}) => {
                 </div>
               </div>
               {/* right section  */}
-              <DetailsRight filterData={filterData} />
+              <DetailsRight filterData={filterData} user={user} />
             </div>
 
             <div className="mt-12">

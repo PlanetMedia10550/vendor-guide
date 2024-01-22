@@ -8,7 +8,7 @@ import axios from 'axios';
 import { getCookie } from "cookies-next";
 
 
-const DetailsRight = ({filterData}) => {
+const DetailsRight = ({filterData,user}) => {
   const imageUrl = filterData?.image_url;
   const [categoryData, setCategoryData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -109,8 +109,8 @@ const DetailsRight = ({filterData}) => {
   </div>
   <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className="text-3xl font-medium" >Request a Quote !</h1>
-        {filterData!=null ? (
-          <PropartyForm user={filterData} vendor_id={vendorId} onClose={closeModal} categoryData={categoryData}   />
+        {user!=null ? (
+          <PropartyForm user={user} vendor_id={vendorId} onClose={closeModal} categoryData={categoryData}   />
         ) : (
           <>
             <p className="text-xl mt-2">Kindly login or register to request a quote</p>

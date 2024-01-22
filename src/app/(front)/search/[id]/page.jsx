@@ -20,11 +20,6 @@ export async function generateMetadata({params}) {
     },
     title: `${metaData?.title?metaData?.title:metaData?.name}`,
     description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
-    robots: {
-      index: true,
-      follow: true,
-      nocache: true,
-    },
     openGraph:{
       title: `${metaData?.title?metaData?.title:metaData?.name}`,
       description: `${metaData?.short_description?metaData?.short_description:metaData?.description}`,
