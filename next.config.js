@@ -44,7 +44,7 @@ const nextConfig = {
       return [
         {
           source: '/api/:path*',
-          destination: 'https://vendor-guide.codelive.info/:path*',
+          destination: 'https://demo.vendorguideusa.com/:path*',
         },
       ];
     },

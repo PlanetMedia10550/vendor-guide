@@ -35,6 +35,11 @@ export const metadata = {
     template: '%s | Vendor Guide',
     default: 'Vendor Guide'
   },
+  robots: {
+    index: false,
+    follow: false,
+    nocache: false,
+  },
 }
 
 export default function RootLayout({ children,props }) {

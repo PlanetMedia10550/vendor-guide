@@ -76,7 +76,7 @@ const VendorCard = (props) => {
 
     const bannerResponse = async () => {
       
-      // params.set('limit',20)
+      // params.set('limit',pageSize)
       // params.set('offset',0)
       params.set('latitude',geoLatitude);
       params.set('longitude',geoLongitude);
