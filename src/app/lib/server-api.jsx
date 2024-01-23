@@ -37,3 +37,9 @@ export async function getSiteSetting() {
     const siteSettingRes = await res.json()
     return siteSettingRes
 }
+
+export  async function getMagazineData(slug) {
+    const res = await fetch(`${process.env.BASE_API_URL}magazine/${slug}`, { cache: 'force-cache' })
+    const magazineDataRes = await res.json()
+    return magazineDataRes
+}

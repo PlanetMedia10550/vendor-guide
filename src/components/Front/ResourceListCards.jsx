@@ -43,7 +43,7 @@ const ResourceListCards = (props) => {
   return (
     <>
       <div className="z-50">
-        <div className="mx-auto max-w-2xl px-10 pb-6 sm:px-6 lg:py-12 lg:max-w-7xl lg:px-8">
+        <div className="max_container mx-auto max-w-2xl px-10 pb-6 sm:px-6 lg:py-12 lg:max-w-7xl 2xl:max-w-screen-2xl lg:px-8">
           <div className="text-center py-10 sm:py-0">
             <Link
               href="#"
@@ -56,33 +56,35 @@ const ResourceListCards = (props) => {
             {isLoading==false &&
               itemsToDisplay.map((row, i) => {
                 return (
-                  <div className="group relative" key={i}>
-                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
-                      <Image
-                        src={row.image_url}
-                        alt={row.title}
-                        width="100"
-                        height="100"
-                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                      />
-                    </div>
-                    <div className="mt-4 md:mx-6  xl:ml-10 md:text-left text-center">
-                      <div>
-                          <Link href={`/blog/${row.slug}`}>
-                        <h3 className="lg:text-xl text-lg  text-[#B13634] font-bold ">
-                            {/* <span
-                              aria-hidden="true"
-                              className="absolute inset-0"
-                            ></span> */}
-                            {row.title}
-                        </h3>
-                          </Link>
-                        <p className="mt-1 lg:text-xl text-lg text-[#221F20] font-medium ">
-                          {row.short_description}
-                        </p>
+                  
+                    <div className="group relative" key={i}>
+                      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden  bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-64">
+                        <Image
+                          src={row.image_url}
+                          alt={row.title}
+                          width="100"
+                          height="100"
+                          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                        />
+                      </div>
+                      <div className="mt-4 md:mx-6  xl:ml-10 md:text-left text-center">
+                        <div>
+                            <Link href={`/blog/${row.slug}`}>
+                          <h3 className="lg:text-xl text-lg  text-[#B13634] font-bold ">
+                              {/* <span
+                                aria-hidden="true"
+                                className="absolute inset-0"
+                              ></span> */}
+                              {row.title}
+                          </h3>
+                            </Link>
+                          <p className="mt-1 lg:text-xl text-lg text-[#221F20] font-medium ">
+                            {row.short_description}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  
                 );
               })}
           </div>
