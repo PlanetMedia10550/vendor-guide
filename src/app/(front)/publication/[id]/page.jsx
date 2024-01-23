@@ -1,4 +1,4 @@
-import Flipbook from "./Flipbook";
+
 import { getPostMeta,getMagazineData } from "@/app/lib/server-api";
 import PageFlipComponent from "./PageFlipComponent";
 
