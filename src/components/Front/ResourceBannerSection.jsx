@@ -23,11 +23,11 @@ const ResourceBannerSection = (props) => {
 
   return (
     <>
-      <div className="image_grid block relative left-0 right-0 bottom-[-2rem] sm:bottom-[121px] lg:bottom-[30px] xl:bottom-[7rem]  2xl:bottom-[-3rem] md:px-16 lg:px-8 xl:px-20 px-10">
+      <div className="image_grid block relative left-0 right-0 bottom-[-2rem] sm:bottom-[121px] lg:bottom-[30px] xl:bottom-[7rem]  2xl:bottom-[12rem] md:px-16 lg:px-8 xl:px-20 px-10">
         <div className="">
           <div className="rounded-xl overflow-hidden shadow-[#0000004a] md:shadow-2xl shadow-lg flex flex-col  bg-white">
             <div className="flex items-center p-3 bg-[#B13634]"></div>
-            <div className="text-center px-2 sm:px-0 pt-3 md:pt-4 lg:pt-6">
+            <div className="blogimage_content text-center px-2 sm:px-0 pt-3 md:pt-4 lg:pt-6">
               <h2 className="lg:text-2xl sm:text-xl text-lg font-bold tracking-tight  text-[#171717b]">
                 {props.title}
               </h2>
@@ -36,6 +36,7 @@ const ResourceBannerSection = (props) => {
             <div className=" digital_grid  grid grid-cols-5  items-center justify-center gap-x-[0.15rem]  gap-y-5 xl:gap-y-0 py-4 sm:py-6 xl:py-10 ">
               {isLoading==false && magazineData.map((row, i) => {
                 return (
+                  <Link href={`/publication/${row.slug}`}>
                     <div  key={i}>
                       <div className="sm:mt-0 sm:px-7 xl:px-9">
                         <Image
@@ -61,6 +62,7 @@ const ResourceBannerSection = (props) => {
                         </h2>
                       </div>
                     </div>
+                    </Link>
                 );
               })}
             </div>
