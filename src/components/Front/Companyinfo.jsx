@@ -14,7 +14,7 @@ const Companyinfo = (props) => {
   const searchParams = useSearchParams();
   const [urlString,setUrlString] = useState("");
   const urlParams = new URLSearchParams(searchParams)
-  // console.log(props.postalCode)
+  // console.log(urlParams)
   useEffect(() => {
     // if(props?.searchWord){ setSearchInput(props.searchWord); }
     // if(props?.postalCode){ setZipcodeInput(props.postalCode); }
@@ -38,9 +38,10 @@ const Companyinfo = (props) => {
       if(categoryInput) {urlParams.set('category_id',categoryInput) }else{ urlParams.delete('category_id') }
       if(zipCodeInput) {urlParams.set('zip_code',zipCodeInput) }else{ urlParams.delete('zip_code') }
 
+
       urlParams.set('latitude',props.latitude);
       urlParams.set('longitude',props.longitude);
-      // urlParams.set('zip_code',zipCodeInput);
+      // urlParams.set('query',urlParams);
       // const vendorResult = await getResponse('vendor?' + urlParams.toString())
       const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlParams.toString()}`,{
             method: 'GET',
@@ -78,6 +79,7 @@ const Companyinfo = (props) => {
             </div>
           </div>
         </div>
+        <div className="text-sm text-center">Latitude: {props.latitude}, Longitude: {props.longitude}</div>
         <div className="lg:flex md:block justify-center  px-10 sm:px-20 md:px-28 lg:px-8 xl:px-12 text-sm items-center">
           <div className="lg:flex xl:text-sm text-xs items-center ">
             <div className="px-4 py-3 bg-black w-[10rem] mx-auto lg:mx-0 mb-4 lg:mb-0">
@@ -96,10 +98,10 @@ const Companyinfo = (props) => {
                     <input
                       type="text"
                       className="w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black  pl-2"
-                      
                       value={searchInput}
                       onChange={(e) => setSearchInput(e.target.value)}
                     />
+                    
                   </div>
                 </div>
                 <div className="grid grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-4">
@@ -147,6 +149,7 @@ const Companyinfo = (props) => {
             </div>
           </div>
         </div>
+
       </div>
     </>
   );

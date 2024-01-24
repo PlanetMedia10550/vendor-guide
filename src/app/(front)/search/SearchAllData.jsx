@@ -37,6 +37,7 @@ const SearchAllData = () => {
           method: 'GET',
         })
         var resLoc = await loc.json();
+    
         // Check if the response contains results
         if (resLoc.results && resLoc.results.length > 0) {
           // Loop through address components to find postal code

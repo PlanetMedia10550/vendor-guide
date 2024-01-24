@@ -81,6 +81,9 @@ const VendorCard = (props) => {
       params.set('latitude',geoLatitude);
       params.set('longitude',geoLongitude);
       params.set('zip_code',postalCode);
+      // params.set('query',params);
+      // params.set('query',params);
+
       if(search) {params.set('key_word',search) }else{ params.delete('key_word') }
       var urlString = params.toString();
       const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlString}`,{
@@ -142,6 +145,7 @@ const VendorCard = (props) => {
                                   {row.name}
                               </h3>
                             </Link>
+                            <h3 className="text-black font-semibold text-xs">Distance: {row.distance.toFixed(2)} km</h3>
                             <p className="text-black font-bold  mb-2 pt-5">{row.mobile}</p>
                             {row.short_description ? (
                                 <p className="text-gray-400 font-normal text-sm whitespace-nowrap text-ellipsis overflow-hidden" dangerouslySetInnerHTML={{ __html: row.short_description }} />
