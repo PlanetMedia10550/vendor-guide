@@ -85,9 +85,16 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
       document.querySelector(".page-current").innerText = e.data + 1;
     });
 
-    pageFlip.on("changeState", (e) => {
-      document.querySelector(`.${filpcss['page-state']}`).innerText = e.data;
-    });
+    // pageFlip.on("changeState", (e) => {
+    //   document.querySelector(`.${filpcss['page-state']}`).innerText = e.data;
+    // });
+    const pageStateElement = document.querySelector(`.${filpcss['page-state']}`);
+    if (pageStateElement) {
+      pageFlip.on("changeState", (e) => {
+        pageStateElement.innerText = e.data;
+      });
+    }
+
 
     pageFlip.on("changeOrientation", (e) => {
       document.querySelector(`.${filpcss['page-orientation']}`).innerText = e.data;
