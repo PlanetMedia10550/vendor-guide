@@ -93,10 +93,10 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
       document.querySelector(`.${filpcss['page-orientation']}`).innerText = e.data;
     });
 
-    return () => {
-      document.querySelector(".btn-prev").removeEventListener("click", pageFlip.flipPrev);
-      document.querySelector(".btn-next").removeEventListener("click", pageFlip.flipNext);
-    };
+    // return () => {
+    //   document.querySelector(".btn-prev").removeEventListener("click", pageFlip.flipPrev);
+    //   document.querySelector(".btn-next").removeEventListener("click", pageFlip.flipNext);
+    // };
   }, []); 
 
   return (
