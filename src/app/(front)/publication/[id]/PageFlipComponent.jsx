@@ -20,10 +20,12 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
   const [allData, setAllData] = useState(magazineData);
   const [totalPage, setTotalPage] = useState(0);
   const [flipData, setFlipData] = useState(magazineData.pages);
-  // console.log(flipData);
+  const [currentPageIndex, setCurrentPageIndex] = useState('');
+
 
   const trackPublication =  () => {
     const currentUrl = window.location.href;
+
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -32,7 +34,7 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
         }, 
       );
     }
-    if(latitude){
+    if(latitude && currentPageIndex !== ''){
       const data = {
         'url' : currentUrl,
         'latitude' : latitude,
@@ -45,7 +47,7 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
   
   useEffect(() => { 
     trackPublication();  
-  }, [latitude]);
+  }, [latitude,currentPageIndex]);
    
 
   useEffect(() => {
@@ -69,13 +71,17 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
 
     document.querySelector(".btn-prev").addEventListener("click", () => {
       pageFlip.flipPrev();
+      trackPublication();
     });
 
     document.querySelector('.btn-next').addEventListener("click", () => {
       pageFlip.flipNext();
+      trackPublication();
     });
 
     pageFlip.on("flip", (e) => {
+      const currentIndex = e.data + 1; // e.data is 0-based index
+      setCurrentPageIndex(currentIndex);
       document.querySelector(".page-current").innerText = e.data + 1;
     });
 
@@ -88,7 +94,6 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
     });
 
     return () => {
-
       document.querySelector(".btn-prev").removeEventListener("click", pageFlip.flipPrev);
       document.querySelector(".btn-next").removeEventListener("click", pageFlip.flipNext);
     };
@@ -162,12 +167,11 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
               </div>
           </div>
         </div>
- 
     </div>
     <div className={`${filpcss.container}`}>
-      <div>
+      <div className="flex justify-center items-center">
           <button type="button" id={`${filpcss.buttons}`} className="btn-prev" >Previous page</button>
-          <div className="hidden">[<span className="page-current">1</span> of <span className="page-total">-</span>]</div>
+          <div className="">[<span className="page-current">1</span> of <span className="page-total">-</span>]</div>
           <button type="button" id={`${filpcss.buttons}`} className="btn-next">Next page</button>
       </div>
       <div className="hidden">
