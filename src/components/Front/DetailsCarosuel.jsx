@@ -29,9 +29,12 @@ const DetailsCarosuel = ({filterData}) => {
     
   return (
     <div className="relative h-full">
-      <button className="custom-prev-button">
-        <FontAwesomeIcon icon={faAngleLeft} />
-      </button>
+       {extractedData.length > 1 && (
+          <button className="custom-prev-button">
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </button>
+        )}
+
           {extractedData.length > 0 ? (
           <Carousel
             autoplay
@@ -67,9 +70,12 @@ const DetailsCarosuel = ({filterData}) => {
             />
           </div>
         )}
-      <button className="custom-next-button">
-        <FontAwesomeIcon icon={faAngleRight} />
-      </button>
+
+      {extractedData.length > 1 && (
+        <button className="custom-next-button">
+          <FontAwesomeIcon icon={faAngleRight} />
+        </button>
+      )}
     </div>
   );
 };
