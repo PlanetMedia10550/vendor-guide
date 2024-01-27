@@ -5,26 +5,25 @@ import { getResponse } from "@/app/lib/load-api";
 import { getCookie } from "cookies-next";
 
 const Companyinfo = (props) => {
-  const [searchInput, setSearchInput] = useState(props.searchWord);
-  const [categoryInput, setCategoryInput] = useState("");
-  const [zipCodeInput, setZipcodeInput] = useState(props.postalCode);
 
   const Router = useRouter();
   const Pathname = usePathname();
   const searchParams = useSearchParams();
   const [urlString,setUrlString] = useState("");
-  const urlParams = new URLSearchParams(searchParams)
+  
   // console.log(urlParams)
   useEffect(() => {
     // if(props?.searchWord){ setSearchInput(props.searchWord); }
     // if(props?.postalCode){ setZipcodeInput(props.postalCode); }
 
   }, [])
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     props.setIsLoding(true);
     
-    if(searchInput) {urlParams.set('key_word',searchInput) }else{ urlParams.delete('key_word') }
+    const urlParams = new URLSearchParams(searchParams)
+
+    if(props.searchWord) { urlParams.set('key_word',props.searchWord) }else{ urlParams.delete('key_word') }
     // setUrlString(urlParams.toString());
     // var urlString2 = urlParams.toString();
     Router.push(Pathname+'?'+urlParams.toString(), { scroll: false })
@@ -34,14 +33,14 @@ const Companyinfo = (props) => {
       // urlParams.set('limit',5)
       // urlParams.set('offset',0)
 
-      
-      if(categoryInput) {urlParams.set('category_id',categoryInput) }else{ urlParams.delete('category_id') }
-      if(zipCodeInput) {urlParams.set('zip_code',zipCodeInput) }else{ urlParams.delete('zip_code') }
+      // if(categoryInput) { urlParams.set('category_id',categoryInput) }else{ urlParams.delete('category_id') }
+      // if(zipCodeInput) {urlParams.set('zip_code',zipCodeInput) }else{ urlParams.delete('zip_code') }
 
 
       urlParams.set('latitude',props.latitude);
       urlParams.set('longitude',props.longitude);
-      // urlParams.set('query',urlParams);
+      urlParams.set('zip_code',props.postalCode)
+      urlParams.set('category_id',props.categoryInput)
       // const vendorResult = await getResponse('vendor?' + urlParams.toString())
       const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlParams.toString()}`,{
             method: 'GET',
@@ -55,11 +54,12 @@ const Companyinfo = (props) => {
         throw new Error('Failed to submit the data. Please try again.')
       }
       var vendorResult = await response.json();
-      props.setVendorData(vendorResult.data)
+      props.setVendorData(vendorResult.data);
       props.setIsLoding(false)
     }
     vendorResponse()
   };
+  
 
 
 
@@ -98,8 +98,8 @@ const Companyinfo = (props) => {
                     <input
                       type="text"
                       className="w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black  pl-2"
-                      value={searchInput}
-                      onChange={(e) => setSearchInput(e.target.value)}
+                      value={props.searchWord}
+                      onChange={(e) => props.setSearch(e.target.value)}
                     />
                     
                   </div>
@@ -113,7 +113,7 @@ const Companyinfo = (props) => {
                   </label>
                   <div className="col-span-7 lg:ml-1">
                     
-                    <select className="w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2" value={categoryInput} onChange={(e) => setCategoryInput(e.target.value)}>
+                    <select className="w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2" value={props.categoryInput} onChange={(e) => props.setCategoryInput(e.target.value)}>
                       <option value="">Select Category</option>
                       {props.categoryData && props.categoryData.map((row,i)=>{
                         return(
@@ -134,8 +134,8 @@ const Companyinfo = (props) => {
                     <input
                       type="text"
                       className="w-full lg:w-20 h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2 "
-                      value={zipCodeInput}
-                      onChange={(e) => setZipcodeInput(e.target.value)}
+                      value={props.postalCode}
+                      onChange={(e) => props.setPostalCode(e.target.value)}
                     />
                   </div>
                 </div>

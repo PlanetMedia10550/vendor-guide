@@ -16,30 +16,38 @@ import axios from 'axios';
 
 const VendorCard = (props) => {
   const {user,renderFieldError,isLoding}  = useAuth();
-  // console.log(user);
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [vendorData, setVendorData] = useState([]);
+// console.log(vendorData);
   const [isLoading, setIsLoding] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
   const [vendorId, setVendorId] = useState(0);
   const searchParams = useSearchParams()
-  const search = searchParams.get('key_word')?searchParams.get('key_word'):""
+  const [search ,setSearch] = useState(searchParams.get('key_word')?searchParams.get('key_word'):"")
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10); // Number of items per page
-  const nPages = Math.ceil(vendorData.length / pageSize);
+  // const nPages = Math.ceil(vendorData.length / pageSize);
+  const nPages = vendorData ? Math.ceil(vendorData.length / pageSize) : 0;
+
+  // const nPages = Math.ceil((vendorData && vendorData.length) ? vendorData.length / pageSize : 0);
 
   const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = Math.min(startIndex + pageSize, vendorData.length);
-  const itemsToDisplay = vendorData.slice(startIndex, endIndex);
+  // const endIndex = Math.min(startIndex + pageSize, vendorData.length);
+  const endIndex = Math.min(startIndex + pageSize, vendorData?.length || 0);
+
+  // const itemsToDisplay = vendorData?.slice(startIndex, endIndex);
+  const itemsToDisplay = vendorData?.slice(startIndex, endIndex) || [];
+
   const [geoLatitude, setGeoLatitude] = useState(props.lat);
   const [geoLongitude, setGeoLongitude] = useState(props.long);
   const [postalCode, setPostalCode] = useState(props.postalCode);
-
   const [categoryData, setCategoryData] = useState([]);
+  const [categoryInput, setCategoryInput] = useState("");
   
 
-  
   const openModal = (id) => {
     setIsModalOpen(true);
     setVendorId(id);
@@ -51,8 +59,6 @@ const VendorCard = (props) => {
 
   
   useEffect(() => {
-
-
 
     const categoriesResult = async () => {
       var response2 = await fetch(`${process.env.BASE_API_URL}category`,{
@@ -81,11 +87,11 @@ const VendorCard = (props) => {
       params.set('latitude',geoLatitude);
       params.set('longitude',geoLongitude);
       params.set('zip_code',postalCode);
-      // params.set('query',params);
-      // params.set('query',params);
 
-      if(search) {params.set('key_word',search) }else{ params.delete('key_word') }
+      if(search) { params.set('key_word',search) }else{ params.delete('key_word') }
+
       var urlString = params.toString();
+
       const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlString}`,{
         method: 'GET',
         headers: {
@@ -101,16 +107,15 @@ const VendorCard = (props) => {
       setIsLoding(false)
       // console.log(totalPage)
     }
-
     bannerResponse();
 
-  }, [search])
+  }, [])
 
 
   
   return (
     <>
-      <Companyinfo searchWord={search} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} locality={props.locality} categoryData={categoryData} />
+      <Companyinfo searchWord={search} setSearch={setSearch} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} setPostalCode={setPostalCode} locality={props.locality} categoryData={categoryData} setCategoryData={setCategoryData} categoryInput={categoryInput} setCategoryInput={setCategoryInput}/>
       
       <div className="contact_search bg-[#f7f9f8]">
         <div className="py-20 pt-8 px-10 md:px-10">
