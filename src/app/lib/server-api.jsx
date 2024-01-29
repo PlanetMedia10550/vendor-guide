@@ -22,7 +22,7 @@ export  async function getVendors() {
 }
 
 export  async function getPages(slug) {
-    const res = await fetch(`${process.env.BASE_API_URL}page/${slug}`, { cache: 'force-cache' })
+    const res = await fetch(`${process.env.BASE_API_URL}page/${slug}`, { cache: 'no-cache' })
     const pageRes = await res.json()
     return pageRes
 }

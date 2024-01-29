@@ -31,7 +31,8 @@ const SearchBar = ({homeMeta}) => {
                     id="default-search"
                     className="block w-full sm:w-80 md:w-[40rem] p-1 sm:p-2 lg:p-3 pl-4 sm:pl-5 md:pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-gray-300 placeholder-text-lg"
                     required
-                    placeholder="Plumbers..."
+                    placeholder="search by category or company name..."
+
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
 

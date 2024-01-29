@@ -74,7 +74,9 @@ const Companyinfo = (props) => {
                 Search Results
               </h1>
               <p className="lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
-                { (props.searchWord) ? `${props.searchWord} in  ${props.locality}` : "" }
+              
+                {props.searchWord && (props.locality ? `${props.searchWord} near ${props.locality}` : props.searchWord)}
+
               </p>
             </div>
           </div>
@@ -92,7 +94,7 @@ const Companyinfo = (props) => {
                     
                     className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20]"
                   >
-                    Company Name
+                    Company/Keyword
                   </label>
                   <div className="col-span-7 lg:ml-3">
                     <input
