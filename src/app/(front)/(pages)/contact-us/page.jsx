@@ -49,6 +49,7 @@ export async function generateMetadata({params}) {
 
 const SlugPages = async ({params}) => {
   const pages = await getPages('contact');
+  console.log(pages)
   const pageMeta = await getPostMeta();
   return (
     <>
