@@ -94,7 +94,6 @@ const Companyinfo = (props) => {
                     
                     className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20]"
                   >
-                    {/* Company Name */}
                     Company/Keyword
                   </label>
                   <div className="col-span-7 lg:ml-3">

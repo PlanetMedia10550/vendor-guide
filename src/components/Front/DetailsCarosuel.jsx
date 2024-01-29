@@ -12,9 +12,6 @@ const DetailsCarosuel = ({filterData}) => {
       const extractedData = vendoreimgedit.map((item, index) => {
         return item.vendorimageview.image_url;
       });
-    
-      // console.log(extractedData);
-
       const customRenderThumb = (children) =>
       children.map((row, index) => (
         <img
