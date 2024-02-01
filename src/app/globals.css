@@ -345,11 +345,12 @@ button.close_button {
 }
 }
 
-/* @media (max-width: 1536px) { 
+ @media (min-width: 1520px) { 
   .product_section{
     padding-top: 30rem;
 }
-} */
+} 
+
 @media (min-width: 1920px) { 
   .product_section {
     padding-top: 32rem !important;

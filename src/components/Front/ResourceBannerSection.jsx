@@ -4,7 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from 'axios';
 import ResourceCarousel from "./ResourceCarousel";
-// import ResourceCarousel from "@components/Front/ResourceCarousel";
+import { Carousel } from 'primereact/carousel';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 
 const ResourceBannerSection = (props) => {
   const [isLoading, setLoading] = useState(true)
@@ -21,6 +24,64 @@ const ResourceBannerSection = (props) => {
     });
   }, [])
 
+ const carouselTemplate = (row, options) => {
+  return (
+    <>
+      {/* {isLoading && ( */}
+        {/*  <div className=" digital_grid  grid grid-cols-5  items-center justify-center gap-x-[0.15rem]  gap-y-5 xl:gap-y-0 py-4 sm:py-6 xl:py-10 "> */}
+        <Link href={`/publication/${row.slug}`}>
+          <div className="">
+            <div className="sm:mt-0 sm:px-7 xl:px-9">
+              <Image
+                src={row.image_url}
+                className="w-full  h-[100%] xl:h-[100%] object-fill"
+                alt="Vendor Guide Logo"
+                width="100"
+                height="100"
+              />
+            </div>
+            <div className="text-center block">
+              <Link
+                href={`/publication/${row.slug}`}
+                className="my-4 xl:my-9 mx-5 xl:mx-8  block px-0  py-1 lg:py-2 text-center rounded-full  bg-[#221F20] xl:text-xl text:lg tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#221F20] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
+              >
+                {row.title}
+              </Link>
+              <p className="xl:text-xl text-lg font-bold text-[#171717b]">
+                {row.short_description}
+              </p>
+              <h2 className="xl:text-xl text-lg font-bold text-[#171717b]">
+                {row.title2}
+              </h2>
+            </div>
+          </div>
+        </Link>
+      {/* )} */}
+      {/* </div> */}
+    </>
+  );
+};
+
+  const owlOptions = {
+    responsive: [
+      {
+        breakpoint: '1024px',
+        numVisible: 5,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 5,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ],
+  };
+  
   return (
     <>
       <div className="image_grid block relative left-0 right-0 bottom-[-2rem] sm:bottom-[121px] lg:bottom-[30px] xl:bottom-[7rem]  2xl:bottom-[12rem] md:px-16 lg:px-8 xl:px-20 px-10">
@@ -32,42 +93,13 @@ const ResourceBannerSection = (props) => {
                 {props.title}
               </h2>
             </div>
-            <div className="hidden lg:block">
-            <div className=" digital_grid  grid grid-cols-5  items-center justify-center gap-x-[0.15rem]  gap-y-5 xl:gap-y-0 py-4 sm:py-6 xl:py-10 ">
-              {isLoading==false && magazineData.map((row, i) => {
-                return (
-                  <Link href={`/publication/${row.slug}`}>
-                    <div  key={i}>
-                      <div className="sm:mt-0 sm:px-7 xl:px-9">
-                        <Image
-                          src={row.image_url}
-                          className="w-full  h-[100%] xl:h-[100%] object-fill"
-                          alt="Vendor Guide Logo"
-                          width="100"
-                          height="100"
-                        />
-                      </div>
-                      <div className="text-center block">
-                        <Link
-                          href={`/publication/${row.slug}`}
-                          className="my-4 xl:my-9 mx-5 xl:mx-8  block px-0  py-1 lg:py-2 text-center rounded-full  bg-[#221F20] xl:text-xl text:lg tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#221F20] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#221F20]"
-                        >
-                          {row.title}
-                        </Link>
-                        <p className="xl:text-xl text-lg font-bold text-[#171717b]">
-                          {row.short_description}
-                        </p>
-                        <h2 className="xl:text-xl text-lg font-bold text-[#171717b]">
-                          {row.title2}
-                        </h2>
-                      </div>
-                    </div>
-                    </Link>
-                );
-              })}
+            <div className="block py-4 sm:py-6 xl:py-10">
+            {!isLoading && (
+              <Carousel showIndicators={false}  value={magazineData} itemTemplate={carouselTemplate} numVisible={5} numScroll={1} responsiveOptions={owlOptions.responsive} circular={true}/>
+            )}
             </div>
             </div>
-            <div className="block lg:hidden px-4 py-4">
+            <div className="hidden px-4 py-4">
               <div className="flex gap-6  overflow-x-auto whitespace-nowrap">
             {isLoading==false && magazineData.map((row, i) => {
                 return (
@@ -102,9 +134,11 @@ const ResourceBannerSection = (props) => {
             </div>
           </div>
         </div>
-      </div>
+
     </>
   );
 };
 
 export default ResourceBannerSection;
+
+

@@ -1,11 +1,27 @@
 /** @type {import('next').NextConfig} */
+
+// const webpack = require("webpack");
+
 const nextConfig = {
     // output: 'export',
+
+
     images: {
         unoptimized: true 
     },
     // dynamicParams: false,
     reactStrictMode: false,
+   
+  //   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) =>
+  //    {
+  //     config.plugins.push(
+  //      new webpack.ProvidePlugin({
+  //      $: 'jquery',
+  //      jQuery: 'jquery',
+  //      'window.jQuery': 'jquery',
+  //   }));
+  //  return config;},
+  
     swcMinify: true,
     env: {
       BASE_API_URL: 'https://demo.vendorguideusa.com/api/',
@@ -70,6 +86,10 @@ const nextConfig = {
         },
       ];
     },
+
+
+
+
     
 }
 

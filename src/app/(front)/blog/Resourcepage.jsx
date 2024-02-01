@@ -10,7 +10,7 @@ const Resourcespage = ({bannerContent}) => {
      
       <TopBanner
         resourceMeta = {bannerContent}/>
-      <div className="pt-[31rem] product_section sm:pt-[21rem] md:pt-[18rem] lg:pt-64 xl:pt-[25rem] 2xl:pt-[25rem]">
+      <div className="pt-[34rem] product_section sm:pt-[21rem] md:pt-[18rem] lg:pt-[19rem] xl:pt-[26rem] 2xl:pt-[24rem]">
         <ResourceListCards title="Read Our Latest Blogs" />
 
         {/* <Pagination /> */}

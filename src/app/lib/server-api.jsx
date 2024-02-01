@@ -43,3 +43,9 @@ export  async function getMagazineData(slug) {
     const magazineDataRes = await res.json()
     return magazineDataRes
 }
+
+export  async function getMagazineAllData() {
+    const res = await fetch(`${process.env.BASE_API_URL}magazine`, { cache: 'force-cache' })
+    const magazineAllDataRes = await res.json()
+    return magazineAllDataRes
+}
