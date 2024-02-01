@@ -27,7 +27,7 @@ const TopBanner = ({resourceMeta}) => {
               </div>
             </div>
           </div>
-          <ResourceBannerSection title="Exolore Our Digital Magazine Editions" />
+          <ResourceBannerSection title={"Exolore Our Digital Magazine Editions"}/>
         </div>
       </div>
     </>

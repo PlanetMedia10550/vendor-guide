@@ -1,5 +1,5 @@
 import Resourcespage from "./Resourcepage";
-import { getPostMeta } from "@/app/lib/server-api";
+import { getPostMeta,getMagazineAllData } from "@/app/lib/server-api";
 // or Dynamic metadata
 export async function generateMetadata({params}) {
   const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/resources`).then((res) => res.json());
@@ -44,6 +44,7 @@ export async function generateMetadata({params}) {
 
 export default async function Page({params}){
   const pageMeta = await getPostMeta();
+  const magazineAllData = await getMagazineAllData();
   return (
     <Resourcespage bannerContent={pageMeta?.data.resources}/>
   );

@@ -153,6 +153,9 @@ const VendorCard = (props) => {
                             {row.distance  && ( 
                             <h3 className="text-black font-semibold text-xs">Distance: {row.distance.toFixed(2)} km</h3>
                             )}
+                            {row.level?.title  && ( 
+                            <h4 className="text-black font-semibold text-xs">{row.level?.title}</h4>
+                            )}
                             <p className="text-black font-bold  mb-2 pt-5">{row.mobile}</p>
                             {row.short_description ? (
                                 <p className="text-gray-400 font-normal text-sm whitespace-nowrap text-ellipsis overflow-hidden" dangerouslySetInnerHTML={{ __html: row.short_description }} />

@@ -53,7 +53,7 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
   useEffect(() => {
     const pageFlip = new PageFlip(bookRef.current, {
       width: 550,
-      height: 500,
+      height: 733,
       size: "stretch",
       minWidth: 315,
       maxWidth: 1000,
@@ -79,27 +79,31 @@ const PageFlipComponent = ({slug,bannerContent,magazineData}) => {
       trackPublication();
     });
 
+    const pageFlipElement = document.querySelector(".page-current");
+    if(pageFlipElement){
     pageFlip.on("flip", (e) => {
       const currentIndex = e.data + 1; // e.data is 0-based index
       setCurrentPageIndex(currentIndex);
-      document.querySelector(".page-current").innerText = e.data + 1;
+      pageFlipElement.innerText = e.data + 1;
     });
-
+    }
     // pageFlip.on("changeState", (e) => {
     //   document.querySelector(`.${filpcss['page-state']}`).innerText = e.data;
     // });
+
     const pageStateElement = document.querySelector(`.${filpcss['page-state']}`);
-    if (pageStateElement) {
+    if(pageStateElement) {
       pageFlip.on("changeState", (e) => {
         pageStateElement.innerText = e.data;
       });
     }
 
-
+ const pageChangeOrientationElement = document.querySelector(`.${filpcss['page-orientation']}`);
+ if(pageChangeOrientationElement) {
     pageFlip.on("changeOrientation", (e) => {
-      document.querySelector(`.${filpcss['page-orientation']}`).innerText = e.data;
+      pageChangeOrientationElement.innerText = e.data;
     });
-
+  }
     // return () => {
     //   document.querySelector(".btn-prev").removeEventListener("click", pageFlip.flipPrev);
     //   document.querySelector(".btn-next").removeEventListener("click", pageFlip.flipNext);
