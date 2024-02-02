@@ -11,53 +11,12 @@ const Companyinfo = (props) => {
   const searchParams = useSearchParams();
   const [urlString,setUrlString] = useState("");
   
-  // console.log(urlParams)
-  useEffect(() => {
-    // if(props?.searchWord){ setSearchInput(props.searchWord); }
-    // if(props?.postalCode){ setZipcodeInput(props.postalCode); }
-
-  }, [])
   const handleSearch = async (e) => {
     e.preventDefault();
     props.setIsLoding(true);
     
-    const urlParams = new URLSearchParams(searchParams)
-
-    if(props.searchWord) { urlParams.set('key_word',props.searchWord) }else{ urlParams.delete('key_word') }
-    // setUrlString(urlParams.toString());
-    // var urlString2 = urlParams.toString();
-    Router.push(Pathname+'?'+urlParams.toString(), { scroll: false })
-    
-    const vendorResponse = async () => {
-      // params.setIsLoding(true)
-      // urlParams.set('limit',5)
-      // urlParams.set('offset',0)
-
-      // if(categoryInput) { urlParams.set('category_id',categoryInput) }else{ urlParams.delete('category_id') }
-      // if(zipCodeInput) {urlParams.set('zip_code',zipCodeInput) }else{ urlParams.delete('zip_code') }
-
-
-      urlParams.set('latitude',props.latitude);
-      urlParams.set('longitude',props.longitude);
-      urlParams.set('zip_code',props.postalCode)
-      urlParams.set('category_id',props.categoryInput)
-      // const vendorResult = await getResponse('vendor?' + urlParams.toString())
-      const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlParams.toString()}`,{
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${getCookie('token')}`
-            },
-            
-        })
-
-      if (!response.ok) {
-        throw new Error('Failed to submit the data. Please try again.')
-      }
-      var vendorResult = await response.json();
-      props.setVendorData(vendorResult.data);
-      props.setIsLoding(false)
-    }
-    vendorResponse()
+    // vendorResponse()
+    props.bannerResponse();
   };
   
 

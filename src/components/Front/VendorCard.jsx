@@ -47,6 +47,7 @@ const VendorCard = (props) => {
   const [categoryData, setCategoryData] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
   
+  const params = new URLSearchParams()
 
   const openModal = (id) => {
     setIsModalOpen(true);
@@ -57,6 +58,34 @@ const VendorCard = (props) => {
     setIsModalOpen(false);
   };
 
+  async function bannerResponse(){
+      
+    // params.set('limit',pageSize)
+    // params.set('offset',0)
+    params.set('latitude',geoLatitude);
+    params.set('longitude',geoLongitude);
+    params.set('zip_code',postalCode);
+    params.set('category_id',categoryInput);
+
+    if(search) { params.set('key_word',search) }else{ params.delete('key_word') }
+
+    var urlString = params.toString();
+
+    const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlString}`,{
+      method: 'GET',
+      headers: {
+          'Authorization': `Bearer ${getCookie('token')}`
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error('Failed to submit the data. Please try again.')
+    }
+    var vendorResult = await response.json();
+    setVendorData(vendorResult.data)
+    setIsLoding(false)
+    // console.log(totalPage)
+  }
   
   useEffect(() => {
 
@@ -78,35 +107,9 @@ const VendorCard = (props) => {
     }
     categoriesResult();
     
-    const params = new URLSearchParams()
+    
 
-    const bannerResponse = async () => {
-      
-      // params.set('limit',pageSize)
-      // params.set('offset',0)
-      params.set('latitude',geoLatitude);
-      params.set('longitude',geoLongitude);
-      params.set('zip_code',postalCode);
-
-      if(search) { params.set('key_word',search) }else{ params.delete('key_word') }
-
-      var urlString = params.toString();
-
-      const response = await fetch(`${process.env.BASE_API_URL}vendor?${urlString}`,{
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${getCookie('token')}`
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to submit the data. Please try again.')
-      }
-      var vendorResult = await response.json();
-      setVendorData(vendorResult.data)
-      setIsLoding(false)
-      // console.log(totalPage)
-    }
+    
     bannerResponse();
 
   }, [])
@@ -115,7 +118,7 @@ const VendorCard = (props) => {
   
   return (
     <>
-      <Companyinfo searchWord={search} setSearch={setSearch} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} setPostalCode={setPostalCode} locality={props.locality} categoryData={categoryData} setCategoryData={setCategoryData} categoryInput={categoryInput} setCategoryInput={setCategoryInput}/>
+      <Companyinfo searchWord={search} setSearch={setSearch} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} setPostalCode={setPostalCode} locality={props.locality} categoryData={categoryData} setCategoryData={setCategoryData} categoryInput={categoryInput} setCategoryInput={setCategoryInput} bannerResponse={bannerResponse}/>
       
       <div className="contact_search bg-[#f7f9f8]">
         <div className="py-20 pt-8 px-10 md:px-10">
