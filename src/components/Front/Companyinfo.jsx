@@ -84,6 +84,26 @@ const Companyinfo = (props) => {
                     </select>
                   </div>
                 </div>
+                <div className="grid grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-4">
+                  <label
+                    
+                    className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20] "
+                  >
+                    State
+                  </label>
+                  <div className="col-span-7 lg:ml-1">
+                    
+                    <select className="w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2" value={props.stateInput} onChange={(e) => props.setStateInput(e.target.value)}>
+                      <option value="">Select State</option>
+                      {props.stateData && props.stateData.map((row,i)=>{
+                        return(
+                          <option key={i} value={row.id}>{row.name}</option>
+                        )
+                      })}
+                    </select>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-12  items-center lg:pl-0 lg:mb-0 mb-4">
                   <label
                     

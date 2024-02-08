@@ -45,8 +45,10 @@ const VendorCard = (props) => {
   const [geoLongitude, setGeoLongitude] = useState(props.long);
   const [postalCode, setPostalCode] = useState(props.postalCode);
   const [categoryData, setCategoryData] = useState([]);
+  const [stateData, setStateData] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
-  
+  const [stateInput, setStateInput] = useState("");
+console.log(stateInput)
   const params = new URLSearchParams()
 
   const openModal = (id) => {
@@ -66,6 +68,7 @@ const VendorCard = (props) => {
     params.set('longitude',geoLongitude);
     params.set('zip_code',postalCode);
     params.set('category_id',categoryInput);
+    params.set('state_id',stateInput);
 
     if(search) { params.set('key_word',search) }else{ params.delete('key_word') }
 
@@ -106,10 +109,28 @@ const VendorCard = (props) => {
       // console.log(vendorResult)
     }
     categoriesResult();
-    
-    
+    bannerResponse();
+  }, [])
 
+  useEffect(() => {
+    const statesResult = async () => {
+      var response3 = await fetch(`${process.env.BASE_API_URL}state`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${getCookie('token')}`
+        },
+          
+      })
+
+      if (!response3.ok) {
+      throw new Error('Failed to submit the data. Please try again.')
+      }
+      var stateResult = await response3.json();
+      setStateData(stateResult.data)
+      
     
+    }
+    statesResult();
     bannerResponse();
 
   }, [])
@@ -118,7 +139,7 @@ const VendorCard = (props) => {
   
   return (
     <>
-      <Companyinfo searchWord={search} setSearch={setSearch} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} setPostalCode={setPostalCode} locality={props.locality} categoryData={categoryData} setCategoryData={setCategoryData} categoryInput={categoryInput} setCategoryInput={setCategoryInput} bannerResponse={bannerResponse}/>
+      <Companyinfo searchWord={search} setSearch={setSearch} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} setPostalCode={setPostalCode} locality={props.locality} categoryData={categoryData} setCategoryData={setCategoryData}  categoryInput={categoryInput} setCategoryInput={setCategoryInput} bannerResponse={bannerResponse} stateData={stateData} setStateData={setStateData} stateInput={stateInput} setStateInput={setStateInput}/>
       
       <div className="contact_search bg-[#f7f9f8]">
         <div className="py-20 pt-8 px-10 md:px-10">
@@ -153,15 +174,15 @@ const VendorCard = (props) => {
                                   {row.name}
                               </h3>
                             </Link>
-                            {row.distance  && ( 
-                            <h3 className="text-black font-semibold text-xs">Distance: {row.distance.toFixed(2)} km</h3>
+                            {row.distanceMile  && ( 
+                            <h3 className="text-black font-semibold text-xs">Distance: {row.distanceMile.toFixed(2)} mile</h3>
                             )}
                             
                              {row.level?.title  && ( 
                             <span class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10 mt-3">{row.level?.title}</span>
                             )}
-                            <p className="text-black font-bold  mb-2 pt-3">{row.mobile}</p>
-
+                            <p className="text-black font-bold my-2">{row.mobile}</p>
+                            <p className="text-black font-bold my-2 text-green-700">{row.city}</p>
                             {row.short_description ? (
                                 <p className="text-gray-400 font-normal text-sm whitespace-nowrap text-ellipsis overflow-hidden" dangerouslySetInnerHTML={{ __html: row.short_description }} />
                               ) : (
