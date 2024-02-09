@@ -182,9 +182,13 @@ console.log(stateInput)
                             <span class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10 mt-3">{row.level?.title}</span>
                             )}
                             <p className="text-black font-bold my-2">{row.mobile}</p>
+                            {row.city ? (
                             <p className="text-black font-bold my-2 text-green-700">{row.city}</p>
+                            ):(
+                              <p className="my-2" style={{ height: "1.3rem" }}></p>
+                            )}
                             {row.short_description ? (
-                                <p className="text-gray-400 font-normal text-sm whitespace-nowrap text-ellipsis overflow-hidden" dangerouslySetInnerHTML={{ __html: row.short_description }} />
+                                <p className="text-gray-400 font-normal text-sm whitespace-wrap  overflow-ellipsis line-clamp-3" dangerouslySetInnerHTML={{ __html: row.short_description }} />
                               ) : (
                                 // Apply styles for when short_description is not accessible
                                 <div style={{ height: "1.3rem" }}></div>

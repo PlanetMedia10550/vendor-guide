@@ -114,6 +114,7 @@ const Companyinfo = (props) => {
                   <div className="col-span-7 lg:ml-4">
                     <input
                       type="text"
+                      readOnly
                       className="w-full lg:w-20 h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2 "
                       value={props.postalCode}
                       onChange={(e) => props.setPostalCode(e.target.value)}
