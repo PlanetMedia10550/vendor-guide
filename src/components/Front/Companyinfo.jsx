@@ -47,7 +47,7 @@ const Companyinfo = (props) => {
               <p className="font-bold text-white">Advanced Search</p>
             </div>
             <div className="bg-white px-4 py-6 lg:py-3 rounded-xl lg:rounded-none">
-              <form className="lg:flex gap-8 text-sm lg:pr-[0.1rem] xl:pr-[1.1rem] pr-4" onSubmit={handleSearch}>
+              <form className="lg:flex gap-5 text-sm lg:pr-[0.1rem] xl:pr-[1.1rem] pr-4" onSubmit={handleSearch}>
                 <div className="grid grid-cols-12  items-center  lg:mb-0 mb-4">
                   <label
                     
@@ -68,7 +68,7 @@ const Companyinfo = (props) => {
                 <div className="grid grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-4">
                   <label
                     
-                    className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20] "
+                    className="col-span-3 font-bold xl:text-sm text-sm text-[#221F20] "
                   >
                     Category
                   </label>
@@ -87,7 +87,7 @@ const Companyinfo = (props) => {
                 <div className="grid grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-4">
                   <label
                     
-                    className="col-span-5 font-bold xl:text-sm text-sm text-[#221F20] "
+                    className="col-span-2 font-bold xl:text-sm text-sm text-[#221F20] "
                   >
                     State
                   </label>
