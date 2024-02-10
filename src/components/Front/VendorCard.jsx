@@ -40,7 +40,7 @@ const VendorCard = (props) => {
 
   // const itemsToDisplay = vendorData?.slice(startIndex, endIndex);
   const itemsToDisplay = vendorData?.slice(startIndex, endIndex) || [];
-
+  
   const [geoLatitude, setGeoLatitude] = useState(props.lat);
   const [geoLongitude, setGeoLongitude] = useState(props.long);
   const [postalCode, setPostalCode] = useState(props.postalCode);
@@ -48,7 +48,7 @@ const VendorCard = (props) => {
   const [stateData, setStateData] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
   const [stateInput, setStateInput] = useState("");
-console.log(stateInput)
+
   const params = new URLSearchParams()
 
   const openModal = (id) => {
@@ -152,6 +152,7 @@ console.log(stateInput)
               <div className="grid_system grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  xl:grid-cols-5 2xl:grid-cols-5 gap-6  xl:gap-8 items-center" >
               {itemsToDisplay.length>0 && itemsToDisplay.map((row, index) => {
                 return (
+                  <>
                   
                     <div className="h-full" key={index}>
                       <div className="card mb-0 bg-white px-3 shadow h-full relative">
@@ -174,24 +175,30 @@ console.log(stateInput)
                                   {row.name}
                               </h3>
                             </Link>
-                            {row.distanceMile  && ( 
+                            {/* {row.distanceMile  && ( 
                             <h3 className="text-black font-semibold text-xs">Distance: {row.distanceMile.toFixed(2)} mile</h3>
+                            )} */}
+                            
+                             {/* {row.level?.title  && ( 
+                            <span class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10 mt-3">{row.level?.title}</span>
+                            )} */}
+
+                            {row.mobile ? (
+                              <p className="text-black font-bold my-2">{row.mobile}</p>
+                            ):(
+                              <p className="text-black font-bold my-2" style={{ height: "1.5rem" }}></p>
                             )}
                             
-                             {row.level?.title  && ( 
-                            <span class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10 mt-3">{row.level?.title}</span>
-                            )}
-                            <p className="text-black font-bold my-2">{row.mobile}</p>
                             {row.city ? (
                             <p className="text-black font-bold my-2 text-green-700">{row.city}</p>
                             ):(
                               <p className="my-2" style={{ height: "1.3rem" }}></p>
                             )}
-                            {row.short_description ? (
-                                <p className="text-gray-400 font-normal text-sm whitespace-wrap  overflow-ellipsis line-clamp-3" dangerouslySetInnerHTML={{ __html: row.short_description }} />
+                            {row.description ? (
+                                <p className="text-gray-400 font-normal text-sm whitespace-wrap  overflow-ellipsis line-clamp-3" dangerouslySetInnerHTML={{ __html: row.description }} />
                               ) : (
                                 // Apply styles for when short_description is not accessible
-                                <div style={{ height: "1.3rem" }}></div>
+                                <div style={{ height: "3.9rem" }}></div>
                               )}
                           </div>
                           <div
@@ -221,7 +228,7 @@ console.log(stateInput)
                         </div>
                       </div>
                     </div>
-                  
+                    </>
                 );
               })}
               </div>
