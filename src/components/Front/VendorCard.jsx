@@ -79,6 +79,7 @@ const VendorCard = (props) => {
       headers: {
           'Authorization': `Bearer ${getCookie('token')}`
       },
+      cache: 'no-cache'
     })
 
     if (!response.ok) {
@@ -214,7 +215,7 @@ const VendorCard = (props) => {
                                   Learn More
                                 </Link>
                               </div>
-                              <div className="sm:mt-0  mt-5">
+                              <div className="">
                                 <Link
                                   href=""
                                   className="rounded-[0.7rem] md:inline-block px-3.5 py-1 2xl:text-sm xl:text-[0.66rem] text-sm border-solid border-[1px] border-black font-extrabold text-black shadow-sm hover:bg-[#B13634 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
