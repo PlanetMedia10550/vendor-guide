@@ -16,7 +16,7 @@ export async function getBlogs() {
 }
   
 export  async function getVendors() {
-    const res = await fetch(`${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`, { cache: 'force-cache' })
+    const res = await fetch(`${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`, { cache: 'no-cache' })
     const vendorRes = await res.json()
     return vendorRes
 }

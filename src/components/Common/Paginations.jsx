@@ -33,9 +33,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
         <Link
           href="#"
           onClick={(e) => { e.preventDefault(); setCurrentPage(currentPage - 1) }}
-          className={`${
-            currentPage === 1 ? 'hidden' : ''
-          } relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50`}
+          className={`relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50`}
         >
           <span className="mr-2">
             <FontAwesomeIcon icon={faAngleLeft} />

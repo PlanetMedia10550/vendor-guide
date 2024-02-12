@@ -343,6 +343,10 @@ button.close_button {
   width: 2rem;
   height: 2rem;
 }
+.company_search {
+  display: block !important;
+}
+
 }
 
  @media (min-width: 1520px) { 
@@ -361,5 +365,12 @@ button.close_button {
 .blogimage_content h2 {
   font-size: 2rem;
   line-height: 4rem;
+}
+}
+
+@media (max-width: 991px) {
+.company_search {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
 }
 }
