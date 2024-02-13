@@ -25,7 +25,7 @@ const DetailsCarosuel = ({filterData}) => {
       ));
     
   return (
-    <div className="relative h-full">
+    <div className="relative h-full vendor_detail_carousel">
        {extractedData.length > 1 && (
           <button className="custom-prev-button">
             <FontAwesomeIcon icon={faAngleLeft} />
@@ -46,7 +46,7 @@ const DetailsCarosuel = ({filterData}) => {
                 <Image
                   src={item}
                   alt={`Image of ${item}`}
-                  className="h-full w-full object-fill"
+                  className="h-full w-full object-cover"
                   width="100"
                   height="100"
                 />
@@ -61,7 +61,7 @@ const DetailsCarosuel = ({filterData}) => {
             <Image
               src="/images&icons/search_result/planetmedia.jpg"
               alt="Default Image"
-              className="h-full w-full object-fill"
+              className="h-full w-full object-cover"
               width="100"
               height="100"
             />
