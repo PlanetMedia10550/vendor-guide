@@ -27,7 +27,7 @@ export  async function getPages(slug) {
     return pageRes
 }
 export async function getPostMeta() {
-    const res = await fetch(`${process.env.BASE_API_URL}post-meta`, { cache: 'no-cache' })
+    const res = await fetch(`${process.env.BASE_API_URL}post-meta`, { cache: 'force-cache' })
     const pageMetaRes = await res.json()
     return pageMetaRes
 }
