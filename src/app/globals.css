@@ -97,6 +97,13 @@ box-shadow: 0px 1px 12px #575757;
 input[type="range"] {
 accent-color: #151515;
 }
+.vendor_detail_carousel .carousel .slide {
+  max-height: 400px !important;
+}
+.vendor_detail_carousel .carousel .thumb{
+  width:120px !important;
+}
+
 @media (max-width: 1023px){
 div#mobile-menu-2 {
   position: fixed;
