@@ -120,7 +120,7 @@ const AdvertiseTable = ({user}) => {
             <td className="sign_btn pt-8 md:px-0 py-3.5 border-collapse">
               <Link
                 href={user?`/plan/${slug}`:'register?guest=1'}
-                className="text-center flex-none rounded-md bg-[#B13634] px-4 md:px-11 py-3 md:py-4 text-base md:text-xl text-sm tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B13634]"
+                className=" whitespace-nowrap text-center flex-none rounded-md bg-[#B13634] px-4 md:px-11 py-3 md:py-4 text-base md:text-xl text-sm tracking-wide font-medium font-lato text-white shadow-sm hover:bg-[#B13634] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B13634]"
               >
                 Sign Up Today
               </Link>
