@@ -1,5 +1,5 @@
 "use client";
-import TopBarImage from "public/images&icons/advertise/banner1.jpg";
+import TopBarImage from "/public/images&icons/advertise/banner1.jpg";
 import FeaturSection2 from "@/components/Front/FeaturSection2";
 import AdvertiseTable from "@/components/Front/AdvertiseTable";
 import Link from "next/link";

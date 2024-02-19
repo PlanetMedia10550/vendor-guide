@@ -3,6 +3,8 @@ import { useState,useEffect } from "react";
 import { Label } from "reactstrap";
 import { getResponse } from "@/app/lib/load-api";
 import { getCookie } from "cookies-next";
+import AddressAutocomplete from "./AddressAutocompleteFront";
+
 
 const Companyinfo = (props) => {
 
@@ -88,7 +90,10 @@ const Companyinfo = (props) => {
                     </select>
                   </div>
                 </div>
-                <div className="grid xl:grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-3 company_search">
+
+
+                
+                {/* <div className="grid xl:grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-3 company_search">
                   <div className="xl:col-span-3 lg:text-center xl:mb-0 mb-1">
                   <label
                     
@@ -108,7 +113,7 @@ const Companyinfo = (props) => {
                       })}
                     </select>
                   </div>
-                </div>
+                </div>*/}
 
                 <div className="grid xl:grid-cols-12  items-center lg:pl-0 lg:mb-0 mb-5 company_search">
                   <div className="xl:col-span-5 lg:text-center xl:mb-0 mb-1">
@@ -116,19 +121,24 @@ const Companyinfo = (props) => {
                     
                     className=" font-bold xl:text-sm lg:text-sm text-base text-[#221F20]"
                   >
-                    Zip Code 
+                    Area 
                   </label>
                   </div>
-                  <div className="xl:col-span-7 lg:ml-4">
-                    <input
+                  <div className="xl:col-span-7 lg:ml-4 items-center">
+                    <AddressAutocomplete val={props.val} setGeoLatitude={props.setGeoLatitude}  setGeoLongitude={props.setGeoLongitude}
+                    setStateInput={props.setStateInput} setPostalCode={props.setPostalCode} bannerResponse={props.bannerResponse} setLocality={props.setLocality}/>
+          
+                    {/* <input
                       type="text"
-                      readOnly
+                      
                       className=" w-full xl:w-20  lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2 "
                       value={props.postalCode}
                       onChange={(e) => props.setPostalCode(e.target.value)}
-                    />
+                    /> */}
                   </div>
-                </div>
+                </div> 
+
+       
                 <div className="pl-4 flex items-center lg:justify-start justify-center" role="group ">
                   <div className="flex text-left justify-end gap-x-6">
                     
