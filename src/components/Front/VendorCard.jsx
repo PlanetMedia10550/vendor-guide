@@ -40,10 +40,10 @@ const VendorCard = (props) => {
 
   // const itemsToDisplay = vendorData?.slice(startIndex, endIndex);
   const itemsToDisplay = vendorData?.slice(startIndex, endIndex) || [];
-  
+
   const [geoLatitude, setGeoLatitude] = useState(props.lat);
   const [geoLongitude, setGeoLongitude] = useState(props.long);
-  const [postalCode, setPostalCode] = useState(props.postalCode);
+  const [postalCode, setPostalCode] = useState(`${props.postalCode}`);
   const [categoryData, setCategoryData] = useState([]);
   const [stateData, setStateData] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");

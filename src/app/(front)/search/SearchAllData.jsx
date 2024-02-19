@@ -17,6 +17,7 @@ const SearchAllData = () => {
 
   const searchParams = useSearchParams()
   const search = searchParams.get('key_word')?searchParams.get('key_word'):""
+
   useEffect(() => {
     if(!getCookie('token')){
       if (typeof window !== 'undefined') {
@@ -44,13 +45,14 @@ const SearchAllData = () => {
           // Loop through address components to find postal code
           const addressComponents = resLoc.results[0].address_components;
 
-          setDefaultinputvalue((addressComponents)? `${addressComponents[0].long_name} ${addressComponents[1].long_name}${addressComponents[2].long_name} ${addressComponents[3].long_name}`:'')
-          let postalCode2;
+          setDefaultinputvalue((addressComponents)? `${addressComponents[1].long_name}, ${addressComponents[2].long_name} ${addressComponents[0].long_name}, ${addressComponents[3].long_name}`:'')
+          var postalCode2;
           let state;
           for (const component of addressComponents) {
             // Check if the component has "postal_code" in its types
             if (component.types.includes('postal_code')) {
               postalCode2 = component.short_name;
+              setPostalCode(component.short_name)
               
               //break; // Stop the loop once postal code is found
             }
@@ -63,10 +65,11 @@ const SearchAllData = () => {
               break;
             }
           }
-          setPostalCode(postalCode2);
+
+          
           setLocality(state);
           setIsLoding(false);
-          // console.log(postalCode)
+          setPostalCode(postalCode2);
         }else{
           setIsLoding(false);
         } 
@@ -111,7 +114,10 @@ const SearchAllData = () => {
           </div>
       </div>
       </>
-      :<VendorCard val={defaultinputvalue} lat={geoLatitude} long={geoLongitude} postalCode={postalCode} locality={locality} setLocality={setLocality} />
+      :<VendorCard val={defaultinputvalue} lat={geoLatitude} 
+      long={geoLongitude} postalCode={postalCode} 
+      setPostalCode={setPostalCode} 
+      locality={locality} setLocality={setLocality} />
       }
       
     </>
