@@ -13,6 +13,8 @@ const SearchAllData = () => {
   const [postalCode, setPostalCode] = useState("");
   const [locality, setLocality] = useState("");
   const [isLoading, setIsLoding] = useState(true);
+  const [defaultinputvalue, setDefaultinputvalue] = useState();
+
   const searchParams = useSearchParams()
   const search = searchParams.get('key_word')?searchParams.get('key_word'):""
   useEffect(() => {
@@ -21,7 +23,6 @@ const SearchAllData = () => {
         if('geolocation' in navigator) {
           // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
           navigator.geolocation.getCurrentPosition(({ coords }) => {
-            // console.log(coords)
             // return coords;
               const { latitude, longitude } = coords;
               
@@ -42,9 +43,10 @@ const SearchAllData = () => {
         if (resLoc.results && resLoc.results.length > 0) {
           // Loop through address components to find postal code
           const addressComponents = resLoc.results[0].address_components;
+
+          setDefaultinputvalue((addressComponents)? `${addressComponents[0].long_name} ${addressComponents[1].long_name}${addressComponents[2].long_name} ${addressComponents[3].long_name}`:'')
           let postalCode2;
           let state;
-    
           for (const component of addressComponents) {
             // Check if the component has "postal_code" in its types
             if (component.types.includes('postal_code')) {
@@ -109,7 +111,7 @@ const SearchAllData = () => {
           </div>
       </div>
       </>
-      :<VendorCard lat={geoLatitude} long={geoLongitude} postalCode={postalCode} locality={locality} />
+      :<VendorCard val={defaultinputvalue} lat={geoLatitude} long={geoLongitude} postalCode={postalCode} locality={locality} setLocality={setLocality} />
       }
       
     </>

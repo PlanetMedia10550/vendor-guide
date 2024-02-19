@@ -88,7 +88,6 @@ const VendorCard = (props) => {
     var vendorResult = await response.json();
     setVendorData(vendorResult.data)
     setIsLoding(false)
-    // console.log(totalPage)
   }
   
   useEffect(() => {
@@ -101,7 +100,8 @@ const VendorCard = (props) => {
         },
           
       })
-  
+      
+
       if (!response2.ok) {
       throw new Error('Failed to submit the data. Please try again.')
       }
@@ -140,7 +140,19 @@ const VendorCard = (props) => {
   
   return (
     <>
-      <Companyinfo searchWord={search} setSearch={setSearch} setIsLoding={setIsLoding} setVendorData={setVendorData} latitude={geoLatitude} longitude={geoLongitude} postalCode={postalCode} setPostalCode={setPostalCode} locality={props.locality} categoryData={categoryData} setCategoryData={setCategoryData}  categoryInput={categoryInput} setCategoryInput={setCategoryInput} bannerResponse={bannerResponse} stateData={stateData} setStateData={setStateData} stateInput={stateInput} setStateInput={setStateInput}/>
+      <Companyinfo val={props.val} searchWord={search} 
+      setSearch={setSearch} setIsLoding={setIsLoding} 
+      setVendorData={setVendorData} latitude={geoLatitude} 
+      longitude={geoLongitude} postalCode={postalCode} 
+      setPostalCode={setPostalCode} locality={props.locality} 
+      categoryData={categoryData} setCategoryData={setCategoryData}  
+      categoryInput={categoryInput} setCategoryInput={setCategoryInput} 
+      bannerResponse={bannerResponse} stateData={stateData} 
+      setStateData={setStateData} stateInput={stateInput} 
+      setStateInput={setStateInput} setGeoLatitude={setGeoLatitude} 
+      setGeoLongitude={setGeoLongitude}
+      setLocality={props.setLocality}
+      />
       
       <div className="contact_search bg-[#f7f9f8]">
         <div className="py-20 pt-8 px-10 md:px-10">
