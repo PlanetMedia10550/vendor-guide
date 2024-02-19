@@ -34,121 +34,98 @@ const Companyinfo = (props) => {
               <h1 className="xl:text-5xl  lg:text-4xl text-3xl font-bold tracking-tight text-[#221F20] md:text-4xl">
                 Search Results
               </h1>
-              <p className="d-block lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
-              
-                {props.searchWord && (props.locality ? `${props.searchWord} near ${props.locality}` : props.searchWord)}
 
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="text-sm text-center">Latitude: {props.latitude}, Longitude: {props.longitude}</div>
-        <div className="lg:flex md:block justify-center  px-10 sm:px-20 md:px-28 lg:px-8 xl:px-12 text-sm items-center">
-          <div className="lg:flex xl:text-sm text-xs items-center ">
-            <div className="px-4 py-3 bg-black w-[10rem] mx-auto lg:mx-0 mb-4 lg:mb-0">
-              <p className="font-bold text-white">Advanced Search</p>
-            </div>
-            <div className="bg-white px-4 py-6 lg:py-3 rounded-xl lg:rounded-none">
-              <form className="lg:flex gap-5 text-sm lg:pr-[0.1rem] xl:pr-[1.1rem] pr-4" onSubmit={handleSearch}>
-                <div className="grid xl:grid-cols-12  items-center  lg:mb-0 mb-3 company_search">
-                  <div className="xl:col-span-6 lg:text-center  xl:mb-0 mb-1">
-                  <label
-                    
-                    className=" font-bold xl:text-sm md:text-sm text-base text-[#221F20]"
-                  >
-                    Company/Keyword
-                  </label>
-                  </div>
-                  <div className="xl:col-span-6 xl:ml-3 lg:ml-1">
-                    <input
-                      type="text"
-                      className="w-full  xl:w-[9rem] lg:w-[10rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black  pl-2"
-                      value={props.searchWord}
-                      onChange={(e) => props.setSearch(e.target.value)}
-                    />
-                    
-                  </div>
-                </div>
-                <div className="grid xl:grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-3 company_search">
-                <div className="xl:col-span-5 lg:text-center xl:mb-0 mb-1">
-                  <label
-                    
-                    className=" font-bold xl:text-sm lg:text-sm text-base text-[#221F20] "
-                  >
-                    Category
-                  </label>
-                </div>
-                  <div className="xl:col-span-7 lg:ml-1">
-                    
-                    <select className=" w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2" value={props.categoryInput} onChange={(e) => props.setCategoryInput(e.target.value)}>
-                      <option value="">Select Category</option>
-                      {props.categoryData && props.categoryData.map((row,i)=>{
-                        return(
-                          <option key={i} value={row.id}>{row.title}</option>
-                        )
-                      })}
-                    </select>
-                  </div>
-                </div>
-
-
+              <p class="d-block lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
+              {props.searchWord && (props.locality ? `${props.searchWord} near ${props.locality}` : props.searchWord)}
                 
-                {/* <div className="grid xl:grid-cols-12 items-center lg:pl-0 lg:mb-0 mb-3 company_search">
-                  <div className="xl:col-span-3 lg:text-center xl:mb-0 mb-1">
-                  <label
-                    
-                    className=" font-bold xl:text-sm lg:text-sm text-base text-[#221F20] "
-                  >
-                    State
-                  </label>
-                  </div>
-                  <div className="xl:col-span-7 lg:ml-1">
-                    
-                    <select className=" w-full lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2" value={props.stateInput} onChange={(e) => props.setStateInput(e.target.value)}>
-                      <option value="">Select State</option>
-                      {props.stateData && props.stateData.map((row,i)=>{
-                        return(
-                          <option key={i} value={row.id}>{row.name}</option>
-                        )
-                      })}
-                    </select>
-                  </div>
-                </div>*/}
-
-                <div className="grid xl:grid-cols-12  items-center lg:pl-0 lg:mb-0 mb-5 company_search">
-                  <div className="xl:col-span-5 lg:text-center xl:mb-0 mb-1">
-                  <label
-                    
-                    className=" font-bold xl:text-sm lg:text-sm text-base text-[#221F20]"
-                  >
-                    Area 
-                  </label>
-                  </div>
-                  <div className="xl:col-span-7 lg:ml-4 items-center">
-                    <AddressAutocomplete val={props.val} setGeoLatitude={props.setGeoLatitude}  setGeoLongitude={props.setGeoLongitude}
-                    setStateInput={props.setStateInput} setPostalCode={props.setPostalCode} bannerResponse={props.bannerResponse} setLocality={props.setLocality}/>
-          
-                    {/* <input
-                      type="text"
-                      
-                      className=" w-full xl:w-20  lg:w-[9rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black pl-2 "
-                      value={props.postalCode}
-                      onChange={(e) => props.setPostalCode(e.target.value)}
-                    /> */}
-                  </div>
-                </div> 
-
-       
-                <div className="pl-4 flex items-center lg:justify-start justify-center" role="group ">
-                  <div className="flex text-left justify-end gap-x-6">
-                    
-                    <button type="submit" className="rounded-full px-8 lg:px-5 py-1 lg:py-0.5 xl:text-sm lg:text-xs text-base border-solid  border-[1px] border-black font-semibold text-black shadow-sm">Search</button>
-                  </div>
-                </div>
-              </form>
+                </p>
             </div>
           </div>
         </div>
+        <div className="text-sm text-center hidden">Latitude: {props.latitude}, Longitude: {props.longitude}</div>
+
+
+        <div className="md:block justify-center px-10 sm:px-20 md:px-28 lg:px-8 xl:px-12 text-sm items-center">
+  <div className="lg:flex xl:text-sm text-xs items-center justify-between">
+   
+    <div className="px-4 py-3 bg-black w-[10rem] mx-auto lg:mx-0 mb-4 lg:mb-0">
+      <p className="font-bold text-white text-center">Advanced Search</p>
+    </div>
+
+   
+    <div className=" px-4 py-6 lg:py-3 rounded-xl lg:rounded-none justify-between">
+      <form className="lg:flex justify-center items-center gap-5 text-sm lg:pr-[0.1rem] xl:pr-[1.1rem] pr-4" onSubmit={handleSearch}>
+        <div className="main lg:flex lg:items-center lg:justify-center ">
+
+         
+          <div className="grid xl:grid-cols-12 lf:items-center lg:mb-0 mb-3 company_search">
+            <div className="xl:col-span-12 text-left xl:mb-0 mb-1">
+              <label className="font-bold xl:text-sm md:text-sm text-base text-[#221F20]">
+                Company/Keyword
+              </label>
+            </div>
+            <div className="xl:col-span-12 mt-3">
+              <input
+                type="text"
+                className="w-full xl:w-[15rem] focus:border-blue-500 py-4    border-gray-300 lg:w-[10rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px]  pl-2"
+                value={props.searchWord}
+                onChange={(e) => props.setSearch(e.target.value)}
+              />
+            </div>
+          </div>
+
+         
+          <div className="grid xl:grid-cols-12 lg:mx-4 items-center lg:pl-0 lg:mb-0  mb-3 company_search">
+            <div className="xl:col-span-12 lg:text-left xl:mb-0 mb-1">
+              <label className="font-bold xl:text-sm lg:text-sm text-base text-[#221F20]">
+                Category
+              </label>
+            </div>
+            <div className="xl:col-span-12 mt-3">
+              <select className="xl:col-span-12 w-[100%] py-4 border-gray-300 lg:w-[10rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px]  pl-2" value={props.categoryInput} onChange={(e) => props.setCategoryInput(e.target.value)}>
+                <option className="xl:col-span-12  " value="">Select Category</option>
+                {props.categoryData && props.categoryData.map((row,i)=>{
+                  return(
+                    <option key={i} value={row.id}>{row.title}</option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+
+        
+          <div className="grid xl:grid-cols-12 lg:pl-0 lg:mb-0 mb-5 company_search lg:pt-4">
+            <div className="xl:col-span-12 xl:mb-0 mb-1">
+              <label className="font-bold xl:text-sm lg:text-sm text-base text-[#221F20]">
+                Area
+              </label>
+            </div>
+            <div className="xl:col-span-12 mt-3 items-center">
+              <AddressAutocomplete
+                val={props.val}
+                setGeoLatitude={props.setGeoLatitude}
+                setGeoLongitude={props.setGeoLongitude}
+                setStateInput={props.setStateInput}
+                setPostalCode={props.setPostalCode}
+                bannerResponse={props.bannerResponse}
+                setLocality={props.setLocality}
+              />
+            </div>
+          </div>
+        </div>
+
+        
+        <div className="pl-4 flex items-center lg:justify-start justify-center">
+          <div className="flex text-left justify-end gap-x-6">
+            <button type="submit" className="rounded-full px-8 lg:px-5 py-1 lg:py-0.5 xl:text-sm lg:text-xs text-base border-solid border-[1px] border-black font-semibold text-black shadow-sm">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 
       </div>
     </>
