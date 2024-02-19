@@ -52,7 +52,6 @@ const SearchAllData = () => {
             // Check if the component has "postal_code" in its types
             if (component.types.includes('postal_code')) {
               postalCode2 = component.short_name;
-              setPostalCode(component.short_name)
               
               //break; // Stop the loop once postal code is found
             }

@@ -84,10 +84,13 @@ const AddressAutocomplete = (props) => {
   };
   return (
     <>
-    <Input className="w-full  xl:w-[9rem] lg:w-[10rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px] border-black  pl-2" placeholder='Start With Zip Code' name="address" id="address" 
+   <div className="div">
+   <Input className="w-full py-4  border-gray-300  xl:w-[275px] lg:w-[275px] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px]  pl-2" placeholder='Start With Zip Code' name="address" id="address" 
    defaultValue={props.val} 
-     /><br/>
-    * start with zip code
+     />
+     <p  className="text-red-300">* start with zip code</p>
+   </div>
+    
 
     <Input type="hidden" name="city" value={city} />
     <Input type="hidden" name="state" value={state} />
