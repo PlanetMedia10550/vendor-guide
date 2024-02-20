@@ -46,9 +46,9 @@ const Companyinfo = (props) => {
 
 
         <div className="md:block justify-center px-10 sm:px-20 md:px-28 lg:px-8 xl:px-12 text-sm items-center">
-  <div className="lg:flex xl:text-sm text-xs items-center">
+  <div className="lg:flex xl:text-sm text-xs items-center justify-center">
    
-    <div className="px-4 py-3 bg-black w-[10rem] lg:w-[257px] mx-auto lg:mx-0 mb-4 lg:mb-0 lg:mr-[30px]">
+    <div className="px-4 py-3 bg-black w-[10rem] lg:w-[290px] mx-auto lg:mx-0 mb-4 lg:mb-0 lg:mr-[30px]">
       <p className="font-bold text-white text-center">Advanced Search</p>
     </div>
 
