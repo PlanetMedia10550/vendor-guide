@@ -4,12 +4,28 @@ import { getResponse } from "@/app/lib/load-api";
 import { useEffect, useState } from "react";
 import { LoadingScreen } from "./LoadingScreen";
 import Link from "next/link";
+import { getVendors } from "@/app/lib/server-api";
 
-const BannerSectionCard = ({vendors}) => {
-
+const BannerSectionCard = () => {
+  const [vendors,setVendors] = useState({})
+  useEffect (  () => {
+  if (typeof window !== 'undefined') {
+    if('geolocation' in navigator) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async function(position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+          var res = await getVendors({latitude,longitude})
+          console.log(res)
+          setVendors(res)
+        });
+      }
+    }}
+  },[getVendors])
   return (
     <div className="grid grid-cols-5 items-center justify-center gap-2 md:gap-5 sm:mt-4 px-4 md:px-8 lg:my-8 my-4">
-      {vendors && vendors?.data.map((row, i) => {
+      {vendors?.data && vendors?.data.map((row, i) => {
           return (
             <div
               key={i}

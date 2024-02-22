@@ -11,7 +11,7 @@ import Image from "next/image";
 
 
 const HomeComponent = ({blogs,vendors,bannerContent}) => {
-
+  
   const backgroundImage = bannerContent.hero_background;
 
   return (

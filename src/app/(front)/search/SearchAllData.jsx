@@ -1,4 +1,5 @@
 "use client";
+
 import VendorCard from "@/components/Front/VendorCard";
 import { useAuth } from "@/context/UserContext";
 import { getCookie } from "cookies-next";
@@ -77,12 +78,16 @@ const SearchAllData = () => {
       getLocationByFormatedAddress();
     }else if(user!=null){
         setGeoLatitude(user?.latitude);
-        setGeoLongitude(user?.longitude);
+        setGeoLongitude(user?.longitude); 
         setPostalCode(user?.postal_code);
         setLocality(user?.city);
         setIsLoding(false);
+        
     }
   },[geoLatitude,user]);
+
+
+  
   return (
     <>
       {(isLoading) ? 
