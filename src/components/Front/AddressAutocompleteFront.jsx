@@ -76,6 +76,7 @@ const AddressAutocomplete = (props) => {
                 
                props.setGeoLatitude(latitude);
                 props.setGeoLongitude(longitude);
+                
                 // props.bannerResponse();
 
       // Update your state or perform other actions with the obtained data

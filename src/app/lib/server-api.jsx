@@ -15,11 +15,34 @@ export async function getBlogs() {
     return blogRes
 }
   
-export  async function getVendors() {
-    const res = await fetch(`${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`, { cache: 'no-cache' })
-    const vendorRes = await res.json()
-    return vendorRes
+export async function getVendors(props) {
+    
+    let url = `${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`;
+
+    // Check if geoLatitude and geoLongitude are provided, and append them to the URL if true
+    if (props !== undefined ) {
+        url += `&latitude=${props.latitude}&longitude=${props.longitude}`;
+        // console.log('url'+url)
+
+    }
+
+    try {
+        const res = await fetch(url, {
+            cache: 'no-cache'
+        });
+    
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+    
+        const vendorRes = await res.json();
+        return vendorRes;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; 
+    }
 }
+
 
 export  async function getPages(slug) {
     const res = await fetch(`${process.env.BASE_API_URL}page/${slug}`, { cache: 'no-cache' })
