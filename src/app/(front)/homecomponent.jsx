@@ -31,7 +31,7 @@ const HomeComponent = ({blogs,vendors,bannerContent}) => {
       </div>}
       <div id="banner_section">
         <div className="container mx-auto py-3 px-6 md:px-8 md:py-4">
-            <BannerSectionCard vendors={vendors} />
+            <BannerSectionCard vendor={vendors} />
         </div>
       </div>
       <div id="featurs_section" className="lg:py-16 lg:pt-12 xl:pt-20">

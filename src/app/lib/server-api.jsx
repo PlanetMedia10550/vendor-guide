@@ -18,12 +18,11 @@ export async function getBlogs() {
 export async function getVendors(props) {
     
     let url = `${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`;
-
-    // Check if geoLatitude and geoLongitude are provided, and append them to the URL if true
-    if (props !== undefined ) {
+    console.log('url hai',url)
+    if (props && props.latitude !== undefined && props.longitude !== undefined) {
         url += `&latitude=${props.latitude}&longitude=${props.longitude}`;
-        // console.log('url'+url)
-
+    } else {
+        url += `&latitude=0&longitude=0`;
     }
 
     try {
