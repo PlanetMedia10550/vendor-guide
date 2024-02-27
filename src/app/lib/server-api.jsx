@@ -1,5 +1,8 @@
 export async function getCategories() {
     const res = await fetch(`${process.env.BASE_API_URL}category`, { cache: 'no-cache' })
+    if (!res.ok) {
+        throw new Error(`API request failed with status: ${res.status}`);
+    }
     const vendorRes = await res.json()
     return vendorRes
 }
