@@ -1,5 +1,11 @@
 export async function getCategories() {
     const res = await fetch(`${process.env.BASE_API_URL}category`, { cache: 'no-cache' })
+    if (res.status === 429) {
+        // Handle rate limit exceeded, maybe implement retry logic
+        console.warn('Rate limit exceeded. Retry after some time.');
+        return null; // or throw an error
+    }
+
     if (!res.ok) {
         throw new Error(`API request failed with status: ${res.status}`);
     }
@@ -62,6 +68,11 @@ export async function getPostMeta() {
 
 export async function getSiteSetting() {
     const res = await fetch(`${process.env.BASE_API_URL}site_setting`, { cache: 'force-cache' })
+    if (res.status === 429) {
+        // Handle rate limit exceeded, maybe implement retry logic
+        console.warn('Rate limit exceeded. Retry after some time.');
+        return null; // or throw an error
+    }
     if (!res.ok) {
         throw new Error(`API request failed with status: ${res.status}`);
     }
