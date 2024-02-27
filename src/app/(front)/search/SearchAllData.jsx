@@ -19,58 +19,84 @@ const SearchAllData = () => {
   const searchParams = useSearchParams()
   const search = searchParams.get('key_word')?searchParams.get('key_word'):""
 
-  const fetchApiData = async ({ latitude, longitude }) => {
-      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=postal_code&key=${process.env.GOOGLE_MAP_API_KEY}`);
-      const resLoc = await res.json();
-      if (resLoc.results && resLoc.results.length > 0) {
-        // Loop through address components to find postal code
-        const addressComponents = resLoc.results[0].address_components;
-
-        setDefaultinputvalue((addressComponents)? `${addressComponents[1].long_name}, ${addressComponents[2].long_name} ${addressComponents[0].long_name}, ${addressComponents[3].long_name}`:'')
-        var postalCode2;
-        let state;
-        for (const component of addressComponents) {
-          // Check if the component has "postal_code" in its types
-          if (component.types.includes('postal_code')) {
-            postalCode2 = component.short_name;
-            
-            //break; // Stop the loop once postal code is found
-          }
-          if (component.types.includes('locality')) {
-            state = component.long_name;
-            
-            //break; // Stop the loop once postal code is found
-          }
-          if(postalCode2 && state){
-            break;
-          }
-        }
-
-        
-        setLocality(state);
-        setPostalCode(postalCode2);
-        setIsLoding(false)
-      }
-  };
-
   useEffect(() => {
-      if('geolocation' in navigator) {
+    if(!getCookie('token')){
+      if (typeof window !== 'undefined') {
+        if('geolocation' in navigator) {
           // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
           navigator.geolocation.getCurrentPosition(({ coords }) => {
+            // return coords;
               const { latitude, longitude } = coords;
-              // setLocation({ latitude, longitude });
+              
               setGeoLatitude(latitude);
               setGeoLongitude(longitude);
+              
+              
           })
+        }
       }
-  }, []);
+      const getLocationByFormatedAddress = async () => {
+        const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${geoLatitude},${geoLongitude}&result_type=postal_code&key=${process.env.GOOGLE_MAP_API_KEY}`,{
+          method: 'GET',
+        })
 
-  useEffect(() => {
-      // Fetch data from API if `location` object is set
-      if (geoLatitude) {
-          fetchApiData(geoLatitude,geoLongitude);
-      }
-  }, [geoLatitude]);
+        if (res.status === 429) {
+            // Handle rate limit exceeded, maybe implement retry logic
+            console.warn('Rate limit exceeded. Retry after some time.');
+            return null; // or throw an error
+        }
+        if (!res.ok) {
+            throw new Error(`API request failed with status: ${res.status}`);
+        }
+        
+        var resLoc = await res.json();
+    
+        // Check if the response contains results
+        if (resLoc.results && resLoc.results.length > 0) {
+          // Loop through address components to find postal code
+          const addressComponents = resLoc.results[0].address_components;
+
+          setDefaultinputvalue((addressComponents)? `${addressComponents[1].long_name}, ${addressComponents[2].long_name} ${addressComponents[0].long_name}, ${addressComponents[3].long_name}`:'')
+          var postalCode2;
+          let state;
+          for (const component of addressComponents) {
+            // Check if the component has "postal_code" in its types
+            if (component.types.includes('postal_code')) {
+              postalCode2 = component.short_name;
+              
+              //break; // Stop the loop once postal code is found
+            }
+            if (component.types.includes('locality')) {
+              state = component.long_name;
+              
+              //break; // Stop the loop once postal code is found
+            }
+            if(postalCode2 && state){
+              break;
+            }
+          }
+
+          
+          setLocality(state);
+          setIsLoding(false);
+          setPostalCode(postalCode2);
+        }else{
+          setIsLoding(false);
+        } 
+      };
+
+      getLocationByFormatedAddress();
+    }else if(user!=null){
+        setGeoLatitude(user?.latitude);
+        setGeoLongitude(user?.longitude); 
+        setPostalCode(user?.postal_code);
+        setLocality(user?.city);
+        setIsLoding(false);
+        
+    }
+  },[geoLatitude,user]);
+
+
   
   return (
     <>
