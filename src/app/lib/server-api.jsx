@@ -28,6 +28,14 @@ export async function getMagazines() {
 
 export async function getBlogs() {
     const res = await fetch(`${process.env.BASE_API_URL}blog-home?limit=3&offset=0`, { cache: 'force-cache' })
+    if (res.status === 429) {
+        // Handle rate limit exceeded, maybe implement retry logic
+        console.warn('Rate limit exceeded. Retry after some time.');
+        return null; // or throw an error
+    }
+    if (!res.ok) {
+        throw new Error(`API request failed with status: ${res.status}`);
+    }
     const blogRes = await res.json()
     return blogRes
 }
@@ -35,7 +43,7 @@ export async function getBlogs() {
 export async function getVendors(props) {
     
     let url = `${process.env.BASE_API_URL}vendor-advertisement?limit=5&offset=0`;
-    console.log('url hai',url)
+    // console.log('url hai',url)
     if (props && props.latitude !== undefined && props.longitude !== undefined) {
         url += `&latitude=${props.latitude}&longitude=${props.longitude}`;
     } else {
