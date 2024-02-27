@@ -1,12 +1,8 @@
-'use client'; 
 import BannerSectionCard from "@/components/Front/BannerSectionCard";
-import Carouselbanner from "@/components/Front/Carouselbanner";
 import FeaturSection from "@/components/Front/FeaturSection";
 import PartnerSection from "@/components/Front/PartnerSection";
 import SearchBar from "@/components/Front/SearchBar";
 import Link from "next/link";
-import { useAuth } from "@/context/UserContext";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 

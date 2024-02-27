@@ -3,7 +3,11 @@ import HomeComponent from "./homecomponent";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
-  const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/home`).then((res) => res.json());
+  const res = await fetch(`${process.env.BASE_API_URL}seo-meta-show/home`, { cache: 'no-cache' })
+  if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+  }
+  var seoMetaData = await res.json()
   var metaData = seoMetaData?.data;
 
   return {
@@ -37,7 +41,7 @@ export async function generateMetadata({params}) {
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
       url: '/',
-      images: [`${metaData?.image_url}`],
+      images: `${metaData?.image_url}`,
       siteId: process.env.SITE_ID,
     },
   }

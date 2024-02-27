@@ -4,7 +4,11 @@ import { getPostMeta } from "@/app/lib/server-api";
 
 // or Dynamic metadata
 export async function generateMetadata({params}) {
-  const seoMetaData = await fetch(`${process.env.BASE_API_URL}seo-meta-show/vendor_listing`).then((res) => res.json());
+  const res = await fetch(`${process.env.BASE_API_URL}seo-meta-show/vendor_listing`, { cache: 'no-cache' })
+  if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+  }
+  var seoMetaData = await res.json()
   var metaData = seoMetaData?.data;
 
   return {
@@ -38,7 +42,7 @@ export async function generateMetadata({params}) {
       title: `${metaData?.title}`,
       description: `${metaData?.description}`,
       url: `/${metaData?.slug?metaData?.slug:'search'}`,
-      images: [`${metaData?.image_url}`],
+      images: `${metaData?.image_url}`,
       siteId: process.env.SITE_ID,
     },
   }
