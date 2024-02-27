@@ -1,12 +1,12 @@
 export async function getCategories() {
-    const res = await fetch(`${process.env.BASE_API_URL}category`, { cache: 'force-cache' })
+    const res = await fetch(`${process.env.BASE_API_URL}category`, { cache: 'no-cache' })
     const vendorRes = await res.json()
     return vendorRes
 }
 export async function getMagazines() {
-    const res = await fetch(`${process.env.BASE_API_URL}magazine`, { cache: 'force-cache' })
-    const vendorRes = await res.json()
-    return vendorRes
+    const res = await fetch(`${process.env.BASE_API_URL}magazine`, { cache: 'no-cache' })
+    const vendorRes1 = await res.json()
+    return vendorRes1
 }
 
 export async function getBlogs() {
@@ -55,7 +55,7 @@ export async function getPostMeta() {
 }
 
 export async function getSiteSetting() {
-    const res = await fetch(`${process.env.BASE_API_URL}site_setting`, { cache: 'force-cache' })
+    const res = await fetch(`${process.env.BASE_API_URL}site_setting`, { cache: 'no-cache' })
     const siteSettingRes = await res.json()
     return siteSettingRes
 }
