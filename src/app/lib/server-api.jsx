@@ -4,9 +4,9 @@ export async function getCategories() {
     return vendorRes
 }
 export async function getMagazines() {
-    const res = await fetch(`${process.env.BASE_API_URL}magazine`, { cache: 'no-cache' })
-    const vendorRes1 = await res.json()
-    return vendorRes1
+    const res = await fetch(`${process.env.BASE_API_URL}magazine`, { cache: 'force-cache' })
+    const vendorRes = await res.json()
+    return vendorRes
 }
 
 export async function getBlogs() {
