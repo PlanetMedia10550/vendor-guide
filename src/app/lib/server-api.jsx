@@ -3,16 +3,14 @@ export async function getCategories() {
     if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
     }
-    const vendorRes = await res.json()
-    return vendorRes
+    return await res.json()
 }
 export async function getMagazines() {
     const res = await fetch(`${process.env.BASE_API_URL}magazine`, { cache: 'no-cache' })
     if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
     }
-    const vendorRes = await res.json()
-    return vendorRes
+    return await res.json()
 }
 
 export async function getBlogs() {
