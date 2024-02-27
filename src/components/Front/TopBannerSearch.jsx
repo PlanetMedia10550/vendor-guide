@@ -1,5 +1,4 @@
 import Image from "next/image";
-import ResourceBannerSection from "./ResourceBannerSection";
 import SignUpcard from "./SignUpcard";
 
 const TopBannerSearch = ({backgroundimage,vendors}) => {

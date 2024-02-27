@@ -1,10 +1,8 @@
 "use client";
 import Link from "next/link";
-import { getResponse } from "@/app/lib/load-api";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { LoadingScreen } from "./LoadingScreen";
 import Companyinfo from "./Companyinfo";
 import Modal from "@/components/Modal";
 import { useAuth } from "@/context/UserContext";
@@ -12,14 +10,12 @@ import PropartyForm from "@/components/PropartyForm";
 import vendorDefult from "@/../../public/images&icons/vendor-default.jpg"
 import Pagination from "../Common/Paginations";
 import { getCookie } from "cookies-next";
-import axios from 'axios';
 
 const VendorCard = (props) => {
   const {user,renderFieldError,isLoding}  = useAuth();
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [vendorData, setVendorData] = useState([]);
-// console.log(vendorData);
   const [isLoading, setIsLoding] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
   const [vendorId, setVendorId] = useState(0);
@@ -78,8 +74,7 @@ const VendorCard = (props) => {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${getCookie('token')}`
-      },
-      cache: 'no-cache'
+      }
     })
 
     if (!response.ok) {
