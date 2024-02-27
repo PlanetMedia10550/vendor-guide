@@ -1,5 +1,5 @@
 export async function getCategories() {
-    const res = await fetch(`${process.env.BASE_API_URL}category`, { cache: 'force-cache' })
+    const res = await fetch(`${process.env.BASE_API_URL}category`, { cache: 'no-cache' })
     if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
     }
