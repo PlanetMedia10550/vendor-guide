@@ -14,6 +14,11 @@ export async function getCategories() {
 }
 export async function getMagazines() {
     const res = await fetch(`${process.env.BASE_API_URL}magazine`, { cache: 'force-cache' })
+    if (res.status === 429) {
+        // Handle rate limit exceeded, maybe implement retry logic
+        console.warn('Rate limit exceeded. Retry after some time.');
+        return null; // or throw an error
+    }
     if (!res.ok) {
         throw new Error(`API request failed with status: ${res.status}`);
     }
