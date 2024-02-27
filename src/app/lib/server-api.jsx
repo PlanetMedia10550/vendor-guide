@@ -50,21 +50,21 @@ export async function getVendors(props) {
         url += `&latitude=0&longitude=0`;
     }
 
-    try {
-        const res = await fetch(url, {
-            cache: 'no-cache'
-        });
-    
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-    
-        const vendorRes = await res.json();
-        return vendorRes;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error; 
+    const res = await fetch(url, {
+        cache: 'no-cache'
+    });
+
+    if (res.status === 429) {
+        // Handle rate limit exceeded, maybe implement retry logic
+        console.warn('Rate limit exceeded. Retry after some time.');
+        return null; // or throw an error
     }
+    if (!res.ok) {
+        throw new Error(`API request failed with status: ${res.status}`);
+    }
+
+    const vendorRes = await res.json();
+    return vendorRes;
 }
 
 
@@ -75,6 +75,14 @@ export  async function getPages(slug) {
 }
 export async function getPostMeta() {
     const res = await fetch(`${process.env.BASE_API_URL}post-meta`, { cache: 'force-cache' })
+    if (res.status === 429) {
+        // Handle rate limit exceeded, maybe implement retry logic
+        console.warn('Rate limit exceeded. Retry after some time.');
+        return null; // or throw an error
+    }
+    if (!res.ok) {
+        throw new Error(`API request failed with status: ${res.status}`);
+    }
     const pageMetaRes = await res.json()
     return pageMetaRes
 }

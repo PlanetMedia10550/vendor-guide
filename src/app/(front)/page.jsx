@@ -4,6 +4,11 @@ import HomeComponent from "./homecomponent";
 // or Dynamic metadata
 export async function generateMetadata({params}) {
   const res = await fetch(`${process.env.BASE_API_URL}seo-meta-show/home`, { cache: 'no-cache' })
+  if (res.status === 429) {
+    // Handle rate limit exceeded, maybe implement retry logic
+    console.warn('Rate limit exceeded. Retry after some time.');
+    return null; // or throw an error
+  }
   if (!res.ok) {
       throw new Error(`HTTP error! Status: ${res.status}`);
   }
