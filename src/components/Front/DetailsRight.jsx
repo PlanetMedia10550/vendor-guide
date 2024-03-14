@@ -69,14 +69,14 @@ const DetailsRight = ({filterData,user}) => {
           <h3 className="text-lg font-lato font-bold   text-[#647589]">
           {filterData?.address}
           </h3>
-        {(filterData?.postal_code && filterData.address) ?(
+        {/*{(filterData?.postal_code && filterData.address) ?(
              <h3 className="text-lg font-lato font-bold text-[#647589] py-3">
              {filterData.country} {filterData.postal_code }
              </h3>
        ) : ( 
           <h3 className="text-lg font-lato font-bold text-[#647589] py-3">
           </h3>
-         )} 
+         )}  */}
          {filterData?.mobile ? (
           <h3 className="text-lg font-lato font-bold   text-[#647589]">
           Phone Number : <Link href={`tel:${filterData.mobile}`} className="">{filterData.mobile}</Link>
