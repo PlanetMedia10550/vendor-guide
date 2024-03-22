@@ -11,16 +11,17 @@ const SearchBar = ({homeMeta,categories,states}) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    var serchKey = Pathname + 'search?key_word=' + searchInput;
+    var serchKey = Pathname;
+    if(searchInput){
+      serchKey = serchKey+ 'search?key_word=' + searchInput
+    }
     if (searchCategory) {
       serchKey = serchKey+ '&category='+searchCategory
     }
     if (SearchState) {
       serchKey = serchKey+'&state='+SearchState
     }
-    if (searchInput) {
-      Router.push(serchKey)
-    }
+    Router.push(serchKey)
   };
   return (
     <div className="home_position absolute z-40 lg:top-40 md:top-[5.5rem] top-[2.5rem] w-full mx-auto text-center">
