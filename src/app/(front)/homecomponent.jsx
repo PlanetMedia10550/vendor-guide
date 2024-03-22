@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 
-const HomeComponent = ({blogs,vendors,bannerContent}) => {
+const HomeComponent = ({blogs,vendors,bannerContent,categories,states}) => {
   
   const backgroundImage = bannerContent.hero_background;
 
@@ -14,15 +14,15 @@ const HomeComponent = ({blogs,vendors,bannerContent}) => {
     < >
      {backgroundImage!=undefined &&
       <div id="hero_section" >
-          <div className={`hero_section_content relative h-[38vh] sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] bg-cover bg-no-repeat before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] bg:opacity-25 `}>
+          <div className={`hero_section_content relative h-[50vh] sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] bg-cover bg-no-repeat before:content[''] before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:bg-[#0000007d] bg:opacity-25 `}>
           <Image
               src={backgroundImage}
               alt="Product screenshot"
-              className="mx-auto max-w-none h-[38vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] object-cover w-full"
+              className="mx-auto max-w-none h-[50vh]  sm:h-[45vh] md:h-[55vh] lg:h-[65vh] xl:h-[69vh] object-cover w-full"
               width="100"
               height="100"
             />
-          <SearchBar  homeMeta={bannerContent} />
+          <SearchBar  homeMeta={bannerContent} categories={categories} states={states} />
          </div>
       </div>}
       <div id="banner_section">
