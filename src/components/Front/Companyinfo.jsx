@@ -35,7 +35,7 @@ const Companyinfo = (props) => {
                 Search Results
               </h1>
 
-              <p class="d-block lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold">
+              <p class="d-block lg:mt-2 mt-3 lg:text-xl text-sm leading-3 text-[#221F20] font-semibold hidden">
               {props.searchWord && (props.locality ? `${props.searchWord} near ${props.locality}` : props.searchWord)}
                 
                 </p>
@@ -61,7 +61,7 @@ const Companyinfo = (props) => {
           <div className="grid xl:grid-cols-12 lf:items-center lg:mb-0 mb-3 company_search">
             <div className="col-span-12 text-left xl:mb-0 mb-1">
               <label className="font-bold xl:text-sm md:text-sm text-base text-[#221F20]">
-                Company/Keyword
+                Search Company
               </label>
             </div>
             <div className="col-span-12 mt-3">
