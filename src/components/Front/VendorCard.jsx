@@ -42,8 +42,8 @@ const VendorCard = (props) => {
   const [postalCode, setPostalCode] = useState(`${props.postalCode}`);
   const [categoryData, setCategoryData] = useState([]);
   const [stateData, setStateData] = useState([]);
-  const [categoryInput, setCategoryInput] = useState("");
-  const [stateInput, setStateInput] = useState("");
+  const [categoryInput, setCategoryInput] = useState(searchParams.get('category')?searchParams.get('category'):"");
+  const [stateInput, setStateInput] = useState(searchParams.get('state')?searchParams.get('state'):"");
 
   const params = new URLSearchParams()
 
@@ -146,7 +146,7 @@ const VendorCard = (props) => {
       setStateData={setStateData} stateInput={stateInput} 
       setStateInput={setStateInput} setGeoLatitude={setGeoLatitude} 
       setGeoLongitude={setGeoLongitude}
-      setLocality={props.setLocality}
+      setLocality={props.setLocality} states={props.states}
       />
       
       <div className="contact_search bg-[#f7f9f8]">
