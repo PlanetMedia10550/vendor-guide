@@ -11,17 +11,19 @@ const SearchBar = ({homeMeta,categories,states}) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    var serchKey = Pathname+'search';
+    const params = new URLSearchParams()
+    var serchKey = Pathname+'search?';
     if(searchInput){
-      serchKey = serchKey+ 'search?key_word=' + searchInput
+      params.set('key_word',searchInput);
     }
     if (searchCategory) {
-      serchKey = serchKey+ '&category='+searchCategory
+      params.set('category',searchCategory);
     }
     if (SearchState) {
-      serchKey = serchKey+'&state='+SearchState
+      params.set('state',SearchState);
     }
-    Router.push(serchKey)
+    var urlString = params.toString();
+    Router.push(serchKey+urlString)
   };
   return (
     <div className="home_position absolute z-40 lg:top-40 md:top-[5.5rem] top-[2.5rem] w-full mx-auto text-center">
