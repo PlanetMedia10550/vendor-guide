@@ -11,7 +11,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    var serchKey = Pathname;
+    var serchKey = Pathname+'search';
     if(searchInput){
       serchKey = serchKey+ 'search?key_word=' + searchInput
     }
