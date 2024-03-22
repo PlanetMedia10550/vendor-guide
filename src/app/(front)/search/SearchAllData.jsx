@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const SearchAllData = () => {
+const SearchAllData = ({states}) => {
   const {user}  = useAuth();
   const [geoLatitude, setGeoLatitude] = useState(0);
   const [geoLongitude, setGeoLongitude] = useState(0);
@@ -131,7 +131,7 @@ const SearchAllData = () => {
       :<VendorCard val={defaultinputvalue} lat={geoLatitude} 
       long={geoLongitude} postalCode={postalCode} 
       setPostalCode={setPostalCode} 
-      locality={locality} setLocality={setLocality} />
+      locality={locality} setLocality={setLocality} states={states} />
       }
       
     </>
