@@ -93,8 +93,26 @@ const Companyinfo = (props) => {
             </div>
           </div>
 
+          <div className="grid xl:grid-cols-12 lg:mx-4 items-center lg:pl-0 lg:mb-0  mb-3 company_search">
+            <div className="col-span-12 lg:text-left xl:mb-0 mb-1">
+              <label className="font-bold xl:text-sm lg:text-sm text-base text-[#221F20]">
+                States
+              </label>
+            </div>
+            <div className="col-span-12 mt-3">
+              <select className="xl:col-span-12 w-[100%] h-[34px] border-gray-300 lg:w-[10rem]  placeholder:text-sm border-solid rounded border-[1px]  pl-2" value={props.stateInput} onChange={(e) => props.setStateInput(e.target.value)}>
+                <option className="xl:col-span-12  " value="">Select State</option>
+                {props?.states?.data && props.states.data.map((row,i)=>{
+                  return(
+                    <option key={i} value={row.id}>{row.name}</option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+
         
-          <div className="grid xl:grid-cols-12 lg:pl-0 lg:mb-0 mb-5 company_search lg:pt-4">
+          <div className="grid xl:grid-cols-12 lg:pl-0 lg:mb-0 mb-5 company_search lg:pt-4 hidden">
             <div className="col-span-12 xl:mb-0 mb-1">
               <label className="font-bold xl:text-sm lg:text-sm text-base text-[#221F20]">
                 Area
