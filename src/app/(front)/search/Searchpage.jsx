@@ -2,7 +2,7 @@ import TopBannerSearch from "@/components/Front/TopBannerSearch";
 import SearchAllData from "./SearchAllData";
  
 
-const Searchpage = ({bannerContent}) => {
+const Searchpage = ({bannerContent,states}) => {
 
   const searchMeta = bannerContent.search_background;
   
@@ -10,7 +10,7 @@ const Searchpage = ({bannerContent}) => {
     <>
      <TopBannerSearch title="Search Results" backgroundimage={searchMeta} vendors={''} />
       {/* <BannerSectionCard  /> */}
-      <SearchAllData />
+      <SearchAllData states={states} />
     </>
   );
 };
