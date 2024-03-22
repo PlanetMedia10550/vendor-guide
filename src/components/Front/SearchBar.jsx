@@ -41,7 +41,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
                         name="keyword"
                         id="default-search"
                         className="leading-5 block w-full p-1 sm:p-2 lg:p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:outline-none placeholder-text-lg "
-                        required
+                        
                         placeholder="search by company name..."
 
                         value={searchInput}
