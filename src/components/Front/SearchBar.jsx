@@ -38,7 +38,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
               <form onSubmit={handleSearch}>
                 {/* <div className="relative flex sm:flex  justify-center gap-5 md:gap-7"> */}
                   <div className="grid md:grid-cols-3 lg:grid-cols-4   lg:pl-0 lg:mb-0  mb-3 company_search mt-3">
-                    <div className=" px-2 lg:mt-0 mt-3 lg:col-span-2">
+                    <div className=" px-2 lg:mt-0 mt-3 lg:col-span-1">
                       <select className="leading-7 w-full p-1 sm:p-2 lg:p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:outline-none  placeholder-text-lg placeholder-text-gray-900 " value={SearchState} onChange={(e) => setSearchState(e.target.value)}>
                         <option className=" " value="">Select States</option>
                         {states?.data && states?.data.map((row,i)=>{
@@ -48,7 +48,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
                         })}
                       </select>
                     </div>
-                    <div className=" px-2 lg:mt-0 mt-3 md:col-span-2">
+                    <div className=" px-2 lg:mt-0 mt-3 md:col-span-2 lg:col-span-1">
                       <select className="leading-7 w-full p-1 sm:p-2 lg:p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:outline-none placeholder-text-lg placeholder-text-gray-900" value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)}>
                         <option className="" value="">Select Category</option>
                         {categories?.data && categories?.data.map((row,i)=>{
@@ -58,7 +58,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
                         })}
                       </select>
                     </div>
-                    <div className=" px-2 md:col-span-3 lg:col-span-4 mt-3">
+                    <div className=" px-2 md:col-span-3 lg:col-span-1 lg:mt-0 mt-3">
                       <input
                         type="text"
                         name="keyword"
@@ -72,7 +72,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
 
                       />
                     </div>
-                    <div className=" px-2  mt-3 lg:mt-3  md:col-span-3 lg:col-span-4">
+                    <div className=" px-2  mt-3 lg:mt-0  md:col-span-3 lg:col-span-1">
                       <button
                       type="submit"
                       className="text-white tracking-wide bg-[#B13634] hover:bg-red-800 focus:ring-1 focus:outline-none focus:ring-[#B13634] font-normal rounded-lg text-sm sm:text-lg lg:text-xl  sm:mt-0 px-4 sm:px-6 py-1 lg:py-2  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-[#B13634]"
