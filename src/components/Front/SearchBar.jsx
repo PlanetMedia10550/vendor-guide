@@ -40,7 +40,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
                   <div className="grid md:grid-cols-3 lg:grid-cols-4   lg:pl-0 lg:mb-0  mb-3 company_search mt-3">
                     <div className=" px-2 lg:mt-0 mt-3 lg:col-span-1 pl-0">
                       <select className="leading-7 w-full p-1 sm:p-2 lg:p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:outline-none  placeholder-text-lg placeholder-text-gray-900 " value={SearchState} onChange={(e) => setSearchState(e.target.value)}>
-                        <option className=" " value="">Select States</option>
+                        <option className=" " value="">Select State</option>
                         {states?.data && states?.data.map((row,i)=>{
                           return(
                             <option key={i} value={row.id}>{row.name}</option>
