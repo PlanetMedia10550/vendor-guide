@@ -29,7 +29,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
     <div className="home_position absolute z-40 lg:top-40 md:top-[5.5rem] top-[2.5rem] w-full mx-auto text-center">
       <div className="px-4 sm:px-6 lg:px-10 z-10 lg:w-[58rem] md:w-[35rem]  mx-auto">
         <div className="text-center">
-          <h1 className="text-center sm:text-full md:text-2xl tracking-tight leading-10 font-semibold text-white  lg:text-[2.55rem] pe-5 ">
+          <h1 className="text-left sm:text-full md:text-2xl tracking-tight leading-10 font-semibold text-white  lg:text-[2.55rem] pe-5 ">
             {homeMeta?.hero_title}
           </h1>
 
@@ -38,7 +38,7 @@ const SearchBar = ({homeMeta,categories,states}) => {
               <form onSubmit={handleSearch}>
                 {/* <div className="relative flex sm:flex  justify-center gap-5 md:gap-7"> */}
                   <div className="grid md:grid-cols-3 lg:grid-cols-4   lg:pl-0 lg:mb-0  mb-3 company_search mt-3">
-                    <div className=" px-2 lg:mt-0 mt-3 lg:col-span-1">
+                    <div className=" px-2 lg:mt-0 mt-3 lg:col-span-1 pl-0">
                       <select className="leading-7 w-full p-1 sm:p-2 lg:p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:outline-none  placeholder-text-lg placeholder-text-gray-900 " value={SearchState} onChange={(e) => setSearchState(e.target.value)}>
                         <option className=" " value="">Select States</option>
                         {states?.data && states?.data.map((row,i)=>{
