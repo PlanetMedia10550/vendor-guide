@@ -56,25 +56,25 @@ const Companyinfo = (props) => {
     <div className=" px-4 py-6 lg:py-3 rounded-xl lg:rounded-none justify-between">
       <form className="lg:flex justify-center items-center gap-5 text-sm lg:pr-[0.1rem] xl:pr-[1.1rem] pr-4" onSubmit={handleSearch}>
         <div className="main lg:flex lg:items-center lg:justify-center ">
-
-         
-          <div className="grid xl:grid-cols-12 lf:items-center lg:mb-0 mb-3 company_search">
-            <div className="col-span-12 text-left xl:mb-0 mb-1">
-              <label className="font-bold xl:text-sm md:text-sm text-base text-[#221F20]">
-                Search Company
+        
+          <div className="grid xl:grid-cols-12 lg:mx-4 items-center lg:pl-0 lg:mb-0  mb-3 company_search">
+            <div className="col-span-12 lg:text-left xl:mb-0 mb-1">
+              <label className="font-bold xl:text-sm lg:text-sm text-base text-[#221F20]">
+                States
               </label>
             </div>
             <div className="col-span-12 mt-3">
-              <input
-                type="text"
-                className="w-full xl:w-[10rem] focus:!outline-none focus:border-red-700 py-4    border-gray-300 lg:w-[10rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px]  pl-2"
-                value={props.searchWord}
-                onChange={(e) => props.setSearch(e.target.value)}
-              />
+              <select className="xl:col-span-12 w-[100%] h-[34px] border-gray-300 lg:w-[10rem]  placeholder:text-sm border-solid rounded border-[1px]  pl-2" value={props.stateInput} onChange={(e) => props.setStateInput(e.target.value)}>
+                <option className="xl:col-span-12  " value="">Select State</option>
+                {props?.states?.data && props.states.data.map((row,i)=>{
+                  return(
+                    <option key={i} value={row.id}>{row.name}</option>
+                  )
+                })}
+              </select>
             </div>
           </div>
 
-         
           <div className="grid xl:grid-cols-12 lg:mx-4 items-center lg:pl-0 lg:mb-0  mb-3 company_search">
             <div className="col-span-12 lg:text-left xl:mb-0 mb-1">
               <label className="font-bold xl:text-sm lg:text-sm text-base text-[#221F20]">
@@ -92,22 +92,20 @@ const Companyinfo = (props) => {
               </select>
             </div>
           </div>
-
-          <div className="grid xl:grid-cols-12 lg:mx-4 items-center lg:pl-0 lg:mb-0  mb-3 company_search">
-            <div className="col-span-12 lg:text-left xl:mb-0 mb-1">
-              <label className="font-bold xl:text-sm lg:text-sm text-base text-[#221F20]">
-                States
+         
+          <div className="grid xl:grid-cols-12 lf:items-center lg:mb-0 mb-3 company_search">
+            <div className="col-span-12 text-left xl:mb-0 mb-1">
+              <label className="font-bold xl:text-sm md:text-sm text-base text-[#221F20]">
+                Search Company
               </label>
             </div>
             <div className="col-span-12 mt-3">
-              <select className="xl:col-span-12 w-[100%] h-[34px] border-gray-300 lg:w-[10rem]  placeholder:text-sm border-solid rounded border-[1px]  pl-2" value={props.stateInput} onChange={(e) => props.setStateInput(e.target.value)}>
-                <option className="xl:col-span-12  " value="">Select State</option>
-                {props?.states?.data && props.states.data.map((row,i)=>{
-                  return(
-                    <option key={i} value={row.id}>{row.name}</option>
-                  )
-                })}
-              </select>
+              <input
+                type="text"
+                className="w-full xl:w-[10rem] focus:!outline-none focus:border-red-700 py-4    border-gray-300 lg:w-[10rem] h-[1.6rem] placeholder:text-sm border-solid rounded border-[1px]  pl-2"
+                value={props.searchWord}
+                onChange={(e) => props.setSearch(e.target.value)}
+              />
             </div>
           </div>
 
